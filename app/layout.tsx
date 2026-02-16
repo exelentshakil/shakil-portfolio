@@ -1,8 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import Script from "next/script"; // <--- IMPORT THIS
+import Script from "next/script";
 import "./globals.css";
-import FacebookPixel from "@/app/components/FacebookPixel";
+import { Suspense } from "react"; // <--- 1. IMPORT SUSPENSE
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,11 +29,11 @@ export const metadata: Metadata = {
     default: "Shakil Ahmed | Senior Full-Stack Engineer (Laravel/Django/Node.js & React)",
     template: "%s | Shakil Ahmed",
   },
-    icons: {
-        icon: '/icon.png?v=2', // Changing ?v=... forces the browser to re-download it
-    },
+  icons: {
+    icon: '/icon.png?v=2',
+  },
   description:
-    "Senior Full-Stack Engineer & Architect with 12+ years experience. Built core features for Legiit (2M+ users). Shipped 1,000+ projects. Expert in Laravel, React, and Scalable Systems.",
+      "Senior Full-Stack Engineer & Architect with 12+ years experience. Built core features for Legiit (2M+ users). Shipped 1,000+ projects. Expert in Laravel, React, and Scalable Systems.",
   keywords: [
     "Laravel Expert",
     "React Developer",
@@ -93,8 +93,8 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({
-  children,
-}: Readonly<{
+                                     children,
+                                   }: Readonly<{
   children: React.ReactNode;
 }>) {
   const jsonLd = {
@@ -106,7 +106,7 @@ export default function RootLayout({
     "image": `${BASE_URL}/profile-photo.jpg`,
     "sameAs": [
       "https://www.upwork.com/freelancers/~01e19084859cda495e",
-      "https://legiit.com", 
+      "https://legiit.com",
       "https://barakahsoft.com"
     ],
     "description": "Senior Full-Stack Engineer with 12+ years experience. Founder of BarakahSoft and Lead Engineer at Legiit.",
@@ -123,35 +123,33 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="scroll-smooth">
+      <html lang="en" className="scroll-smooth">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-neutral-950 text-neutral-200`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-neutral-950 text-neutral-200`}
       >
-      <FacebookPixel />
-        {/* --- GOOGLE ANALYTICS START --- */}
-        <Script
+
+      {/* --- GOOGLE ANALYTICS START --- */}
+      <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-8YSWCH2FTB"
           strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
 
             gtag('config', 'G-8YSWCH2FTB');
           `}
-        </Script>
-        {/* --- GOOGLE ANALYTICS END --- */}
+      </Script>
+      {/* --- GOOGLE ANALYTICS END --- */}
 
-        <script
+      <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-        />
-        {children}
+      />
+      {children}
       </body>
-    </html>
+      </html>
   );
-} 
-
-// hello world
+}
