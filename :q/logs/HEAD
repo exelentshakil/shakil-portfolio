@@ -1,0 +1,27 @@
+0000000000000000000000000000000000000000 d19538680d312926b849ba3e4768d04e46e676fd exelentshakil <exelentshakil@gmail.com> 1769270982 +0600	commit (initial): Initial commit from Create Next App
+d19538680d312926b849ba3e4768d04e46e676fd 47833574d12a638b0db6fb118deda95345186581 exelentshakil <exelentshakil@gmail.com> 1769275029 +0600	commit: initial commit
+47833574d12a638b0db6fb118deda95345186581 12cd71cf77e474cb463a6252bce9bc013f309c97 exelentshakil <exelentshakil@gmail.com> 1769275263 +0600	commit: Switch to npm, remove pnpm
+12cd71cf77e474cb463a6252bce9bc013f309c97 8714acad8dbcf6b72329e8278c23a36a70880113 exelentshakil <exelentshakil@gmail.com> 1769275459 +0600	commit: Force npm on Vercel
+8714acad8dbcf6b72329e8278c23a36a70880113 7dae4baed2390801b713669792881e025303d442 exelentshakil <exelentshakil@gmail.com> 1769275557 +0600	commit: Fix TypeScript interface
+7dae4baed2390801b713669792881e025303d442 64b846a8a5e7570e0371cd6a978b0636b3d2edb6 exelentshakil <exelentshakil@gmail.com> 1769277633 +0600	commit: updated proper category
+64b846a8a5e7570e0371cd6a978b0636b3d2edb6 d94841b566790aaa203d19d7c96f74ce92cfa8a3 exelentshakil <exelentshakil@gmail.com> 1769281679 +0600	commit: updated categories
+d94841b566790aaa203d19d7c96f74ce92cfa8a3 974886b3a5bdf88c5c8479b49565de62f462958a exelentshakil <exelentshakil@gmail.com> 1769324961 +0600	commit: landing page updated to v2
+974886b3a5bdf88c5c8479b49565de62f462958a ec4d7e45ddbcc519c83a79c38440a0d1ff6a36b2 exelentshakil <exelentshakil@gmail.com> 1769340348 +0600	commit: ladnign page v3
+ec4d7e45ddbcc519c83a79c38440a0d1ff6a36b2 ac41c89d19644d5cc559d59c070b5d995eb4e02f exelentshakil <exelentshakil@gmail.com> 1769344719 +0600	commit: ladnign page v3-bug fixes
+ac41c89d19644d5cc559d59c070b5d995eb4e02f 280e8f383edc6c680e2380a9873341c4a486e930 exelentshakil <exelentshakil@gmail.com> 1769351159 +0600	commit: ladnign page v3-bug fixes image
+280e8f383edc6c680e2380a9873341c4a486e930 3544aec2111c5b7a078d3c43738ab2df1694598d exelentshakil <exelentshakil@gmail.com> 1769358068 +0600	commit: updated upwork custom url
+3544aec2111c5b7a078d3c43738ab2df1694598d 7b7bdd13f5c175ff2f8419451e5116e12c21c20c exelentshakil <exelentshakil@gmail.com> 1769415027 +0600	commit: google analytics added
+7b7bdd13f5c175ff2f8419451e5116e12c21c20c 6e15685bfa7ea4a53a67863221d029ec1d070e4e exelentshakil <exelentshakil@gmail.com> 1769493097 +0600	commit: updated experience year
+6e15685bfa7ea4a53a67863221d029ec1d070e4e 342ab64daeaa455e4e49ecb721bce21cc23ed28f exelentshakil <exelentshakil@gmail.com> 1769499690 +0600	commit: updated branding logo
+342ab64daeaa455e4e49ecb721bce21cc23ed28f 38c8ac4a6f8afca04a63049f3176a5c88a996ef4 exelentshakil <exelentshakil@gmail.com> 1769501958 +0600	commit: updated featured review section
+38c8ac4a6f8afca04a63049f3176a5c88a996ef4 de322965ab32823ce42ae0ef7a6a91087f806065 exelentshakil <exelentshakil@gmail.com> 1769504676 +0600	commit: portfolio thumbnails updated
+de322965ab32823ce42ae0ef7a6a91087f806065 13413d261ea5110777ffacd8b43ce87dcc7c3e4d exelentshakil <exelentshakil@gmail.com> 1769504767 +0600	commit: missing portfolio images
+13413d261ea5110777ffacd8b43ce87dcc7c3e4d c281e7bf6c285ccba879becabf1f14596b823ef0 exelentshakil <exelentshakil@gmail.com> 1769505038 +0600	commit: bug fixes
+c281e7bf6c285ccba879becabf1f14596b823ef0 5b3b17965362bbc197b49eba83f41636ef3e2df7 exelentshakil <exelentshakil@gmail.com> 1769505522 +0600	commit: bug fixes: method declaration error
+5b3b17965362bbc197b49eba83f41636ef3e2df7 955672daa70295fefa033dcafd23134d42bd71f0 exelentshakil <exelentshakil@gmail.com> 1769505700 +0600	commit: bug fixes - external link icon issus
+955672daa70295fefa033dcafd23134d42bd71f0 e81b674874ef0f60032ea9339ef3e18e4a916380 exelentshakil <exelentshakil@gmail.com> 1769506152 +0600	commit: disclaimer updated
+e81b674874ef0f60032ea9339ef3e18e4a916380 080a602bc110c443bec5146e41e1820585d44842 exelentshakil <exelentshakil@gmail.com> 1769508045 +0600	commit: removed few repo
+080a602bc110c443bec5146e41e1820585d44842 54bf576ad43c623685a1e20684880d501476cde5 exelentshakil <exelentshakil@gmail.com> 1769509080 +0600	commit: website images updated
+54bf576ad43c623685a1e20684880d501476cde5 a70f7821377bbd88dcc9f82911ae6d07ae648417 exelentshakil <exelentshakil@gmail.com> 1769778960 +0600	commit: skills updated
+a70f7821377bbd88dcc9f82911ae6d07ae648417 cf38751999bd88bd25f749bcf4f1f641db064668 exelentshakil <exelentshakil@gmail.com> 1769779338 +0600	commit: skills updated on homepage
+cf38751999bd88bd25f749bcf4f1f641db064668 61d2d4e5f181b2fb366b2455efa254b20fd5f57c exelentshakil <exelentshakil@gmail.com> 1769779799 +0600	commit: updated skills card
