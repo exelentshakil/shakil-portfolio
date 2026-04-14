@@ -534,15 +534,36 @@ export default function PortfolioPage() {
 
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
                   <a
-                    href="https://www.upwork.com/freelancers/shakilhq"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="group relative px-10 py-5 rounded-full font-bold text-lg overflow-hidden"
+                      href="https://www.upwork.com/freelancers/shakilhq"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="group relative px-10 py-5 rounded-full font-bold text-lg overflow-hidden"
                   >
                     <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-cyan-600" />
                     <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                    <span className="relative z-10">Hire Me on Upwork</span>
+                    <span className="relative z-10">Upwork</span>
                   </a>
+                    <a
+                        href="https://legiit.com/exelentshakil"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group relative px-10 py-5 rounded-full font-bold text-lg overflow-hidden"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-cyan-600" />
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <span className="relative z-10">Legiit</span>
+                    </a>
+
+                      <a
+                          href="https://www.freelancer.com/u/exelentshakil"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="group relative px-10 py-5 rounded-full font-bold text-lg overflow-hidden"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-cyan-600" />
+                        <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <span className="relative z-10">Freelancer</span>
+                      </a>
 
                   <a
                     href="https://calendly.com/shakilhq/30min"
@@ -550,7 +571,7 @@ export default function PortfolioPage() {
                     rel="noopener noreferrer"
                     className="group px-10 py-5 rounded-full bg-white/10 backdrop-blur-sm border border-white/20 font-bold text-lg hover:bg-white/20 transition-all duration-300"
                   >
-                    Book Free Consultation
+                    Book
                   </a>
                 </div>
 
