@@ -157,11 +157,94 @@ function CustomTelemetryTooltip({ active, payload, label }: TooltipProps) {
   return null;
 }
 
+// --------------------------------------------------------------------------
+// Interactive Architecture Blueprints Data
+// --------------------------------------------------------------------------
+const architectureBlueprints = [
+  {
+    id: "ai-rescue",
+    title: "AI MVP Production Hardening & Rescue",
+    tag: "Prototype → Production",
+    summary: "Rescuing prototypes built with AI tools (Lovable, Bolt, v0, Replit, Base44) that hit architectural dead-ends. Re-engineering raw SQL queries, adding transactional security, implementing background workers, and deploying scalable cloud infrastructure.",
+    steps: [
+      { num: "01", name: "Architecture Audit", desc: "Isolate memory leaks, unindexed queries & untyped state" },
+      { num: "02", name: "Database Hardening", desc: "PostgreSQL schema normalization & atomic transactions" },
+      { num: "03", name: "Security & Auth", desc: "JWT/Session rotation, rate limiting & role-based ACL" },
+      { num: "04", name: "Production Scale", desc: "Redis cache layer, S3 CDN & CI/CD deployment" }
+    ],
+    snippet: `// Hardened Next.js / Node.js Production Endpoint with Rate Limiting & Queue
+export async function POST(req: Request) {
+  const session = await auth.verifySession(req);
+  if (!session) return unauthorizedResponse();
+
+  const rateLimit = await redis.limit(\`ip:\${req.ip}\`, { max: 60, window: 60 });
+  if (!rateLimit.ok) return rateLimitExceeded();
+
+  const payload = await validateOrderSchema(await req.json());
+  const job = await queue.dispatch('process_marketplace_order', payload);
+  return jsonResponse({ jobId: job.id, status: 'queued' });
+}`
+  },
+  {
+    id: "escrow",
+    title: "Marketplace Escrow & Multi-Vendor Billing",
+    tag: "Fintech & Stripe Connect",
+    summary: "Custom financial infrastructure handling multi-party escrow holding, milestone approvals, automated refunds, dispute resolution, and automated seller payouts across 100+ countries.",
+    steps: [
+      { num: "01", name: "Authorized Hold", desc: "Stripe PaymentIntent authorized with capture delay" },
+      { num: "02", name: "Escrow Ledger", desc: "Isolated double-entry ledger lock on order funds" },
+      { num: "03", name: "Milestone Verify", desc: "Buyer approves deliverable or triggers arbitration" },
+      { num: "04", name: "Instant Payout", desc: "Stripe Connect Transfer with automated fee split" }
+    ],
+    snippet: `// Stripe Connect Automated Escrow Release with Ledger Transaction
+public function releaseMilestone(Order $order, Milestone $milestone) {
+    return DB::transaction(function () use ($order, $milestone) {
+        $transfer = Stripe\\Transfer::create([
+            'amount' => $milestone->payout_amount_cents,
+            'currency' => 'usd',
+            'destination' => $order->seller->stripe_account_id,
+            'transfer_group' => $order->uuid,
+        ]);
+        $milestone->update(['status' => 'released', 'transfer_id' => $transfer->id]);
+        event(new MilestonePaidEvent($order, $milestone));
+    });
+}`
+  },
+  {
+    id: "database",
+    title: "High-Speed Database & Latency Tuning",
+    tag: "800ms → 118ms Optimization",
+    summary: "Resolving N+1 database bottlenecks, composite B-Tree indexing, Redis caching strategies, and connection pooling to maintain instant sub-120ms response times under massive user concurrency.",
+    steps: [
+      { num: "01", name: "EXPLAIN ANALYZE", desc: "Identify full table scans & missing index bottlenecks" },
+      { num: "02", name: "Composite Index", desc: "Add B-Tree indexes on high-cardinality foreign keys" },
+      { num: "03", name: "Tagged Caching", desc: "Redis tagged cache with TTL and event invalidation" },
+      { num: "04", name: "Sub-120ms Benchmark", desc: "Response times drop from 800ms to 118ms at peak" }
+    ],
+    snippet: `// Optimized Multi-Tenant Search with Redis Invalidation
+const searchCatalog = async (tenantId: string, filters: QueryFilters) => {
+  const cacheKey = \`tenant:\${tenantId}:query:\${hashFilters(filters)}\`;
+  const cached = await redis.get(cacheKey);
+  if (cached) return JSON.parse(cached);
+
+  const results = await prisma.listing.findMany({
+    where: { tenantId, status: 'ACTIVE', ...buildIndexClauses(filters) },
+    select: { id: true, title: true, priceCents: true, rating: true },
+    take: 50
+  });
+
+  await redis.setex(cacheKey, 300, JSON.stringify(results));
+  return results;
+};`
+  }
+];
+
 export default function PortfolioPage() {
   const pageRef = useRef<HTMLDivElement>(null);
   const [repos, setRepos] = useState<GitHubRepo[]>(CACHED_GITHUB_REPOS);
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"marquee" | "grid">("marquee");
+  const [activeBlueprintIndex, setActiveBlueprintIndex] = useState<number>(0);
 
   // GSAP Entrance Choreography
   useEffect(() => {
@@ -390,12 +473,13 @@ export default function PortfolioPage() {
               {/* Verification Pills */}
               <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[#667085]">
                 <div className="flex items-center gap-1.5">
-                  <Check className="w-3.5 h-3.5 text-[#533AFD]" />
-                  <span>Upwork Top-Rated Plus</span>
+                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
+                  <span className="font-semibold text-[#0D1738]">Top Rated on Freelancer.com</span>
+                  <span className="text-[#667085]">(4.9 ★ • 127+ Reviews)</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Check className="w-3.5 h-3.5 text-[#533AFD]" />
-                  <span>Freelancer Preferred SLA</span>
+                  <span>Preferred Freelancer SLA (100% On-Time)</span>
                 </div>
                 <div className="flex items-center gap-1.5">
                   <Check className="w-3.5 h-3.5 text-[#533AFD]" />
@@ -822,6 +906,87 @@ export default function PortfolioPage() {
 
           </div>
 
+          {/* Interactive Architecture Blueprints Terminal */}
+          <div className="bg-white rounded-[4px] border border-[#D0D5DD] p-6 lg:p-8 mb-10 shadow-sm">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-6 border-b border-[#EAECF0]">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#533AFD]">Interactive Engineering Blueprints</span>
+                <h3 className="text-xl font-bold text-[#0D1738] mt-1">
+                  How I Engineer Complex Backend & Data Flows
+                </h3>
+              </div>
+
+              {/* Blueprint Selector Tabs */}
+              <div className="flex flex-wrap gap-2">
+                {architectureBlueprints.map((bp, idx) => (
+                  <button
+                    key={bp.id}
+                    onClick={() => setActiveBlueprintIndex(idx)}
+                    className={`px-3 py-1.5 rounded-[4px] text-xs font-semibold transition-all ${
+                      activeBlueprintIndex === idx
+                        ? "bg-[#533AFD] text-white"
+                        : "bg-[#F2F4F7] text-[#344054] hover:bg-[#EAECF0]"
+                    }`}
+                  >
+                    {bp.title}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Active Blueprint Content */}
+            <div className="grid lg:grid-cols-12 gap-8 pt-6 items-start">
+              
+              {/* Left Column: Pipeline Execution Steps */}
+              <div className="lg:col-span-6 space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-[2px] bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] text-[11px] font-bold uppercase">
+                    {architectureBlueprints[activeBlueprintIndex].tag}
+                  </span>
+                </div>
+
+                <p className="text-xs sm:text-sm text-[#475467] leading-relaxed">
+                  {architectureBlueprints[activeBlueprintIndex].summary}
+                </p>
+
+                {/* Steps List */}
+                <div className="space-y-2.5 pt-2">
+                  {architectureBlueprints[activeBlueprintIndex].steps.map((step) => (
+                    <div key={step.num} className="p-3 rounded-[4px] bg-[#F8FAFC] border border-[#EAECF0] flex items-start gap-3">
+                      <span className="font-mono text-xs font-bold text-[#533AFD] bg-white px-2 py-0.5 rounded border border-[#D9D6FE]">
+                        {step.num}
+                      </span>
+                      <div>
+                        <div className="text-xs font-bold text-[#0D1738]">{step.name}</div>
+                        <div className="text-[11px] text-[#667085] mt-0.5">{step.desc}</div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Column: Code Implementation Terminal */}
+              <div className="lg:col-span-6">
+                <div className="rounded-[4px] bg-[#0D1738] border border-slate-700 overflow-hidden shadow-lg">
+                  <div className="px-4 py-2.5 bg-[#09112B] border-b border-slate-800 flex items-center justify-between text-xs text-slate-400 font-mono">
+                    <div className="flex items-center gap-2">
+                      <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
+                      <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
+                      <span className="text-[11px] text-slate-300 ml-2">architecture-pipeline.ts</span>
+                    </div>
+                    <span className="text-[10px] text-slate-400">Production Code</span>
+                  </div>
+
+                  <pre className="p-4 text-xs font-mono text-slate-200 overflow-x-auto leading-relaxed">
+                    <code>{architectureBlueprints[activeBlueprintIndex].snippet}</code>
+                  </pre>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
           {/* Benchmark Comparison Chart */}
           <div className="bg-white rounded-[4px] border border-[#D0D5DD] p-6 lg:p-8">
             <div className="grid lg:grid-cols-12 gap-6 items-center">
@@ -883,6 +1048,34 @@ export default function PortfolioPage() {
             <p className="text-xs sm:text-sm text-[#475467] mt-1.5">
               Trusted by marketplace founders, agency CEOs, and high-profile entrepreneurs to engineer scalable digital systems.
             </p>
+          </div>
+
+          {/* Freelancer.com Top Rated Performance Strip */}
+          <div className="bg-[#F8FAFC] rounded-[4px] border border-[#D0D5DD] p-5 mb-10 max-w-4xl mx-auto shadow-sm">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-[#EAECF0]">
+              <div className="pt-2 md:pt-0 md:px-4 text-center">
+                <div className="flex items-center justify-center gap-1 text-amber-500 font-bold text-lg">
+                  <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
+                  <span>4.9 / 5.0</span>
+                </div>
+                <div className="text-[11px] text-[#475467] font-medium mt-0.5">127+ Verified Reviews</div>
+              </div>
+
+              <div className="pt-2 md:pt-0 md:px-4 text-center">
+                <div className="text-emerald-700 font-bold text-lg">100%</div>
+                <div className="text-[11px] text-[#475467] font-medium mt-0.5">On-Time Delivery</div>
+              </div>
+
+              <div className="pt-2 md:pt-0 md:px-4 text-center">
+                <div className="text-[#533AFD] font-bold text-lg">94%</div>
+                <div className="text-[11px] text-[#475467] font-medium mt-0.5">Repeat Hire Rate</div>
+              </div>
+
+              <div className="pt-2 md:pt-0 md:px-4 text-center">
+                <div className="text-[#0D1738] font-bold text-lg">Top 1%</div>
+                <div className="text-[11px] text-[#475467] font-medium mt-0.5">Preferred Freelancer SLA</div>
+              </div>
+            </div>
           </div>
 
           {/* Video Container */}
