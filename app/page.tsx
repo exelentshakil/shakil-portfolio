@@ -7,7 +7,6 @@ import {
   ArrowUpRight,
   ArrowDownRight,
   Check,
-  CheckCircle2,
   Github,
   Layers3,
   ShieldCheck,
@@ -24,7 +23,8 @@ import {
   MessageCircle,
   Calendar,
   Grid,
-  SlidersHorizontal
+  SlidersHorizontal,
+  Code2
 } from "lucide-react";
 import {
   Area,
@@ -40,22 +40,22 @@ import {
 import { sites, getSiteImage, getSiteFallback, Site } from "./data/sites";
 
 // --------------------------------------------------------------------------
-// Telemetry & Benchmark Data (Real Architectural Metrics)
+// Real Architectural Benchmarks & Telemetry Data
 // --------------------------------------------------------------------------
 const telemetryData = [
-  { month: "Initial Launch", throughput: 280, latency: 820, uptime: 99.8 },
-  { month: "Q1 Optimization", throughput: 740, latency: 450, uptime: 99.92 },
-  { month: "Q2 Scale Phase", throughput: 1420, latency: 260, uptime: 99.98 },
-  { month: "Q3 Cluster Tuning", throughput: 2100, latency: 150, uptime: 99.995 },
-  { month: "Current Production", throughput: 3400, latency: 118, uptime: 99.999 },
+  { month: "Base", throughput: 320, latency: 820 },
+  { month: "Q1 Indexing", throughput: 850, latency: 420 },
+  { month: "Q2 Redis & Queues", throughput: 1650, latency: 240 },
+  { month: "Q3 Cluster Tuning", throughput: 2400, latency: 155 },
+  { month: "Production Peak", throughput: 3850, latency: 118 },
 ];
 
 const benchmarkComparisonData = [
-  { metric: "Response Time", customArchitect: 98, genericFreelancer: 42 },
-  { metric: "Code Scalability", customArchitect: 96, genericFreelancer: 38 },
-  { metric: "Payment Security", customArchitect: 100, genericFreelancer: 55 },
-  { metric: "Database Concurrency", customArchitect: 94, genericFreelancer: 45 },
-  { metric: "Test Coverage", customArchitect: 92, genericFreelancer: 30 },
+  { metric: "Query Latency", customEngineered: 98, genericBuild: 45 },
+  { metric: "Concurrency Scaling", customEngineered: 96, genericBuild: 40 },
+  { metric: "Escrow & Payment Safety", customEngineered: 100, genericBuild: 50 },
+  { metric: "Memory Efficiency", customEngineered: 94, genericBuild: 38 },
+  { metric: "Database Indexing", customEngineered: 95, genericBuild: 35 },
 ];
 
 type GitHubRepo = {
@@ -67,25 +67,22 @@ type GitHubRepo = {
   forks_count: number;
 };
 
-// --------------------------------------------------------------------------
-// Subcomponent: Custom Tooltip for Charts
-// --------------------------------------------------------------------------
 interface TooltipProps {
   active?: boolean;
-  payload?: Array<{ value: number; name?: string }>;
+  payload?: Array<{ value: number; name?: string; dataKey?: string }>;
   label?: string;
 }
 
 function CustomTelemetryTooltip({ active, payload, label }: TooltipProps) {
   if (active && payload && payload.length) {
     return (
-      <div className="bg-slate-900 text-white p-3 rounded-lg shadow-xl border border-slate-700 text-xs">
-        <p className="font-bold text-slate-300 mb-1">{label}</p>
-        <p className="text-indigo-400 font-semibold">
+      <div className="bg-[#0D1738] text-white p-2.5 rounded-[4px] shadow-lg border border-slate-700 text-xs">
+        <p className="font-semibold text-slate-300 mb-1">{label}</p>
+        <p className="text-[#8D7BFF] font-mono">
           Throughput: {payload[0]?.value} req/s
         </p>
-        <p className="text-emerald-400 font-semibold">
-          Latency: {payload[1]?.value} ms (85% faster)
+        <p className="text-emerald-400 font-mono">
+          Latency: {payload[1]?.value} ms (85% reduction)
         </p>
       </div>
     );
@@ -99,27 +96,27 @@ export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"marquee" | "grid">("marquee");
 
-  // GSAP Entrance Animations
+  // GSAP Entrance Choreography
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.from(".gsap-reveal", {
         opacity: 0,
-        y: 28,
-        duration: 0.75,
+        y: 20,
+        duration: 0.65,
         stagger: 0.08,
         ease: "power2.out",
       });
       gsap.from(".gsap-stat", {
-        scale: 0.95,
         opacity: 0,
-        duration: 0.6,
+        y: 15,
+        duration: 0.55,
         stagger: 0.06,
-        delay: 0.3,
+        delay: 0.25,
         ease: "power1.out",
       });
     }, pageRef);
 
-    // Fetch GitHub Repos
+    // Fetch GitHub Repositories
     fetch("https://api.github.com/users/exelentshakil/repos?per_page=15&sort=updated")
       .then((res) => res.json())
       .then((data: GitHubRepo[]) => {
@@ -132,7 +129,6 @@ export default function PortfolioPage() {
     return () => ctx.revert();
   }, []);
 
-  // Filtered sites for Grid view
   const categories = useMemo(() => [
     "all",
     "marketplace",
@@ -155,140 +151,133 @@ export default function PortfolioPage() {
   const marqueeTrack2 = useMemo(() => sites.filter((_, i) => i % 2 !== 0), []);
 
   return (
-    <div ref={pageRef} className="min-h-screen bg-[#F8FAFC] text-slate-900 selection:bg-[#533AFD] selection:text-white">
+    <div ref={pageRef} className="min-h-screen bg-white text-[#0D1738]">
       
       {/* -------------------------------------------------------------------- */}
       {/* 1. TOP NAVIGATION BAR */}
       {/* -------------------------------------------------------------------- */}
-      <header className="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200/80">
-        <div className="site-container h-20 flex items-center justify-between gap-4">
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#EAECF0]">
+        <div className="site-container h-16 flex items-center justify-between gap-4">
           
           {/* Brand */}
-          <a href="#top" className="flex items-center gap-3 group">
-            <div className="w-10 h-10 rounded-lg bg-indigo-50 flex items-center justify-center p-1.5 border border-indigo-100 group-hover:border-indigo-300 transition-colors">
-              <Image src="/logo.png" alt="Shakil HQ Logo" width={32} height={32} className="object-contain" priority />
+          <a href="#top" className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-[4px] bg-[#F4F3FF] flex items-center justify-center p-1 border border-[#D9D6FE]">
+              <Image src="/logo.png" alt="Shakil HQ" width={24} height={24} className="object-contain" priority />
             </div>
             <div>
-              <div className="flex items-center gap-1.5 font-black text-base text-slate-900 tracking-tight">
+              <div className="flex items-center gap-1.5 font-bold text-sm text-[#0D1738]">
                 Shakil Ahmed
-                <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" title="Available for new engagements" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" title="Available for projects" />
               </div>
-              <div className="text-xs font-semibold text-slate-500">
-                Lead Architect & Full-Stack Engineer
+              <div className="text-[11px] font-medium text-[#475467]">
+                Senior Full-Stack & System Architect
               </div>
             </div>
           </a>
 
           {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-slate-600">
-            <a href="#proof" className="hover:text-[#533AFD] transition-colors">Track Record</a>
+          <nav className="hidden lg:flex items-center gap-7 text-xs font-semibold text-[#344054]">
+            <a href="#proof" className="hover:text-[#533AFD] transition-colors">Metrics</a>
             <a href="#flagship" className="hover:text-[#533AFD] transition-colors">Flagship (2M+ Users)</a>
-            <a href="#portfolio" className="hover:text-[#533AFD] transition-colors">All 60+ Projects</a>
+            <a href="#portfolio" className="hover:text-[#533AFD] transition-colors">All 60+ Deployments</a>
             <a href="#architecture" className="hover:text-[#533AFD] transition-colors">Architecture</a>
             <a href="#reviews" className="hover:text-[#533AFD] transition-colors">CEO Review & Proof</a>
             <a href="#contact" className="hover:text-[#533AFD] transition-colors">Contact</a>
           </nav>
 
           {/* Action CTAs */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2">
             <a
               href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
               target="_blank"
               rel="noreferrer"
-              className="btn-whatsapp text-xs py-2 px-3.5 hidden sm:inline-flex"
+              className="btn-secondary text-xs py-1.5 px-3 hidden sm:inline-flex"
             >
-              <MessageCircle className="w-4 h-4" />
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
               WhatsApp
             </a>
             <a
               href="https://calendly.com/shakilhq/30min"
               target="_blank"
               rel="noreferrer"
-              className="btn-primary text-xs py-2 px-4"
+              className="btn-primary text-xs py-1.5 px-3.5"
             >
-              Book Strategy Call
-              <ArrowUpRight className="w-4 h-4" />
+              Book Call
+              <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
         </div>
       </header>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 2. HERO SECTION (HIGH CONVERTING SAAS TELEMETRY + GSAP) */}
+      {/* 2. HERO SECTION */}
       {/* -------------------------------------------------------------------- */}
-      <section id="top" className="relative pt-12 pb-20 md:py-24 overflow-hidden bg-gradient-to-b from-indigo-50/40 via-white to-[#F8FAFC]">
-        {/* Subtle grid pattern background */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f080_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f080_1px,transparent_1px)] bg-[size:3rem_3rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] pointer-events-none" />
-
-        <div className="site-container relative z-10">
-          <div className="grid lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <section id="top" className="relative pt-12 pb-16 md:pt-16 md:pb-20 border-b border-[#EAECF0] bg-gradient-to-b from-[#F8F9FC] to-white">
+        <div className="site-container">
+          <div className="grid lg:grid-cols-12 gap-10 items-center">
             
-            {/* Left Column: Positioning & Copy */}
-            <div className="lg:col-span-7 space-y-6 gsap-reveal">
+            {/* Left Column: Positioning & Clear Engineering Copy */}
+            <div className="lg:col-span-7 space-y-5 gsap-reveal">
               
-              {/* Trust Badge */}
-              <div className="inline-flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-bold tracking-wide">
-                <span className="flex h-2 w-2 relative">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span>Available for Q3/Q4 Architecture & Full-Stack Projects</span>
+              {/* Status Badge */}
+              <div className="badge-status">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span>Open for Technical Architecture & Full-Stack Engagements</span>
               </div>
 
               {/* Main Headline */}
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-950 tracking-tight leading-[1.08]">
-                Architecting high-scale web apps, SaaS & MVPs{" "}
-                <span className="text-[#533AFD] underline decoration-[#533AFD]/20 decoration-wavy">that compound.</span>
+              <h1 className="text-3xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#0D1738] tracking-[-0.03em] leading-[1.12]">
+                Engineering high-throughput platforms, marketplace core & resilient APIs.
               </h1>
 
               {/* Subtitle */}
-              <p className="text-lg sm:text-xl text-slate-600 font-normal leading-relaxed max-w-2xl">
-                12+ years of production experience. Lead engineer behind <strong className="text-slate-900 font-bold">Legiit</strong> (2M+ users, $40M+ in transactions). Specializing in Next.js, Laravel, Node.js, Python, PostgreSQL, Stripe Escrow, and zero-downtime scaling.
+              <p className="text-sm sm:text-base text-[#475467] font-normal leading-relaxed max-w-xl">
+                12+ years building enterprise architectures and scalable backends. Lead platform architect behind <strong className="text-[#0D1738] font-semibold">Legiit</strong> (2M+ active users, $40M+ volume). Specialist in Laravel, Node.js, Python, PostgreSQL, Next.js, and Stripe payment systems.
               </p>
 
-              {/* Action Buttons */}
-              <div className="flex flex-wrap items-center gap-4 pt-2">
+              {/* Action Buttons (4px border radius, tight sizing) */}
+              <div className="flex flex-wrap items-center gap-3 pt-2">
                 <a
                   href="https://calendly.com/shakilhq/30min"
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-primary py-3.5 px-6 text-base"
+                  className="btn-primary"
                 >
-                  <Calendar className="w-5 h-5" />
-                  Schedule 30-Min Strategy Call
+                  <Calendar className="w-4 h-4" />
+                  Book Strategy Call
                 </a>
 
                 <a
                   href="https://wa.me/13075336678?text=Hi%20Shakil,%20I'm%20looking%20to%20build%20a%20project."
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-whatsapp py-3.5 px-6 text-base"
+                  className="btn-secondary"
                 >
-                  <MessageCircle className="w-5 h-5" />
-                  WhatsApp (+1 307 533-6678)
+                  <Phone className="w-4 h-4 text-[#533AFD]" />
+                  +1 (307) 533-6678
                 </a>
 
                 <a
                   href="#portfolio"
-                  className="btn-secondary py-3.5 px-5 text-sm font-semibold"
+                  className="btn-outline-primary"
                 >
-                  Explore 60+ Live Projects
-                  <ArrowDownRight className="w-4 h-4 text-slate-500" />
+                  Browse 60+ Deployments
+                  <ArrowDownRight className="w-4 h-4" />
                 </a>
               </div>
 
-              {/* Proof Badges Row */}
-              <div className="pt-6 border-t border-slate-200/80 flex flex-wrap items-center gap-x-8 gap-y-3 text-xs font-semibold text-slate-500">
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#533AFD]" />
+              {/* Verification Pills */}
+              <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[#667085]">
+                <div className="flex items-center gap-1.5">
+                  <Check className="w-3.5 h-3.5 text-[#533AFD]" />
                   <span>Upwork Top-Rated Plus</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#533AFD]" />
+                <div className="flex items-center gap-1.5">
+                  <Check className="w-3.5 h-3.5 text-[#533AFD]" />
                   <span>Freelancer Preferred SLA</span>
                 </div>
-                <div className="flex items-center gap-2">
-                  <CheckCircle2 className="w-4 h-4 text-[#533AFD]" />
+                <div className="flex items-center gap-1.5">
+                  <Check className="w-3.5 h-3.5 text-[#533AFD]" />
                   <span>US Business: BarakahSoft LLC</span>
                 </div>
               </div>
@@ -296,54 +285,54 @@ export default function PortfolioPage() {
 
             {/* Right Column: Live Production Telemetry Panel (Recharts) */}
             <div className="lg:col-span-5 gsap-reveal">
-              <div className="bg-white rounded-2xl p-6 shadow-2xl shadow-indigo-500/10 border border-indigo-100/80 relative">
+              <div className="bg-white rounded-[4px] p-5 border border-[#D0D5DD] shadow-sm">
                 
                 {/* Header */}
-                <div className="flex items-center justify-between pb-4 border-b border-slate-100">
+                <div className="flex items-center justify-between pb-3 border-b border-[#EAECF0]">
                   <div className="flex items-center gap-2">
-                    <div className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="text-xs font-bold uppercase tracking-wider text-slate-700">Production Telemetry</span>
+                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <span className="text-xs font-bold uppercase tracking-wider text-[#344054]">Core Platform Telemetry</span>
                   </div>
-                  <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-indigo-50 text-[#533AFD] font-bold">
-                    Legiit Core Engine
+                  <span className="text-[11px] font-mono px-2 py-0.5 rounded-[2px] bg-[#F4F3FF] text-[#533AFD] font-semibold border border-[#D9D6FE]">
+                    Legiit Production
                   </span>
                 </div>
 
                 {/* Top Metrics Grid */}
-                <div className="grid grid-cols-3 gap-3 my-4">
-                  <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-center">
-                    <div className="text-xs text-slate-500 font-medium">Active Users</div>
-                    <div className="text-xl font-black text-slate-900">2,000,000+</div>
+                <div className="grid grid-cols-3 gap-2.5 my-3.5">
+                  <div className="p-2 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
+                    <div className="text-[11px] text-[#667085] font-medium">Active Users</div>
+                    <div className="text-lg font-bold text-[#0D1738]">2,000,000+</div>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-center">
-                    <div className="text-xs text-slate-500 font-medium">Query Latency</div>
-                    <div className="text-xl font-black text-emerald-600">118 ms</div>
+                  <div className="p-2 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
+                    <div className="text-[11px] text-[#667085] font-medium">Query Latency</div>
+                    <div className="text-lg font-bold text-emerald-700">118 ms</div>
                   </div>
-                  <div className="p-2.5 rounded-xl bg-slate-50 border border-slate-100 text-center">
-                    <div className="text-xs text-slate-500 font-medium">Service Uptime</div>
-                    <div className="text-xl font-black text-[#533AFD]">99.999%</div>
+                  <div className="p-2 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
+                    <div className="text-[11px] text-[#667085] font-medium">Service Uptime</div>
+                    <div className="text-lg font-bold text-[#533AFD]">99.999%</div>
                   </div>
                 </div>
 
                 {/* Recharts Area Chart */}
-                <div className="h-44 w-full pt-2">
+                <div className="h-40 w-full pt-1">
                   <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={telemetryData}>
+                    <AreaChart data={telemetryData} margin={{ top: 5, right: 5, left: -25, bottom: 0 }}>
                       <defs>
                         <linearGradient id="throughputGrad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#533AFD" stopOpacity={0.25} />
+                          <stop offset="5%" stopColor="#533AFD" stopOpacity={0.15} />
                           <stop offset="95%" stopColor="#533AFD" stopOpacity={0} />
                         </linearGradient>
                       </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" vertical={false} />
-                      <XAxis dataKey="month" hide />
-                      <YAxis hide domain={[0, 4000]} />
+                      <CartesianGrid strokeDasharray="3 3" stroke="#F2F4F7" vertical={false} />
+                      <XAxis dataKey="month" tick={{ fontSize: 10, fill: "#667085" }} axisLine={false} tickLine={false} />
+                      <YAxis domain={[0, 4000]} tick={{ fontSize: 10, fill: "#667085" }} axisLine={false} tickLine={false} />
                       <Tooltip content={<CustomTelemetryTooltip />} />
                       <Area
                         type="monotone"
                         dataKey="throughput"
                         stroke="#533AFD"
-                        strokeWidth={3}
+                        strokeWidth={2}
                         fillOpacity={1}
                         fill="url(#throughputGrad)"
                       />
@@ -352,18 +341,18 @@ export default function PortfolioPage() {
                 </div>
 
                 {/* Microservice Architecture Tags */}
-                <div className="mt-4 pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-[11px] text-slate-500">
-                  <span className="flex items-center gap-1.5">
-                    <Activity className="w-3.5 h-3.5 text-emerald-500" />
+                <div className="mt-3 pt-3 border-t border-[#EAECF0] flex items-center justify-between text-[11px] text-[#667085]">
+                  <span className="flex items-center gap-1">
+                    <Activity className="w-3 h-3 text-emerald-600" />
                     <span>Celery Queues: Active</span>
                   </span>
-                  <span className="flex items-center gap-1.5">
-                    <Database className="w-3.5 h-3.5 text-[#533AFD]" />
-                    <span>Redis Cache: 98.4% Hit</span>
+                  <span className="flex items-center gap-1">
+                    <Database className="w-3 h-3 text-[#533AFD]" />
+                    <span>Redis: 98.4% Hit</span>
                   </span>
-                  <span className="flex items-center gap-1.5">
-                    <Lock className="w-3.5 h-3.5 text-amber-500" />
-                    <span>Stripe Escrow: Verified</span>
+                  <span className="flex items-center gap-1">
+                    <Lock className="w-3 h-3 text-amber-600" />
+                    <span>Stripe Escrow: Live</span>
                   </span>
                 </div>
               </div>
@@ -376,32 +365,32 @@ export default function PortfolioPage() {
       {/* -------------------------------------------------------------------- */}
       {/* 3. STRIPE-STYLE STAT BAND */}
       {/* -------------------------------------------------------------------- */}
-      <section id="proof" className="bg-white border-y border-slate-200 py-12">
+      <section id="proof" className="bg-white border-b border-[#EAECF0] py-10">
         <div className="site-container">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 divide-y lg:divide-y-0 lg:divide-x divide-slate-100">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 divide-y lg:divide-y-0 lg:divide-x divide-[#EAECF0]">
             
-            <div className="pt-4 lg:pt-0 lg:px-6 gsap-stat">
-              <div className="text-4xl sm:text-5xl font-black text-slate-950 tracking-tight">2M+</div>
-              <div className="text-sm font-bold text-slate-700 mt-1">Active Marketplace Users</div>
-              <p className="text-xs text-slate-500 mt-1">Architected core systems powering Legiit.com global traffic.</p>
+            <div className="pt-3 lg:pt-0 lg:px-4 gsap-stat">
+              <div className="text-3xl sm:text-4xl font-bold text-[#0D1738] tracking-tight">2M+</div>
+              <div className="text-xs font-semibold text-[#344054] mt-0.5">Active Marketplace Users</div>
+              <p className="text-[11px] text-[#667085] mt-1">Platform architecture powering Legiit.com global transactions.</p>
             </div>
 
-            <div className="pt-4 lg:pt-0 lg:px-6 gsap-stat">
-              <div className="text-4xl sm:text-5xl font-black text-slate-950 tracking-tight">115+</div>
-              <div className="text-sm font-bold text-slate-700 mt-1">Production Systems Shipped</div>
-              <p className="text-xs text-slate-500 mt-1">High-stakes deployments across healthcare, legal, SaaS & agency.</p>
+            <div className="pt-3 lg:pt-0 lg:px-4 gsap-stat">
+              <div className="text-3xl sm:text-4xl font-bold text-[#0D1738] tracking-tight">115+</div>
+              <div className="text-xs font-semibold text-[#344054] mt-0.5">Production Systems Shipped</div>
+              <p className="text-[11px] text-[#667085] mt-1">Deployments across healthcare, legal, SaaS, fintech & commerce.</p>
             </div>
 
-            <div className="pt-4 lg:pt-0 lg:px-6 gsap-stat">
-              <div className="text-4xl sm:text-5xl font-black text-slate-950 tracking-tight">99%</div>
-              <div className="text-sm font-bold text-slate-700 mt-1">Client Satisfaction</div>
-              <p className="text-xs text-slate-500 mt-1">Over 125+ verified five-star reviews on Freelancer & Upwork.</p>
+            <div className="pt-3 lg:pt-0 lg:px-4 gsap-stat">
+              <div className="text-3xl sm:text-4xl font-bold text-[#0D1738] tracking-tight">99%</div>
+              <div className="text-xs font-semibold text-[#344054] mt-0.5">Client Satisfaction</div>
+              <p className="text-[11px] text-[#667085] mt-1">Over 125+ verified five-star client reviews on Freelancer & Upwork.</p>
             </div>
 
-            <div className="pt-4 lg:pt-0 lg:px-6 gsap-stat">
-              <div className="text-4xl sm:text-5xl font-black text-slate-950 tracking-tight">12+ Yrs</div>
-              <div className="text-sm font-bold text-slate-700 mt-1">Engineering Leadership</div>
-              <p className="text-xs text-slate-500 mt-1">From hands-on full-stack coding to multi-tenant system architecture.</p>
+            <div className="pt-3 lg:pt-0 lg:px-4 gsap-stat">
+              <div className="text-3xl sm:text-4xl font-bold text-[#0D1738] tracking-tight">12+ Yrs</div>
+              <div className="text-xs font-semibold text-[#344054] mt-0.5">Engineering Leadership</div>
+              <p className="text-[11px] text-[#667085] mt-1">Full lifecycle development from scratch to multi-tenant scaling.</p>
             </div>
 
           </div>
@@ -409,134 +398,131 @@ export default function PortfolioPage() {
       </section>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 4. FEATURED FLAGSHIP CASE STUDY: LEGIIT (WEB + MOBILE ECOSYSTEM) */}
+      {/* 4. FEATURED FLAGSHIP CASE STUDY: LEGIIT */}
       {/* -------------------------------------------------------------------- */}
       <section id="flagship" className="section-pad bg-[#F8FAFC]">
         <div className="site-container">
           
-          <div className="max-w-3xl mb-12">
-            <span className="badge-primary mb-3">Flagship Production System</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
-              Scaling Legiit to 2,000,000+ Users & Millions in Revenue
+          <div className="max-w-2xl mb-8">
+            <span className="badge-tag mb-2">Flagship Architecture</span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0D1738] tracking-tight">
+              Scaling Legiit to 2,000,000+ Users
             </h2>
-            <p className="text-base sm:text-lg text-slate-600 mt-3">
-              Served as Lead Engineer & Platform Architect. Replaced fragmented scripts with a robust multi-service platform capable of handling intense transaction volume without downtime.
+            <p className="text-xs sm:text-sm text-[#475467] mt-2">
+              Served as Lead Engineer & Platform Architect. Re-engineered core transaction pipelines, search indexing, real-time messaging, and multi-currency payouts to support exponential marketplace growth.
             </p>
           </div>
 
           {/* Main Case Study Bento Card */}
-          <div className="bg-white rounded-3xl border border-slate-200/80 shadow-xl overflow-hidden">
-            <div className="grid lg:grid-cols-12 gap-8 items-center p-8 lg:p-12">
+          <div className="bg-white rounded-[4px] border border-[#D0D5DD] p-6 lg:p-8 shadow-sm">
+            <div className="grid lg:grid-cols-12 gap-8 items-center">
               
               {/* Left Column: Details & Technical Wins */}
-              <div className="lg:col-span-6 space-y-6">
-                <div className="flex items-center gap-3">
-                  <span className="px-3 py-1 rounded-md bg-indigo-50 border border-indigo-200 text-[#533AFD] text-xs font-bold uppercase">
+              <div className="lg:col-span-6 space-y-4">
+                <div className="flex items-center gap-2">
+                  <span className="px-2.5 py-0.5 rounded-[2px] bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] text-[11px] font-bold uppercase">
                     Freelance Marketplace
                   </span>
-                  <span className="px-3 py-1 rounded-md bg-emerald-50 border border-emerald-200 text-emerald-700 text-xs font-bold">
-                    2M+ Active Accounts
+                  <span className="px-2.5 py-0.5 rounded-[2px] bg-[#ECFDF3] border border-[#A6F4C5] text-[#027A48] text-[11px] font-bold">
+                    2M+ Registered Accounts
                   </span>
                 </div>
 
-                <h3 className="text-2xl sm:text-3xl font-black text-slate-950 tracking-tight">
-                  End-to-End Marketplace Architecture
+                <h3 className="text-xl sm:text-2xl font-bold text-[#0D1738] tracking-tight">
+                  High-Concurrency Marketplace Core
                 </h3>
 
-                <p className="text-slate-600 text-sm leading-relaxed">
-                  Architected the payment gateway, wallet escrow system, real-time messaging, and high-concurrency order processing. Scaled from early traction to a multi-million-dollar global ecosystem.
+                <p className="text-[#475467] text-xs sm:text-sm leading-relaxed">
+                  Architected the entire billing flow, wallet escrow holding, instant seller payouts, and WebSockets messaging. Scaled platform with zero service interruptions during major peak events.
                 </p>
 
                 {/* Technical Achievements List */}
-                <div className="space-y-3 pt-2">
-                  <div className="flex items-start gap-3 text-sm text-slate-700 font-medium">
-                    <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
-                      <Check className="w-3.5 h-3.5" />
+                <div className="space-y-2.5 pt-1">
+                  <div className="flex items-start gap-2 text-xs sm:text-sm text-[#344054]">
+                    <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3 h-3" />
                     </div>
-                    <span><strong>Stripe & PayPal Escrow:</strong> Automated order hold, milestone release, affiliate split & instant withdrawal engine.</span>
+                    <span><strong>Stripe Connect & Escrow:</strong> Automated order hold, milestone release, affiliate splits, and automated ledger balancing.</span>
                   </div>
 
-                  <div className="flex items-start gap-3 text-sm text-slate-700 font-medium">
-                    <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
-                      <Check className="w-3.5 h-3.5" />
+                  <div className="flex items-start gap-2 text-xs sm:text-sm text-[#344054]">
+                    <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3 h-3" />
                     </div>
-                    <span><strong>Query Optimization:</strong> Reduced search & analytics response times from 800ms down to 118ms under peak loads.</span>
+                    <span><strong>Database Tuning:</strong> Reduced search & analytics queries from 800ms down to 118ms under concurrent load.</span>
                   </div>
 
-                  <div className="flex items-start gap-3 text-sm text-slate-700 font-medium">
-                    <div className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
-                      <Check className="w-3.5 h-3.5" />
+                  <div className="flex items-start gap-2 text-xs sm:text-sm text-[#344054]">
+                    <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3 h-3" />
                     </div>
-                    <span><strong>Real-Time Messaging:</strong> WebSockets chat with order attachment previews, notifications, and mobile push sync.</span>
+                    <span><strong>Real-Time Messaging:</strong> WebSockets chat engine with live file previews, order sync, and native mobile notifications.</span>
                   </div>
                 </div>
 
                 {/* Tech Pills */}
-                <div className="flex flex-wrap gap-2 pt-2">
-                  {["Laravel", "Django", "Node.js", "React / Next.js", "MySQL", "Redis", "Celery", "WebSockets", "AWS EC2/S3", "Stripe API"].map((tech) => (
-                    <span key={tech} className="px-2.5 py-1 rounded bg-slate-100 text-slate-700 font-mono text-xs font-semibold">
+                <div className="flex flex-wrap gap-1.5 pt-2">
+                  {["Laravel", "Django", "Node.js", "React", "Next.js", "MySQL", "Redis", "Celery", "AWS", "Stripe API"].map((tech) => (
+                    <span key={tech} className="px-2 py-0.5 rounded-[2px] bg-[#F2F4F7] text-[#344054] font-mono text-[11px] font-semibold">
                       {tech}
                     </span>
                   ))}
                 </div>
 
                 {/* Direct Action Link */}
-                <div className="pt-4 flex items-center gap-4">
+                <div className="pt-2">
                   <a
                     href="https://legiit.com"
                     target="_blank"
                     rel="noreferrer"
-                    className="btn-primary text-sm py-2.5 px-5"
+                    className="btn-primary text-xs"
                   >
                     Visit Live Platform (Legiit.com)
-                    <ExternalLink className="w-4 h-4" />
+                    <ExternalLink className="w-3.5 h-3.5" />
                   </a>
                 </div>
               </div>
 
-              {/* Right Column: Visual Mockups & Screenshots (Web + Mobile App) */}
-              <div className="lg:col-span-6 space-y-4">
-                {/* Main Web Screenshot */}
-                <div className="relative aspect-[16/10] rounded-2xl overflow-hidden border border-slate-200 shadow-lg bg-slate-950 group">
+              {/* Right Column: Web + Mobile Screenshots */}
+              <div className="lg:col-span-6 space-y-3">
+                <div className="relative aspect-[16/10] rounded-[4px] overflow-hidden border border-[#D0D5DD] shadow-sm bg-slate-900">
                   <Image
                     src="/screenshots/Legiit.png"
-                    alt="Legiit Marketplace Web Dashboard"
+                    alt="Legiit Marketplace Web Platform"
                     fill
-                    className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                    className="object-cover object-top"
                     priority
                   />
-                  <div className="absolute top-3 right-3 px-2.5 py-1 rounded bg-slate-900/80 backdrop-blur text-white text-[11px] font-bold">
+                  <div className="absolute top-2 right-2 px-2 py-0.5 rounded-[2px] bg-[#0D1738]/90 text-white text-[10px] font-semibold">
                     Web Platform
                   </div>
                 </div>
 
-                {/* Mobile Apps Side-by-Side Strip */}
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-slate-200 shadow bg-slate-950 group">
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="relative aspect-[16/9] rounded-[4px] overflow-hidden border border-[#D0D5DD] shadow-sm bg-slate-900">
                     <Image
                       src="/screenshots/Legiit - iOS.png"
                       alt="Legiit iOS App"
                       fill
-                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover object-top"
                     />
-                    <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 backdrop-blur text-white text-[10px] font-bold">
-                      iOS App Store (4.0 ★)
+                    <div className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded-[2px] bg-black/80 text-white text-[9px] font-semibold">
+                      iOS App (4.0 ★)
                     </div>
                   </div>
 
-                  <div className="relative aspect-[16/9] rounded-xl overflow-hidden border border-slate-200 shadow bg-slate-950 group">
+                  <div className="relative aspect-[16/9] rounded-[4px] overflow-hidden border border-[#D0D5DD] shadow-sm bg-slate-900">
                     <Image
                       src="/screenshots/Legiit - Android.png"
                       alt="Legiit Android App"
                       fill
-                      className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+                      className="object-cover object-top"
                     />
-                    <div className="absolute top-2 left-2 px-2 py-0.5 rounded bg-black/70 backdrop-blur text-white text-[10px] font-bold">
-                      Google Play (4.5 ★)
+                    <div className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded-[2px] bg-black/80 text-white text-[9px] font-semibold">
+                      Android (4.5 ★)
                     </div>
                   </div>
                 </div>
-
               </div>
 
             </div>
@@ -548,40 +534,40 @@ export default function PortfolioPage() {
       {/* -------------------------------------------------------------------- */}
       {/* 5. "DIFFERENT INDUSTRIES. SAME STANDARD." (ALL 60+ SCREENSHOTS) */}
       {/* -------------------------------------------------------------------- */}
-      <section id="portfolio" className="section-pad bg-white border-y border-slate-200 overflow-hidden">
-        <div className="site-container mb-8">
+      <section id="portfolio" className="section-pad bg-white border-b border-[#EAECF0] overflow-hidden">
+        <div className="site-container mb-6">
           
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
             <div>
-              <span className="badge-primary mb-3">Full Production Portfolio</span>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
+              <span className="badge-tag mb-2">Production Catalog</span>
+              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0D1738] tracking-tight">
                 Different Industries. Same Standard.
               </h2>
-              <p className="text-slate-600 mt-2 max-w-2xl">
-                Showing all 60+ production platforms, portals, and lead systems built for real businesses. Hover over any project to inspect.
+              <p className="text-xs sm:text-sm text-[#475467] mt-1 max-w-xl">
+                Showcasing all 60+ production platforms, customer portals, and lead engines deployed for real businesses.
               </p>
             </div>
 
-            {/* View Mode & Filter Controls */}
-            <div className="flex items-center gap-3">
+            {/* View Mode Toggle */}
+            <div className="flex items-center gap-2">
               <button
                 onClick={() => setViewMode("marquee")}
-                className={`px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+                className={`px-3 py-1.5 rounded-[4px] text-xs font-semibold flex items-center gap-1.5 transition-all ${
                   viewMode === "marquee"
-                    ? "bg-[#533AFD] text-white shadow-md shadow-indigo-500/20"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                    ? "bg-[#533AFD] text-white"
+                    : "bg-[#F2F4F7] text-[#344054] hover:bg-[#EAECF0]"
                 }`}
               >
                 <SlidersHorizontal className="w-3.5 h-3.5" />
-                Live Marquee Slider
+                Live Scrolling Marquee
               </button>
 
               <button
                 onClick={() => setViewMode("grid")}
-                className={`px-3.5 py-2 rounded-lg text-xs font-bold flex items-center gap-1.5 transition-all ${
+                className={`px-3 py-1.5 rounded-[4px] text-xs font-semibold flex items-center gap-1.5 transition-all ${
                   viewMode === "grid"
-                    ? "bg-[#533AFD] text-white shadow-md shadow-indigo-500/20"
-                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                    ? "bg-[#533AFD] text-white"
+                    : "bg-[#F2F4F7] text-[#344054] hover:bg-[#EAECF0]"
                 }`}
               >
                 <Grid className="w-3.5 h-3.5" />
@@ -590,8 +576,8 @@ export default function PortfolioPage() {
             </div>
           </div>
 
-          {/* Interactive Category Filter Pills (When in Grid Mode or Filter) */}
-          <div className="flex flex-wrap gap-2 mt-8 pt-4 border-t border-slate-100">
+          {/* Category Filter Pills */}
+          <div className="flex flex-wrap gap-1.5 mt-6 pt-3 border-t border-[#EAECF0]">
             {categories.map((cat) => (
               <button
                 key={cat}
@@ -599,10 +585,10 @@ export default function PortfolioPage() {
                   setActiveCategory(cat);
                   if (viewMode === "marquee") setViewMode("grid");
                 }}
-                className={`px-3.5 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all ${
+                className={`px-3 py-1 rounded-[4px] text-xs font-semibold uppercase tracking-wider transition-all ${
                   activeCategory === cat
-                    ? "bg-slate-900 text-white shadow-sm"
-                    : "bg-slate-100 text-slate-600 hover:bg-slate-200"
+                    ? "bg-[#0D1738] text-white"
+                    : "bg-[#F2F4F7] text-[#475467] hover:bg-[#EAECF0]"
                 }`}
               >
                 {cat}
@@ -612,39 +598,39 @@ export default function PortfolioPage() {
 
         </div>
 
-        {/* --- VIEW MODE 1: NATURAL SMOOTH CONTINUOUS MARQUEE SLIDERS (ALL SCREENSHOTS) --- */}
+        {/* --- VIEW MODE 1: NATURAL SMOOTH MARQUEE SLIDERS (ALL SCREENSHOTS) --- */}
         {viewMode === "marquee" ? (
-          <div className="space-y-6 pt-4">
+          <div className="space-y-4 pt-2">
             
-            {/* Track 1: Moving Left */}
-            <div className="overflow-hidden whitespace-nowrap py-2 mask-radial">
-              <div className="animate-marquee-left flex gap-6">
+            {/* Track 1: Scrolling Left */}
+            <div className="overflow-hidden whitespace-nowrap py-1">
+              <div className="animate-marquee-left flex gap-4">
                 {[...marqueeTrack1, ...marqueeTrack1].map((site, index) => (
                   <MarqueeSiteCard key={`track1-${site.url}-${index}`} site={site} />
                 ))}
               </div>
             </div>
 
-            {/* Track 2: Moving Right */}
-            <div className="overflow-hidden whitespace-nowrap py-2">
-              <div className="animate-marquee-right flex gap-6">
+            {/* Track 2: Scrolling Right */}
+            <div className="overflow-hidden whitespace-nowrap py-1">
+              <div className="animate-marquee-right flex gap-4">
                 {[...marqueeTrack2, ...marqueeTrack2].map((site, index) => (
                   <MarqueeSiteCard key={`track2-${site.url}-${index}`} site={site} />
                 ))}
               </div>
             </div>
 
-            <div className="site-container text-center pt-8">
-              <p className="text-xs text-slate-500">
-                ⚡ Continuous live feed of 60+ client systems. Hover any card to pause and inspect metrics.
+            <div className="site-container text-center pt-4">
+              <p className="text-[11px] text-[#667085]">
+                Continuous live catalog of 60+ client systems. Hover any card to pause and inspect metrics.
               </p>
             </div>
 
           </div>
         ) : (
-          /* --- VIEW MODE 2: ASYMMETRIC BENTO GRID (ALL FILTERED SITES) --- */
-          <div className="site-container pt-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          /* --- VIEW MODE 2: FILTERABLE BENTO GRID --- */
+          <div className="site-container pt-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {filteredSites.map((site) => (
                 <GridSiteCard key={`grid-${site.url}`} site={site} />
               ))}
@@ -655,103 +641,103 @@ export default function PortfolioPage() {
       </section>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 6. SYSTEM ARCHITECTURE & COMPARISON BENCHMARKS (RECHARTS) */}
+      {/* 6. TECHNICAL ARCHITECTURE & BENCHMARKS (RECHARTS) */}
       {/* -------------------------------------------------------------------- */}
-      <section id="architecture" className="section-pad bg-[#F8FAFC]">
+      <section id="architecture" className="section-pad bg-[#F8FAFC] border-b border-[#EAECF0]">
         <div className="site-container">
           
-          <div className="max-w-3xl mb-14">
-            <span className="badge-primary mb-3">Architectural Philosophy</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
-              Engineering Rigor Built For Scale
+          <div className="max-w-2xl mb-10">
+            <span className="badge-tag mb-2">Technical Foundations</span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0D1738] tracking-tight">
+              Systems Engineered For Longevity
             </h2>
-            <p className="text-slate-600 mt-2 text-base sm:text-lg">
-              Most developers just write code to close tickets. I engineer robust, observable systems designed to handle real traffic, complex financial logic, and rapid iteration.
+            <p className="text-xs sm:text-sm text-[#475467] mt-1.5">
+              Architecture decisions focused on maintainability, query speed, transaction integrity, and minimal operational overhead.
             </p>
           </div>
 
-          {/* 4 Architectural Pillars Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+          {/* 4 Architectural Pillars */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
             
-            <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-indigo-50 text-[#533AFD] flex items-center justify-center mb-4">
-                <Layers3 className="w-6 h-6" />
+            <div className="bg-white p-5 rounded-[4px] border border-[#D0D5DD]">
+              <div className="w-9 h-9 rounded-[4px] bg-[#F4F3FF] text-[#533AFD] flex items-center justify-center mb-3">
+                <Layers3 className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Full-Stack SaaS & Apps</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Next.js 15, React 19, TypeScript, Tailwind, Server Actions, responsive mobile optimization, and accessible UI engineering.
+              <h3 className="text-sm font-bold text-[#0D1738] mb-1">Full-Stack SaaS & Web</h3>
+              <p className="text-xs text-[#475467] leading-relaxed">
+                Next.js 15, React 19, TypeScript, Tailwind, Server Components, and responsive mobile architecture.
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
-                <Server className="w-6 h-6" />
+            <div className="bg-white p-5 rounded-[4px] border border-[#D0D5DD]">
+              <div className="w-9 h-9 rounded-[4px] bg-emerald-50 text-emerald-700 flex items-center justify-center mb-3">
+                <Server className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">High-Throughput APIs</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Laravel, Node.js/NestJS, Python Django, REST & GraphQL endpoints, Celery workers, and WebSockets for real-time state.
+              <h3 className="text-sm font-bold text-[#0D1738] mb-1">High-Throughput APIs</h3>
+              <p className="text-xs text-[#475467] leading-relaxed">
+                Laravel, Node.js/NestJS, Python Django, Celery background queues, and WebSockets real-time sync.
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4">
-                <CreditCard className="w-6 h-6" />
+            <div className="bg-white p-5 rounded-[4px] border border-[#D0D5DD]">
+              <div className="w-9 h-9 rounded-[4px] bg-amber-50 text-amber-700 flex items-center justify-center mb-3">
+                <CreditCard className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Fintech & Billing</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Stripe Connect, escrow holding, multi-vendor splits, automated webhooks, subscription lifecycle, and PCI compliance.
+              <h3 className="text-sm font-bold text-[#0D1738] mb-1">Fintech & Billing Escrow</h3>
+              <p className="text-xs text-[#475467] leading-relaxed">
+                Stripe Connect, escrow holding, automated splits, webhook handlers, and multi-currency ledgers.
               </p>
             </div>
 
-            <div className="bg-white p-6 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition-shadow">
-              <div className="w-12 h-12 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center mb-4">
-                <ShieldCheck className="w-6 h-6" />
+            <div className="bg-white p-5 rounded-[4px] border border-[#D0D5DD]">
+              <div className="w-9 h-9 rounded-[4px] bg-indigo-50 text-[#533AFD] flex items-center justify-center mb-3">
+                <ShieldCheck className="w-5 h-5" />
               </div>
-              <h3 className="text-lg font-bold text-slate-900 mb-2">Database & Security</h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                PostgreSQL/MySQL index tuning, Redis caching layers, AWS infrastructure, HIPAA compliance, and zero-downtime migrations.
+              <h3 className="text-sm font-bold text-[#0D1738] mb-1">Database & Infrastructure</h3>
+              <p className="text-xs text-[#475467] leading-relaxed">
+                PostgreSQL/MySQL index tuning, Redis caching, AWS EC2/S3 deployment, and HIPAA compliance.
               </p>
             </div>
 
           </div>
 
-          {/* Benchmark Comparison Recharts Card */}
-          <div className="bg-white rounded-3xl border border-slate-200 p-8 lg:p-10 shadow-lg">
-            <div className="grid lg:grid-cols-12 gap-8 items-center">
+          {/* Benchmark Comparison Chart */}
+          <div className="bg-white rounded-[4px] border border-[#D0D5DD] p-6 lg:p-8">
+            <div className="grid lg:grid-cols-12 gap-6 items-center">
               
-              <div className="lg:col-span-5 space-y-4">
-                <span className="text-xs font-bold uppercase tracking-wider text-indigo-600">Performance Benchmarks</span>
-                <h3 className="text-2xl font-black text-slate-900">
-                  Custom System Architecture vs. Typical Freelance Builds
+              <div className="lg:col-span-5 space-y-2.5">
+                <span className="text-xs font-bold uppercase tracking-wider text-[#533AFD]">Quantitative Standards</span>
+                <h3 className="text-xl font-bold text-[#0D1738]">
+                  Architectural Rigor vs. Generic Freelance Builds
                 </h3>
-                <p className="text-sm text-slate-600 leading-relaxed">
-                  Comparing critical operational criteria across production deployments. High engineering standards translate directly to lower server costs and higher conversion rates.
+                <p className="text-xs sm:text-sm text-[#475467] leading-relaxed">
+                  Comparing critical execution standards across production deployments. Rigorous architecture directly reduces cloud bills and eliminates refactoring debt.
                 </p>
-                <div className="flex items-center gap-6 pt-2 text-xs font-bold">
-                  <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded-full bg-[#533AFD]" />
-                    <span>My Engineering Standard</span>
+                <div className="flex items-center gap-4 pt-1 text-xs font-semibold">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-[2px] bg-[#533AFD]" />
+                    <span>My Standard</span>
                   </div>
-                  <div className="flex items-center gap-2">
-                    <span className="w-3 h-3 rounded-full bg-slate-300" />
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-[2px] bg-[#D0D5DD]" />
                     <span>Typical Agency Build</span>
                   </div>
                 </div>
               </div>
 
-              <div className="lg:col-span-7 h-64 w-full">
+              <div className="lg:col-span-7 h-52 w-full">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart
                     data={benchmarkComparisonData}
                     layout="vertical"
-                    margin={{ top: 10, right: 20, left: 40, bottom: 5 }}
+                    margin={{ top: 5, right: 15, left: 35, bottom: 5 }}
                   >
-                    <CartesianGrid strokeDasharray="3 3" stroke="#F1F5F9" horizontal={false} />
+                    <CartesianGrid strokeDasharray="3 3" stroke="#F2F4F7" horizontal={false} />
                     <XAxis type="number" domain={[0, 100]} hide />
-                    <YAxis dataKey="metric" type="category" tick={{ fontSize: 11, fill: "#475569", fontWeight: 600 }} axisLine={false} tickLine={false} />
-                    <Tooltip contentStyle={{ background: "#0F172A", border: "none", borderRadius: 8, color: "#fff", fontSize: 12 }} />
-                    <Bar dataKey="customArchitect" name="My Engineering Standard" fill="#533AFD" radius={[0, 4, 4, 0]} />
-                    <Bar dataKey="genericFreelancer" name="Generic Build" fill="#CBD5E1" radius={[0, 4, 4, 0]} />
+                    <YAxis dataKey="metric" type="category" tick={{ fontSize: 11, fill: "#344054", fontWeight: 600 }} axisLine={false} tickLine={false} />
+                    <Tooltip contentStyle={{ background: "#0D1738", border: "none", borderRadius: 4, color: "#fff", fontSize: 11 }} />
+                    <Bar dataKey="customEngineered" name="My Engineering Standard" fill="#533AFD" radius={[0, 2, 2, 0]} />
+                    <Bar dataKey="genericBuild" name="Generic Build" fill="#EAECF0" radius={[0, 2, 2, 0]} />
                   </BarChart>
                 </ResponsiveContainer>
               </div>
@@ -763,24 +749,24 @@ export default function PortfolioPage() {
       </section>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 7. CEO VIDEO REVIEW & HIGH-TRUST REVIEWS SECTION */}
+      {/* 7. CEO VIDEO REVIEW & VERIFIED TESTIMONIALS */}
       {/* -------------------------------------------------------------------- */}
-      <section id="reviews" className="section-pad bg-white border-y border-slate-200">
+      <section id="reviews" className="section-pad bg-white border-b border-[#EAECF0]">
         <div className="site-container">
           
-          <div className="max-w-3xl mx-auto text-center mb-14">
-            <span className="badge-emerald mb-3">CEO Verified Partnership</span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-950 tracking-tight">
+          <div className="max-w-2xl mx-auto text-center mb-10">
+            <span className="badge-tag mb-2">CEO Endorsement</span>
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0D1738] tracking-tight">
               &quot;Shaq actually <span className="text-[#533AFD]">works with us</span> on Legiit.&quot;
             </h2>
-            <p className="text-slate-600 mt-3 text-base sm:text-lg">
-              Trusted by CEOs, founders, and celebrity athletes to build the platforms their businesses rely on.
+            <p className="text-xs sm:text-sm text-[#475467] mt-1.5">
+              Trusted by marketplace founders, agency CEOs, and high-profile entrepreneurs to engineer scalable digital systems.
             </p>
           </div>
 
           {/* Video Container */}
-          <div className="max-w-4xl mx-auto mb-16">
-            <div className="relative aspect-video rounded-3xl overflow-hidden border border-slate-200 shadow-2xl bg-slate-950">
+          <div className="max-w-3xl mx-auto mb-12">
+            <div className="relative aspect-video rounded-[4px] overflow-hidden border border-[#D0D5DD] shadow-sm bg-slate-950">
               <iframe
                 width="100%"
                 height="100%"
@@ -793,68 +779,68 @@ export default function PortfolioPage() {
             </div>
           </div>
 
-          {/* Testimonial Cards Grid */}
-          <div className="grid md:grid-cols-3 gap-8">
+          {/* Testimonial Cards */}
+          <div className="grid md:grid-cols-3 gap-5">
             
             {/* Chris M Walker */}
-            <div className="bg-[#F8FAFC] rounded-2xl p-8 border border-slate-200 flex flex-col justify-between hover:border-[#533AFD]/40 transition-colors">
+            <div className="bg-[#F8FAFC] rounded-[4px] p-5 border border-[#D0D5DD] flex flex-col justify-between">
               <div>
-                <div className="flex gap-1 text-amber-500 mb-4">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
+                <div className="flex gap-1 text-amber-500 mb-3">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
                 </div>
-                <p className="text-slate-700 text-sm leading-relaxed mb-6 font-medium">
+                <p className="text-[#344054] text-xs leading-relaxed mb-4">
                   &quot;Most developers just write code; he thinks in systems. Legiit isn&apos;t a simple website; it&apos;s a complex marketplace with intricate financial logic. He engineered the architecture that allows us to scale safely. I don&apos;t need a freelancer; I need an engineering partner.&quot;
                 </p>
               </div>
-              <div className="flex items-center gap-3 pt-4 border-t border-slate-200">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden border border-slate-200">
+              <div className="flex items-center gap-2.5 pt-3 border-t border-[#EAECF0]">
+                <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#D0D5DD]">
                   <Image src="/chris.jpeg" alt="Chris M. Walker" fill className="object-cover" />
                 </div>
                 <div>
-                  <div className="font-bold text-slate-900 text-sm">Chris M. Walker</div>
-                  <div className="text-xs text-[#533AFD] font-semibold">CEO, Legiit.com (2M+ Users)</div>
+                  <div className="font-bold text-[#0D1738] text-xs">Chris M. Walker</div>
+                  <div className="text-[11px] text-[#533AFD] font-medium">CEO, Legiit.com (2M+ Users)</div>
                 </div>
               </div>
             </div>
 
             {/* Jim Sabellico */}
-            <div className="bg-[#F8FAFC] rounded-2xl p-8 border border-slate-200 flex flex-col justify-between hover:border-[#533AFD]/40 transition-colors">
+            <div className="bg-[#F8FAFC] rounded-[4px] p-5 border border-[#D0D5DD] flex flex-col justify-between">
               <div>
-                <div className="flex gap-1 text-amber-500 mb-4">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
+                <div className="flex gap-1 text-amber-500 mb-3">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
                 </div>
-                <p className="text-slate-700 text-sm leading-relaxed mb-6 font-medium">
+                <p className="text-[#344054] text-xs leading-relaxed mb-4">
                   &quot;When I land high-stakes clients like Steve Weatherford, I can&apos;t afford &apos;trial and error.&apos; I bring him in because he brings an engineering discipline to agency chaos. He was the technical lead behind our biggest deployments because the code is clean, the database optimized, and the delivery flawless.&quot;
                 </p>
               </div>
-              <div className="flex items-center gap-3 pt-4 border-t border-slate-200">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden border border-slate-200">
+              <div className="flex items-center gap-2.5 pt-3 border-t border-[#EAECF0]">
+                <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#D0D5DD]">
                   <Image src="/jim.jpeg" alt="Jim Sabellico" fill className="object-cover" />
                 </div>
                 <div>
-                  <div className="font-bold text-slate-900 text-sm">Jim Sabellico</div>
-                  <div className="text-xs text-[#533AFD] font-semibold">Founder, No Half Cakes</div>
+                  <div className="font-bold text-[#0D1738] text-xs">Jim Sabellico</div>
+                  <div className="text-[11px] text-[#533AFD] font-medium">Founder, No Half Cakes</div>
                 </div>
               </div>
             </div>
 
             {/* Steve Weatherford */}
-            <div className="bg-[#F8FAFC] rounded-2xl p-8 border border-slate-200 flex flex-col justify-between hover:border-[#533AFD]/40 transition-colors">
+            <div className="bg-[#F8FAFC] rounded-[4px] p-5 border border-[#D0D5DD] flex flex-col justify-between">
               <div>
-                <div className="flex gap-1 text-amber-500 mb-4">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-4 h-4 fill-amber-400 text-amber-400" />)}
+                <div className="flex gap-1 text-amber-500 mb-3">
+                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
                 </div>
-                <p className="text-slate-700 text-sm leading-relaxed mb-6 font-medium">
+                <p className="text-[#344054] text-xs leading-relaxed mb-4">
                   &quot;I don&apos;t know the code, I just know that my platform needs to perform as hard as I do. The team delivered a digital HQ that handles my traffic, my content, and my sales without blinking. It feels solid, fast, and professional. That&apos;s the standard.&quot;
                 </p>
               </div>
-              <div className="flex items-center gap-3 pt-4 border-t border-slate-200">
-                <div className="relative w-12 h-12 rounded-full overflow-hidden border border-slate-200">
+              <div className="flex items-center gap-2.5 pt-3 border-t border-[#EAECF0]">
+                <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#D0D5DD]">
                   <Image src="/steve.jpeg" alt="Steve Weatherford" fill className="object-cover" />
                 </div>
                 <div>
-                  <div className="font-bold text-slate-900 text-sm">Steve Weatherford</div>
-                  <div className="text-xs text-[#533AFD] font-semibold">Super Bowl Champ & Entrepreneur</div>
+                  <div className="font-bold text-[#0D1738] text-xs">Steve Weatherford</div>
+                  <div className="text-[11px] text-[#533AFD] font-medium">Super Bowl Champ & Entrepreneur</div>
                 </div>
               </div>
             </div>
@@ -865,24 +851,17 @@ export default function PortfolioPage() {
       </section>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 8. TRANSPARENCY & ATTRIBUTION SECTION */}
+      {/* 8. TRANSPARENCY & ATTRIBUTION */}
       {/* -------------------------------------------------------------------- */}
-      <section className="py-12 bg-[#F8FAFC]">
+      <section className="py-8 bg-[#F8FAFC] border-b border-[#EAECF0]">
         <div className="site-container">
-          <div className="bg-white rounded-2xl p-6 md:p-8 border border-slate-200 shadow-sm flex flex-col md:flex-row items-start md:items-center gap-6">
-            <div className="w-12 h-12 rounded-xl bg-indigo-50 text-[#533AFD] flex items-center justify-center shrink-0">
-              <ShieldCheck className="w-6 h-6" />
+          <div className="bg-white rounded-[4px] p-5 border border-[#D0D5DD] flex flex-col md:flex-row items-start md:items-center gap-4">
+            <div className="w-8 h-8 rounded-[4px] bg-[#F4F3FF] text-[#533AFD] flex items-center justify-center shrink-0">
+              <ShieldCheck className="w-4 h-4" />
             </div>
-            <div className="space-y-1.5 flex-1">
-              <div className="flex items-center gap-2 font-bold text-slate-900 text-base">
-                <span>Integrity & Engineering Attribution</span>
-                <span className="px-2 py-0.5 rounded bg-slate-100 text-slate-600 text-[10px] uppercase tracking-wider font-mono">
-                  Verified History
-                </span>
-              </div>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Many of the featured high-scale case studies—including Legiit, Steve Weatherford, and high-volume agency deployments—were architected and shipped during my tenure as <strong className="text-slate-900">Lead Technical Architect</strong> at <em>No Half Cakes</em>. I now deliver that same agency-grade engineering discipline directly to your company.
-              </p>
+            <div className="text-xs text-[#475467] leading-relaxed">
+              <span className="font-bold text-[#0D1738] mr-1.5">Engineering Attribution:</span>
+              Many featured case studies—including Legiit, Steve Weatherford, and high-volume agency deployments—were architected and shipped during my tenure as <strong className="text-[#0D1738]">Lead Technical Architect</strong> at <em>No Half Cakes</em>. I bring this same enterprise discipline directly to your business.
             </div>
           </div>
         </div>
@@ -891,17 +870,17 @@ export default function PortfolioPage() {
       {/* -------------------------------------------------------------------- */}
       {/* 9. OPEN SOURCE SIGNAL (GITHUB LIVE FEED) */}
       {/* -------------------------------------------------------------------- */}
-      <section className="section-pad bg-white border-t border-slate-200">
+      <section className="section-pad bg-white border-b border-[#EAECF0]">
         <div className="site-container">
           
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-6 mb-12">
+          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
             <div>
-              <span className="badge-primary mb-3">Public Engineering Signal</span>
-              <h2 className="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+              <span className="badge-tag mb-2">Public Engineering</span>
+              <h2 className="text-2xl sm:text-3xl font-bold text-[#0D1738] tracking-tight">
                 Open Source & Engineering Labs
               </h2>
-              <p className="text-slate-600 mt-1 text-sm sm:text-base">
-                Exploring algorithms, developer tools, and microservice prototypes in public on GitHub.
+              <p className="text-xs sm:text-sm text-[#475467] mt-1">
+                Developer tools, API utilities, and full-stack modules maintained in public.
               </p>
             </div>
 
@@ -909,43 +888,43 @@ export default function PortfolioPage() {
               href="https://github.com/exelentshakil"
               target="_blank"
               rel="noreferrer"
-              className="btn-secondary text-xs py-2.5 px-4 self-start sm:self-auto"
+              className="btn-secondary text-xs"
             >
-              <Github className="w-4 h-4" />
-              View Full GitHub Profile
+              <Github className="w-3.5 h-3.5" />
+              GitHub Profile
             </a>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {repos.map((repo) => (
               <a
                 key={repo.name}
                 href={repo.html_url}
                 target="_blank"
                 rel="noreferrer"
-                className="bg-[#F8FAFC] rounded-2xl p-6 border border-slate-200 card-lift flex flex-col justify-between group"
+                className="bg-[#F8FAFC] rounded-[4px] p-4 border border-[#D0D5DD] hover:border-[#533AFD] transition-colors flex flex-col justify-between group"
               >
                 <div>
-                  <div className="flex items-center justify-between text-slate-400 mb-3">
-                    <Github className="w-5 h-5 text-slate-700" />
-                    <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#533AFD] transition-colors" />
+                  <div className="flex items-center justify-between text-[#667085] mb-2">
+                    <Code2 className="w-4 h-4 text-[#0D1738]" />
+                    <ArrowUpRight className="w-3.5 h-3.5 text-[#667085] group-hover:text-[#533AFD] transition-colors" />
                   </div>
-                  <h4 className="font-bold text-slate-900 text-base mb-2 group-hover:text-[#533AFD] transition-colors truncate">
+                  <h4 className="font-bold text-[#0D1738] text-sm mb-1 group-hover:text-[#533AFD] transition-colors truncate">
                     {repo.name}
                   </h4>
-                  <p className="text-xs text-slate-600 line-clamp-3 leading-relaxed">
-                    {repo.description || "Production utility and full-stack project repository."}
+                  <p className="text-xs text-[#475467] line-clamp-2 leading-relaxed">
+                    {repo.description || "Open source production module and engineering utility."}
                   </p>
                 </div>
 
-                <div className="pt-4 border-t border-slate-200 flex items-center justify-between mt-6 text-xs text-slate-500 font-semibold">
-                  <span className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-[#533AFD]" />
+                <div className="pt-3 border-t border-[#EAECF0] flex items-center justify-between mt-4 text-[11px] text-[#667085]">
+                  <span className="flex items-center gap-1 font-mono">
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#533AFD]" />
                     <span>{repo.language || "TypeScript"}</span>
                   </span>
                   {repo.stargazers_count > 0 && (
-                    <span className="flex items-center gap-1">
-                      <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
+                    <span className="flex items-center gap-1 font-semibold text-amber-600">
+                      <Star className="w-3 h-3 fill-amber-400" />
                       <span>{repo.stargazers_count}</span>
                     </span>
                   )}
@@ -958,90 +937,90 @@ export default function PortfolioPage() {
       </section>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 10. HIGH-CONVERTING CONTACT & BOOKING TERMINAL */}
+      {/* 10. DIRECT CONTACT & OFFICIAL BUSINESS TERMINAL */}
       {/* -------------------------------------------------------------------- */}
-      <section id="contact" className="section-pad bg-gradient-to-br from-slate-900 via-[#0E1528] to-[#1E1B4B] text-white">
+      <section id="contact" className="section-pad bg-[#0D1738] text-white">
         <div className="site-container">
           
-          <div className="grid lg:grid-cols-12 gap-12 items-center">
+          <div className="grid lg:grid-cols-12 gap-10 items-center">
             
             {/* Left: Call to Action */}
-            <div className="lg:col-span-6 space-y-6">
-              <span className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-xs font-bold uppercase tracking-wider">
+            <div className="lg:col-span-6 space-y-4">
+              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-[#533AFD]/20 text-[#D9D6FE] border border-[#533AFD]/40 text-xs font-semibold">
                 Direct Engineering Access
               </span>
 
-              <h2 className="text-4xl sm:text-5xl lg:text-6xl font-black tracking-tight leading-[1.05]">
-                Ready to build something <span className="text-indigo-400">extraordinary?</span>
+              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1]">
+                Ready to engineer your next platform?
               </h2>
 
-              <p className="text-slate-300 text-base sm:text-lg leading-relaxed">
-                Available for contract architecture, complex SaaS builds, MVP development, and emergency database / payment scaling. Let&apos;s turn your roadmap into production software.
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-lg">
+                Available for technical architecture, high-concurrency SaaS builds, MVP engineering, and payment / database performance optimization.
               </p>
 
-              <div className="space-y-4 pt-2">
+              <div className="flex flex-wrap items-center gap-3 pt-2">
                 <a
                   href="https://calendly.com/shakilhq/30min"
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-primary w-full sm:w-auto text-base py-4 px-8 shadow-xl shadow-indigo-500/30"
+                  className="btn-primary text-xs py-2.5 px-4"
                 >
-                  <Calendar className="w-5 h-5" />
-                  Book a 30-Minute Strategy Call
+                  <Calendar className="w-4 h-4" />
+                  Schedule 30-Minute Strategy Call
                 </a>
 
                 <a
                   href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20would%20like%20to%20discuss%20a%20new%20project."
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-whatsapp w-full sm:w-auto text-base py-4 px-8 ml-0 sm:ml-4 inline-flex"
+                  className="btn-secondary text-xs py-2.5 px-4 bg-white text-[#0D1738] hover:bg-slate-100"
                 >
-                  <MessageCircle className="w-5 h-5" />
-                  WhatsApp Direct Message
+                  <MessageCircle className="w-4 h-4 text-emerald-600" />
+                  WhatsApp (+1 307 533-6678)
                 </a>
               </div>
             </div>
 
             {/* Right: Verified Business Contact Card */}
             <div className="lg:col-span-6">
-              <div className="bg-slate-800/80 backdrop-blur-xl border border-slate-700/80 rounded-3xl p-8 space-y-6 shadow-2xl">
+              <div className="bg-[#101B3D] border border-slate-700/80 rounded-[4px] p-6 space-y-4">
                 
-                <h3 className="text-xl font-bold text-white border-b border-slate-700/80 pb-4">
-                  Official Business Details
+                <h3 className="text-sm font-bold text-white border-b border-slate-700/80 pb-3">
+                  Registered Business Details
                 </h3>
 
-                <div className="space-y-4 text-sm text-slate-300">
-                  <div className="flex items-start gap-4">
-                    <div className="w-9 h-9 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0 mt-0.5">
-                      <Phone className="w-4 h-4" />
+                <div className="space-y-3 text-xs text-slate-300">
+                  <div className="flex items-start gap-3">
+                    <div className="w-7 h-7 rounded-[4px] bg-[#533AFD]/20 text-[#D9D6FE] flex items-center justify-center shrink-0 mt-0.5">
+                      <Phone className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <div className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Phone & WhatsApp</div>
-                      <a href="tel:+13075336678" className="text-white font-bold hover:text-indigo-400 transition-colors text-base">
+                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Phone & WhatsApp</div>
+                      <a href="tel:+13075336678" className="text-white font-semibold hover:text-[#D9D6FE] transition-colors">
                         +1 (307) 533-6678
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-9 h-9 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0 mt-0.5">
-                      <Mail className="w-4 h-4" />
+                  <div className="flex items-start gap-3">
+                    <div className="w-7 h-7 rounded-[4px] bg-[#533AFD]/20 text-[#D9D6FE] flex items-center justify-center shrink-0 mt-0.5">
+                      <Mail className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <div className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Email Inquiry</div>
-                      <a href="mailto:hello@barakahsoft.com" className="text-white font-bold hover:text-indigo-400 transition-colors text-base">
+                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Email Direct</div>
+                      <a href="mailto:hello@barakahsoft.com" className="text-white font-semibold hover:text-[#D9D6FE] transition-colors">
                         hello@barakahsoft.com
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-4">
-                    <div className="w-9 h-9 rounded-lg bg-indigo-500/10 text-indigo-400 flex items-center justify-center shrink-0 mt-0.5">
-                      <MapPin className="w-4 h-4" />
+                  <div className="flex items-start gap-3">
+                    <div className="w-7 h-7 rounded-[4px] bg-[#533AFD]/20 text-[#D9D6FE] flex items-center justify-center shrink-0 mt-0.5">
+                      <MapPin className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <div className="text-xs text-slate-400 font-semibold uppercase tracking-wider">Registered Business HQ</div>
-                      <div className="text-white font-medium">
+                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Business Headquarters</div>
+                      <div className="text-slate-200">
                         30 N. Gould St. Ste R, Sheridan, WY 82801, USA
                       </div>
                     </div>
@@ -1049,12 +1028,12 @@ export default function PortfolioPage() {
                 </div>
 
                 {/* Freelancer & Platform Profiles */}
-                <div className="pt-6 border-t border-slate-700/80 flex flex-wrap items-center gap-4 text-xs">
+                <div className="pt-4 border-t border-slate-700/80 flex flex-wrap items-center gap-2 text-xs">
                   <a
                     href="https://www.upwork.com/freelancers/~01e19084859cda495e"
                     target="_blank"
                     rel="noreferrer"
-                    className="px-3 py-1.5 rounded-lg bg-slate-700/60 hover:bg-slate-700 text-slate-200 transition-colors"
+                    className="px-2.5 py-1 rounded-[2px] bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors text-[11px]"
                   >
                     Upwork Top Talent ↗
                   </a>
@@ -1062,7 +1041,7 @@ export default function PortfolioPage() {
                     href="https://www.freelancer.com/u/exelentshakil"
                     target="_blank"
                     rel="noreferrer"
-                    className="px-3 py-1.5 rounded-lg bg-slate-700/60 hover:bg-slate-700 text-slate-200 transition-colors"
+                    className="px-2.5 py-1 rounded-[2px] bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors text-[11px]"
                   >
                     Freelancer.com ↗
                   </a>
@@ -1070,7 +1049,7 @@ export default function PortfolioPage() {
                     href="https://github.com/exelentshakil"
                     target="_blank"
                     rel="noreferrer"
-                    className="px-3 py-1.5 rounded-lg bg-slate-700/60 hover:bg-slate-700 text-slate-200 transition-colors"
+                    className="px-2.5 py-1 rounded-[2px] bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors text-[11px]"
                   >
                     GitHub ↗
                   </a>
@@ -1078,7 +1057,7 @@ export default function PortfolioPage() {
                     href="https://x.com/shakilhq"
                     target="_blank"
                     rel="noreferrer"
-                    className="px-3 py-1.5 rounded-lg bg-slate-700/60 hover:bg-slate-700 text-slate-200 transition-colors"
+                    className="px-2.5 py-1 rounded-[2px] bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors text-[11px]"
                   >
                     Twitter / X ↗
                   </a>
@@ -1095,15 +1074,15 @@ export default function PortfolioPage() {
       {/* -------------------------------------------------------------------- */}
       {/* 11. FOOTER */}
       {/* -------------------------------------------------------------------- */}
-      <footer className="bg-slate-950 border-t border-slate-800 text-slate-400 py-10">
-        <div className="site-container flex flex-col md:flex-row items-center justify-between gap-6 text-xs font-medium">
+      <footer className="bg-[#080E24] border-t border-slate-800 text-slate-400 py-8">
+        <div className="site-container flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
           <div className="flex items-center gap-2 text-slate-300">
-            <span className="font-bold">© 2026 Shakil HQ (BarakahSoft LLC).</span>
+            <span className="font-semibold">© 2026 Shakil Ahmed (BarakahSoft LLC).</span>
             <span>All rights reserved.</span>
           </div>
 
-          <div className="text-center md:text-right">
-            <span>30 N. Gould St. Ste R, Sheridan, WY 82801 • Tel: +1 (307) 533-6678</span>
+          <div className="text-slate-400">
+            30 N. Gould St. Ste R, Sheridan, WY 82801 • Tel: +1 (307) 533-6678
           </div>
         </div>
       </footer>
@@ -1124,7 +1103,7 @@ function MarqueeSiteCard({ site }: { site: Site }) {
       href={`https://${site.url}`}
       target="_blank"
       rel="noreferrer"
-      className="inline-block w-[320px] bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-[#533AFD]/50 transition-all transform hover:-translate-y-1.5 text-left select-none group"
+      className="inline-block w-[300px] bg-white rounded-[4px] border border-[#D0D5DD] overflow-hidden hover:border-[#533AFD] transition-all text-left select-none group"
     >
       {/* Screenshot Section */}
       <div className="relative aspect-[16/10] bg-slate-100 overflow-hidden">
@@ -1133,37 +1112,37 @@ function MarqueeSiteCard({ site }: { site: Site }) {
             src={imageSrc}
             alt={site.name}
             fill
-            sizes="320px"
-            className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+            sizes="300px"
+            className="object-cover object-top"
             onError={() => setHasError(true)}
           />
         ) : (
-          <div className={`w-full h-full bg-gradient-to-br ${getSiteFallback(site)} flex items-center justify-center text-white font-bold text-xl`}>
+          <div className={`w-full h-full bg-gradient-to-br ${getSiteFallback(site)} flex items-center justify-center text-white font-bold text-lg`}>
             {site.name}
           </div>
         )}
 
-        <div className="absolute top-2.5 left-2.5 px-2 py-0.5 rounded bg-white/90 backdrop-blur shadow-sm text-slate-800 text-[10px] font-bold uppercase tracking-wider">
+        <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded-[2px] bg-white/95 border border-[#D0D5DD] text-[#0D1738] text-[9px] font-bold uppercase tracking-wider">
           {site.category}
         </div>
       </div>
 
       {/* Content Section */}
-      <div className="p-4 space-y-2">
+      <div className="p-3 space-y-1.5">
         <div className="flex items-center justify-between">
-          <h4 className="font-bold text-slate-900 text-sm truncate group-hover:text-[#533AFD] transition-colors">
+          <h4 className="font-bold text-[#0D1738] text-xs truncate group-hover:text-[#533AFD] transition-colors">
             {site.name}
           </h4>
-          <ArrowUpRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-[#533AFD] transition-colors shrink-0" />
+          <ArrowUpRight className="w-3 h-3 text-[#667085] group-hover:text-[#533AFD] transition-colors shrink-0" />
         </div>
 
-        <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
-          {site.hook || `Specialized digital platform engineered for ${site.clientType || "business"}.`}
+        <p className="text-[11px] text-[#475467] line-clamp-2 leading-relaxed">
+          {site.hook || `Production web system engineered for ${site.clientType || "client"}.`}
         </p>
 
         {site.metric && (
-          <div className="pt-2 border-t border-slate-100 flex items-center gap-1.5 text-[11px] font-bold text-emerald-600">
-            <CheckCircle2 className="w-3 h-3" />
+          <div className="pt-1.5 border-t border-[#EAECF0] flex items-center gap-1 text-[10px] font-bold text-emerald-700">
+            <Check className="w-3 h-3" />
             <span>{site.metric}</span>
           </div>
         )}
@@ -1184,7 +1163,7 @@ function GridSiteCard({ site }: { site: Site }) {
       href={`https://${site.url}`}
       target="_blank"
       rel="noreferrer"
-      className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm hover:shadow-xl hover:border-[#533AFD]/50 transition-all transform hover:-translate-y-1.5 flex flex-col group"
+      className="bg-white rounded-[4px] border border-[#D0D5DD] overflow-hidden hover:border-[#533AFD] transition-all flex flex-col group"
     >
       <div className="relative aspect-[16/10] bg-slate-100 overflow-hidden">
         {!hasError ? (
@@ -1193,38 +1172,38 @@ function GridSiteCard({ site }: { site: Site }) {
             alt={site.name}
             fill
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover object-top group-hover:scale-105 transition-transform duration-500"
+            className="object-cover object-top"
             onError={() => setHasError(true)}
           />
         ) : (
-          <div className={`w-full h-full bg-gradient-to-br ${getSiteFallback(site)} flex items-center justify-center text-white font-bold text-2xl`}>
+          <div className={`w-full h-full bg-gradient-to-br ${getSiteFallback(site)} flex items-center justify-center text-white font-bold text-xl`}>
             {site.name}
           </div>
         )}
 
-        <div className="absolute top-3 left-3 px-2.5 py-1 rounded bg-white/90 backdrop-blur shadow-sm text-slate-800 text-[11px] font-bold uppercase tracking-wider">
+        <div className="absolute top-2 left-2 px-2 py-0.5 rounded-[2px] bg-white/95 border border-[#D0D5DD] text-[#0D1738] text-[10px] font-bold uppercase tracking-wider">
           {site.category}
         </div>
       </div>
 
-      <div className="p-6 flex-1 flex flex-col justify-between space-y-4">
+      <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
         <div>
-          <div className="flex items-center justify-between mb-1.5">
-            <h4 className="font-bold text-slate-900 text-lg group-hover:text-[#533AFD] transition-colors truncate">
+          <div className="flex items-center justify-between mb-1">
+            <h4 className="font-bold text-[#0D1738] text-sm group-hover:text-[#533AFD] transition-colors truncate">
               {site.name}
             </h4>
-            <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#533AFD] transition-colors shrink-0" />
+            <ArrowUpRight className="w-3.5 h-3.5 text-[#667085] group-hover:text-[#533AFD] transition-colors shrink-0" />
           </div>
 
-          <p className="text-sm text-slate-500 line-clamp-2 leading-relaxed">
+          <p className="text-xs text-[#475467] line-clamp-2 leading-relaxed">
             {site.hook || `Tailored production system engineered for ${site.clientType || "client requirements"}.`}
           </p>
         </div>
 
         {site.technologies && (
-          <div className="pt-3 border-t border-slate-100 flex flex-wrap gap-1.5">
+          <div className="pt-2.5 border-t border-[#EAECF0] flex flex-wrap gap-1">
             {site.technologies.slice(0, 3).map((tech) => (
-              <span key={tech} className="px-2 py-0.5 rounded bg-slate-100 text-slate-600 font-mono text-[10px] font-semibold">
+              <span key={tech} className="px-1.5 py-0.5 rounded-[2px] bg-[#F2F4F7] text-[#344054] font-mono text-[10px] font-medium">
                 {tech}
               </span>
             ))}
