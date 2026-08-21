@@ -322,10 +322,28 @@ export default function PortfolioPage() {
             {/* Left Column: Positioning & Clear Engineering Copy */}
             <div className="lg:col-span-7 space-y-5 gsap-reveal">
               
-              {/* Status Badge */}
-              <div className="badge-status">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                <span>Open for Technical Architecture & Full-Stack Engagements</span>
+              {/* Profile Pill with Headshot */}
+              <div className="flex items-center gap-3">
+                <div className="relative w-11 h-11 rounded-[4px] overflow-hidden border border-[#D0D5DD] shadow-sm shrink-0 bg-slate-100">
+                  <Image
+                    src="/shakil-headshot.jpeg"
+                    alt="Shakil Ahmed - Lead System Architect"
+                    fill
+                    sizes="44px"
+                    className="object-cover object-top"
+                    priority
+                  />
+                </div>
+                <div>
+                  <div className="flex items-center gap-1.5 font-bold text-xs text-[#0D1738]">
+                    <span>Shakil Ahmed</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
+                    <span className="text-[11px] font-normal text-[#667085]">Founder, BarakahSoft LLC</span>
+                  </div>
+                  <div className="badge-status mt-0.5">
+                    <span>Open for Technical Architecture & Full-Stack Engagements</span>
+                  </div>
+                </div>
               </div>
 
               {/* Main Headline */}
@@ -954,18 +972,76 @@ export default function PortfolioPage() {
       </section>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 8. TRANSPARENCY & ATTRIBUTION */}
+      {/* 8. DIRECT ARCHITECT PARTNERSHIP & ATTRIBUTION */}
       {/* -------------------------------------------------------------------- */}
-      <section className="py-8 bg-[#F8FAFC] border-b border-[#EAECF0]">
+      <section className="section-pad bg-white border-b border-[#EAECF0]">
         <div className="site-container">
-          <div className="bg-white rounded-[4px] p-5 border border-[#D0D5DD] flex flex-col md:flex-row items-start md:items-center gap-4">
-            <div className="w-8 h-8 rounded-[4px] bg-[#F4F3FF] text-[#533AFD] flex items-center justify-center shrink-0">
-              <ShieldCheck className="w-4 h-4" />
+          <div className="bg-[#F8FAFC] rounded-[4px] border border-[#D0D5DD] p-6 lg:p-10 shadow-sm">
+            <div className="grid lg:grid-cols-12 gap-8 items-center">
+              
+              {/* Headshot Portrait */}
+              <div className="lg:col-span-4 flex flex-col items-center sm:items-start">
+                <div className="relative w-full max-w-[260px] aspect-square rounded-[4px] overflow-hidden border border-[#D0D5DD] bg-white shadow-sm">
+                  <Image
+                    src="/shakil-headshot.jpeg"
+                    alt="Shakil Ahmed - Senior Full-Stack Engineer & System Architect"
+                    fill
+                    sizes="(max-width: 768px) 260px, 300px"
+                    className="object-cover object-top"
+                  />
+                  <div className="absolute bottom-2.5 left-2.5 right-2.5 px-2.5 py-1.5 rounded-[2px] bg-[#0D1738]/90 backdrop-blur text-white text-[11px] font-semibold flex items-center justify-between">
+                    <span>Shakil Ahmed</span>
+                    <span className="text-[#8D7BFF] font-mono text-[10px]">12+ Yrs Exp</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Profile Bio & Direct Access Commitment */}
+              <div className="lg:col-span-8 space-y-3.5">
+                <span className="badge-tag">Direct Engineering Partnership</span>
+                <h2 className="text-2xl sm:text-3xl font-bold text-[#0D1738] tracking-tight">
+                  Direct technical leadership — no junior handoffs, no agency bloat.
+                </h2>
+                <p className="text-xs sm:text-sm text-[#475467] leading-relaxed">
+                  When you work with me, you collaborate directly with the architect who scaled Legiit to 2,000,000+ users and shipped over 115 production systems. Every critical line of code, database schema, payment flow, and infrastructure config is engineered with precision and enterprise discipline.
+                </p>
+                
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1">
+                  <div className="p-2.5 rounded-[2px] bg-white border border-[#EAECF0]">
+                    <div className="text-[10px] uppercase font-bold text-[#667085]">Founder</div>
+                    <div className="text-xs font-bold text-[#0D1738] mt-0.5">BarakahSoft LLC (USA)</div>
+                  </div>
+                  <div className="p-2.5 rounded-[2px] bg-white border border-[#EAECF0]">
+                    <div className="text-[10px] uppercase font-bold text-[#667085]">Track Record</div>
+                    <div className="text-xs font-bold text-[#0D1738] mt-0.5">1,000+ Shipped Builds</div>
+                  </div>
+                  <div className="p-2.5 rounded-[2px] bg-white border border-[#EAECF0]">
+                    <div className="text-[10px] uppercase font-bold text-[#667085]">Direct Contact</div>
+                    <div className="text-xs font-bold text-[#533AFD] mt-0.5">+1 (307) 533-6678</div>
+                  </div>
+                </div>
+
+                <div className="pt-2 flex flex-wrap items-center gap-3">
+                  <a href="https://calendly.com/shakilhq/30min" target="_blank" rel="noreferrer" className="btn-primary text-xs">
+                    <Calendar className="w-3.5 h-3.5" />
+                    Book Strategy Call with Shakil
+                  </a>
+                  <a href="https://wa.me/13075336678" target="_blank" rel="noreferrer" className="btn-secondary text-xs">
+                    <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+                    Chat on WhatsApp
+                  </a>
+                </div>
+              </div>
+
             </div>
-            <div className="text-xs text-[#475467] leading-relaxed">
-              <span className="font-bold text-[#0D1738] mr-1.5">Engineering Attribution:</span>
-              Many featured case studies—including Legiit, Steve Weatherford, and high-volume agency deployments—were architected and shipped during my tenure as <strong className="text-[#0D1738]">Lead Technical Architect</strong> at <em>No Half Cakes</em>. I bring this same enterprise discipline directly to your business.
-            </div>
+          </div>
+
+          {/* Attribution Notice */}
+          <div className="mt-4 p-4 rounded-[4px] bg-white border border-[#EAECF0] flex items-center gap-3 text-xs text-[#667085]">
+            <ShieldCheck className="w-4 h-4 text-[#533AFD] shrink-0" />
+            <span>
+              <strong className="text-[#0D1738]">Engineering Attribution:</strong> Many featured enterprise case studies (Legiit, Steve Weatherford, agency lead engines) were architected during my tenure as <em>Lead Technical Architect</em> at <strong>No Half Cakes</strong>. I deliver that same agency-grade discipline directly to your business.
+            </span>
           </div>
         </div>
       </section>
@@ -1088,9 +1164,30 @@ export default function PortfolioPage() {
             <div className="lg:col-span-6">
               <div className="bg-[#101B3D] border border-slate-700/80 rounded-[4px] p-6 space-y-4">
                 
-                <h3 className="text-sm font-bold text-white border-b border-slate-700/80 pb-3">
-                  Registered Business Details
-                </h3>
+                <div className="flex items-center justify-between border-b border-slate-700/80 pb-3">
+                  <div className="flex items-center gap-2.5">
+                    <div className="relative w-8 h-8 rounded-[4px] overflow-hidden border border-slate-600 bg-slate-800 shrink-0">
+                      <Image
+                        src="/shakil-headshot.jpeg"
+                        alt="Shakil Ahmed"
+                        fill
+                        sizes="32px"
+                        className="object-cover object-top"
+                      />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-bold text-white leading-none">
+                        Shakil Ahmed
+                      </h3>
+                      <span className="text-[10px] text-[#8D7BFF] font-medium leading-none">
+                        BarakahSoft LLC
+                      </span>
+                    </div>
+                  </div>
+                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-[2px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                    Direct Contact
+                  </span>
+                </div>
 
                 <div className="space-y-3 text-xs text-slate-300">
                   <div className="flex items-start gap-3">
