@@ -52,6 +52,7 @@ export default function PortfolioPage() {
   }, []);
 
   const featured = selectedProjects[0];
+  const featuredImage = featured.name === "Legiit" ? "/screenshots/Legiit.png" : getSiteImage(featured);
 
   return (
     <main ref={pageRef} className="portfolio-page">
@@ -98,7 +99,7 @@ export default function PortfolioPage() {
         <div className="section-heading reveal"><div><p className="eyebrow purple">01 / Selected missions</p><h2>Proof, not promises.</h2></div><p>Production work for founders, operators, and teams who need software to perform under pressure.</p></div>
         <article className="case-study reveal">
           <div className="case-copy"><div className="case-index">01</div><p className="eyebrow purple">Flagship system / 2M+ users</p><h3>{featured.name}</h3><p className="case-description">{featured.hook}. Architected the platform foundations, payments, analytics, and systems that let the marketplace scale safely.</p><ul>{(featured.problems_solved || []).map((problem) => <li key={problem}><Check size={15} />{problem}</li>)}</ul><div className="tag-row">{(featured.technologies || []).slice(0, 6).map((technology) => <span key={technology}>{technology}</span>)}</div><a className="text-link dark-link" href={`https://${featured.url}`} target="_blank" rel="noreferrer">View live system <ArrowUpRight size={16} /></a></div>
-          <div className="case-visual"><Image src={getSiteImage(featured)} alt={`Screenshot of ${featured.name}`} fill sizes="(max-width: 900px) 100vw, 58vw" className="case-image" priority /></div>
+           <div className="case-visual"><Image src={featuredImage} alt={`Screenshot of ${featured.name}`} fill sizes="(max-width: 900px) 100vw, 58vw" className="case-image" priority /></div>
         </article>
       </section>
 
