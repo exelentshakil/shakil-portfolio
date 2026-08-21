@@ -70,12 +70,13 @@ export function ProjectsSection() {
   const displaySites = activeCategory === "All" ? filteredSites.slice(0, 9) : filteredSites;
 
     return (
-    <section className="py-20 bg-paper min-h-screen font-sans">
+    <section id="mission-log" className="py-28 bg-paper min-h-screen font-sans relative">
       <div className="max-w-7xl mx-auto px-8">
         
         {/* Header */}
-        <div className="mb-12 text-center">
-             <h2 className="text-3xl md:text-5xl font-bold text-ink mb-4 tracking-tight">
+         <div className="mb-14 max-w-2xl">
+             <p className="section-kicker mb-4">Mission log / selected systems</p>
+             <h2 className="text-3xl md:text-5xl font-bold text-ink mb-4 tracking-[-0.04em]">
              Building Digital <span className="text-primary">Excellence</span>
           </h2>
           <p className="text-neutral-400 max-w-2xl mx-auto">
@@ -137,9 +138,12 @@ export function ProjectsSection() {
                 <Card className="h-full flex flex-col justify-between">
                   <div>
                     {/* Header: Icon & Category */}
-                    <div className="flex items-center justify-between mb-2">
-                      <div className="flex items-center gap-2">
-                        <div className={`w-2 h-2 rounded-full ${site.featured ? 'bg-emerald-500' : 'bg-neutral-500'}`} />
+                     <div className="flex items-center justify-between mb-2">
+                       <div className="flex items-center gap-2">
+                         <div className="w-8 h-8 rounded-[4px] bg-primary text-white flex items-center justify-center">
+                           <Code2 className="w-4 h-4" />
+                         </div>
+                         <div className={`w-2 h-2 rounded-full ${site.featured ? 'bg-primary' : 'bg-slate-300'}`} />
                         <span className="text-xs font-mono uppercase text-neutral-500">{site.clientType || site.category}</span>
                       </div>
                       {site.featured && (
