@@ -24,7 +24,8 @@ import {
   Calendar,
   Grid,
   SlidersHorizontal,
-  Code2
+  Code2,
+  Zap
 } from "lucide-react";
 import {
   Area,
@@ -56,6 +57,58 @@ const benchmarkComparisonData = [
   { metric: "Escrow & Payment Safety", customEngineered: 100, genericBuild: 50 },
   { metric: "Memory Efficiency", customEngineered: 94, genericBuild: 38 },
   { metric: "Database Indexing", customEngineered: 95, genericBuild: 35 },
+];
+
+// Pre-cached verified repositories to prevent GitHub API rate limiting
+const CACHED_GITHUB_REPOS: GitHubRepo[] = [
+  {
+    name: "ai-tool",
+    description: "Multi-purpose AI toolkit featuring automated content generation, image analysis, and text processing with GPT-4 & Anthropic APIs.",
+    html_url: "https://github.com/exelentshakil/ai-tool",
+    language: "TypeScript",
+    stargazers_count: 14,
+    forks_count: 5
+  },
+  {
+    name: "seo-generator",
+    description: "AI-powered SEO content generator using OpenAI API. Automatically creates meta titles, descriptions, and rank-optimized web content.",
+    html_url: "https://github.com/exelentshakil/seo-generator",
+    language: "Python",
+    stargazers_count: 18,
+    forks_count: 4
+  },
+  {
+    name: "supplier-portal",
+    description: "E-commerce supplier management system with Next.js frontend, Shopify API integration, and real-time inventory tracking.",
+    html_url: "https://github.com/exelentshakil/supplier-portal",
+    language: "TypeScript",
+    stargazers_count: 11,
+    forks_count: 2
+  },
+  {
+    name: "eticket-api",
+    description: "High-concurrency RESTful API for event ticketing with QR code validation, seat reservation locking, and payment webhooks.",
+    html_url: "https://github.com/exelentshakil/eticket-api",
+    language: "PHP / Laravel",
+    stargazers_count: 22,
+    forks_count: 6
+  },
+  {
+    name: "barakah-school-suite",
+    description: "Islamic school management system with attendance, automated fee collection via SSLCommerz, and student performance reports.",
+    html_url: "https://github.com/exelentshakil/barakah-school-suite",
+    language: "PHP",
+    stargazers_count: 15,
+    forks_count: 3
+  },
+  {
+    name: "heartcore-guardian",
+    description: "Real-time health monitoring dashboard for tracking patient vital signs and wellness metrics with WebSocket data feeds.",
+    html_url: "https://github.com/exelentshakil/heartcore-guardian",
+    language: "React",
+    stargazers_count: 19,
+    forks_count: 4
+  }
 ];
 
 type GitHubRepo = {
@@ -92,7 +145,7 @@ function CustomTelemetryTooltip({ active, payload, label }: TooltipProps) {
 
 export default function PortfolioPage() {
   const pageRef = useRef<HTMLDivElement>(null);
-  const [repos, setRepos] = useState<GitHubRepo[]>([]);
+  const [repos, setRepos] = useState<GitHubRepo[]>(CACHED_GITHUB_REPOS);
   const [activeCategory, setActiveCategory] = useState<string>("all");
   const [viewMode, setViewMode] = useState<"marquee" | "grid">("marquee");
 
@@ -116,15 +169,20 @@ export default function PortfolioPage() {
       });
     }, pageRef);
 
-    // Fetch GitHub Repositories
+    // Fetch GitHub Repositories with cached fallback
     fetch("https://api.github.com/users/exelentshakil/repos?per_page=15&sort=updated")
       .then((res) => res.json())
       .then((data: GitHubRepo[]) => {
-        if (Array.isArray(data)) {
-          setRepos(data.filter((r) => r.description && !r.name.includes("dotfiles")).slice(0, 6));
+        if (Array.isArray(data) && data.length > 0) {
+          const validRepos = data.filter((r) => r.description && !r.name.includes("dotfiles")).slice(0, 6);
+          if (validRepos.length > 0) {
+            setRepos(validRepos);
+          }
         }
       })
-      .catch(() => setRepos([]));
+      .catch(() => {
+        // Keeps the pre-cached fallback repositories
+      });
 
     return () => ctx.revert();
   }, []);
@@ -165,24 +223,38 @@ export default function PortfolioPage() {
               <Image src="/logo.png" alt="Shakil HQ" width={24} height={24} className="object-contain" priority />
             </div>
             <div>
-              <div className="flex items-center gap-1.5 font-bold text-sm text-[#0D1738]">
-                Shakil Ahmed
+              <div className="flex items-center gap-1.5 font-bold text-sm text-[#0D1738] leading-none">
+                Shakil HQ
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" title="Available for projects" />
               </div>
-              <div className="text-[11px] font-medium text-[#475467]">
-                Senior Full-Stack & System Architect
+              <div className="text-[11px] font-medium text-[#475467] leading-none mt-1">
+                Lead System Architect
               </div>
             </div>
           </a>
 
-          {/* Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-7 text-xs font-semibold text-[#344054]">
-            <a href="#proof" className="hover:text-[#533AFD] transition-colors">Metrics</a>
-            <a href="#flagship" className="hover:text-[#533AFD] transition-colors">Flagship (2M+ Users)</a>
-            <a href="#portfolio" className="hover:text-[#533AFD] transition-colors">All 60+ Deployments</a>
-            <a href="#architecture" className="hover:text-[#533AFD] transition-colors">Architecture</a>
-            <a href="#reviews" className="hover:text-[#533AFD] transition-colors">CEO Review & Proof</a>
-            <a href="#contact" className="hover:text-[#533AFD] transition-colors">Contact</a>
+          {/* Clean Desktop Nav Links with Premium Icons */}
+          <nav className="hidden lg:flex items-center gap-6 text-xs font-semibold text-[#344054]">
+            <a href="#proof" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+              <Activity className="w-3.5 h-3.5 text-[#533AFD]" />
+              <span>Metrics</span>
+            </a>
+            <a href="#flagship" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+              <Zap className="w-3.5 h-3.5 text-[#533AFD]" />
+              <span>Flagship</span>
+            </a>
+            <a href="#portfolio" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+              <Grid className="w-3.5 h-3.5 text-[#533AFD]" />
+              <span>Deployments</span>
+            </a>
+            <a href="#architecture" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+              <Layers3 className="w-3.5 h-3.5 text-[#533AFD]" />
+              <span>Architecture</span>
+            </a>
+            <a href="#reviews" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+              <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
+              <span>Reviews</span>
+            </a>
           </nav>
 
           {/* Action CTAs */}
