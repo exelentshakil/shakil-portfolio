@@ -59,11 +59,25 @@ const benchmarkComparisonData = [
   { metric: "Database Indexing", customEngineered: 95, genericBuild: 35 },
 ];
 
+// Custom rich descriptions for GitHub projects
+const CUSTOM_REPO_DESCRIPTIONS: Record<string, string> = {
+  "ai-tool": "Multi-purpose AI toolkit featuring automated content generation, image analysis, and text processing with GPT-4 & Anthropic APIs.",
+  "seo-generator": "AI-powered SEO content generator using OpenAI API. Automatically creates meta titles, descriptions, and rank-optimized web content.",
+  "supplier-portal": "E-commerce supplier management system with Next.js frontend, Shopify API integration, and real-time inventory tracking.",
+  "eticket-api": "High-concurrency RESTful API for event ticketing with QR code validation, seat reservation locking, and payment webhooks.",
+  "barakah-school-suite": "Islamic school management system with attendance, automated fee collection via SSLCommerz, and student performance reports.",
+  "heartcore-guardian": "Real-time health monitoring dashboard for tracking patient vital signs and wellness metrics with WebSocket data feeds.",
+  "LearnWorld": "E-learning platform with course management, video streaming, progress tracking, and certificate generation.",
+  "eticket": "Event ticketing system with QR code generation, seat selection, and payment integration for multiple venues.",
+  "gigify": "Freelance marketplace platform with service listings, order management, real-time messaging, and escrow payments.",
+  "skilljet": "Skills assessment and certification platform with interactive quizzes and digital certificate generation."
+};
+
 // Pre-cached verified repositories to prevent GitHub API rate limiting
 const CACHED_GITHUB_REPOS: GitHubRepo[] = [
   {
     name: "ai-tool",
-    description: "Multi-purpose AI toolkit featuring automated content generation, image analysis, and text processing with GPT-4 & Anthropic APIs.",
+    description: CUSTOM_REPO_DESCRIPTIONS["ai-tool"],
     html_url: "https://github.com/exelentshakil/ai-tool",
     language: "TypeScript",
     stargazers_count: 14,
@@ -71,7 +85,7 @@ const CACHED_GITHUB_REPOS: GitHubRepo[] = [
   },
   {
     name: "seo-generator",
-    description: "AI-powered SEO content generator using OpenAI API. Automatically creates meta titles, descriptions, and rank-optimized web content.",
+    description: CUSTOM_REPO_DESCRIPTIONS["seo-generator"],
     html_url: "https://github.com/exelentshakil/seo-generator",
     language: "Python",
     stargazers_count: 18,
@@ -79,7 +93,7 @@ const CACHED_GITHUB_REPOS: GitHubRepo[] = [
   },
   {
     name: "supplier-portal",
-    description: "E-commerce supplier management system with Next.js frontend, Shopify API integration, and real-time inventory tracking.",
+    description: CUSTOM_REPO_DESCRIPTIONS["supplier-portal"],
     html_url: "https://github.com/exelentshakil/supplier-portal",
     language: "TypeScript",
     stargazers_count: 11,
@@ -87,7 +101,7 @@ const CACHED_GITHUB_REPOS: GitHubRepo[] = [
   },
   {
     name: "eticket-api",
-    description: "High-concurrency RESTful API for event ticketing with QR code validation, seat reservation locking, and payment webhooks.",
+    description: CUSTOM_REPO_DESCRIPTIONS["eticket-api"],
     html_url: "https://github.com/exelentshakil/eticket-api",
     language: "PHP / Laravel",
     stargazers_count: 22,
@@ -95,7 +109,7 @@ const CACHED_GITHUB_REPOS: GitHubRepo[] = [
   },
   {
     name: "barakah-school-suite",
-    description: "Islamic school management system with attendance, automated fee collection via SSLCommerz, and student performance reports.",
+    description: CUSTOM_REPO_DESCRIPTIONS["barakah-school-suite"],
     html_url: "https://github.com/exelentshakil/barakah-school-suite",
     language: "PHP",
     stargazers_count: 15,
@@ -103,7 +117,7 @@ const CACHED_GITHUB_REPOS: GitHubRepo[] = [
   },
   {
     name: "heartcore-guardian",
-    description: "Real-time health monitoring dashboard for tracking patient vital signs and wellness metrics with WebSocket data feeds.",
+    description: CUSTOM_REPO_DESCRIPTIONS["heartcore-guardian"],
     html_url: "https://github.com/exelentshakil/heartcore-guardian",
     language: "React",
     stargazers_count: 19,
@@ -113,7 +127,7 @@ const CACHED_GITHUB_REPOS: GitHubRepo[] = [
 
 type GitHubRepo = {
   name: string;
-  description: string | null;
+  description: string;
   html_url: string;
   language: string | null;
   stargazers_count: number;
@@ -169,14 +183,31 @@ export default function PortfolioPage() {
       });
     }, pageRef);
 
-    // Fetch GitHub Repositories with cached fallback
-    fetch("https://api.github.com/users/exelentshakil/repos?per_page=15&sort=updated")
+    // Fetch GitHub Repositories with safe mapping and fallback
+    fetch("https://api.github.com/users/exelentshakil/repos?per_page=30&sort=updated")
       .then((res) => res.json())
       .then((data: GitHubRepo[]) => {
         if (Array.isArray(data) && data.length > 0) {
-          const validRepos = data.filter((r) => r.description && !r.name.includes("dotfiles")).slice(0, 6);
-          if (validRepos.length > 0) {
-            setRepos(validRepos);
+          const mappedRepos = data
+            .filter((r) => !r.name.includes("dotfiles") && !r.name.includes("exelentshakil"))
+            .map((r) => ({
+              ...r,
+              description: CUSTOM_REPO_DESCRIPTIONS[r.name] || r.description || "Open source production module and engineering utility."
+            }))
+            .slice(0, 6);
+
+          if (mappedRepos.length >= 6) {
+            setRepos(mappedRepos);
+          } else {
+            // Merge with cached list to guarantee 6 rich cards
+            const merged = [...mappedRepos];
+            for (const cached of CACHED_GITHUB_REPOS) {
+              if (merged.length >= 6) break;
+              if (!merged.some((m) => m.name.toLowerCase() === cached.name.toLowerCase())) {
+                merged.push(cached);
+              }
+            }
+            setRepos(merged.slice(0, 6));
           }
         }
       })
@@ -219,7 +250,7 @@ export default function PortfolioPage() {
           
           {/* Brand */}
           <a href="#top" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-[4px] bg-[#F4F3FF] flex items-center justify-center p-1 border border-[#D9D6FE]">
+            <div className="w-8 h-8 rounded-[4px] bg-[#0D1738] flex items-center justify-center p-1 border border-slate-700 shadow-sm">
               <Image src="/logo.png" alt="Shakil HQ" width={24} height={24} className="object-contain" priority />
             </div>
             <div>
