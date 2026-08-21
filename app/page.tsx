@@ -83,7 +83,7 @@ export default function PortfolioPage() {
         <div className="launch-instrument reveal" aria-label="Production system dashboard preview">
           <div className="instrument-header"><span>LIVE / PRODUCTION</span><span>01—04</span></div>
           <div className="instrument-title"><span>Legiit</span><span className="instrument-badge">MARKETPLACE</span></div>
-          <div className="instrument-chart"><ResponsiveContainer width="100%" height="100%"><AreaChart data={proofData}><defs><linearGradient id="proofFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#ffffff" stopOpacity={0.35} /><stop offset="100%" stopColor="#ffffff" stopOpacity={0} /></linearGradient></defs><CartesianGrid stroke="#ffffff12" vertical={false} /><XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: "#999999", fontSize: 10 }} /><YAxis hide domain={[0, 100]} /><Tooltip contentStyle={{ background: "#181818", border: "1px solid #ffffff22", borderRadius: 0, color: "white" }} /><Area type="monotone" dataKey="value" stroke="#ffffff" strokeWidth={3} fill="url(#proofFill)" /></AreaChart></ResponsiveContainer></div>
+          <div className="instrument-chart"><ResponsiveContainer width="100%" height="100%"><AreaChart data={proofData}><defs><linearGradient id="proofFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stopColor="#111111" stopOpacity={0.18} /><stop offset="100%" stopColor="#111111" stopOpacity={0} /></linearGradient></defs><CartesianGrid stroke="#11111118" vertical={false} /><XAxis dataKey="label" axisLine={false} tickLine={false} tick={{ fill: "#707070", fontSize: 10 }} /><YAxis hide domain={[0, 100]} /><Tooltip contentStyle={{ background: "#ffffff", border: "1px solid #dedede", borderRadius: 0, color: "#111111" }} /><Area type="monotone" dataKey="value" stroke="#111111" strokeWidth={3} fill="url(#proofFill)" /></AreaChart></ResponsiveContainer></div>
           <div className="instrument-metrics"><div><strong>2M+</strong><span>active users</span></div><div><strong>99.9%</strong><span>reliability</span></div><div><strong>12 yrs</strong><span>in the arena</span></div></div>
           <div className="instrument-foot"><span><span className="signal" /> Systems nominal</span><span>Scale is a feature.</span></div>
         </div>
@@ -119,8 +119,8 @@ export default function PortfolioPage() {
 
       <TestimonialsSection />
 
-      <section className="final-cta reveal"><div><p className="eyebrow">Ready when you are</p><h2>Let&apos;s build<br /><em>your unfair advantage.</em></h2></div><a className="button button-primary" href="https://calendly.com/shakilhq/30min" target="_blank" rel="noreferrer">Book a discovery call <ArrowUpRight size={17} /></a></section>
-      <footer className="footer"><span>© 2026 Shakil HQ</span><span>Senior full-stack engineer / Bangladesh → everywhere</span><a href="#top">Back to launch <ArrowUpRight size={14} /></a></footer>
+      <section className="final-cta reveal"><div><p className="eyebrow">Ready when you are</p><h2>Let&apos;s build<br /><em>your unfair advantage.</em></h2></div><div className="cta-contact"><a className="button button-primary" href="https://calendly.com/shakilhq/30min" target="_blank" rel="noreferrer">Book a discovery call <ArrowUpRight size={17} /></a><div><a href="mailto:hello@barakahsoft.com">hello@barakahsoft.com</a><a href="https://wa.me/13075336678" target="_blank" rel="noreferrer">WhatsApp +1 (307) 533-6678</a></div></div></section>
+      <footer className="footer"><span>© 2026 Shakil HQ</span><span>30 N. Gould St. Ste R, Sheridan, WY 82801</span><a href="tel:+13075336678">+1 (307) 533-6678 <ArrowUpRight size={14} /></a></footer>
     </main>
   );
 }
