@@ -1236,11 +1236,14 @@ export const sites: Site[] = [
 ];
 
 export function getSiteImage(site: Site): string {
-    // 1. Use the manual image if you set one (like for Legiit)
-    if (site.image) return site.image;
+    if (site.name.toLowerCase() === "legiit") {
+        return "/screenshots/Legiit.png";
+    }
 
-    // 2. Otherwise, use the generated screenshot path
-    // This logic creates a "slug" from the name (e.g. "Jim Sabellico" -> "jim-sabellico")
+    if (site.image && site.image.startsWith("/")) {
+        return site.image;
+    }
+
     const slug = site.name
         .toLowerCase()
         .trim()
