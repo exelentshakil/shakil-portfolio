@@ -55,22 +55,18 @@ const StarRating = () => (
 // ------------------------------------------------------------------
 export function TestimonialsSection() {
     return (
-        <section className="py-24 bg-neutral-950 relative overflow-hidden">
+        <section className="py-24 bg-paper relative overflow-hidden">
             {/* Background Gradients */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full max-w-7xl pointer-events-none">
-                <div className="absolute top-[20%] left-[10%] w-96 h-96 bg-emerald-500/10 rounded-full blur-[100px]" />
-                <div className="absolute bottom-[20%] right-[10%] w-96 h-96 bg-blue-500/10 rounded-full blur-[100px]" />
-            </div>
 
             <div className="max-w-7xl mx-auto px-6 relative z-10">
 
                 {/* Section Header */}
                 <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
-                        Engineering <span className="text-emerald-500">Mindset</span>, Not Just Code
+                    <h2 className="text-3xl md:text-5xl font-bold text-ink mb-6 tracking-tight">
+                        Engineering <span className="text-primary">Mindset</span>, Not Just Code
                     </h2>
                     <p className="text-neutral-400 max-w-2xl mx-auto text-lg">
-                        Clients don't hire me to just "build a website."
+                         Clients don&apos;t hire me to just &quot;build a website.&quot;
                         They hire me to architect solutions, solve complex business logic,
                         and ensure technical stability for their most important projects.
                     </p>
@@ -87,8 +83,8 @@ export function TestimonialsSection() {
                             transition={{ duration: 0.5, delay: idx * 0.2 }}
                             className={cn(
                                 "relative group rounded-3xl p-8 h-full flex flex-col justify-between",
-                                "bg-neutral-900/50 border border-white/10 hover:border-emerald-500/50 transition-colors duration-300",
-                                testimonial.isCelebrity && "bg-gradient-to-b from-neutral-900/80 to-purple-900/10 border-purple-500/20 hover:border-purple-500/50"
+                                "bg-white border border-slate-200 rounded-[4px] hover:border-primary/50 transition-colors duration-300",
+                                testimonial.isCelebrity && "border-primary/30"
                             )}
                         >
                             {/* Hover Glow Effect */}
@@ -105,13 +101,13 @@ export function TestimonialsSection() {
                                 <StarRating />
 
                                 {/* The Review */}
-                                <p className="text-neutral-300 leading-relaxed mb-8 relative z-10 text-sm md:text-base">
-                                    "{testimonial.content}"
+                            <p className="text-ink leading-relaxed mb-8 relative z-10 text-base md:text-lg font-semibold">
+                                     &quot;{testimonial.content}&quot;
                                 </p>
                             </div>
 
                             {/* Footer: User Info & Metric */}
-                            <div className="pt-6 border-t border-white/10 flex items-center justify-between mt-auto">
+                            <div className="pt-6 border-t border-slate-200 flex items-center justify-between mt-auto">
                                 <div className="flex items-center gap-3">
                                     {/* Image Container */}
                                     <div className="relative w-10 h-10 rounded-full overflow-hidden border border-white/10">

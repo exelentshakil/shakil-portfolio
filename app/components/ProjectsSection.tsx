@@ -3,8 +3,8 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ExternalLink, ArrowUpRight, TrendingUp, ShieldCheck, Code2 } from "lucide-react";
-import { sites, Site } from "../data/sites"; // Import your data file
+import { ArrowUpRight, TrendingUp, ShieldCheck, Code2 } from "lucide-react";
+import { sites } from "../data/sites"; // Import your data file
 import { cn } from "../lib/utils";
 
 // ------------------------------------------------------------------
@@ -15,7 +15,7 @@ const Card = ({ className, children }: { className?: string; children: React.Rea
   return (
     <div
       className={cn(
-        "rounded-2xl h-full w-full p-4 overflow-hidden bg-black border border-white/[0.2] group-hover:border-slate-700 relative z-20",
+        "rounded-[4px] h-full w-full p-4 overflow-hidden bg-white border border-slate-200 relative z-20",
         className
       )}
     >
@@ -69,14 +69,14 @@ export function ProjectsSection() {
   // Limit for performance/aesthetics if "All" is selected, otherwise show all in category
   const displaySites = activeCategory === "All" ? filteredSites.slice(0, 9) : filteredSites;
 
-  return (
-    <section className="py-20 bg-neutral-950 min-h-screen font-sans">
+    return (
+    <section className="py-20 bg-paper min-h-screen font-sans">
       <div className="max-w-7xl mx-auto px-8">
         
         {/* Header */}
         <div className="mb-12 text-center">
-          <h2 className="text-3xl md:text-5xl font-bold text-neutral-200 mb-4">
-            Building Digital <span className="text-emerald-500">Excellence</span>
+             <h2 className="text-3xl md:text-5xl font-bold text-ink mb-4 tracking-tight">
+             Building Digital <span className="text-primary">Excellence</span>
           </h2>
           <p className="text-neutral-400 max-w-2xl mx-auto">
             A showcase of high-performance platforms, agencies, and tools.
@@ -108,7 +108,7 @@ export function ProjectsSection() {
         </div>
 
         {/* Hover Grid (The Aceternity Effect) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 auto-rows-fr">
+         <div className="bento-grid">
           <AnimatePresence mode="popLayout">
             {displaySites.map((site, idx) => (
               <motion.div
@@ -117,15 +117,15 @@ export function ProjectsSection() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.9, y: 20 }}
                 transition={{ duration: 0.3, delay: idx * 0.05 }}
-                className="relative group block p-2 h-full w-full"
+                 className="relative group block h-full w-full"
                 onMouseEnter={() => setHoveredIndex(idx)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
                 {/* Hover Background Animation */}
                 <AnimatePresence>
                   {hoveredIndex === idx && (
-                    <motion.span
-                      className="absolute inset-0 h-full w-full bg-neutral-800/[0.8] block rounded-3xl"
+                         <motion.span
+                       className="absolute inset-0 h-full w-full bg-primary-soft block rounded-[4px]"
                       layoutId="hoverBackground"
                       initial={{ opacity: 0 }}
                       animate={{ opacity: 1, transition: { duration: 0.15 } }}

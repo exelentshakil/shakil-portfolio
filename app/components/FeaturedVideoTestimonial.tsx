@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Quote, TrendingUp, ShieldCheck, Play } from "lucide-react";
+import { Quote, TrendingUp, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 
 // ------------------------------------------------------------------
@@ -12,10 +12,10 @@ const VIDEO_TITLE = "Legiit CEO Chris Walker Review";
 
 export function FeaturedVideoTestimonial() {
     return (
-        <section className="py-32 bg-neutral-950 relative overflow-hidden">
+        <section className="py-32 bg-paper relative overflow-hidden">
 
             {/* 1. VIBRANT BACKGROUND FX */}
-            <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute inset-0 pointer-events-none opacity-0">
                 {/* Top Center Spotlight */}
                 <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[500px] bg-emerald-500/10 blur-[120px] rounded-full" />
                 {/* Bottom accents */}
@@ -43,8 +43,8 @@ export function FeaturedVideoTestimonial() {
                         CEO Verified Partner
                     </div>
 
-                    <h2 className="text-4xl md:text-6xl font-bold text-white mb-6 tracking-tight leading-tight">
-                        "Shaq actually <span className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-cyan-400">works with us</span> on Legiit."
+                        <h2 className="text-4xl md:text-6xl font-bold text-ink mb-6 tracking-tight leading-tight">
+                        &quot;Shaq actually <span className="text-primary">works with us</span> on Legiit.&quot;
                     </h2>
 
                     <p className="text-lg text-neutral-400 max-w-2xl mx-auto">
@@ -64,7 +64,7 @@ export function FeaturedVideoTestimonial() {
                     <div className="absolute -inset-1 bg-gradient-to-r from-emerald-500 to-purple-600 rounded-3xl blur opacity-20 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
 
                     {/* The Player Frame */}
-                    <div className="relative rounded-2xl overflow-hidden bg-neutral-900 ring-1 ring-white/10 shadow-2xl aspect-video">
+                        <div className="relative rounded-[4px] overflow-hidden bg-slate-900 ring-1 ring-slate-200 aspect-video">
                         <iframe
                             width="100%"
                             height="100%"
@@ -104,7 +104,7 @@ export function FeaturedVideoTestimonial() {
                             </div>
                         </div>
                         <p className="text-neutral-300 italic text-lg leading-relaxed">
-                            "Most people don't know this, but Shaq is the man. He builds the platform itself... He didn't just patch features together—he engineered the architecture that allows us to scale safely."
+                             &quot;Most people don&apos;t know this, but Shaq is the man. He builds the platform itself... He didn&apos;t just patch features together—he engineered the architecture that allows us to scale safely.&quot;
                         </p>
                     </motion.div>
 

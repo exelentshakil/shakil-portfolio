@@ -8,6 +8,12 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      colors: {
+        ink: "#0D1738",
+        paper: "#F8F9FC",
+        primary: "#533AFD",
+        "primary-soft": "#EEE AFF".replace(" ", ""),
+      },
       animation: {
         blob: "blob 7s infinite",
         "spin-slow": "spin 20s linear infinite",

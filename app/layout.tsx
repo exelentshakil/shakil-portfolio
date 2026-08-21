@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
-import { Suspense } from "react"; // <--- 1. IMPORT SUSPENSE
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -17,7 +16,7 @@ const geistMono = Geist_Mono({
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://shakilhq.com";
 
 export const viewport: Viewport = {
-  themeColor: "#0a0a0a",
+  themeColor: "#f8f9fc",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
@@ -124,9 +123,7 @@ export default function RootLayout({
 
   return (
       <html lang="en" className="scroll-smooth">
-      <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-neutral-950 text-neutral-200`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable}`}>
 
       {/* --- GOOGLE ANALYTICS START --- */}
       <Script

@@ -1,8 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ShieldCheck, Handshake, Info, MonitorCheck } from "lucide-react";
-import { cn } from "../lib/utils";
+import { ShieldCheck, Handshake, Info } from "lucide-react";
 
 export function DisclosureSection() {
     return (
@@ -13,7 +12,7 @@ export function DisclosureSection() {
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="relative rounded-2xl bg-neutral-900/40 border border-white/5 p-8 md:p-10 overflow-hidden mb-4"
+                className="relative rounded-[4px] bg-white border border-slate-200 p-8 md:p-10 overflow-hidden mb-4"
             >
                 {/* Decorative Background Element */}
                 <div className="absolute top-0 right-0 -mt-10 -mr-10 w-32 h-32 bg-emerald-500/10 blur-[60px] rounded-full pointer-events-none" />

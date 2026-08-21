@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, useSpring, useMotionValue, AnimatePresence } from "framer-motion";
+import { motion, useScroll, useSpring, AnimatePresence } from "framer-motion";
 import {sites, getSiteImage, getSiteFallback, topSites, hiddenSites, Site} from "./data/sites";
 
 import { ProjectsSection } from "./components/ProjectsSection";
@@ -58,7 +58,6 @@ export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState("all");
   const [githubRepos, setGithubRepos] = useState<GitHubRepo[]>([]);
   const [loading, setLoading] = useState(true);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [showScrollTop, setShowScrollTop] = useState(false);
   const [navVisible, setNavVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -72,15 +71,6 @@ export default function PortfolioPage() {
     damping: 30,
     restDelta: 0.001
   });
-
-  // Mouse position for spotlight effect
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener("mousemove", handleMouseMove);
-    return () => window.removeEventListener("mousemove", handleMouseMove);
-  }, []);
 
   // Scroll handling for nav and scroll-to-top button
   useEffect(() => {
@@ -141,10 +131,10 @@ export default function PortfolioPage() {
     : displaySites.filter((site) => site.category === activeCategory);
 
   return (
-    <div ref={containerRef} className="relative min-h-screen bg-black text-white overflow-hidden">
+    <div ref={containerRef} className="site-shell relative min-h-screen overflow-hidden">
       {/* Progress bar */}
       <motion.div
-        className="fixed top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-pink-500 to-cyan-500 origin-left z-50"
+        className="fixed top-0 left-0 right-0 h-1 bg-primary origin-left z-50"
         style={{ scaleX }}
       />
 
@@ -155,13 +145,13 @@ export default function PortfolioPage() {
             initial={{ y: -100 }}
             animate={{ y: 0 }}
             exit={{ y: -100 }}
-            className="fixed top-4 left-0 right-0 z-50 px-6"
+            className="fixed top-0 left-0 right-0 z-50 px-4 md:px-6"
           >
-            <div className="max-w-4xl mx-auto px-6 py-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full shadow-2xl">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 py-3 bg-white/95 border-b border-slate-200">
               <div className="flex items-center justify-between">
                 {/* Logo Space */}
                 <div className="flex items-center gap-2">
-                  <div className="w-10 h-10 rounded-full bg-gradient-to-br from-purple-500 to-cyan-500 flex items-center justify-center">
+                   <div className="w-10 h-10 rounded-full bg-primary-soft flex items-center justify-center overflow-hidden">
                     <span className="text-xl font-black text-white">
                         <Image src="/logo.png" alt="Shakil HQ"
                                width="90" height="90"/>
@@ -179,7 +169,7 @@ export default function PortfolioPage() {
                     href="https://calendly.com/shakilhq/30min"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-2 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full text-sm font-bold hover:shadow-lg hover:shadow-purple-500/50 transition-all"
+                     className="primary-button px-5 py-2 text-sm font-bold"
                   >
                     Book a Call
                   </a>
@@ -198,7 +188,7 @@ export default function PortfolioPage() {
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0, scale: 0 }}
             onClick={scrollToTop}
-            className="fixed bottom-8 right-8 z-50 w-14 h-14 bg-gradient-to-r from-purple-600 to-cyan-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-purple-500/50 transition-all"
+             className="primary-button fixed bottom-8 right-8 z-50 w-12 h-12 flex items-center justify-center"
           >
             <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
@@ -207,48 +197,7 @@ export default function PortfolioPage() {
         )}
       </AnimatePresence>
 
-      {/* Spotlight effect */}
-      <div
-        className="pointer-events-none fixed inset-0 z-30 transition duration-300"
-        style={{
-          background: `radial-gradient(600px at ${mousePosition.x}px ${mousePosition.y}px, rgba(139, 92, 246, 0.15), transparent 80%)`,
-        }}
-      />
-
-      {/* Animated background grid */}
-      <div className="fixed inset-0 z-0">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#4f4f4f2e_1px,transparent_1px)] bg-[size:14px_24px]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black" />
-      </div>
-
-      {/* Floating orbs */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <motion.div
-          animate={{
-            x: [0, 100, 0],
-            y: [0, -100, 0],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute top-1/4 left-1/4 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl"
-        />
-        <motion.div
-          animate={{
-            x: [0, -100, 0],
-            y: [0, 100, 0],
-          }}
-          transition={{
-            duration: 25,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-cyan-500/20 rounded-full blur-3xl"
-        />
-      </div>
-
+      {/* Content */}
       <div className="relative z-10">
         {/* Hero Section */}
         <section id="hero" className="min-h-screen flex items-center justify-center px-6 pt-24 relative">
@@ -264,19 +213,19 @@ export default function PortfolioPage() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.2 }}
-                className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 border border-green-500/30 rounded-full mb-8"
+                 className="inline-flex items-center gap-2 px-4 py-2 bg-primary-soft border border-[#d8d1ff] rounded-full mb-8"
               >
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-sm font-semibold text-green-400">Open for New Projects</span>
+                 <div className="w-2 h-2 bg-primary rounded-full" />
+                 <span className="text-sm font-semibold text-primary">Open for New Projects</span>
               </motion.div>
 
               {/* Pain-Point Headline */}
-              <h1 className="text-5xl md:text-8xl font-black mb-8 leading-tight">
+               <h1 className="text-5xl md:text-8xl font-black mb-8 leading-[0.95] tracking-[-0.07em] text-ink">
                 <motion.span
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.3 }}
-                  className="block text-white"
+                   className="block text-ink"
                 >
                   Ship
                 </motion.span>
@@ -284,7 +233,7 @@ export default function PortfolioPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.4 }}
-                  className="block bg-gradient-to-r from-purple-400 to-cyan-400 bg-clip-text text-transparent"
+                   className="block text-primary"
                 >
                   production-ready
                 </motion.span>
@@ -292,7 +241,7 @@ export default function PortfolioPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.5 }}
-                  className="block text-white"
+                   className="block text-ink"
                 >
                   web apps
                 </motion.span>
@@ -300,50 +249,29 @@ export default function PortfolioPage() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.6 }}
-                  className="block text-gray-400 text-4xl md:text-6xl mt-4"
+                   className="block text-slate-500 text-4xl md:text-6xl mt-4 tracking-[-0.06em]"
                 >
                   in weeks, not months
                 </motion.span>
               </h1>
 
-              {/* Client Carousel */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-                className="mb-12"
-              >
-                <p className="text-gray-500 text-sm mb-6 uppercase tracking-wider">Trusted by</p>
-                <div className="flex flex-wrap items-center justify-center gap-8 mb-8">
-                  <ClientBadge icon="🏢" label="Legiit" metric="2M+ users" />
-                  <ClientBadge icon="🏥" label="8+ Healthcare" metric="Practices" />
-                  <ClientBadge icon="⚖️" label="5+ Law Firms" metric="Premium" />
-                  <ClientBadge icon="🎯" label="8+ Agencies" metric="Marketing" />
-                  <ClientBadge icon="⚽" label="12+ Sports" metric="Organizations" />
-                </div>
-              </motion.div>
-
-              {/* Stats with Glassmorphism */}
-              <div className="flex flex-col md:flex-row gap-6 justify-center items-center mb-16">
-                <GlassStatsCard number="115+" label="Projects Delivered" delay={0.9} />
-                <GlassStatsCard number="99%" label="Client Satisfaction" delay={1.0} />
-                <GlassStatsCard number="12+" label="Years Experience" delay={1.1} />
-              </div>
+               <div className="stat-band grid grid-cols-2 md:grid-cols-4 gap-8 text-left px-6 md:px-10 py-8 mb-16">
+                 <Stat number="2M+" label="Users reached" />
+                 <Stat number="115+" label="Projects delivered" />
+                 <Stat number="99%" label="Client satisfaction" />
+                 <Stat number="12+" label="Years experience" />
+               </div>
 
               <motion.a
                 href="https://calendly.com/shakilhq/30min"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.3 }}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="group relative inline-block px-12 py-5 rounded-full font-bold text-lg overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-cyan-600" />
-                <div className="absolute inset-0 bg-gradient-to-r from-cyan-600 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                 className="primary-button group relative inline-block px-10 py-4 font-bold text-lg"
+               >
                 <span className="relative z-10 flex items-center gap-2">
                   <span className="group-hover:hidden">Got an Idea?</span>
-                  <span className="hidden group-hover:inline">Let's Do It</span>
+                   <span className="hidden group-hover:inline">Let&apos;s Do It</span>
                   <svg className="w-5 h-5 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
@@ -529,7 +457,7 @@ export default function PortfolioPage() {
                   </span>
                 </h2>
                 <p className="text-xl text-gray-400 mb-12 max-w-2xl mx-auto">
-                  Available 30+ hours per week for new projects. Let's turn your vision into reality.
+                   Available 30+ hours per week for new projects. Let&apos;s turn your vision into reality.
                 </p>
 
                 <div className="flex flex-col sm:flex-row gap-6 justify-center">
@@ -615,7 +543,16 @@ export default function PortfolioPage() {
   );
 }
 
-// Glassmorphism Stats Card
+function Stat({ number, label }: { number: string; label: string }) {
+  return (
+    <div>
+      <div className="stat-number">{number}</div>
+      <div className="stat-label">{label}</div>
+    </div>
+  );
+}
+
+// Legacy helper retained for the existing component API.
 function GlassStatsCard({ number, label, delay }: { number: string; label: string; delay: number }) {
   return (
     <motion.div
@@ -669,12 +606,7 @@ function SectionHeader({ title, subtitle }: { title: string; subtitle: string })
 }
 
 // Component: Featured Project Card (3D MacBook Effect)
-function FeaturedProjectCard({ site, index }: { site: any; index: number }) {
-  const [isHovered, setIsHovered] = useState(false);
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-  const rotateX = useTransform(y, [-100, 100], [10, -10]);
-  const rotateY = useTransform(x, [-100, 100], [-10, 10]);
+function FeaturedProjectCard({ site, index }: { site: Site; index: number }) {
 
   return (
     <motion.div
@@ -683,19 +615,9 @@ function FeaturedProjectCard({ site, index }: { site: any; index: number }) {
       viewport={{ once: true }}
       transition={{ delay: index * 0.2 }}
       className="group relative"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-      onMouseMove={(e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        x.set(e.clientX - rect.left - rect.width / 2);
-        y.set(e.clientY - rect.top - rect.height / 2);
-      }}
     >
-      <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 via-pink-600 to-cyan-600 rounded-3xl blur-xl opacity-20 group-hover:opacity-40 transition duration-500" />
-      
       <motion.div
-        style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
-        className="relative bg-gradient-to-br from-gray-900 to-black rounded-3xl p-8 md:p-12 border border-gray-800"
+        className="relative bg-white rounded-[4px] p-8 md:p-12 border border-slate-200"
       >
         <div className="grid md:grid-cols-2 gap-12 items-center">
           <div style={{ transform: "translateZ(50px)" }}>
@@ -964,7 +886,7 @@ function MagneticButton({ children, active, onClick }: { children: React.ReactNo
 }
 
 // Component: Site Image with Gradient Fallback
-function SiteImage({ site, onError }: { site: any; onError?: () => void }) {
+function SiteImage({ site, onError }: { site: Site; onError?: () => void }) {
   const imageUrl = getSiteImage(site);
 
   if (!imageUrl) {
@@ -988,72 +910,17 @@ function SiteImage({ site, onError }: { site: any; onError?: () => void }) {
 }
 
 // Infinite Moving Cards Slider Component
-function InfiniteMovingCards({
-  items,
-  direction = "left",
-  speed = "slow",
-}: {
-  items: any[];
+function InfiniteMovingCards({ items }: {
+  items: Site[];
   direction?: "left" | "right";
   speed?: "slow" | "normal" | "fast";
 }) {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const scrollerRef = useRef<HTMLDivElement>(null);
-  const [start, setStart] = useState(false);
-
-  useEffect(() => {
-    addAnimation();
-  }, []);
-
-  function addAnimation() {
-    if (containerRef.current && scrollerRef.current) {
-      const scrollerContent = Array.from(scrollerRef.current.children);
-
-      scrollerContent.forEach((item) => {
-        const duplicatedItem = item.cloneNode(true);
-        if (scrollerRef.current) {
-          scrollerRef.current.appendChild(duplicatedItem);
-        }
-      });
-
-      getDirection();
-      getSpeed();
-      setStart(true);
-    }
-  }
-
-  const getDirection = () => {
-    if (containerRef.current) {
-      if (direction === "left") {
-        containerRef.current.style.setProperty("--animation-direction", "forwards");
-      } else {
-        containerRef.current.style.setProperty("--animation-direction", "reverse");
-      }
-    }
-  };
-
-  const getSpeed = () => {
-    if (containerRef.current) {
-      if (speed === "fast") {
-        containerRef.current.style.setProperty("--animation-duration", "20s");
-      } else if (speed === "normal") {
-        containerRef.current.style.setProperty("--animation-duration", "40s");
-      } else {
-        containerRef.current.style.setProperty("--animation-duration", "60s");
-      }
-    }
-  };
-
   return (
     <div
-      ref={containerRef}
-      className="scroller relative z-20 max-w-7xl overflow-hidden [mask-image:linear-gradient(to_right,transparent,white_20%,white_80%,transparent)]"
+      className="relative z-20 max-w-7xl overflow-x-auto"
     >
       <div
-        ref={scrollerRef}
-        className={`flex min-w-full shrink-0 gap-6 py-4 w-max flex-nowrap ${
-          start && "animate-scroll"
-        }`}
+        className="flex min-w-full shrink-0 gap-6 py-4 w-max flex-nowrap"
       >
         {items.map((site, idx) => (
           <div
