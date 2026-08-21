@@ -239,6 +239,33 @@ const searchCatalog = async (tenantId: string, filters: QueryFilters) => {
   }
 ];
 
+// Repositories to exclude from portfolio showcase
+const EXCLUDED_REPOS = [
+  "your-dining-club",
+  "dotfiles",
+  "exelentshakil",
+  "awesome-stock-resources",
+  "elementor",
+  "Switcheroo",
+  "reactjs.org",
+  "nuxt.js",
+  "socket.io",
+  "SumonMSelim",
+  "vue",
+  "cocoen",
+  "awesome-laravel",
+  "jwt-auth",
+  "woocommerce",
+  "the-php-practitioner",
+  "ES6-Learning",
+  "phpstorm-code-style",
+  "Scrollify",
+  "wedocs-plugin",
+  "responsive-html-email-template",
+  "airfare",
+  "noonsmart"
+];
+
 export default function PortfolioPage() {
   const pageRef = useRef<HTMLDivElement>(null);
   const [repos, setRepos] = useState<GitHubRepo[]>(CACHED_GITHUB_REPOS);
@@ -272,7 +299,7 @@ export default function PortfolioPage() {
       .then((data: GitHubRepo[]) => {
         if (Array.isArray(data) && data.length > 0) {
           const mappedRepos = data
-            .filter((r) => !r.name.includes("dotfiles") && !r.name.includes("exelentshakil"))
+            .filter((r) => !EXCLUDED_REPOS.some((skip) => r.name.toLowerCase().includes(skip.toLowerCase())))
             .map((r) => ({
               ...r,
               description: CUSTOM_REPO_DESCRIPTIONS[r.name] || r.description || "Open source production module and engineering utility."
