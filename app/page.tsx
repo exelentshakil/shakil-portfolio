@@ -476,40 +476,36 @@ export default function PortfolioPage() {
       {/* -------------------------------------------------------------------- */}
       {/* 2. HERO SECTION */}
       {/* -------------------------------------------------------------------- */}
-      <section id="top" className="relative pt-12 pb-16 md:pt-16 md:pb-20 border-b border-[#EAECF0] bg-gradient-to-b from-[#F8F9FC] to-white">
+      <section id="top" className="relative pt-10 pb-14 md:pt-14 md:pb-18 border-b border-[#EAECF0] bg-gradient-to-b from-[#F8F9FC] via-white to-white">
         <div className="site-container">
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            {/* Left Column: Positioning & Clear Engineering Copy */}
-            <div className="lg:col-span-7 space-y-5 gsap-reveal">
+            {/* Left Column: Clean, Authoritative Engineering Headline & Positioning */}
+            <div className="lg:col-span-7 space-y-4 gsap-reveal">
               
-              {/* Profile Pill with Headshot */}
-              <div className="flex items-center gap-3">
-                <div className="relative w-11 h-11 rounded-[4px] overflow-hidden border border-[#D0D5DD] shadow-sm shrink-0 bg-slate-100">
+              {/* Sleek Unified Profile Status Badge */}
+              <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-white border border-[#D0D5DD] shadow-sm text-xs text-[#0D1738]">
+                <div className="relative w-5 h-5 rounded-full overflow-hidden border border-slate-300 shrink-0 bg-slate-100">
                   <Image
                     src="/shakil-headshot.jpeg"
-                    alt="Shakil Ahmed - Lead System Architect"
+                    alt="Shakil Ahmed"
                     fill
-                    sizes="44px"
+                    sizes="20px"
                     className="object-cover object-top"
                     priority
                   />
                 </div>
-                <div>
-                  <div className="flex items-center gap-1.5 font-bold text-xs text-[#0D1738]">
-                    <span>Shakil Ahmed</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" />
-                    <span className="text-[11px] font-normal text-[#667085]">Founder, BarakahSoft LLC</span>
-                  </div>
-                  <div className="badge-status mt-0.5">
-                    <span>Open for Technical Architecture & Full-Stack Engagements</span>
-                  </div>
-                </div>
+                <span className="font-semibold text-[#0D1738]">Shakil Ahmed</span>
+                <span className="text-[#D0D5DD]">•</span>
+                <span className="text-emerald-700 font-medium flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                  Available for Contracts
+                </span>
               </div>
 
               {/* Main Headline */}
-              <h1 className="text-3xl sm:text-5xl lg:text-[3.25rem] font-bold text-[#0D1738] tracking-[-0.03em] leading-[1.12]">
-                Engineering high-throughput platforms, marketplace core & resilient APIs.
+              <h1 className="text-3xl sm:text-4xl lg:text-[3.1rem] font-bold text-[#0D1738] tracking-[-0.035em] leading-[1.12]">
+                Engineering high-throughput platforms & resilient backend APIs.
               </h1>
 
               {/* Subtitle */}
@@ -517,8 +513,8 @@ export default function PortfolioPage() {
                 12+ years building enterprise architectures and scalable backends. Lead platform architect behind <strong className="text-[#0D1738] font-semibold">Legiit</strong> (2M+ active users, $40M+ volume). Specialist in Laravel, Node.js, Python, PostgreSQL, Next.js, and Stripe payment systems.
               </p>
 
-              {/* Action Buttons (4px border radius, tight sizing) */}
-              <div className="flex flex-wrap items-center gap-3 pt-2">
+              {/* Action Buttons (Clean & Tight) */}
+              <div className="flex flex-wrap items-center gap-3 pt-1">
                 <a
                   href="https://calendly.com/shakilhq/30min"
                   target="_blank"
@@ -535,33 +531,35 @@ export default function PortfolioPage() {
                   rel="noreferrer"
                   className="btn-secondary"
                 >
-                  <Phone className="w-4 h-4 text-[#533AFD]" />
-                  +1 (307) 533-6678
+                  <MessageCircle className="w-4 h-4 text-emerald-600" />
+                  WhatsApp (+1 307 533-6678)
                 </a>
 
                 <a
                   href="#portfolio"
-                  className="btn-outline-primary"
+                  className="text-xs font-semibold text-[#533AFD] hover:underline flex items-center gap-1 ml-1"
                 >
-                  Browse 60+ Deployments
-                  <ArrowDownRight className="w-4 h-4" />
+                  <span>Browse 60+ Deployments</span>
+                  <ArrowDownRight className="w-3.5 h-3.5" />
                 </a>
               </div>
 
-              {/* Verification Pills */}
-              <div className="pt-4 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-[#667085]">
+              {/* Sleek Horizontal Verification Row */}
+              <div className="pt-3 border-t border-[#EAECF0] flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-[#667085]">
                 <div className="flex items-center gap-1.5">
                   <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
-                  <span className="font-semibold text-[#0D1738]">Top Rated on Freelancer.com</span>
+                  <span className="font-semibold text-[#0D1738]">Freelancer.com Top Rated</span>
                   <span className="text-[#667085]">(4.9 ★ • 127+ Reviews)</span>
                 </div>
+                <span className="hidden sm:inline text-[#D0D5DD]">•</span>
                 <div className="flex items-center gap-1.5">
                   <Check className="w-3.5 h-3.5 text-[#533AFD]" />
-                  <span>Preferred Freelancer SLA (100% On-Time)</span>
+                  <span>100% On-Time SLA</span>
                 </div>
+                <span className="hidden sm:inline text-[#D0D5DD]">•</span>
                 <div className="flex items-center gap-1.5">
-                  <Check className="w-3.5 h-3.5 text-[#533AFD]" />
-                  <span>US Business: BarakahSoft LLC</span>
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD]" />
+                  <span>BarakahSoft LLC (USA)</span>
                 </div>
               </div>
             </div>
@@ -598,7 +596,7 @@ export default function PortfolioPage() {
                 </div>
 
                 {/* Recharts Area Chart */}
-                <div className="h-40 w-full pt-1">
+                <div className="h-36 w-full pt-1">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={telemetryData} margin={{ top: 5, right: 5, left: -25, bottom: 0 }}>
                       <defs>
