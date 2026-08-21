@@ -9,10 +9,10 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        ink: "#0D1738",
-        paper: "#F8F9FC",
-        primary: "#533AFD",
-        "primary-soft": "#EEE AFF".replace(" ", ""),
+        ink: "#111111",
+        paper: "#F3F3F1",
+        primary: "#080808",
+        "primary-soft": "#EEEEEE",
       },
       animation: {
         blob: "blob 7s infinite",

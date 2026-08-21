@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 const BASE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://shakilhq.com";
 
 export const viewport: Viewport = {
-  themeColor: "#f8f9fc",
+  themeColor: "#f3f3f1",
   width: "device-width",
   initialScale: 1,
   maximumScale: 1,
