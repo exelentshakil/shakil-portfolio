@@ -964,17 +964,17 @@ export default function PortfolioPage() {
               </div>
 
               {/* Main Headline */}
-              <h1 className="text-3xl sm:text-4xl lg:text-[3.1rem] font-bold text-[#0D1738] tracking-[-0.035em] leading-[1.12]">
+              <h1 className="text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-[#0D1738] tracking-[-0.025em] leading-[1.18] max-w-2xl">
                 Engineering high-throughput platforms & resilient backend APIs.
               </h1>
 
               {/* Subtitle */}
-              <p className="text-sm sm:text-base text-[#475467] font-normal leading-relaxed max-w-xl">
+              <p className="text-base text-[#475467] font-normal leading-[1.7] max-w-xl">
                 12+ years building enterprise architectures and scalable backends. Lead platform architect behind <strong className="text-[#0D1738] font-semibold">Legiit</strong> (2M+ active users, $40M+ volume). Specialist in Laravel, Node.js, Python, PostgreSQL, Next.js, and Stripe payment systems.
               </p>
 
               {/* Action Buttons (Clean & Tight) */}
-              <div className="flex flex-wrap items-center gap-3 pt-1">
+              <div className="flex flex-wrap items-center gap-3 pt-1.5">
                 <a
                   href="https://calendly.com/shakilhq/30min"
                   target="_blank"
@@ -1005,7 +1005,7 @@ export default function PortfolioPage() {
               </div>
 
               {/* Sleek Horizontal Verification Row */}
-              <div className="pt-3 border-t border-[#EAECF0] flex flex-wrap items-center gap-x-4 gap-y-2 text-xs text-[#667085]">
+              <div className="pt-4 border-t border-[#EAECF0] flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#667085]">
                 <div className="flex items-center gap-1.5">
                   <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
                   <span className="font-semibold text-[#0D1738]">Freelancer.com Top Rated</span>
