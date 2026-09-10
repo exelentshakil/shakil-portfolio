@@ -51,6 +51,8 @@ export const aiProjects: AiProject[] = [
     category: "autonomous-agents",
     categoryLabel: "Autonomous Agents",
     liveUrl: "https://prospect-os-tau.vercel.app",
+    githubUrl: "https://github.com/exelentshakil/prospect-os",
+    previewImage: "/screenshots/ai/prospect-os.png",
     badge: "8 Sub-Agents",
     featured: true,
     architecturalPrinciple: {
@@ -74,6 +76,8 @@ export const aiProjects: AiProject[] = [
     category: "workflow-orchestration",
     categoryLabel: "Quoting & Geospatial",
     liveUrl: "https://parcelquote.vercel.app",
+    githubUrl: "https://github.com/exelentshakil/parcelquote",
+    previewImage: "/screenshots/ai/parcelquote.png",
     badge: "Geospatial AI",
     featured: true,
     architecturalPrinciple: {
@@ -97,6 +101,8 @@ export const aiProjects: AiProject[] = [
     category: "multimodal-vision",
     categoryLabel: "Multimodal AI",
     liveUrl: "https://rehab-estimator-api.vercel.app",
+    githubUrl: "https://github.com/exelentshakil/rehab-estimator-api",
+    previewImage: "/screenshots/ai/rehab-estimator.png",
     badge: "Computer Vision",
     featured: true,
     architecturalPrinciple: {
@@ -120,7 +126,8 @@ export const aiProjects: AiProject[] = [
     category: "legal-fintech",
     categoryLabel: "Legal AI & Publishing",
     liveUrl: "https://wp-content-autopilot.vercel.app",
-    previewImage: "/screenshots/ai/atoyan-dashboard-preview.png",
+    githubUrl: "https://github.com/exelentshakil/wp-content-autopilot",
+    previewImage: "/screenshots/ai/wp-content-autopilot.png",
     badge: "Client Production",
     featured: true,
     architecturalPrinciple: {
@@ -144,6 +151,8 @@ export const aiProjects: AiProject[] = [
     category: "legal-fintech",
     categoryLabel: "Legal AI",
     liveUrl: "https://ai-legalassistant.vercel.app",
+    githubUrl: "https://github.com/exelentshakil/legal-ai-assistant",
+    previewImage: "/screenshots/ai/legal-ai-assistant.png",
     badge: "Enterprise Internal",
     featured: true,
     architecturalPrinciple: {
@@ -166,7 +175,9 @@ export const aiProjects: AiProject[] = [
     subtitle: "Confidence-routed operational ecosystem spanning customer email, CRM lead scoring, and automated task dispatch.",
     category: "workflow-orchestration",
     categoryLabel: "Workflow Orchestration",
-    liveUrl: "https://ai-automation-hub.vercel.app",
+    liveUrl: "https://ai-automationhub.vercel.app",
+    githubUrl: "https://github.com/exelentshakil/ai-automation-hub",
+    previewImage: "/screenshots/ai/ai-automation-hub.png",
     badge: "Event Orchestration",
     featured: false,
     architecturalPrinciple: {
@@ -189,6 +200,9 @@ export const aiProjects: AiProject[] = [
     subtitle: "Voice call transcription, speaker diarization, and drift-free employee performance evaluation.",
     category: "rag-knowledge",
     categoryLabel: "Audio AI & QA",
+    liveUrl: "https://callscoreai.vercel.app",
+    githubUrl: "https://github.com/exelentshakil/callscore-ai",
+    previewImage: "/screenshots/ai/callscore-ai.png",
     badge: "Deterministic QA",
     featured: false,
     architecturalPrinciple: {
@@ -211,6 +225,9 @@ export const aiProjects: AiProject[] = [
     subtitle: "Intelligent commercial real estate lending dashboard with automated OCR document extraction and RAG underwriting.",
     category: "legal-fintech",
     categoryLabel: "FinTech & Real Estate",
+    liveUrl: "https://intercapital-lending-ai.vercel.app",
+    githubUrl: "https://github.com/exelentshakil/intercapital-lending-ai",
+    previewImage: "/screenshots/ai/intercapital-ai.png",
     badge: "FinTech RAG",
     featured: false,
     architecturalPrinciple: {
@@ -233,6 +250,9 @@ export const aiProjects: AiProject[] = [
     subtitle: "Automated vehicle damage detection and repair cost range estimation via multimodal vision and background queues.",
     category: "multimodal-vision",
     categoryLabel: "Multimodal AI",
+    liveUrl: "https://aicarfix.vercel.app",
+    githubUrl: "https://github.com/exelentshakil/carfix",
+    previewImage: "/screenshots/ai/carfix-ai.png",
     badge: "Async Vision",
     featured: false,
     architecturalPrinciple: {

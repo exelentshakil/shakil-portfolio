@@ -41,6 +41,7 @@ export const sites: Site[] = [
     url: "prospect-os-tau.vercel.app",
     category: "ai",
     featured: true,
+    image: "/screenshots/ai/prospect-os.png",
     clientType: "Autonomous Outbound Engine",
     hook: "8 sub-agents running ICP discovery to booking with auditable rubric scoring",
     problems_solved: [
@@ -56,6 +57,7 @@ export const sites: Site[] = [
     url: "parcelquote.vercel.app",
     category: "ai",
     featured: true,
+    image: "/screenshots/ai/parcelquote.png",
     clientType: "Instant Property Quoting",
     hook: "Instant roof and property quoting using OpenStreetMap polygon geometry",
     problems_solved: [
@@ -71,6 +73,7 @@ export const sites: Site[] = [
     url: "rehab-estimator-api.vercel.app",
     category: "ai",
     featured: true,
+    image: "/screenshots/ai/rehab-estimator.png",
     clientType: "Computer Vision Property Estimator",
     hook: "Multi-photo condition classification with deterministic cost book pricing",
     problems_solved: [
@@ -102,6 +105,7 @@ export const sites: Site[] = [
     url: "ai-legalassistant.vercel.app",
     category: "ai",
     featured: true,
+    image: "/screenshots/ai/legal-ai-assistant.png",
     clientType: "Enterprise Legal Workflow",
     hook: "Contract analysis and risk factor extraction for 27-member law firm",
     problems_solved: [
@@ -114,9 +118,10 @@ export const sites: Site[] = [
   },
   {
     name: "AI Automation Hub",
-    url: "ai-automation-hub.vercel.app",
+    url: "ai-automationhub.vercel.app",
     category: "ai",
     featured: true,
+    image: "/screenshots/ai/ai-automation-hub.png",
     clientType: "Multi-Pipeline Orchestrator",
     hook: "Confidence-routed AI orchestration across Email, CRM, and PM tools",
     problems_solved: [
@@ -128,6 +133,54 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "Claude 3.5 Sonnet", "Gemini API", "TypeScript"]
   },
 
+  {
+    name: "CallScore AI",
+    url: "callscoreai.vercel.app",
+    category: "ai",
+    featured: true,
+    image: "/screenshots/ai/callscore-ai.png",
+    clientType: "Deterministic Call Grading",
+    hook: "Voice transcription and drift-free rubric quality scoring for customer service",
+    problems_solved: [
+      "Model extracts quotes and qualitative rating, formula computes 0-100 score",
+      "Published /api/rubric reproducible by independent auditors",
+      "Historical trend analysis identifying coaching opportunities per manager"
+    ],
+    metric: "100% Reproducible QA Scores",
+    technologies: ["Next.js", "Whisper STT", "Claude API", "PostgreSQL"]
+  },
+  {
+    name: "InterCapital Lending AI",
+    url: "intercapital-lending-ai.vercel.app",
+    category: "ai",
+    featured: true,
+    image: "/screenshots/ai/intercapital-ai.png",
+    clientType: "Commercial Real Estate AI",
+    hook: "AI commercial lending dashboard with automated OCR extraction and RAG underwriting",
+    problems_solved: [
+      "Natural language queries over dense borrower tax packets and rent rolls",
+      "Automated extraction and validation of LTV and DSCR ratios",
+      "Event-driven background processing with Inngest to eliminate timeouts"
+    ],
+    metric: "65% Faster Loan File Review",
+    technologies: ["Next.js 15", "Inngest", "pgvector", "Tailwind CSS"]
+  },
+  {
+    name: "CarFix AI",
+    url: "aicarfix.vercel.app",
+    category: "ai",
+    featured: true,
+    image: "/screenshots/ai/carfix-ai.png",
+    clientType: "Multimodal Auto Estimator",
+    hook: "Multimodal damage detection and preliminary repair pricing via async background queues",
+    problems_solved: [
+      "Vehicle Make, Model, Year, Trim identification from exterior smartphone photos",
+      "Panel damage detection across scratches, dents, structural deformation",
+      "Async queue architecture with polling status to prevent Vercel 504 timeouts"
+    ],
+    metric: "Sub-30s Triage Assessment",
+    technologies: ["Next.js", "Gemini Vision", "Inngest", "Supabase"]
+  },
   // --------------------------------------------------------------------------
   // FEATURED
   // --------------------------------------------------------------------------
