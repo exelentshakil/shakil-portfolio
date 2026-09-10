@@ -25,27 +25,30 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Shakil Ahmed | Senior Full-Stack Engineer (Laravel/Django/Node.js & React)",
+    default: "Shakil Ahmed | AI Full Stack, Web, Mobile, SaaS & MVP Developer ($150/hr)",
     template: "%s | Shakil Ahmed",
   },
   icons: {
     icon: '/icon.png?v=2',
   },
   description:
-      "Senior Full-Stack Engineer & Architect with 12+ years experience. Built core features for Legiit (2M+ users). Shipped 1,000+ projects. Expert in Laravel, React, and Scalable Systems.",
+      "AI Full Stack, Web, Mobile, SaaS & MVP Developer. Former Engineering Team Lead at Legiit (scaled AI Command Center to $1M ARR). Shipped Legiit Mobile (10K+ downloads), 10+ production AI systems, and rescued AI MVPs (Lovable, Bolt, v0, Supabase). 12+ years engineering, 125+ 5-star reviews.",
   keywords: [
-    "Laravel Expert",
-    "React Developer",
-    "Full Stack Engineer",
+    "AI Full Stack Developer",
+    "AI MVP Developer",
+    "Autonomous Agents Engineer",
+    "SaaS Platform Architect",
     "Next.js Developer",
-    "SaaS Architecture",
-    "WordPress Malware Removal",
-    "Database Optimization",
-    "API Development",
-    "Legiit Marketplace Developer",
+    "React Native Developer",
+    "Lovable MVP Rescue",
+    "Bolt.new Rescue",
+    "v0 by Vercel Rescue",
+    "Supabase Expert",
+    "Claude API Integration",
+    "Gemini API Integration",
+    "Legiit AI Command Center",
     "BarakahSoft Founder",
-    "Upwork Top Talent",
-    "Bangladesh Software Engineer"
+    "Upwork Top Talent $150/hr"
   ],
   authors: [{ name: "Shakil Ahmed", url: BASE_URL }],
   creator: "Shakil Ahmed",
@@ -68,8 +71,8 @@ export const metadata: Metadata = {
     gender: "male",
     locale: "en_US",
     url: BASE_URL,
-    title: "Shakil Ahmed | Senior Full-Stack Engineer",
-    description: "12+ Years Building Production Systems. Architect behind Legiit (2M+ Users). Laravel/Django/Node.js & React Expert.",
+    title: "Shakil Ahmed | AI Full Stack, Web, Mobile, SaaS & MVP Developer",
+    description: "Production SaaS platforms, AI applications, and mobile apps. Former Engineering Team Lead at Legiit (scaled AI Command Center to $1M ARR). 125+ five-star reviews.",
     siteName: "Shakil Ahmed Portfolio",
     images: [
       {
@@ -82,7 +85,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Shakil Ahmed | Laravel/Django/Node.js & React Expert",
+    title: "Shakil Ahmed | AI Full Stack & SaaS Developer ($150/hr)",
     description: "Shipped 1,000+ projects. Architect for 2M+ user marketplace. Available for US-based projects.",
     images: ["/og-image.jpg"],
   },
@@ -114,7 +117,7 @@ export default function RootLayout({
       "addressLocality": "Rajshahi",
       "addressCountry": "Bangladesh"
     },
-    "knowsAbout": ["Laravel", "React", "AWS", "WordPress Security", "System Architecture"],
+    "knowsAbout": ["AI Full Stack Engineering", "Autonomous Multi-Agent Systems", "Grounded RAG", "Next.js", "React Native", "PostgreSQL", "Supabase", "Stripe Billing", "System Architecture"],
     "alumniOf": {
       "@type": "CollegeOrUniversity",
       "name": "Bangladesh University"

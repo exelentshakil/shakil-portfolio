@@ -28,6 +28,9 @@ import {
   Code2,
   Zap,
   Cpu,
+  Sparkles,
+  Bot,
+  Wrench,
   ChevronLeft,
   ChevronRight
 } from "lucide-react";
@@ -43,6 +46,8 @@ import {
   YAxis
 } from "recharts";
 import { sites, getSiteImage, getSiteFallback, Site } from "./data/sites";
+import { AiProjectsSection } from "./components/AiProjectsSection";
+import { AiMvpRescueSection } from "./components/AiMvpRescueSection";
 
 // --------------------------------------------------------------------------
 // Real Architectural Benchmarks & Telemetry Data
@@ -841,6 +846,7 @@ export default function PortfolioPage() {
 
   const categories = useMemo(() => [
     "all",
+    "ai",
     "marketplace",
     "healthcare",
     "legal",
@@ -880,20 +886,24 @@ export default function PortfolioPage() {
                 <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" title="Available for projects" />
               </div>
               <div className="text-[11px] font-medium text-[#475467] leading-none mt-1">
-                Lead System Architect
+                AI Full Stack & SaaS Architect
               </div>
             </div>
           </a>
 
           {/* Clean Desktop Nav Links with Premium Icons */}
-          <nav className="hidden lg:flex items-center gap-6 text-xs font-semibold text-[#344054]">
-            <a href="#proof" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
-              <Activity className="w-3.5 h-3.5 text-[#533AFD]" />
-              <span>Metrics</span>
+          <nav className="hidden lg:flex items-center gap-5 text-xs font-semibold text-[#344054]">
+            <a href="#ai-systems" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+              <Sparkles className="w-3.5 h-3.5 text-[#533AFD]" />
+              <span>AI Systems</span>
             </a>
             <a href="#flagship" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
               <Zap className="w-3.5 h-3.5 text-[#533AFD]" />
-              <span>Flagship</span>
+              <span>Legiit & AI</span>
+            </a>
+            <a href="#ai-rescue" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+              <Wrench className="w-3.5 h-3.5 text-[#533AFD]" />
+              <span>MVP Rescue</span>
             </a>
             <a href="#portfolio" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
               <Grid className="w-3.5 h-3.5 text-[#533AFD]" />
@@ -901,7 +911,7 @@ export default function PortfolioPage() {
             </a>
             <a href="#architecture" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
               <Layers3 className="w-3.5 h-3.5 text-[#533AFD]" />
-              <span>Architecture</span>
+              <span>Strategy Lab</span>
             </a>
             <a href="#reviews" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
               <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
@@ -957,20 +967,27 @@ export default function PortfolioPage() {
                 </div>
                 <span className="font-semibold text-[#0D1738]">Shakil Ahmed</span>
                 <span className="text-[#D0D5DD]">•</span>
+                <span className="font-bold text-[#533AFD]">$150.00/hr</span>
+                <span className="text-[#D0D5DD]">•</span>
                 <span className="text-emerald-700 font-medium flex items-center gap-1.5">
                   <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
-                  Available for Contracts
+                  Available for Contracts & MVPs
                 </span>
+              </div>
+
+              {/* Tag Pill */}
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[4px] bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] text-[11px] font-bold uppercase tracking-wider">
+                AI Full Stack | Web | Mobile | SaaS | MVP Developer
               </div>
 
               {/* Main Headline */}
               <h1 className="text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-[#0D1738] tracking-[-0.025em] leading-[1.18] max-w-2xl">
-                Engineering high-throughput platforms & resilient backend APIs.
+                Engineering production AI applications, scalable SaaS & high-velocity MVPs.
               </h1>
 
               {/* Subtitle */}
               <p className="text-base text-[#475467] font-normal leading-[1.7] max-w-xl">
-                12+ years building enterprise architectures and scalable backends. Lead platform architect behind <strong className="text-[#0D1738] font-semibold">Legiit</strong> (2M+ active users, $40M+ volume). Specialist in Laravel, Node.js, Python, PostgreSQL, Next.js, and Stripe payment systems.
+                I build production SaaS platforms, AI applications, and mobile apps. <strong>Not demos, not prototypes that die after the pitch deck.</strong> 12+ years of production engineering. Former Engineering Team Lead at <strong className="text-[#0D1738] font-semibold">Legiit</strong> (scaled AI Command Center to $1M ARR across 1,500+ businesses; 1M+ orders, 100K+ businesses). Shipped Legiit Mobile (React Native, 10K+ downloads) and 115+ client systems. I also rescue and ship AI-generated MVPs (Lovable, Bolt, Replit, Base44, v0, Supabase) that stalled before production.
               </p>
 
               {/* Action Buttons (Clean & Tight) */}
@@ -982,11 +999,11 @@ export default function PortfolioPage() {
                   className="btn-primary"
                 >
                   <Calendar className="w-4 h-4" />
-                  Book Strategy Call
+                  Book Strategy Call ($150/hr)
                 </a>
 
                 <a
-                  href="https://wa.me/13075336678?text=Hi%20Shakil,%20I'm%20looking%20to%20build%20a%20project."
+                  href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20would%20like%20to%20discuss%20an%20AI%20or%20SaaS%20project."
                   target="_blank"
                   rel="noreferrer"
                   className="btn-secondary"
@@ -996,10 +1013,10 @@ export default function PortfolioPage() {
                 </a>
 
                 <a
-                  href="#portfolio"
+                  href="#ai-systems"
                   className="text-xs font-semibold text-[#533AFD] hover:underline flex items-center gap-1 ml-1"
                 >
-                  <span>Browse 60+ Deployments</span>
+                  <span>Explore 10+ AI Systems</span>
                   <ArrowDownRight className="w-3.5 h-3.5" />
                 </a>
               </div>
@@ -1042,16 +1059,16 @@ export default function PortfolioPage() {
                 {/* Top Metrics Grid */}
                 <div className="grid grid-cols-3 gap-2.5 my-3.5">
                   <div className="p-2 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
-                    <div className="text-[11px] text-[#667085] font-medium">Active Users</div>
-                    <div className="text-lg font-bold text-[#0D1738]">2,000,000+</div>
+                    <div className="text-[11px] text-[#667085] font-medium">Shipped Users</div>
+                    <div className="text-lg font-bold text-[#0D1738]">400,000+</div>
                   </div>
                   <div className="p-2 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
                     <div className="text-[11px] text-[#667085] font-medium">Query Latency</div>
                     <div className="text-lg font-bold text-emerald-700">118 ms</div>
                   </div>
                   <div className="p-2 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
-                    <div className="text-[11px] text-[#667085] font-medium">Service Uptime</div>
-                    <div className="text-lg font-bold text-[#533AFD]">99.999%</div>
+                    <div className="text-[11px] text-[#667085] font-medium">AI Command Ctr</div>
+                    <div className="text-lg font-bold text-[#533AFD]">$1M ARR</div>
                   </div>
                 </div>
 
@@ -1085,11 +1102,11 @@ export default function PortfolioPage() {
                 <div className="mt-3 pt-3 border-t border-[#EAECF0] flex items-center justify-between text-[11px] text-[#667085]">
                   <span className="flex items-center gap-1">
                     <Activity className="w-3 h-3 text-emerald-600" />
-                    <span>Celery Queues: Active</span>
+                    <span>Grounded RAG: Active</span>
                   </span>
                   <span className="flex items-center gap-1">
                     <Database className="w-3 h-3 text-[#533AFD]" />
-                    <span>Redis: 98.4% Hit</span>
+                    <span>Rubric: Deterministic</span>
                   </span>
                   <span className="flex items-center gap-1">
                     <Lock className="w-3 h-3 text-amber-600" />
@@ -1111,27 +1128,27 @@ export default function PortfolioPage() {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 divide-y lg:divide-y-0 lg:divide-x divide-[#EAECF0]">
             
             <div className="pt-3 lg:pt-0 lg:px-4 gsap-stat">
-              <div className="text-3xl sm:text-4xl font-bold text-[#0D1738] tracking-tight">2M+</div>
-              <div className="text-xs font-semibold text-[#344054] mt-0.5">Active Marketplace Users</div>
-              <p className="text-[11px] text-[#667085] mt-1">Platform architecture powering Legiit.com global transactions.</p>
+              <div className="text-3xl sm:text-4xl font-bold text-[#0D1738] tracking-tight">400,000+</div>
+              <div className="text-xs font-semibold text-[#344054] mt-0.5">Shipped Platform Users</div>
+              <p className="text-[11px] text-[#667085] mt-1">Marketplace architecture powering Legiit across 17 countries.</p>
             </div>
 
             <div className="pt-3 lg:pt-0 lg:px-4 gsap-stat">
-              <div className="text-3xl sm:text-4xl font-bold text-[#0D1738] tracking-tight">115+</div>
-              <div className="text-xs font-semibold text-[#344054] mt-0.5">Production Systems Shipped</div>
-              <p className="text-[11px] text-[#667085] mt-1">Deployments across healthcare, legal, SaaS, fintech & commerce.</p>
+              <div className="text-3xl sm:text-4xl font-bold text-[#0D1738] tracking-tight">$1M ARR</div>
+              <div className="text-xs font-semibold text-[#344054] mt-0.5">AI Command Center Scaled</div>
+              <p className="text-[11px] text-[#667085] mt-1">Intelligent business scoring & matching across 1,500+ locations in 40+ countries.</p>
             </div>
 
             <div className="pt-3 lg:pt-0 lg:px-4 gsap-stat">
-              <div className="text-3xl sm:text-4xl font-bold text-[#0D1738] tracking-tight">99%</div>
-              <div className="text-xs font-semibold text-[#344054] mt-0.5">Client Satisfaction</div>
-              <p className="text-[11px] text-[#667085] mt-1">Over 125+ verified five-star client reviews on Freelancer & Upwork.</p>
+              <div className="text-3xl sm:text-4xl font-bold text-[#0D1738] tracking-tight">115+ Systems</div>
+              <div className="text-xs font-semibold text-[#344054] mt-0.5">Client Work Delivered</div>
+              <p className="text-[11px] text-[#667085] mt-1">Healthcare HIPAA booking (8+), legal intake (5+), agencies (8+), sports (12+).</p>
             </div>
 
             <div className="pt-3 lg:pt-0 lg:px-4 gsap-stat">
-              <div className="text-3xl sm:text-4xl font-bold text-[#0D1738] tracking-tight">12+ Yrs</div>
-              <div className="text-xs font-semibold text-[#344054] mt-0.5">Engineering Leadership</div>
-              <p className="text-[11px] text-[#667085] mt-1">Full lifecycle development from scratch to multi-tenant scaling.</p>
+              <div className="text-3xl sm:text-4xl font-bold text-[#0D1738] tracking-tight">125+ Reviews</div>
+              <div className="text-xs font-semibold text-[#344054] mt-0.5">Five-Star Track Record</div>
+              <p className="text-[11px] text-[#667085] mt-1">12+ years of production engineering. Clean code built for real users.</p>
             </div>
 
           </div>
@@ -1139,18 +1156,23 @@ export default function PortfolioPage() {
       </section>
 
       {/* -------------------------------------------------------------------- */}
+      {/* 3.5 DEDICATED AI APPLICATIONS & AUTONOMOUS AGENTS SHOWCASE */}
+      {/* -------------------------------------------------------------------- */}
+      <AiProjectsSection />
+
+      {/* -------------------------------------------------------------------- */}
       {/* 4. FEATURED FLAGSHIP CASE STUDY: LEGIIT */}
       {/* -------------------------------------------------------------------- */}
       <section id="flagship" className="section-pad bg-[#F8FAFC]">
         <div className="site-container">
           
-          <div className="max-w-2xl mb-8">
-            <span className="badge-tag mb-2">Flagship Architecture</span>
+          <div className="max-w-3xl mb-8">
+            <span className="badge-tag mb-2">Flagship Marketplace & AI Command Center</span>
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0D1738] tracking-tight">
-              Scaling Legiit to 2,000,000+ Users
+              Scaling Legiit to 400,000+ Users & $1M ARR AI Command Center
             </h2>
-            <p className="text-xs sm:text-sm text-[#475467] mt-2">
-              Served as Lead Engineer & Platform Architect. Re-engineered core transaction pipelines, search indexing, real-time messaging, and multi-currency payouts to support exponential marketplace growth.
+            <p className="text-xs sm:text-sm text-[#475467] mt-2 leading-relaxed">
+              For 4 years I was Engineering Team Lead at <strong>Legiit</strong>, a marketplace now processing 1M+ orders for 100K+ businesses through a vetted network of 25K+ freelancers. I engineered the core platform architecture, built the AI-powered Command Center from scratch, and developed the native mobile apps.
             </p>
           </div>
 
@@ -1165,7 +1187,10 @@ export default function PortfolioPage() {
                     Freelance Marketplace
                   </span>
                   <span className="px-2.5 py-0.5 rounded-[2px] bg-[#ECFDF3] border border-[#A6F4C5] text-[#027A48] text-[11px] font-bold">
-                    2M+ Registered Accounts
+                    400K+ Users • 17 Countries
+                  </span>
+                  <span className="px-2.5 py-0.5 rounded-[2px] bg-[#FEF3F2] border border-[#FECDCA] text-[#B42318] text-[11px] font-bold">
+                    $1M ARR AI Feature
                   </span>
                 </div>
 
@@ -1183,27 +1208,40 @@ export default function PortfolioPage() {
                     <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
                       <Check className="w-3 h-3" />
                     </div>
-                    <span><strong>Stripe Connect & Escrow:</strong> Automated order hold, milestone release, affiliate splits, and automated ledger balancing.</span>
+                    <span><strong>AI-Powered Command Center ($1M ARR):</strong> Built dashboard scoring businesses across SEO, performance, uptime, and traffic from connected Google Analytics & Search Console, dynamically routing them to qualified freelancers across 1,500+ locations in 40+ countries.</span>
                   </div>
 
                   <div className="flex items-start gap-2 text-xs sm:text-sm text-[#344054]">
                     <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
                       <Check className="w-3 h-3" />
                     </div>
-                    <span><strong>Database Tuning:</strong> Reduced search & analytics queries from 800ms down to 118ms under concurrent load.</span>
+                    <span><strong>Legiit Mobile (10,000+ Downloads):</strong> Built end-to-end in React Native for iOS and Android with real-time bidding, biometric auth, and instant order push notifications.</span>
                   </div>
 
                   <div className="flex items-start gap-2 text-xs sm:text-sm text-[#344054]">
                     <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
                       <Check className="w-3 h-3" />
                     </div>
-                    <span><strong>Real-Time Messaging:</strong> WebSockets chat engine with live file previews, order sync, and native mobile notifications.</span>
+                    <span><strong>Stripe Billing & Escrow:</strong> Automated order escrow hold, milestone release, affiliate splits, and automated ledger balancing handling $40M+ platform volume.</span>
                   </div>
+
+                  <div className="flex items-start gap-2 text-xs sm:text-sm text-[#344054]">
+                    <div className="w-4 h-4 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check className="w-3 h-3" />
+                    </div>
+                    <span><strong>Database Tuning & WebSockets:</strong> Reduced complex marketplace queries from 800ms to 118ms under concurrent load; built real-time chat with live file previews.</span>
+                  </div>
+                </div>
+
+                {/* CEO Quote Pill */}
+                <div className="p-3 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-xs text-[#344054] italic">
+                  &quot;He didn&apos;t just patch features together, he engineered the architecture that allows us to scale safely.&quot;
+                  <span className="block not-italic font-bold text-[#0D1738] mt-1 text-[11px]">— Chris M. Walker, CEO of Legiit</span>
                 </div>
 
                 {/* Tech Pills */}
                 <div className="flex flex-wrap gap-1.5 pt-2">
-                  {["Laravel", "Django", "Node.js", "React", "Next.js", "MySQL", "Redis", "Celery", "AWS", "Stripe API"].map((tech) => (
+                  {["React", "Next.js", "React Native", "Node.js", "Laravel", "MySQL", "Redis", "Celery", "AWS", "Stripe API", "Google Search Console API"].map((tech) => (
                     <span key={tech} className="px-2 py-0.5 rounded-[2px] bg-[#F2F4F7] text-[#344054] font-mono text-[11px] font-semibold">
                       {tech}
                     </span>
@@ -1271,6 +1309,11 @@ export default function PortfolioPage() {
 
         </div>
       </section>
+
+      {/* -------------------------------------------------------------------- */}
+      {/* 4.25 AI MVP RESCUE & PRODUCTIONIZATION SECTION */}
+      {/* -------------------------------------------------------------------- */}
+      <AiMvpRescueSection />
 
       {/* -------------------------------------------------------------------- */}
       {/* 4.5 10 CRITICAL BOTTLENECKS IN SCALABLE SYSTEMS — INTERACTIVE LAB */}
@@ -1510,7 +1553,7 @@ export default function PortfolioPage() {
                 Different Industries. Same Standard.
               </h2>
               <p className="text-xs sm:text-sm text-[#475467] mt-1 max-w-xl">
-                Showcasing all 60+ production platforms, customer portals, and lead engines deployed for real businesses.
+                Showcasing 60+ production platforms from 115+ delivered client projects across healthcare (8+ HIPAA systems), legal (5+ law firms), marketing agencies (8+), and sports organizations (12+).
               </p>
             </div>
 
@@ -1872,12 +1915,21 @@ export default function PortfolioPage() {
               {/* Profile Bio & Direct Access Commitment */}
               <div className="lg:col-span-8 space-y-3.5">
                 <span className="badge-tag">Direct Engineering Partnership</span>
+                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-[4px] bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] text-[11px] font-bold uppercase tracking-wider">
+                  AI Full Stack | Web | Mobile | SaaS | MVP Developer ($150/hr)
+                </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-[#0D1738] tracking-tight">
                   Direct technical leadership — no junior handoffs, no agency bloat.
                 </h2>
                 <p className="text-xs sm:text-sm text-[#475467] leading-relaxed">
-                  When you work with me, you collaborate directly with the architect who scaled Legiit to 2,000,000+ users and shipped over 115 production systems. Every critical line of code, database schema, payment flow, and infrastructure config is engineered with precision and enterprise discipline.
+                  I build production SaaS platforms, AI applications, and mobile apps. Not demos, not prototypes that die after the pitch deck. 12+ years of production engineering. 125+ five-star reviews. Clean code, clear communication, software built for real users.
                 </p>
+                <p className="text-xs sm:text-sm text-[#475467] leading-relaxed">
+                  I also rescue and ship AI-generated MVPs (Lovable, Bolt, Replit, Base44, v0, Supabase) that stalled before production. If your AI tool got you 80% there and you need a real engineer to finish it, that&apos;s exactly my lane.
+                </p>
+                <div className="text-xs text-[#344054] font-medium pt-1">
+                  <strong>Stack:</strong> React, Next.js, React Native, Node.js, NestJS, TypeScript, PostgreSQL, MongoDB, Redis, AWS, Supabase, Stripe, Gemini/OpenAI/Claude API integration.
+                </div>
                 
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1">
                   <div className="p-2.5 rounded-[2px] bg-white border border-[#EAECF0]">
@@ -2007,7 +2059,7 @@ export default function PortfolioPage() {
               </h2>
 
               <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-lg">
-                Available for technical architecture, high-concurrency SaaS builds, MVP engineering, and payment / database performance optimization.
+                Available for AI application engineering, autonomous agent pipelines, MVP rescues, and high-concurrency SaaS platforms at $150/hr.
               </p>
 
               <div className="flex flex-wrap items-center gap-3 pt-2">

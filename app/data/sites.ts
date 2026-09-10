@@ -4,7 +4,7 @@ import slugify from 'slugify';
 export interface Site {
   name: string;
   url: string;
-  category: "marketplace" | "agency" | "business" | "lifestyle" | "healthcare" | "legal" | "sports" | "ecommerce";
+  category: "marketplace" | "agency" | "business" | "lifestyle" | "healthcare" | "legal" | "sports" | "ecommerce" | "ai";
   image?: string;
   featured?: boolean;
   
@@ -17,6 +17,117 @@ export interface Site {
 }
 
 export const sites: Site[] = [
+  // --------------------------------------------------------------------------
+  // AI & AUTONOMOUS AGENTS
+  // --------------------------------------------------------------------------
+  {
+    name: "NightShift AI Employee",
+    url: "ai-employee-demo-mu.vercel.app",
+    category: "ai",
+    featured: true,
+    image: "/screenshots/ai/nightshift-preview.png",
+    clientType: "Autonomous Inbox Agent",
+    hook: "Grounded RAG inbox agent with human-in-the-loop approval gates",
+    problems_solved: [
+      "Strict citation-grounded answers citing verified company docs",
+      "Drafted queue holding Gmail/CRM mutations until human approval",
+      "Dual model fallback chain (Claude & Gemini) for 99.9% uptime"
+    ],
+    metric: "100% Auditable Actions • 0 Rogue Writes",
+    technologies: ["Next.js 15", "Gemini API", "Claude API", "Supabase", "TypeScript"]
+  },
+  {
+    name: "Prospect OS",
+    url: "prospect-os-tau.vercel.app",
+    category: "ai",
+    featured: true,
+    clientType: "Autonomous Outbound Engine",
+    hook: "8 sub-agents running ICP discovery to booking with auditable rubric scoring",
+    problems_solved: [
+      "The rubric scores qualification, the model never does",
+      "12 auditable weighted components across fit, pain, timing",
+      "Automated enrichment, competitive analysis, and multi-touch copy"
+    ],
+    metric: "12 Scoring Factors • 8 Sub-Agents",
+    technologies: ["Next.js", "Claude 3.5 Sonnet", "TypeScript", "Deterministic Rubric"]
+  },
+  {
+    name: "ParcelQuote",
+    url: "parcelquote.vercel.app",
+    category: "ai",
+    featured: true,
+    clientType: "Instant Property Quoting",
+    hook: "Instant roof and property quoting using OpenStreetMap polygon geometry",
+    problems_solved: [
+      "Shoelace formula calculating building footprint area directly from OSM",
+      "Confidence-scored routing triage: <72% flags to human exceptions queue",
+      "Versioned pricing rules table: Admin edits rules without code redeploys"
+    ],
+    metric: "Sub-Second Quoting • <72% Exception Triage",
+    technologies: ["Next.js", "OpenStreetMap API", "PostgreSQL", "TypeScript"]
+  },
+  {
+    name: "Rehab Estimator API",
+    url: "rehab-estimator-api.vercel.app",
+    category: "ai",
+    featured: true,
+    clientType: "Computer Vision Property Estimator",
+    hook: "Multi-photo condition classification with deterministic cost book pricing",
+    problems_solved: [
+      "Vision model observes condition from closed taxonomy (never outputs dollars)",
+      "Deterministic pricing engine computes low/expected/high rehab budget",
+      "Reconciles 100% to audited cost benchmarks defensible to credit committees"
+    ],
+    metric: "40+ Standardized Repair Items",
+    technologies: ["Next.js", "Gemini 1.5 Pro", "OpenAI Vision", "REST API"]
+  },
+  {
+    name: "WP Content Autopilot",
+    url: "wp-content-autopilot.vercel.app",
+    category: "ai",
+    featured: true,
+    image: "/screenshots/ai/atoyan-dashboard-preview.png",
+    clientType: "Legal Publishing Automation",
+    hook: "Programmatic California legal content synthesis with ACF 348 payload mapping",
+    problems_solved: [
+      "Statutory California legal depth citing FEHA, CRD, and Labor Code",
+      "Dual AI visual synthesis (Imagen 3 / DALL-E 3) for banners & illustrations",
+      "Direct WordPress REST API publishing with Yoast SEO metadata sync"
+    ],
+    metric: "27 ACF Fields Mapped • 10x Content Velocity",
+    technologies: ["Next.js", "WordPress REST API", "Google Imagen 3", "ACF Pro"]
+  },
+  {
+    name: "Legal AI Workflow Assistant",
+    url: "ai-legalassistant.vercel.app",
+    category: "ai",
+    featured: true,
+    clientType: "Enterprise Legal Workflow",
+    hook: "Contract analysis and risk factor extraction for 27-member law firm",
+    problems_solved: [
+      "Gemini 1.5 Pro long-context document analysis and entity extraction",
+      "Risk factor scoring with specific paragraph citations and confidence metrics",
+      "Deterministic offline fallback mode for zero-downtime client demonstrations"
+    ],
+    metric: "45s Contract Triage • 90%+ Time Saved",
+    technologies: ["Next.js", "Google AI Studio", "Gemini 1.5 Pro", "Google Cloud"]
+  },
+  {
+    name: "AI Automation Hub",
+    url: "ai-automation-hub.vercel.app",
+    category: "ai",
+    featured: true,
+    clientType: "Multi-Pipeline Orchestrator",
+    hook: "Confidence-routed AI orchestration across Email, CRM, and PM tools",
+    problems_solved: [
+      "Confidence routing: >90% autonomous execution, <90% human-in-the-loop review",
+      "Multi-channel ingestion across emails, leads, and project events",
+      "Dual LLM fallback chain (Claude 3.5 Sonnet -> Gemini 1.5 Pro)"
+    ],
+    metric: "<2s Inference Latency • 99.9% Uptime",
+    technologies: ["Next.js 15", "Claude 3.5 Sonnet", "Gemini API", "TypeScript"]
+  },
+
   // --------------------------------------------------------------------------
   // FEATURED
   // --------------------------------------------------------------------------
@@ -1271,6 +1382,7 @@ export function getSiteFallback(site: Site): string {
 // Filter for display
 export const topSites = sites.filter(site => 
   site.featured || 
+  site.category === "ai" ||
   site.category === "marketplace" ||
   site.category === "agency" ||
   site.category === "legal" ||
