@@ -20,6 +20,7 @@ import { aiProjects, AiProject } from "../data/aiProjects";
 const FILTER_CATEGORIES = [
   { id: "all", label: "All AI Systems" },
   { id: "autonomous-agents", label: "Autonomous Agents" },
+  { id: "rag-knowledge", label: "Governed RAG & Knowledge" },
   { id: "multimodal-vision", label: "Computer Vision & Multimodal" },
   { id: "legal-fintech", label: "Legal & FinTech AI" },
   { id: "workflow-orchestration", label: "Orchestration & Quoting" }
@@ -30,12 +31,7 @@ export function AiProjectsSection() {
 
   const filteredProjects = activeCategory === "all"
     ? aiProjects
-    : aiProjects.filter((p) => {
-        if (activeCategory === "workflow-orchestration") {
-          return p.category === "workflow-orchestration" || p.category === "rag-knowledge";
-        }
-        return p.category === activeCategory;
-      });
+    : aiProjects.filter((p) => p.category === activeCategory);
 
   return (
     <section id="ai-systems" className="section-pad bg-white border-b border-[#EAECF0]">

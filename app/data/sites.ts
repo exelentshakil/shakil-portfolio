@@ -85,20 +85,20 @@ export const sites: Site[] = [
     technologies: ["Next.js", "Gemini 1.5 Pro", "OpenAI Vision", "REST API"]
   },
   {
-    name: "WP Content Autopilot",
-    url: "wp-content-autopilot.vercel.app",
+    name: "Forward RAG OS",
+    url: "forward-rag-os.vercel.app",
     category: "ai",
     featured: true,
-    image: "/screenshots/ai/atoyan-dashboard-preview.png",
-    clientType: "Legal Publishing Automation",
-    hook: "Programmatic California legal content synthesis with ACF 348 payload mapping",
+    image: "/screenshots/ai/forward-rag-os.png",
+    clientType: "Governed Enterprise RAG",
+    hook: "Governed knowledge retrieval with de-identification quarantine and ChatGPT boundary protection",
     problems_solved: [
-      "Statutory California legal depth citing FEHA, CRD, and Labor Code",
-      "Dual AI visual synthesis (Imagen 3 / DALL-E 3) for banners & illustrations",
-      "Direct WordPress REST API publishing with Yoast SEO metadata sync"
+      "Air-gapped 3-layer data tiering preventing confidential client data leakage into shared AI",
+      "De-identification quarantine pipeline with senior architect approval gate before indexing",
+      "Content Registry metadata validation guaranteeing zero unauthorized AI retrieval"
     ],
-    metric: "27 ACF Fields Mapped • 10x Content Velocity",
-    technologies: ["Next.js", "WordPress REST API", "Google Imagen 3", "ACF Pro"]
+    metric: "3-Tier Data Isolation • Zero Leakage Risk",
+    technologies: ["Next.js 15", "TypeScript", "GPT-4o", "Gemini 2.0 Flash", "Tailwind CSS"]
   },
   {
     name: "Legal AI Workflow Assistant",

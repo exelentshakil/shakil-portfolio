@@ -120,29 +120,29 @@ export const aiProjects: AiProject[] = [
     stack: ["Next.js", "Gemini 1.5 Pro", "OpenAI Vision", "TypeScript", "REST API", "Vercel"]
   },
   {
-    id: "wp-content-autopilot",
-    title: "WP Content Autopilot — Programmatic Legal Publishing",
-    subtitle: "Enterprise legal content generation engine with statutory California legal depth and WordPress REST API publishing.",
-    category: "legal-fintech",
-    categoryLabel: "Legal AI & Publishing",
-    liveUrl: "https://wp-content-autopilot.vercel.app",
-    githubUrl: "https://github.com/exelentshakil/wp-content-autopilot",
-    previewImage: "/screenshots/ai/wp-content-autopilot.png",
-    badge: "Client Production",
+    id: "forward-rag-os",
+    title: "Forward RAG OS — Enterprise Knowledge Base & Boundary Shield",
+    subtitle: "Governed RAG architecture with air-gapped data tiering, de-identification quarantine, and ChatGPT Boundary Shield.",
+    category: "rag-knowledge",
+    categoryLabel: "Governed RAG & Knowledge Systems",
+    liveUrl: "https://forward-rag-os.vercel.app",
+    githubUrl: "https://github.com/exelentshakil/forward-rag-os",
+    previewImage: "/screenshots/ai/forward-rag-os.png",
+    badge: "Securiti Certified AI TRiSM",
     featured: true,
     architecturalPrinciple: {
-      headline: "Statutory Legal Rigor + Complete 27-Subfield ACF Mapping",
-      description: "Generates California employment law pages citing FEHA, CRD, and Labor Code §§ 98.6 & 1102.5. Synthesizes custom Imagen 3 / DALL-E 3 visual assets and maps all 27 ACF subfields directly to WordPress."
+      headline: "Air-Gapped Data Tiering + De-Identification Quarantine Gate",
+      description: "Enforces an explicit unidirectional approval gate across 3 data tiers. Raw CRM and pipeline leads are strictly air-gapped from LLM retrieval. Insights must pass through a systematic de-identification quarantine before being indexed in the Content Registry."
     },
     keyFeatures: [
-      "Statutory precision: Cites California Labor Code, SB 497, and Yanowitz v. L'Oreal precedent",
-      "Automated dual-AI visual asset generation (16:9 moody office banners & 4:3 illustrations)",
-      "Complete ACF Field Group 348 payload mapping across 6 tabs",
-      "Direct WordPress REST API publishing with Yoast SEO title & meta sync"
+      "3-Tier data isolation: Public Library, Internal Approved, and Restricted Air-Gapped storage",
+      "De-identification quarantine queue: Automated PII redaction and client masking before indexing",
+      "Unified Content Registry schema with strict RBAC metadata and permission tagging",
+      "Dual model fallback (GPT-4o + Gemini 2.0 Flash) with zero unauthorized ChatGPT retrieval"
     ],
-    clientValue: "Scaled practice-area organic search expansion for prominent Los Angeles employment litigation firm (Atoyan Law Firm).",
-    metrics: "27 ACF Fields Mapped • 10x Content Velocity",
-    stack: ["Next.js", "WordPress REST API", "Google Imagen 3", "DALL-E 3", "ACF Pro", "Yoast SEO"]
+    clientValue: "Allows enterprise analyst and consulting teams to safely deploy centralized AI retrieval without leaking confidential client data or sales pipeline.",
+    metrics: "3-Tier Data Isolation • 0% Data Leakage Risk",
+    stack: ["Next.js 15", "TypeScript", "GPT-4o", "Gemini 2.0 Flash", "Securiti AI TRiSM", "Tailwind CSS", "Vercel"]
   },
   {
     id: "legal-ai-assistant",
