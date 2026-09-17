@@ -1046,7 +1046,7 @@ export default function PortfolioPage() {
             <div className="lg:col-span-7 space-y-4">
               
               {/* Only ONE Consolidated Aerospace Flight Status Badge - Non-wrapping! */}
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 shadow-inner text-xs text-slate-200 backdrop-blur-md">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 shadow-inner text-xs text-slate-200 backdrop-blur-md max-w-full overflow-hidden whitespace-nowrap">
                 <div className="relative w-5 h-5 rounded-full overflow-hidden border border-cyan-400/50 shrink-0 bg-slate-800">
                   <Image
                     src="/shakil-headshot.jpeg"
@@ -1057,23 +1057,23 @@ export default function PortfolioPage() {
                     priority
                   />
                 </div>
-                <span className="font-bold text-white tracking-wide">Shakil Ahmed</span>
-                <span className="text-slate-600">•</span>
-                <span className="font-semibold text-cyan-400">Principal Systems Architect</span>
-                <span className="text-slate-600 hidden sm:inline">•</span>
-                <span className="text-slate-300 font-medium hidden sm:inline-flex items-center gap-1">
+                <span className="font-bold text-white tracking-wide shrink-0">Shakil Ahmed</span>
+                <span className="text-slate-600 shrink-0">•</span>
+                <span className="font-semibold text-cyan-400 shrink-0">Principal Systems Architect</span>
+                <span className="text-slate-600 hidden sm:inline shrink-0">•</span>
+                <span className="text-slate-300 font-medium hidden sm:inline-flex items-center gap-1 shrink-0">
                   <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
-                  Securiti Certified
+                  Securiti Certified AI Architect
                 </span>
-                <span className="text-slate-600 hidden md:inline">•</span>
-                <span className="text-emerald-400 font-semibold hidden md:inline-flex items-center gap-1.5">
+                <span className="text-slate-600 hidden md:inline shrink-0">•</span>
+                <span className="text-emerald-400 font-semibold hidden md:inline-flex items-center gap-1.5 shrink-0">
                   <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse" />
                   Available for Contracts &amp; MVPs
                 </span>
               </div>
 
               {/* Main Headline - Commanding, Zero Awkward Hyphenation */}
-              <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] xl:text-[3.05rem] font-black text-white tracking-tight leading-[1.14]">
+              <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] xl:text-[3.05rem] font-black text-white tracking-tight leading-[1.22] sm:leading-[1.22] lg:leading-[1.2] xl:leading-[1.18]">
                 Engineering Mission-Critical AI Systems &amp;{" "}
                 <span className="bg-gradient-to-r from-violet-400 via-fuchsia-300 to-cyan-300 bg-clip-text text-transparent">
                   Autonomous Swarms.
@@ -1093,7 +1093,7 @@ export default function PortfolioPage() {
                     <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity" />
                   </div>
                   <div className="text-base sm:text-lg font-black text-white mt-0.5 tracking-tight">400K+ Users</div>
-                  <div className="text-[10px] text-slate-400 font-mono truncate">17 Countries • 1M+ Orders</div>
+                  <div className="text-[10px] text-slate-400 font-mono truncate">1M+ Orders • 17 Nations</div>
                 </div>
 
                 <div className="p-2.5 rounded-[6px] bg-slate-900/80 border border-slate-700/80 hover:border-violet-500/60 transition-all backdrop-blur-sm group">
