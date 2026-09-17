@@ -28,20 +28,27 @@ import {
   Terminal,
   Activity,
   Layers3,
-  Eye
+  Eye,
+  Scale
 } from "lucide-react";
 import useEmblaCarousel from "embla-carousel-react";
 import { AnimatePresence, motion } from "framer-motion";
 import { aiProjects, AiProject } from "../data/aiProjects";
 
-const FILTER_CATEGORIES = [
-  { id: "all", label: "All AI Systems" },
-  { id: "autonomous-agents", label: "Autonomous Agents" },
-  { id: "rag-knowledge", label: "Governed RAG & Knowledge" },
-  { id: "multimodal-vision", label: "Computer Vision & Multimodal" },
-  { id: "legal-fintech", label: "Legal & FinTech AI" },
-  { id: "workflow-orchestration", label: "Orchestration & Quoting" }
-] as const;
+interface FilterCategory {
+  id: "all" | "autonomous-agents" | "rag-knowledge" | "multimodal-vision" | "legal-fintech" | "workflow-orchestration";
+  label: string;
+  icon: React.ComponentType<{ className?: string }>;
+}
+
+const FILTER_CATEGORIES: readonly FilterCategory[] = [
+  { id: "all", label: "All AI Systems", icon: Sparkles },
+  { id: "autonomous-agents", label: "Autonomous Agents", icon: Bot },
+  { id: "rag-knowledge", label: "Governed RAG & Knowledge", icon: ShieldCheck },
+  { id: "multimodal-vision", label: "Computer Vision & Multimodal", icon: Eye },
+  { id: "legal-fintech", label: "Legal & FinTech AI", icon: Scale },
+  { id: "workflow-orchestration", label: "Orchestration & Quoting", icon: Workflow }
+];
 
 type ViewMode = "spotlight" | "grid" | "matrix";
 
@@ -261,33 +268,45 @@ export function AiProjectsSection() {
             </div>
           </div>
 
-          {/* Category Filter Pills with Live Counter Badges */}
-          <div className="flex flex-wrap items-center gap-2 pt-3 border-t border-[#EAECF0]">
-            {FILTER_CATEGORIES.map((cat) => {
-              const count = categoryCounts[cat.id] || 0;
-              const isActive = activeCategory === cat.id;
+          {/* Category Filter Navigation Bar - Fixed Single-Row Command Rail (No Next-Line Wrapping) */}
+          <div className="pt-3 border-t border-[#EAECF0]">
+            <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar scrollbar-none whitespace-nowrap py-1">
+              {FILTER_CATEGORIES.map((cat) => {
+                const count = categoryCounts[cat.id] || 0;
+                const isActive = activeCategory === cat.id;
+                const Icon = cat.icon;
 
-              return (
-                <button
-                  key={cat.id}
-                  onClick={() => setActiveCategory(cat.id)}
-                  className={`px-3 py-1.5 rounded-[6px] text-xs font-semibold transition-all inline-flex items-center gap-2 ${
-                    isActive
-                      ? "bg-[#0D1738] text-white shadow-xs"
-                      : "bg-[#F2F4F7] text-[#475467] hover:bg-[#EAECF0] hover:text-[#0D1738]"
-                  }`}
-                >
-                  <span>{cat.label}</span>
-                  <span
-                    className={`px-1.5 py-0.2 rounded-full text-[10px] font-mono ${
-                      isActive ? "bg-white/20 text-white" : "bg-white text-[#667085] border border-[#E4E7EC]"
+                return (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActiveCategory(cat.id)}
+                    className={`group shrink-0 inline-flex items-center gap-2 px-2.5 sm:px-3 py-1.5 rounded-[6px] text-xs font-semibold transition-all duration-150 cursor-pointer whitespace-nowrap border ${
+                      isActive
+                        ? "bg-[#0D1738] text-white border-[#0D1738] shadow-xs"
+                        : "bg-white text-[#344054] border-[#D0D5DD] hover:border-[#98A2B3] hover:bg-[#F8F9FC] hover:text-[#0D1738]"
                     }`}
                   >
-                    {count}
-                  </span>
-                </button>
-              );
-            })}
+                    <Icon
+                      className={`w-3.5 h-3.5 shrink-0 transition-colors ${
+                        isActive
+                          ? "text-[#A488FC]"
+                          : "text-[#667085] group-hover:text-[#533AFD]"
+                      }`}
+                    />
+                    <span>{cat.label}</span>
+                    <span
+                      className={`inline-flex items-center justify-center min-w-[20px] px-1.5 py-0.5 rounded-full text-[10px] font-mono font-bold leading-none shrink-0 ${
+                        isActive
+                          ? "bg-white/15 text-white border border-white/20"
+                          : "bg-[#F2F4F7] text-[#475467] border border-[#EAECF0] group-hover:bg-[#EAECF0] group-hover:text-[#0D1738]"
+                      }`}
+                    >
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
