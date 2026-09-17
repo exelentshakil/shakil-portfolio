@@ -792,24 +792,14 @@ export default function PortfolioPage() {
   const [activeBlueprintIndex, setActiveBlueprintIndex] = useState<number>(0);
   const [codeComparisonTab, setCodeComparisonTab] = useState<"before" | "after">("after");
 
-  // GSAP Entrance Choreography
+  // GSAP Entrance Choreography - Safe fade in, never trapping elements at opacity 0
   useEffect(() => {
     const ctx = gsap.context(() => {
-      gsap.from(".gsap-reveal", {
-        opacity: 0,
-        y: 20,
-        duration: 0.65,
-        stagger: 0.08,
-        ease: "power2.out",
-      });
-      gsap.from(".gsap-stat", {
-        opacity: 0,
-        y: 15,
-        duration: 0.55,
-        stagger: 0.06,
-        delay: 0.25,
-        ease: "power1.out",
-      });
+      gsap.fromTo(
+        ".gsap-reveal",
+        { opacity: 0.8, y: 10 },
+        { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: "power2.out", clearProps: "all" }
+      );
     }, pageRef);
 
     // Fetch GitHub Repositories with safe mapping and fallback
@@ -947,59 +937,87 @@ export default function PortfolioPage() {
       </header>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 2. HERO SECTION */}
+      {/* 2. HERO SECTION - EXECUTIVE COMMAND STATION */}
       {/* -------------------------------------------------------------------- */}
-      <section id="top" className="relative pt-10 pb-14 md:pt-14 md:pb-18 border-b border-[#EAECF0] bg-gradient-to-b from-[#F8F9FC] via-white to-white">
-        <div className="site-container">
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+      <section id="top" className="relative pt-8 pb-10 lg:pt-12 lg:pb-14 border-b border-[#EAECF0] bg-white overflow-hidden">
+        {/* Subtle Ambient Architectural Grids & Gradient Glow */}
+        <div className="absolute inset-0 bg-[radial-gradient(#EAECF0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
+        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[850px] h-[360px] bg-gradient-to-b from-[#533AFD]/10 via-[#7F56D9]/5 to-transparent blur-3xl pointer-events-none" />
+
+        <div className="site-container relative z-10">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
             
-            {/* Left Column: Clean, Authoritative Engineering Headline & Positioning */}
-            <div className="lg:col-span-7 space-y-4 gsap-reveal">
+            {/* Left Column: Authoritative Engineering Positioning */}
+            <div className="lg:col-span-7 space-y-4">
               
-              {/* Sleek Unified Profile Status Badge */}
-              <div className="inline-flex items-center gap-2.5 px-3 py-1 rounded-full bg-white border border-[#D0D5DD] shadow-sm text-xs text-[#0D1738]">
-                <div className="relative w-5 h-5 rounded-full overflow-hidden border border-slate-300 shrink-0 bg-slate-100">
-                  <Image
-                    src="/shakil-headshot.jpeg"
-                    alt="Shakil Ahmed"
-                    fill
-                    sizes="20px"
-                    className="object-cover object-top"
-                    priority
-                  />
+              {/* Profile Status Badge */}
+              <div className="flex flex-wrap items-center gap-2">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#D0D5DD] shadow-sm text-xs text-[#0D1738]">
+                  <div className="relative w-5 h-5 rounded-full overflow-hidden border border-slate-300 shrink-0 bg-slate-100">
+                    <Image
+                      src="/shakil-headshot.jpeg"
+                      alt="Shakil Ahmed"
+                      fill
+                      sizes="20px"
+                      className="object-cover object-top"
+                      priority
+                    />
+                  </div>
+                  <span className="font-semibold text-[#0D1738]">Shakil Ahmed</span>
+                  <span className="text-[#D0D5DD]">•</span>
+                  <span className="font-semibold text-[#533AFD]">Principal Systems Architect</span>
+                  <span className="text-[#D0D5DD]">•</span>
+                  <span className="text-emerald-700 font-medium flex items-center gap-1.5">
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                    Available for Contracts & MVPs
+                  </span>
                 </div>
-                <span className="font-semibold text-[#0D1738]">Shakil Ahmed</span>
-                <span className="text-[#D0D5DD]">•</span>
-                <span className="font-semibold text-[#533AFD]">Principal AI & Systems Architect</span>
-                <span className="text-[#D0D5DD]">•</span>
-                <span className="text-emerald-700 font-medium flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
-                  Available for High-Impact Systems
+
+                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] text-[11px] font-bold uppercase tracking-wider">
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD]" />
+                  <span>Securiti Certified AI Architect</span>
+                </div>
+              </div>
+
+              {/* Main Headline - High-Impact, Balanced, Non-Wrapping */}
+              <h1 className="text-3xl sm:text-4xl lg:text-[2.85rem] xl:text-[3.25rem] font-black text-[#0D1738] tracking-tight leading-[1.12]">
+                Engineering Mission-Critical AI Systems &amp;{" "}
+                <span className="bg-gradient-to-r from-[#533AFD] via-[#6941C6] to-[#7F56D9] bg-clip-text text-transparent">
+                  Autonomous Swarms.
                 </span>
-              </div>
-
-              {/* Tag Pill */}
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[4px] bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] text-[11px] font-bold uppercase tracking-wider">
-                Enterprise AI Architecture • Securiti Certified • $1M ARR Scale
-              </div>
-
-              {/* Main Headline */}
-              <h1 className="text-3xl sm:text-4xl lg:text-[3.25rem] font-bold text-[#0D1738] tracking-[-0.025em] leading-[1.18] max-w-2xl">
-                Engineering Mission-Critical AI Systems, Scalable SaaS & Autonomous Swarms.
               </h1>
 
-              {/* Subtitle */}
-              <p className="text-base text-[#475467] font-normal leading-[1.7] max-w-xl">
-                I build production SaaS platforms, autonomous AI swarms, and high-concurrency systems. <strong>Not speculative demos, not prototypes that fail under load.</strong> 12+ years of mission-critical systems engineering. Former Engineering Team Lead at <strong className="text-[#0D1738] font-semibold">Legiit</strong> (scaled AI Command Center to $1M ARR across 1,500+ businesses; 1M+ marketplace orders). Shipped 44 verified production AI architectures and rescued dozens of stalled MVPs into hardened, zero-drift platforms.
+              {/* Subtitle - Scannable, High-Signal, No Walls of Text */}
+              <p className="text-sm sm:text-base text-[#475467] font-normal leading-relaxed max-w-2xl">
+                12+ years engineering fault-tolerant architectures that process millions of transactions. Former Engineering Team Lead at <strong className="text-[#0D1738] font-semibold">Legiit</strong> (scaled AI Command Center to $1M ARR across 1,500+ orgs). Shipped 44 production AI systems with deterministic zero-drift boundaries and guaranteed SLA delivery.
               </p>
 
-              {/* Action Buttons (Clean & Tight) */}
-              <div className="flex flex-wrap items-center gap-3 pt-1.5">
+              {/* 3 Scannable Micro-Proof Metric Cards */}
+              <div className="grid grid-cols-3 gap-2.5 max-w-xl pt-1">
+                <div className="p-2.5 rounded-[6px] bg-[#F8FAFC] border border-[#EAECF0] hover:border-[#D9D6FE] transition-colors">
+                  <div className="text-[10px] uppercase font-bold tracking-wider text-[#667085]">Marketplace Scale</div>
+                  <div className="text-base sm:text-lg font-black text-[#0D1738] mt-0.5">400K+ Users</div>
+                  <div className="text-[10px] text-[#475467] truncate">17 Countries • 1M+ Orders</div>
+                </div>
+                <div className="p-2.5 rounded-[6px] bg-[#F8FAFC] border border-[#EAECF0] hover:border-[#D9D6FE] transition-colors">
+                  <div className="text-[10px] uppercase font-bold tracking-wider text-[#667085]">AI Command Center</div>
+                  <div className="text-base sm:text-lg font-black text-[#533AFD] mt-0.5">$1M ARR</div>
+                  <div className="text-[10px] text-[#475467] truncate">1,500+ Connected Orgs</div>
+                </div>
+                <div className="p-2.5 rounded-[6px] bg-[#F8FAFC] border border-[#EAECF0] hover:border-[#D9D6FE] transition-colors">
+                  <div className="text-[10px] uppercase font-bold tracking-wider text-[#667085]">AI Governance</div>
+                  <div className="text-base sm:text-lg font-black text-emerald-700 mt-0.5">NIST AI RMF</div>
+                  <div className="text-[10px] text-[#475467] truncate">AI TRiSM Certified</div>
+                </div>
+              </div>
+
+              {/* Action Buttons - Clear Hierarchy */}
+              <div className="flex flex-wrap items-center gap-3 pt-1">
                 <a
                   href="https://calendly.com/shakilhq/30min"
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-primary"
+                  className="btn-primary shadow-sm hover:shadow-lg hover:shadow-[#533AFD]/20 hover:-translate-y-0.5 transition-all text-xs sm:text-sm font-semibold py-2.5 px-4"
                 >
                   <Calendar className="w-4 h-4" />
                   Book Architecture Call
@@ -1009,7 +1027,7 @@ export default function PortfolioPage() {
                   href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20would%20like%20to%20discuss%20an%20AI%20or%20SaaS%20project."
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-secondary"
+                  className="btn-secondary shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all text-xs sm:text-sm font-semibold py-2.5 px-4"
                 >
                   <MessageCircle className="w-4 h-4 text-emerald-600" />
                   WhatsApp (+1 307 533-6678)
@@ -1017,19 +1035,20 @@ export default function PortfolioPage() {
 
                 <a
                   href="#ai-systems"
-                  className="text-xs font-semibold text-[#533AFD] hover:underline flex items-center gap-1 ml-1"
+                  className="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-[4px] bg-[#F4F3FF] border border-[#D9D6FE] text-xs font-bold text-[#533AFD] hover:bg-[#EBE9FE] transition-all"
                 >
-                  <span>Explore 44 Production AI Systems</span>
+                  <Sparkles className="w-3.5 h-3.5 text-[#533AFD]" />
+                  <span>Explore 44 AI Cockpits</span>
                   <ArrowDownRight className="w-3.5 h-3.5" />
                 </a>
               </div>
 
-              {/* Sleek Horizontal Verification Row */}
-              <div className="pt-4 border-t border-[#EAECF0] flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#667085]">
+              {/* Verification Row */}
+              <div className="pt-3 border-t border-[#EAECF0] flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#667085]">
                 <div className="flex items-center gap-1.5">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD]" />
                   <span className="font-semibold text-[#0D1738]">Securiti Certified AI Architect</span>
-                  <span className="text-[#667085]">(NIST AI RMF / AI TRiSM)</span>
+                  <span className="text-[#667085]">(Cert ID: 14B411BCE)</span>
                 </div>
                 <span className="hidden sm:inline text-[#D0D5DD]">•</span>
                 <div className="flex items-center gap-1.5">
@@ -1044,44 +1063,47 @@ export default function PortfolioPage() {
               </div>
             </div>
 
-            {/* Right Column: Live Production Telemetry Panel (Recharts) */}
-            <div className="lg:col-span-5 gsap-reveal">
-              <div className="bg-white rounded-[4px] p-5 border border-[#D0D5DD] shadow-sm">
+            {/* Right Column: Mission-Critical Production Telemetry & Cockpit */}
+            <div className="lg:col-span-5 space-y-3">
+              <div className="bg-white rounded-[8px] p-5 border border-[#D0D5DD] shadow-md hover:shadow-lg transition-shadow">
                 
                 {/* Header */}
                 <div className="flex items-center justify-between pb-3 border-b border-[#EAECF0]">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-emerald-500" />
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                    </span>
                     <span className="text-xs font-bold uppercase tracking-wider text-[#344054]">Core Platform Telemetry</span>
                   </div>
-                  <span className="text-[11px] font-mono px-2 py-0.5 rounded-[2px] bg-[#F4F3FF] text-[#533AFD] font-semibold border border-[#D9D6FE]">
+                  <span className="text-[11px] font-mono px-2 py-0.5 rounded-[3px] bg-[#F4F3FF] text-[#533AFD] font-bold border border-[#D9D6FE]">
                     Legiit Production
                   </span>
                 </div>
 
                 {/* Top Metrics Grid */}
-                <div className="grid grid-cols-3 gap-2.5 my-3.5">
-                  <div className="p-2 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
-                    <div className="text-[11px] text-[#667085] font-medium">Shipped Users</div>
-                    <div className="text-lg font-bold text-[#0D1738]">400,000+</div>
+                <div className="grid grid-cols-3 gap-2.5 my-3">
+                  <div className="p-2.5 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
+                    <div className="text-[10px] text-[#667085] font-semibold uppercase">Shipped Users</div>
+                    <div className="text-base font-black text-[#0D1738] mt-0.5">400,000+</div>
                   </div>
-                  <div className="p-2 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
-                    <div className="text-[11px] text-[#667085] font-medium">Query Latency</div>
-                    <div className="text-lg font-bold text-emerald-700">118 ms</div>
+                  <div className="p-2.5 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
+                    <div className="text-[10px] text-[#667085] font-semibold uppercase">Query Latency</div>
+                    <div className="text-base font-black text-emerald-700 mt-0.5">118 ms</div>
                   </div>
-                  <div className="p-2 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
-                    <div className="text-[11px] text-[#667085] font-medium">AI Command Ctr</div>
-                    <div className="text-lg font-bold text-[#533AFD]">$1M ARR</div>
+                  <div className="p-2.5 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
+                    <div className="text-[10px] text-[#667085] font-semibold uppercase">AI Command Ctr</div>
+                    <div className="text-base font-black text-[#533AFD] mt-0.5">$1M ARR</div>
                   </div>
                 </div>
 
                 {/* Recharts Area Chart */}
-                <div className="h-36 w-full pt-1">
+                <div className="h-32 w-full pt-1">
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={telemetryData} margin={{ top: 5, right: 5, left: -25, bottom: 0 }}>
                       <defs>
                         <linearGradient id="throughputGrad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#533AFD" stopOpacity={0.15} />
+                          <stop offset="5%" stopColor="#533AFD" stopOpacity={0.18} />
                           <stop offset="95%" stopColor="#533AFD" stopOpacity={0} />
                         </linearGradient>
                       </defs>
@@ -1101,21 +1123,32 @@ export default function PortfolioPage() {
                   </ResponsiveContainer>
                 </div>
 
-                {/* Microservice Architecture Tags */}
-                <div className="mt-3 pt-3 border-t border-[#EAECF0] flex items-center justify-between text-[11px] text-[#667085]">
+                {/* Architecture Telemetry Matrix */}
+                <div className="mt-3 pt-3 border-t border-[#EAECF0] grid grid-cols-3 gap-2 text-[11px] text-[#475467] font-medium">
                   <span className="flex items-center gap-1">
-                    <Activity className="w-3 h-3 text-emerald-600" />
-                    <span>Grounded RAG: Active</span>
+                    <Activity className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span className="truncate">RAG: Grounded</span>
                   </span>
                   <span className="flex items-center gap-1">
-                    <Database className="w-3 h-3 text-[#533AFD]" />
-                    <span>Rubric: Deterministic</span>
+                    <Database className="w-3.5 h-3.5 text-[#533AFD] shrink-0" />
+                    <span className="truncate">Rubric: Invariant</span>
                   </span>
                   <span className="flex items-center gap-1">
-                    <Lock className="w-3 h-3 text-amber-600" />
-                    <span>Stripe Escrow: Live</span>
+                    <Lock className="w-3.5 h-3.5 text-amber-600 shrink-0" />
+                    <span className="truncate">Escrow: $40M+</span>
                   </span>
                 </div>
+              </div>
+
+              {/* Bottom Institutional Trust Banner */}
+              <div className="px-4 py-2.5 rounded-[6px] bg-[#F8F9FC] border border-[#EAECF0] flex items-center justify-between text-xs text-[#344054]">
+                <div className="flex items-center gap-2">
+                  <ShieldCheck className="w-4 h-4 text-[#533AFD]" />
+                  <span className="font-semibold text-[#0D1738]">Gartner AI TRiSM &amp; NIST AI RMF</span>
+                </div>
+                <span className="font-mono text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-bold border border-emerald-200">
+                  Validated
+                </span>
               </div>
             </div>
 
@@ -1130,7 +1163,7 @@ export default function PortfolioPage() {
         <div className="site-container">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             
-            <div className="stat-card gsap-stat">
+            <div className="stat-card">
               <div className="flex items-center justify-between mb-3">
                 <div className="w-8 h-8 rounded-md bg-[#F4F3FF] border border-[#D9D6FE] flex items-center justify-center text-[#533AFD]">
                   <Globe2 className="w-4 h-4" />
@@ -1146,7 +1179,7 @@ export default function PortfolioPage() {
               </p>
             </div>
 
-            <div className="stat-card gsap-stat">
+            <div className="stat-card">
               <div className="flex items-center justify-between mb-3">
                 <div className="w-8 h-8 rounded-md bg-[#F4F3FF] border border-[#D9D6FE] flex items-center justify-center text-[#533AFD]">
                   <Sparkles className="w-4 h-4" />
@@ -1162,7 +1195,7 @@ export default function PortfolioPage() {
               </p>
             </div>
 
-            <div className="stat-card gsap-stat">
+            <div className="stat-card">
               <div className="flex items-center justify-between mb-3">
                 <div className="w-8 h-8 rounded-md bg-[#F4F3FF] border border-[#D9D6FE] flex items-center justify-center text-[#533AFD]">
                   <Cpu className="w-4 h-4" />
@@ -1178,7 +1211,7 @@ export default function PortfolioPage() {
               </p>
             </div>
 
-            <div className="stat-card gsap-stat">
+            <div className="stat-card">
               <div className="flex items-center justify-between mb-3">
                 <div className="w-8 h-8 rounded-md bg-[#F4F3FF] border border-[#D9D6FE] flex items-center justify-center text-[#533AFD]">
                   <Star className="w-4 h-4 text-amber-500 fill-amber-400" />
