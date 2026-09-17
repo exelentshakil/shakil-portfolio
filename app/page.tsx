@@ -980,7 +980,7 @@ export default function PortfolioPage() {
               </div>
 
               {/* Main Headline - High-Impact, Balanced, Non-Wrapping */}
-              <h1 className="text-3xl sm:text-4xl lg:text-[2.85rem] xl:text-[3.25rem] font-black text-[#0D1738] tracking-tight leading-[1.12]">
+              <h1 className="text-3xl sm:text-4xl lg:text-[2.85rem] xl:text-[3.25rem] font-black text-[#0D1738] tracking-tight leading-[1.2] sm:leading-[1.2] lg:leading-[1.18] xl:leading-[1.16]">
                 Engineering Mission-Critical AI Systems &amp;{" "}
                 <span className="bg-gradient-to-r from-[#533AFD] via-[#6941C6] to-[#7F56D9] bg-clip-text text-transparent">
                   Autonomous Swarms.
