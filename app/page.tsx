@@ -6,6 +6,7 @@ import Image from "next/image";
 import {
   ArrowUpRight,
   ArrowDownRight,
+  ArrowDown,
   AlertTriangle,
   Check,
   Github,
@@ -803,6 +804,33 @@ interface HeroFlagshipDemo {
   stack: string[];
 }
 
+// Featured Flying AI Project Blurbs for Hero Background
+interface HeroFloatingBlurb {
+  name: string;
+  desc: string;
+  metric: string;
+  latency: string;
+  color: string;
+}
+
+const HERO_FLOATING_BLURBS_TOP: HeroFloatingBlurb[] = [
+  { name: "LedgerFlow Core", desc: "Autonomous ACH Ledger", metric: "$40M+ Escrow", latency: "118ms", color: "text-emerald-700 bg-emerald-50 border-emerald-200" },
+  { name: "NightShift AI", desc: "Grounded Inbox Swarm", metric: "Zero Drift RAG", latency: "240ms", color: "text-violet-700 bg-violet-50 border-violet-200" },
+  { name: "Legiit Command Ctr", desc: "$1M ARR Marketplace", metric: "1M+ Orders", latency: "85ms", color: "text-indigo-700 bg-indigo-50 border-indigo-200" },
+  { name: "GearSignal AI", desc: "Automotive Telemetry", metric: "12K Sigs/sec", latency: "94ms", color: "text-cyan-700 bg-cyan-50 border-cyan-200" },
+  { name: "TheraScore AI", desc: "Clinical Intake Scoring", metric: "HIPAA Verified", latency: "140ms", color: "text-emerald-700 bg-emerald-50 border-emerald-200" },
+  { name: "CalRealty Ops", desc: "Multi-Agent Escrow", metric: "99.98% SLA", latency: "160ms", color: "text-blue-700 bg-blue-50 border-blue-200" },
+];
+
+const HERO_FLOATING_BLURBS_BOTTOM: HeroFloatingBlurb[] = [
+  { name: "NIST AI RMF", desc: "Enterprise LLM Firewall", metric: "TRiSM Validated", latency: "65ms", color: "text-violet-700 bg-violet-50 border-violet-200" },
+  { name: "Supabase Vector", desc: "pgvector HNSW Indexing", metric: "Sub-50ms Search", latency: "42ms", color: "text-emerald-700 bg-emerald-50 border-emerald-200" },
+  { name: "Inngest Durable", desc: "Fault-Tolerant Step Swarm", metric: "100% Guaranteed", latency: "110ms", color: "text-indigo-700 bg-indigo-50 border-indigo-200" },
+  { name: "Augusta Lights AI", desc: "Instant Quoting Engine", metric: "Sub-500ms Quoting", latency: "190ms", color: "text-amber-700 bg-amber-50 border-amber-200" },
+  { name: "Ontario Student Voice", desc: "Policy Intelligence", metric: "Multi-Model Fusion", latency: "180ms", color: "text-cyan-700 bg-cyan-50 border-cyan-200" },
+  { name: "FastAPI Engine", desc: "Async Python Services", metric: "Zero Cold-Start", latency: "38ms", color: "text-blue-700 bg-blue-50 border-blue-200" },
+];
+
 const HERO_FLAGSHIP_DEMOS: HeroFlagshipDemo[] = [
   {
     id: "ledgerflow",
@@ -946,54 +974,54 @@ export default function PortfolioPage() {
     <div ref={pageRef} className="min-h-screen bg-white text-[#0D1738]">
       
       {/* -------------------------------------------------------------------- */}
-      {/* 1. STARSHIP COMMAND NAVIGATION BAR */}
+      {/* 1. STRIPE-STYLE NAVIGATION BAR */}
       {/* -------------------------------------------------------------------- */}
-      <header className="sticky top-0 z-50 bg-[#050814]/95 backdrop-blur-md border-b border-slate-800/80">
+      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#EAECF0] shadow-sm">
         <div className="site-container h-16 flex items-center justify-between gap-4">
           
-          {/* Brand / Starship Command */}
+          {/* Brand */}
           <a href="#top" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-[4px] bg-slate-900 flex items-center justify-center p-1 border border-slate-700/80 shadow-md group-hover:border-cyan-500/50 transition-colors">
+            <div className="w-8 h-8 rounded-[4px] bg-[#F4F3FF] flex items-center justify-center p-1 border border-[#D9D6FE] shadow-sm group-hover:border-[#533AFD] transition-colors">
               <Image src="/logo.png" alt="Shakil HQ" width={24} height={24} className="object-contain" priority />
             </div>
             <div>
-              <div className="flex items-center gap-1.5 font-bold text-sm text-white leading-none">
+              <div className="flex items-center gap-1.5 font-bold text-sm text-[#0D1738] leading-none">
                 Shakil HQ
                 <span className="relative flex h-2 w-2">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                 </span>
               </div>
-              <div className="text-[11px] font-mono text-slate-400 leading-none mt-1">
-                AI Systems Architect // Flight Deck
+              <div className="text-[11px] font-mono text-[#667085] leading-none mt-1">
+                Principal Systems Architect
               </div>
             </div>
           </a>
 
-          {/* Clean Desktop Nav Links with High-Tech Micro-Icons */}
-          <nav className="hidden lg:flex items-center gap-5 text-xs font-semibold text-slate-300">
-            <a href="#ai-systems" className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+          {/* Clean Desktop Nav Links */}
+          <nav className="hidden lg:flex items-center gap-6 text-xs font-semibold text-[#475467]">
+            <a href="#ai-systems" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+              <Sparkles className="w-3.5 h-3.5 text-[#533AFD]" />
               <span>AI Systems</span>
             </a>
-            <a href="#flagship" className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+            <a href="#flagship" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
               <Zap className="w-3.5 h-3.5 text-[#533AFD]" />
               <span>Legiit &amp; AI</span>
             </a>
-            <a href="#ai-rescue" className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
-              <Wrench className="w-3.5 h-3.5 text-amber-400" />
+            <a href="#ai-rescue" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+              <Wrench className="w-3.5 h-3.5 text-amber-500" />
               <span>MVP Rescue</span>
             </a>
-            <a href="#portfolio" className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
-              <Grid className="w-3.5 h-3.5 text-slate-400" />
+            <a href="#portfolio" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+              <Grid className="w-3.5 h-3.5 text-[#667085]" />
               <span>Deployments</span>
             </a>
-            <a href="#architecture" className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
-              <Layers3 className="w-3.5 h-3.5 text-violet-400" />
+            <a href="#architecture" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+              <Layers3 className="w-3.5 h-3.5 text-violet-500" />
               <span>Strategy Lab</span>
             </a>
-            <a href="#reviews" className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
-              <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+            <a href="#reviews" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+              <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
               <span>Reviews</span>
             </a>
           </nav>
@@ -1004,16 +1032,16 @@ export default function PortfolioPage() {
               href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white text-xs font-semibold border border-slate-700/80 transition-all hidden sm:inline-flex"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] bg-white hover:bg-[#F8F9FC] text-[#344054] hover:text-[#0D1738] text-xs font-semibold border border-[#D0D5DD] transition-all hidden sm:inline-flex shadow-sm"
             >
-              <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
               WhatsApp
             </a>
             <a
               href="https://calendly.com/shakilhq/30min"
               target="_blank"
               rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-xs font-semibold shadow-lg shadow-[#533AFD]/30 hover:shadow-[#533AFD]/50 transition-all border border-violet-400/30"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-xs font-semibold shadow-sm hover:shadow-md transition-all border border-transparent"
             >
               Book Mission
               <ArrowUpRight className="w-3.5 h-3.5" />
@@ -1023,27 +1051,70 @@ export default function PortfolioPage() {
       </header>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 2. HERO SECTION - STARSHIP COMMAND STATION */}
+      {/* 2. HERO SECTION - STRIPE CLEAN WHITE WITH FLYING AI BLURBS */}
       {/* -------------------------------------------------------------------- */}
-      <section id="top" className="relative pt-8 pb-10 lg:pt-10 lg:pb-12 border-b border-slate-800 bg-[#050814] text-white overflow-hidden">
-        {/* Aerospace Coordinate Grid & Cosmic Stardust Nebula */}
-        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:28px_28px] opacity-70 pointer-events-none" />
-        <div className="absolute -top-32 left-1/4 w-[750px] h-[380px] bg-gradient-to-b from-[#533AFD]/20 via-[#06B6D4]/10 to-transparent blur-[120px] pointer-events-none" />
-        <div className="absolute top-1/3 -right-20 w-[550px] h-[350px] bg-cyan-500/10 blur-[100px] pointer-events-none" />
+      <section id="top" className="relative pt-8 pb-12 lg:pt-10 lg:pb-14 border-b border-[#EAECF0] bg-white text-[#0D1738] overflow-hidden">
+        
+        {/* Subtle Stripe Dot Matrix Background */}
+        <div className="absolute inset-0 bg-[radial-gradient(#E2E8F0_1px,transparent_1px)] [background-size:24px_24px] opacity-70 pointer-events-none" />
+        
+        {/* Soft Ambient Radial Meshes (Stripe Signature Violet/Cyan Blobs) */}
+        <div className="absolute -top-32 left-1/4 w-[750px] h-[380px] bg-gradient-to-b from-[#533AFD]/07 via-[#06B6D4]/04 to-transparent blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/3 -right-20 w-[550px] h-[350px] bg-[#533AFD]/05 blur-[100px] pointer-events-none" />
 
-        {/* Tactical Corner HUD Markings */}
-        <div className="absolute top-3 left-4 font-mono text-[9px] text-slate-600 hidden xl:block pointer-events-none">
-          SYS.LOC // 40.7128° N, 74.0060° W • FLEET SECTOR 44
-        </div>
-        <div className="absolute top-3 right-4 font-mono text-[9px] text-slate-600 hidden xl:block pointer-events-none">
-          STATUS: FLIGHT READY • ZERO-DRIFT BOUNDARIES
+        {/* =================================================================== */}
+        {/* FLYING AI PROJECT BLURBS (BACKGROUND STREAM) */}
+        {/* Dual continuous marquee drifting subtly behind the scene */}
+        {/* =================================================================== */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0 flex flex-col justify-around opacity-40 [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)]">
+          
+          {/* Track 1: Drifting Left */}
+          <div className="animate-marquee-left flex items-center gap-3">
+            {[...HERO_FLOATING_BLURBS_TOP, ...HERO_FLOATING_BLURBS_TOP].map((item, idx) => (
+              <div
+                key={`track1-${idx}`}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-[#E2E8F0] shadow-sm backdrop-blur-[1px] text-[11px] font-mono text-[#475467] shrink-0"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#533AFD]" />
+                <span className="font-bold text-[#0D1738]">{item.name}</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-[#667085]">{item.desc}</span>
+                <span className={`px-1.5 py-0.5 text-[9px] font-bold rounded border ${item.color}`}>
+                  {item.metric}
+                </span>
+                <span className="text-[10px] text-slate-400 font-semibold">{item.latency}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* Track 2: Drifting Right */}
+          <div className="animate-marquee-right flex items-center gap-3">
+            {[...HERO_FLOATING_BLURBS_BOTTOM, ...HERO_FLOATING_BLURBS_BOTTOM].map((item, idx) => (
+              <div
+                key={`track2-${idx}`}
+                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-[#E2E8F0] shadow-sm backdrop-blur-[1px] text-[11px] font-mono text-[#475467] shrink-0"
+              >
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
+                <span className="font-bold text-[#0D1738]">{item.name}</span>
+                <span className="text-slate-300">•</span>
+                <span className="text-[#667085]">{item.desc}</span>
+                <span className={`px-1.5 py-0.5 text-[9px] font-bold rounded border ${item.color}`}>
+                  {item.metric}
+                </span>
+                <span className="text-[10px] text-slate-400 font-semibold">{item.latency}</span>
+              </div>
+            ))}
+          </div>
+
         </div>
 
+        {/* Foreground Content */}
         <div className="site-container relative z-10">
-          {/* Only ONE Consolidated Aerospace Flight Status Badge - Container-Wide - Non-wrapping! */}
-          <div className="mb-4 lg:mb-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 shadow-inner text-xs text-slate-200 backdrop-blur-md max-w-full overflow-hidden whitespace-nowrap">
-              <div className="relative w-5 h-5 rounded-full overflow-hidden border border-cyan-400/50 shrink-0 bg-slate-800">
+          
+          {/* Single Consolidated Aerospace Flight Status Badge - Stripe White */}
+          <div className="mb-5 lg:mb-6">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#D9D6FE] shadow-sm text-xs text-[#344054] backdrop-blur-md max-w-full overflow-hidden whitespace-nowrap">
+              <div className="relative w-5 h-5 rounded-full overflow-hidden border border-[#D9D6FE] shrink-0 bg-slate-100">
                 <Image
                   src="/shakil-headshot.jpeg"
                   alt="Shakil Ahmed"
@@ -1053,17 +1124,17 @@ export default function PortfolioPage() {
                   priority
                 />
               </div>
-              <span className="font-bold text-white tracking-wide shrink-0">Shakil Ahmed</span>
-              <span className="text-slate-600 shrink-0">•</span>
-              <span className="font-semibold text-cyan-400 shrink-0">Principal Systems Architect</span>
-              <span className="text-slate-600 hidden sm:inline shrink-0">•</span>
-              <span className="text-slate-300 font-medium hidden sm:inline-flex items-center gap-1 shrink-0">
-                <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+              <span className="font-bold text-[#0D1738] tracking-wide shrink-0">Shakil Ahmed</span>
+              <span className="text-slate-300 shrink-0">•</span>
+              <span className="font-semibold text-[#533AFD] shrink-0">Principal Systems Architect</span>
+              <span className="text-slate-300 hidden sm:inline shrink-0">•</span>
+              <span className="text-[#344054] font-medium hidden sm:inline-flex items-center gap-1 shrink-0">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD]" />
                 Securiti Certified AI Architect
               </span>
-              <span className="text-slate-600 hidden md:inline shrink-0">•</span>
-              <span className="text-emerald-400 font-semibold hidden md:inline-flex items-center gap-1.5 shrink-0">
-                <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse" />
+              <span className="text-slate-300 hidden md:inline shrink-0">•</span>
+              <span className="text-[#027A48] font-semibold hidden md:inline-flex items-center gap-1.5 shrink-0">
+                <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
                 Available for Contracts &amp; MVPs
               </span>
             </div>
@@ -1071,124 +1142,123 @@ export default function PortfolioPage() {
 
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-8 items-center">
             
-            {/* Left Column: Starship Flight Command & Briefing */}
+            {/* Left Column */}
             <div className="lg:col-span-7 space-y-4">
               
-              {/* Main Headline - Commanding, Zero Awkward Hyphenation */}
-              <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] xl:text-[3.05rem] font-black text-white tracking-tight leading-[1.22] sm:leading-[1.22] lg:leading-[1.2] xl:leading-[1.18]">
+              <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] xl:text-[3.05rem] font-black text-[#0D1738] tracking-tight leading-[1.2] sm:leading-[1.2] lg:leading-[1.18]">
                 Engineering Mission-Critical AI Systems &amp;{" "}
-                <span className="bg-gradient-to-r from-violet-400 via-fuchsia-300 to-cyan-300 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-[#533AFD] via-[#7F56D9] to-[#0BA5EC] bg-clip-text text-transparent">
                   Autonomous Swarms.
                 </span>
               </h1>
 
-              {/* Flight Briefing Subtitle */}
-              <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed max-w-2xl">
-                12+ years commanding fault-tolerant enterprise architectures that process millions of transactions. Former Engineering Team Lead at <strong className="text-white font-semibold">Legiit</strong> (scaled AI Command Center to $1M ARR across 1,500+ orgs). Shipped 44 production AI systems with deterministic zero-drift boundaries and guaranteed 99.98% SLA.
+              <p className="text-sm sm:text-base text-[#475467] font-normal leading-relaxed max-w-2xl">
+                12+ years commanding fault-tolerant enterprise architectures that process millions of transactions. Former Engineering Team Lead at <strong className="text-[#0D1738] font-semibold">Legiit</strong> (scaled AI Command Center to $1M ARR across 1,500+ orgs). Shipped 44 production AI systems with deterministic zero-drift boundaries and guaranteed 99.98% SLA.
               </p>
 
-              {/* 3 Cockpit Telemetry HUD Cards */}
+              {/* 3 Stripe HUD Telemetry Cards */}
               <div className="grid grid-cols-3 gap-2.5 max-w-xl pt-0.5">
-                <div className="p-2.5 rounded-[6px] bg-slate-900/80 border border-slate-700/80 hover:border-cyan-500/60 transition-all backdrop-blur-sm group">
-                  <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400 flex items-center justify-between">
+                <div className="p-2.5 rounded-[6px] bg-white border border-[#EAECF0] hover:border-[#D9D6FE] shadow-sm hover:shadow-md transition-all group">
+                  <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-[#667085] flex items-center justify-between">
                     <span>FLEET SCALE</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 opacity-80" />
                   </div>
-                  <div className="text-base sm:text-lg font-black text-white mt-0.5 tracking-tight">400K+ Users</div>
-                  <div className="text-[10px] text-slate-400 font-mono truncate">1M+ Orders</div>
+                  <div className="text-base sm:text-lg font-black text-[#0D1738] mt-0.5 tracking-tight">400K+ Users</div>
+                  <div className="text-[10px] text-[#667085] font-mono truncate">1M+ Orders</div>
                 </div>
 
-                <div className="p-2.5 rounded-[6px] bg-slate-900/80 border border-slate-700/80 hover:border-violet-500/60 transition-all backdrop-blur-sm group">
-                  <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400 flex items-center justify-between">
+                <div className="p-2.5 rounded-[6px] bg-white border border-[#EAECF0] hover:border-[#D9D6FE] shadow-sm hover:shadow-md transition-all group">
+                  <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-[#667085] flex items-center justify-between">
                     <span>COMMAND CTR</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400 opacity-60 group-hover:opacity-100 transition-opacity" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#533AFD] opacity-80" />
                   </div>
-                  <div className="text-base sm:text-lg font-black text-violet-300 mt-0.5 tracking-tight">$1M ARR</div>
-                  <div className="text-[10px] text-slate-400 font-mono truncate">1,500+ Orgs</div>
+                  <div className="text-base sm:text-lg font-black text-[#533AFD] mt-0.5 tracking-tight">$1M ARR</div>
+                  <div className="text-[10px] text-[#667085] font-mono truncate">1,500+ Orgs</div>
                 </div>
 
-                <div className="p-2.5 rounded-[6px] bg-slate-900/80 border border-slate-700/80 hover:border-emerald-500/60 transition-all backdrop-blur-sm group">
-                  <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400 flex items-center justify-between">
+                <div className="p-2.5 rounded-[6px] bg-white border border-[#EAECF0] hover:border-[#D9D6FE] shadow-sm hover:shadow-md transition-all group">
+                  <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-[#667085] flex items-center justify-between">
                     <span>GOVERNANCE</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 opacity-60 group-hover:opacity-100 transition-opacity" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 opacity-80" />
                   </div>
-                  <div className="text-base sm:text-lg font-black text-emerald-400 mt-0.5 tracking-tight">NIST AI RMF</div>
-                  <div className="text-[10px] text-slate-400 font-mono truncate">AI TRiSM</div>
+                  <div className="text-base sm:text-lg font-black text-[#027A48] mt-0.5 tracking-tight">NIST AI RMF</div>
+                  <div className="text-[10px] text-[#667085] font-mono truncate">AI TRiSM</div>
                 </div>
               </div>
 
-              {/* Action Thrusters */}
-              <div className="flex flex-wrap items-center gap-3 pt-1">
+              {/* Action Buttons: ZERO Awkward Whitespace - Perfectly Balanced */}
+              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <a
                   href="https://calendly.com/shakilhq/30min"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-xs sm:text-sm font-semibold shadow-lg shadow-[#533AFD]/30 hover:shadow-[#533AFD]/50 hover:-translate-y-0.5 transition-all border border-violet-400/30"
+                  className="btn-primary gap-2 shadow-md shadow-[#533AFD]/20 hover:shadow-[#533AFD]/35 text-xs sm:text-sm font-semibold justify-center py-2.5 px-5"
                 >
                   <Calendar className="w-4 h-4" />
-                  Book Architecture Mission
-                </a>
-
-                <a
-                  href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20would%20like%20to%20discuss%20an%20AI%20or%20SaaS%20project."
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white text-xs sm:text-sm font-semibold border border-slate-700 hover:border-slate-600 shadow-sm hover:-translate-y-0.5 transition-all"
-                >
-                  <MessageCircle className="w-4 h-4 text-emerald-400" />
-                  Secure Comms (+1 307 533-6678)
+                  <span>Book Architecture Mission</span>
                 </a>
 
                 <a
                   href="#ai-systems"
-                  className="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-[4px] bg-cyan-950/40 hover:bg-cyan-900/50 border border-cyan-500/40 text-xs font-bold text-cyan-300 hover:text-cyan-200 transition-all"
+                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-[4px] bg-[#F4F3FF] hover:bg-[#EBE9FE] text-[#533AFD] hover:text-[#4327F5] border border-[#D9D6FE] hover:border-[#533AFD] transition-all text-xs sm:text-sm font-semibold shadow-sm"
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                  <Sparkles className="w-4 h-4 text-[#533AFD]" />
                   <span>Engage 44 AI Cockpits</span>
-                  <ArrowDownRight className="w-3.5 h-3.5" />
+                  <ArrowDown className="w-3.5 h-3.5" />
+                </a>
+
+                <a
+                  href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-[4px] bg-white hover:bg-[#F8F9FC] text-[#344054] hover:text-[#0D1738] border border-[#D0D5DD] hover:border-[#98A2B3] transition-all text-xs font-mono shadow-sm"
+                >
+                  <MessageCircle className="w-4 h-4 text-emerald-600" />
+                  <span>+1 307 533-6678</span>
                 </a>
               </div>
 
-              {/* Flight Telemetry Status Bar */}
-              <div className="pt-2.5 border-t border-slate-800 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-slate-400 font-mono">
+              {/* Status Bar */}
+              <div className="pt-2.5 border-t border-[#EAECF0] flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#667085] font-mono">
                 <div className="flex items-center gap-1.5">
-                  <Check className="w-3.5 h-3.5 text-emerald-400" />
-                  <span className="font-semibold text-slate-200">44 Orbital AI Systems Active</span>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="font-semibold text-[#0D1738]">44 Orbital AI Systems Active</span>
                 </div>
-                <span className="hidden sm:inline text-slate-700">•</span>
+                <span className="hidden sm:inline text-slate-300">•</span>
                 <div className="flex items-center gap-1.5">
-                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                  <span className="font-semibold text-slate-200">4.9 ★ • 127+ Missions</span>
+                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
+                  <span className="font-semibold text-[#0D1738]">4.9 ★ • 127+ Missions</span>
                 </div>
-                <span className="hidden sm:inline text-slate-700">•</span>
+                <span className="hidden sm:inline text-slate-300">•</span>
                 <div className="flex items-center gap-1.5">
-                  <Activity className="w-3.5 h-3.5 text-cyan-400" />
-                  <span className="text-slate-300">&lt;120ms Latency SLA</span>
+                  <Activity className="w-3.5 h-3.5 text-[#533AFD]" />
+                  <span className="text-[#344054]">&lt;120ms Latency SLA</span>
                 </div>
               </div>
+
             </div>
 
-            {/* Right Column: Starship Tactical Viewport & Avionics Deck */}
+            {/* Right Column: Tactical Viewport in Stripe Archetype */}
             <div className="lg:col-span-5 space-y-3">
-              <div className="bg-[#0A0F24] rounded-[8px] border border-cyan-500/30 shadow-2xl shadow-cyan-950/40 overflow-hidden">
+              <div className="bg-white rounded-[8px] border border-[#D0D5DD] shadow-xl shadow-slate-200/50 overflow-hidden">
                 
-                {/* Viewport HUD Header */}
-                <div className="bg-[#0D1533] px-3 py-2 border-b border-slate-800 flex items-center justify-between gap-2">
+                {/* Viewport Window Header */}
+                <div className="bg-[#F8F9FC] px-3.5 py-2.5 border-b border-[#EAECF0] flex items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] inline-block shadow-sm shadow-red-500/50" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] inline-block shadow-sm shadow-amber-500/50" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] inline-block shadow-sm shadow-emerald-500/50" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] inline-block shadow-sm" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] inline-block shadow-sm" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] inline-block shadow-sm" />
                   </div>
 
                   {/* Avionics Locator */}
-                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-slate-950/80 border border-slate-700/60 text-[10px] font-mono text-slate-300 max-w-[210px] truncate">
-                    <Lock className="w-2.5 h-2.5 text-cyan-400 shrink-0" />
-                    <span className="text-slate-500">ORBITAL //</span>
-                    <span className="text-cyan-300 font-semibold truncate">{HERO_FLAGSHIP_DEMOS[activeHeroDemo].id}</span>
+                  <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-white border border-[#EAECF0] text-[10px] font-mono text-[#475467] max-w-[210px] truncate shadow-sm">
+                    <Lock className="w-2.5 h-2.5 text-[#533AFD] shrink-0" />
+                    <span className="text-slate-400">ORBITAL //</span>
+                    <span className="text-[#0D1738] font-semibold truncate">{HERO_FLAGSHIP_DEMOS[activeHeroDemo].id}</span>
                   </div>
 
-                  {/* Starship Live Beacon */}
-                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-700/50 shrink-0">
+                  {/* Live Beacon */}
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 shrink-0 font-medium">
                     <span className="relative flex h-1.5 w-1.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
@@ -1198,7 +1268,7 @@ export default function PortfolioPage() {
                 </div>
 
                 {/* Viewport Display (Real System Screenshots) */}
-                <div className="relative h-[230px] sm:h-[250px] w-full bg-slate-950 overflow-hidden group">
+                <div className="relative h-[230px] sm:h-[250px] w-full bg-slate-900 overflow-hidden group">
                   <Image
                     key={HERO_FLAGSHIP_DEMOS[activeHeroDemo].id}
                     src={HERO_FLAGSHIP_DEMOS[activeHeroDemo].image}
@@ -1208,28 +1278,21 @@ export default function PortfolioPage() {
                     className="object-cover object-top transition-all duration-300 group-hover:scale-[1.01]"
                     priority
                   />
-                  {/* Atmospheric Cockpit Vignette */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F24] via-[#0A0F24]/25 to-[#0A0F24]/40 pointer-events-none" />
-
-                  {/* HUD Corner Accents */}
-                  <div className="absolute top-1.5 left-1.5 w-3 h-3 border-t-2 border-l-2 border-cyan-400/60 pointer-events-none" />
-                  <div className="absolute top-1.5 right-1.5 w-3 h-3 border-t-2 border-r-2 border-cyan-400/60 pointer-events-none" />
-                  <div className="absolute bottom-1.5 left-1.5 w-3 h-3 border-b-2 border-l-2 border-cyan-400/60 pointer-events-none" />
-                  <div className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b-2 border-r-2 border-cyan-400/60 pointer-events-none" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-slate-950/20 pointer-events-none" />
 
                   {/* Top Floating Telemetry Overlay */}
                   <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-2 pointer-events-none">
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-slate-950/90 backdrop-blur-md border border-cyan-500/40 text-[11px] text-white shadow-lg pointer-events-auto">
-                      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-                      <span className="font-bold text-white truncate">{HERO_FLAGSHIP_DEMOS[activeHeroDemo].name}</span>
-                      <span className="text-cyan-300 font-mono text-[10px]">• {HERO_FLAGSHIP_DEMOS[activeHeroDemo].latency}</span>
+                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-white/95 backdrop-blur-md border border-[#EAECF0] text-[11px] text-[#0D1738] shadow-md pointer-events-auto">
+                      <span className="w-2 h-2 rounded-full bg-[#533AFD] animate-pulse" />
+                      <span className="font-bold text-[#0D1738] truncate">{HERO_FLAGSHIP_DEMOS[activeHeroDemo].name}</span>
+                      <span className="text-[#533AFD] font-mono text-[10px] font-semibold">• {HERO_FLAGSHIP_DEMOS[activeHeroDemo].latency}</span>
                     </div>
 
                     <a
                       href={HERO_FLAGSHIP_DEMOS[activeHeroDemo].url || HERO_FLAGSHIP_DEMOS[activeHeroDemo].anchor}
                       target={HERO_FLAGSHIP_DEMOS[activeHeroDemo].url ? "_blank" : undefined}
                       rel="noreferrer"
-                      className="pointer-events-auto inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-[11px] font-bold shadow-md hover:shadow-cyan-500/30 transition-all border border-violet-400/40"
+                      className="pointer-events-auto inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-[11px] font-bold shadow-md hover:shadow-[#533AFD]/30 transition-all border border-transparent"
                     >
                       <span>Engage Cockpit</span>
                       <ArrowUpRight className="w-3 h-3" />
@@ -1242,20 +1305,20 @@ export default function PortfolioPage() {
                       {HERO_FLAGSHIP_DEMOS[activeHeroDemo].stack.map((tech) => (
                         <span
                           key={tech}
-                          className="px-1.5 py-0.5 rounded-[3px] bg-slate-950/90 backdrop-blur-sm border border-slate-700/80 font-mono text-[9px] text-slate-300"
+                          className="px-1.5 py-0.5 rounded-[3px] bg-white/95 backdrop-blur-sm border border-[#EAECF0] font-mono text-[9px] text-[#344054] font-medium shadow-sm"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
-                    <span className="px-2 py-0.5 rounded-[3px] bg-cyan-950/90 border border-cyan-500/60 text-cyan-300 font-mono text-[10px] font-bold shrink-0 pointer-events-auto shadow-sm">
+                    <span className="px-2 py-0.5 rounded-[3px] bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] font-mono text-[10px] font-bold shrink-0 pointer-events-auto shadow-sm">
                       {HERO_FLAGSHIP_DEMOS[activeHeroDemo].scale}
                     </span>
                   </div>
                 </div>
 
                 {/* 4-System Avionics Console Buttons */}
-                <div className="p-2 bg-[#080D21] border-t border-slate-800 grid grid-cols-4 gap-1.5">
+                <div className="p-2 bg-[#F8F9FC] border-t border-[#EAECF0] grid grid-cols-4 gap-1.5">
                   {HERO_FLAGSHIP_DEMOS.map((demo, idx) => {
                     const isActive = activeHeroDemo === idx;
                     return (
@@ -1265,20 +1328,20 @@ export default function PortfolioPage() {
                         onClick={() => setActiveHeroDemo(idx)}
                         className={`flex flex-col text-left p-1.5 rounded-[4px] transition-all border ${
                           isActive
-                            ? "bg-cyan-950/50 border-cyan-500 shadow-sm ring-1 ring-cyan-500/50"
-                            : "bg-slate-900/60 border-slate-800 hover:bg-slate-800 hover:border-slate-700"
+                            ? "bg-white border-[#533AFD] shadow-sm ring-1 ring-[#533AFD]"
+                            : "bg-white/60 border-[#EAECF0] hover:bg-white hover:border-[#D0D5DD]"
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className={`text-[9px] font-mono font-bold ${isActive ? "text-cyan-400" : "text-slate-500"}`}>
+                          <span className={`text-[9px] font-mono font-bold ${isActive ? "text-[#533AFD]" : "text-[#667085]"}`}>
                             0{idx + 1}
                           </span>
-                          {isActive && <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-sm shadow-cyan-400/80" />}
+                          {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#533AFD] shadow-sm shadow-[#533AFD]/80" />}
                         </div>
-                        <span className={`text-[11px] font-bold truncate mt-0.5 ${isActive ? "text-white" : "text-slate-400"}`}>
+                        <span className={`text-[11px] font-bold truncate mt-0.5 ${isActive ? "text-[#0D1738]" : "text-[#475467]"}`}>
                           {demo.name}
                         </span>
-                        <span className={`text-[9px] font-mono truncate mt-0.5 ${isActive ? "text-cyan-300" : "text-slate-500"}`}>
+                        <span className={`text-[9px] font-mono truncate mt-0.5 ${isActive ? "text-[#533AFD] font-medium" : "text-[#667085]"}`}>
                           {demo.sla}
                         </span>
                       </button>
@@ -1288,13 +1351,13 @@ export default function PortfolioPage() {
 
               </div>
 
-              {/* Starship Safety & Governance Protocol Banner */}
-              <div className="px-3.5 py-2 rounded-[6px] bg-slate-900/80 border border-slate-800 flex items-center justify-between text-xs text-slate-300 backdrop-blur-sm">
+              {/* Protocol Banner */}
+              <div className="px-3.5 py-2 rounded-[6px] bg-[#F8F9FC] border border-[#EAECF0] flex items-center justify-between text-xs text-[#475467]">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-cyan-400" />
-                  <span className="font-semibold text-slate-200">Gartner AI TRiSM &amp; NIST AI RMF Validated</span>
+                  <ShieldCheck className="w-4 h-4 text-[#533AFD]" />
+                  <span className="font-semibold text-[#0D1738]">Gartner AI TRiSM &amp; NIST AI RMF Validated</span>
                 </div>
-                <span className="font-mono text-[10px] text-cyan-300 bg-cyan-950/80 px-2 py-0.5 rounded font-bold border border-cyan-700/50">
+                <span className="font-mono text-[10px] text-[#533AFD] bg-[#F4F3FF] px-2 py-0.5 rounded font-bold border border-[#D9D6FE]">
                   44 Orbital Cockpits
                 </span>
               </div>
