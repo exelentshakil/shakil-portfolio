@@ -154,7 +154,7 @@ export function AiProjectsSection() {
 
   return (
     <section id="ai-systems" className="section-pad bg-[#FAFBFD] border-b border-[#EAECF0]">
-      <div className="site-container">
+      <div className="site-container xl:max-w-[1280px]">
         
         {/* ==================================================================== */}
         {/* SECTION HEADER: FUTURISTIC COMMAND CENTER EYEBROW */}
@@ -280,7 +280,7 @@ export function AiProjectsSection() {
                   <button
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
-                    className={`group shrink-0 inline-flex items-center gap-2 px-2.5 sm:px-3 py-1.5 rounded-[6px] text-xs font-semibold transition-all duration-150 cursor-pointer whitespace-nowrap border ${
+                    className={`group shrink-0 inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-[6px] text-xs font-semibold transition-all duration-150 cursor-pointer whitespace-nowrap border ${
                       isActive
                         ? "bg-[#0D1738] text-white border-[#0D1738] shadow-xs"
                         : "bg-white text-[#344054] border-[#D0D5DD] hover:border-[#98A2B3] hover:bg-[#F8F9FC] hover:text-[#0D1738]"
@@ -295,7 +295,7 @@ export function AiProjectsSection() {
                     />
                     <span>{cat.label}</span>
                     <span
-                      className={`inline-flex items-center justify-center min-w-[20px] px-1.5 py-0.5 rounded-full text-[10px] font-mono font-bold leading-none shrink-0 ${
+                      className={`inline-flex items-center justify-center min-w-[18px] px-1.5 py-0.5 rounded-full text-[10px] font-mono font-bold leading-none shrink-0 ${
                         isActive
                           ? "bg-white/15 text-white border border-white/20"
                           : "bg-[#F2F4F7] text-[#475467] border border-[#EAECF0] group-hover:bg-[#EAECF0] group-hover:text-[#0D1738]"
