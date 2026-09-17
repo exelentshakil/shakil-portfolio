@@ -235,7 +235,7 @@ export function AiProjectsSection() {
         {/* ==================================================================== */}
         {/* INTERACTIVE CONTROLS BAR: SEARCH + CATEGORY FILTER PILLS */}
         {/* ==================================================================== */}
-        <div className="bg-white rounded-[8px] border border-[#EAECF0] p-4 mb-8 shadow-xs space-y-4">
+        <div className="bg-white rounded-[8px] border border-[#EAECF0] p-3 sm:p-4 mb-8 shadow-xs space-y-3.5">
           <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between gap-3">
             
             {/* Real-Time Search Bar */}
@@ -270,7 +270,7 @@ export function AiProjectsSection() {
 
           {/* Category Filter Navigation Bar - Fixed Single-Row Command Rail (No Next-Line Wrapping) */}
           <div className="pt-3 border-t border-[#EAECF0]">
-            <div className="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar scrollbar-none whitespace-nowrap py-1">
+            <div className="flex items-center gap-1.5 xl:gap-2 overflow-x-auto no-scrollbar scrollbar-none whitespace-nowrap py-1">
               {FILTER_CATEGORIES.map((cat) => {
                 const count = categoryCounts[cat.id] || 0;
                 const isActive = activeCategory === cat.id;
@@ -280,7 +280,7 @@ export function AiProjectsSection() {
                   <button
                     key={cat.id}
                     onClick={() => setActiveCategory(cat.id)}
-                    className={`group shrink-0 inline-flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-3 py-1.5 rounded-[6px] text-xs font-semibold transition-all duration-150 cursor-pointer whitespace-nowrap border ${
+                    className={`group shrink-0 inline-flex items-center gap-1.5 px-2.5 xl:px-3 py-1.5 rounded-[6px] text-xs font-semibold transition-all duration-150 cursor-pointer whitespace-nowrap border ${
                       isActive
                         ? "bg-[#0D1738] text-white border-[#0D1738] shadow-xs"
                         : "bg-white text-[#344054] border-[#D0D5DD] hover:border-[#98A2B3] hover:bg-[#F8F9FC] hover:text-[#0D1738]"
