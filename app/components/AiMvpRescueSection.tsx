@@ -113,7 +113,7 @@ export function AiMvpRescueSection() {
               Ready to turn your prototype into a live, paying business?
             </h4>
             <p className="text-xs sm:text-sm text-[#475467]">
-              Average MVP rescue turnaround is 5–14 days. Full code review, architectural blueprint, and fixed or hourly pricing ($150/hr).
+              Average MVP rescue turnaround is 5–14 days. Full architecture audit, security scan, and hardened production deliverables with zero lock-in.
             </p>
           </div>
 
