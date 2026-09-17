@@ -101,6 +101,22 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "GPT-4o", "Gemini 2.0 Flash", "Tailwind CSS"]
   },
   {
+    name: "LedgerFlow Core",
+    url: "ledgerflow-core.vercel.app",
+    category: "ai",
+    featured: true,
+    image: "/screenshots/ai/ledgerflow-core.png",
+    clientType: "FinTech & Payments Engine",
+    hook: "Production payment settlement with NACHA 94-char compilation, double-entry ledger, and dual AI compliance",
+    problems_solved: [
+      "Atomic UUIDv4 idempotency lock intercepting replay attacks in sub-10ms with zero duplicate debits",
+      "Mathematical double-entry ledger invariant guaranteeing debit/credit equilibrium across all accounts",
+      "PostgreSQL 16 composite B-Tree index scan dropping query latency from 142ms down to 1.4ms"
+    ],
+    metric: "0.00% Double-Debit Risk • Sub-2ms Queries",
+    technologies: ["Next.js 15", "TypeScript", "PostgreSQL 16", "OpenAI", "Gemini", "Tailwind CSS"]
+  },
+  {
     name: "Legal AI Workflow Assistant",
     url: "ai-legalassistant.vercel.app",
     category: "ai",
