@@ -946,73 +946,76 @@ export default function PortfolioPage() {
     <div ref={pageRef} className="min-h-screen bg-white text-[#0D1738]">
       
       {/* -------------------------------------------------------------------- */}
-      {/* 1. TOP NAVIGATION BAR */}
+      {/* 1. STARSHIP COMMAND NAVIGATION BAR */}
       {/* -------------------------------------------------------------------- */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-[#EAECF0]">
+      <header className="sticky top-0 z-50 bg-[#050814]/95 backdrop-blur-md border-b border-slate-800/80">
         <div className="site-container h-16 flex items-center justify-between gap-4">
           
-          {/* Brand */}
-          <a href="#top" className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-[4px] bg-[#0D1738] flex items-center justify-center p-1 border border-slate-700 shadow-sm">
+          {/* Brand / Starship Command */}
+          <a href="#top" className="flex items-center gap-2.5 group">
+            <div className="w-8 h-8 rounded-[4px] bg-slate-900 flex items-center justify-center p-1 border border-slate-700/80 shadow-md group-hover:border-cyan-500/50 transition-colors">
               <Image src="/logo.png" alt="Shakil HQ" width={24} height={24} className="object-contain" priority />
             </div>
             <div>
-              <div className="flex items-center gap-1.5 font-bold text-sm text-[#0D1738] leading-none">
+              <div className="flex items-center gap-1.5 font-bold text-sm text-white leading-none">
                 Shakil HQ
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block" title="Available for projects" />
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                </span>
               </div>
-              <div className="text-[11px] font-medium text-[#475467] leading-none mt-1">
-                AI Full Stack & SaaS Architect
+              <div className="text-[11px] font-mono text-slate-400 leading-none mt-1">
+                AI Systems Architect // Flight Deck
               </div>
             </div>
           </a>
 
-          {/* Clean Desktop Nav Links with Premium Icons */}
-          <nav className="hidden lg:flex items-center gap-5 text-xs font-semibold text-[#344054]">
-            <a href="#ai-systems" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
-              <Sparkles className="w-3.5 h-3.5 text-[#533AFD]" />
+          {/* Clean Desktop Nav Links with High-Tech Micro-Icons */}
+          <nav className="hidden lg:flex items-center gap-5 text-xs font-semibold text-slate-300">
+            <a href="#ai-systems" className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
               <span>AI Systems</span>
             </a>
-            <a href="#flagship" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+            <a href="#flagship" className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
               <Zap className="w-3.5 h-3.5 text-[#533AFD]" />
-              <span>Legiit & AI</span>
+              <span>Legiit &amp; AI</span>
             </a>
-            <a href="#ai-rescue" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
-              <Wrench className="w-3.5 h-3.5 text-[#533AFD]" />
+            <a href="#ai-rescue" className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+              <Wrench className="w-3.5 h-3.5 text-amber-400" />
               <span>MVP Rescue</span>
             </a>
-            <a href="#portfolio" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
-              <Grid className="w-3.5 h-3.5 text-[#533AFD]" />
+            <a href="#portfolio" className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+              <Grid className="w-3.5 h-3.5 text-slate-400" />
               <span>Deployments</span>
             </a>
-            <a href="#architecture" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
-              <Layers3 className="w-3.5 h-3.5 text-[#533AFD]" />
+            <a href="#architecture" className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+              <Layers3 className="w-3.5 h-3.5 text-violet-400" />
               <span>Strategy Lab</span>
             </a>
-            <a href="#reviews" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
-              <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
+            <a href="#reviews" className="flex items-center gap-1.5 hover:text-cyan-400 transition-colors">
+              <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
               <span>Reviews</span>
             </a>
           </nav>
 
           {/* Action CTAs */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2.5">
             <a
               href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
               target="_blank"
               rel="noreferrer"
-              className="btn-secondary text-xs py-1.5 px-3 hidden sm:inline-flex"
+              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white text-xs font-semibold border border-slate-700/80 transition-all hidden sm:inline-flex"
             >
-              <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+              <MessageCircle className="w-3.5 h-3.5 text-emerald-400" />
               WhatsApp
             </a>
             <a
               href="https://calendly.com/shakilhq/30min"
               target="_blank"
               rel="noreferrer"
-              className="btn-primary text-xs py-1.5 px-3.5"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-xs font-semibold shadow-lg shadow-[#533AFD]/30 hover:shadow-[#533AFD]/50 transition-all border border-violet-400/30"
             >
-              Book Call
+              Book Mission
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -1020,22 +1023,31 @@ export default function PortfolioPage() {
       </header>
 
       {/* -------------------------------------------------------------------- */}
-      {/* 2. HERO SECTION - EXECUTIVE COMMAND STATION */}
+      {/* 2. HERO SECTION - STARSHIP COMMAND STATION */}
       {/* -------------------------------------------------------------------- */}
-      <section id="top" className="relative pt-8 pb-10 lg:pt-11 lg:pb-13 border-b border-[#EAECF0] bg-white overflow-hidden">
-        {/* Subtle Ambient Architectural Dot Grid & Gradient Glow */}
-        <div className="absolute inset-0 bg-[radial-gradient(#EAECF0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
-        <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[850px] h-[360px] bg-gradient-to-b from-[#533AFD]/10 via-[#7F56D9]/5 to-transparent blur-3xl pointer-events-none" />
+      <section id="top" className="relative pt-8 pb-10 lg:pt-10 lg:pb-12 border-b border-slate-800 bg-[#050814] text-white overflow-hidden">
+        {/* Aerospace Coordinate Grid & Cosmic Stardust Nebula */}
+        <div className="absolute inset-0 bg-[radial-gradient(rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:28px_28px] opacity-70 pointer-events-none" />
+        <div className="absolute -top-32 left-1/4 w-[750px] h-[380px] bg-gradient-to-b from-[#533AFD]/20 via-[#06B6D4]/10 to-transparent blur-[120px] pointer-events-none" />
+        <div className="absolute top-1/3 -right-20 w-[550px] h-[350px] bg-cyan-500/10 blur-[100px] pointer-events-none" />
+
+        {/* Tactical Corner HUD Markings */}
+        <div className="absolute top-3 left-4 font-mono text-[9px] text-slate-600 hidden xl:block pointer-events-none">
+          SYS.LOC // 40.7128° N, 74.0060° W • FLEET SECTOR 44
+        </div>
+        <div className="absolute top-3 right-4 font-mono text-[9px] text-slate-600 hidden xl:block pointer-events-none">
+          STATUS: FLIGHT READY • ZERO-DRIFT BOUNDARIES
+        </div>
 
         <div className="site-container relative z-10">
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-10 items-start">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-8 items-center">
             
-            {/* Left Column: Authoritative Engineering Positioning */}
+            {/* Left Column: Starship Flight Command & Briefing */}
             <div className="lg:col-span-7 space-y-4">
               
-              {/* Only ONE Consolidated Master Status Badge */}
-              <div className="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#D0D5DD] shadow-sm text-xs text-[#0D1738]">
-                <div className="relative w-5 h-5 rounded-full overflow-hidden border border-slate-300 shrink-0 bg-slate-100">
+              {/* Only ONE Consolidated Aerospace Flight Status Badge - Non-wrapping! */}
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-cyan-500/30 shadow-inner text-xs text-slate-200 backdrop-blur-md">
+                <div className="relative w-5 h-5 rounded-full overflow-hidden border border-cyan-400/50 shrink-0 bg-slate-800">
                   <Image
                     src="/shakil-headshot.jpeg"
                     alt="Shakil Ahmed"
@@ -1045,135 +1057,146 @@ export default function PortfolioPage() {
                     priority
                   />
                 </div>
-                <span className="font-bold text-[#0D1738]">Shakil Ahmed</span>
-                <span className="text-[#D0D5DD]">•</span>
-                <span className="font-semibold text-[#533AFD]">Principal Systems Architect</span>
-                <span className="text-[#D0D5DD]">•</span>
-                <span className="font-semibold text-[#344054] flex items-center gap-1">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD]" />
-                  Securiti Certified AI Architect
+                <span className="font-bold text-white tracking-wide">Shakil Ahmed</span>
+                <span className="text-slate-600">•</span>
+                <span className="font-semibold text-cyan-400">Principal Systems Architect</span>
+                <span className="text-slate-600 hidden sm:inline">•</span>
+                <span className="text-slate-300 font-medium hidden sm:inline-flex items-center gap-1">
+                  <ShieldCheck className="w-3.5 h-3.5 text-cyan-400" />
+                  Securiti Certified
                 </span>
-                <span className="text-[#D0D5DD]">•</span>
-                <span className="text-emerald-700 font-semibold flex items-center gap-1.5">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                <span className="text-slate-600 hidden md:inline">•</span>
+                <span className="text-emerald-400 font-semibold hidden md:inline-flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 inline-block animate-pulse" />
                   Available for Contracts &amp; MVPs
                 </span>
               </div>
 
-              {/* Main Headline - Balanced, Generous Line-Height, Non-Wrapping */}
-              <h1 className="text-3xl sm:text-4xl lg:text-[2.85rem] xl:text-[3.25rem] font-black text-[#0D1738] tracking-tight leading-[1.2] sm:leading-[1.2] lg:leading-[1.18] xl:leading-[1.16]">
+              {/* Main Headline - Commanding, Zero Awkward Hyphenation */}
+              <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] xl:text-[3.05rem] font-black text-white tracking-tight leading-[1.14]">
                 Engineering Mission-Critical AI Systems &amp;{" "}
-                <span className="bg-gradient-to-r from-[#533AFD] via-[#6941C6] to-[#7F56D9] bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-violet-400 via-fuchsia-300 to-cyan-300 bg-clip-text text-transparent">
                   Autonomous Swarms.
                 </span>
               </h1>
 
-              {/* Subtitle - Scannable, High-Signal */}
-              <p className="text-sm sm:text-base text-[#475467] font-normal leading-relaxed max-w-2xl">
-                12+ years engineering fault-tolerant architectures that process millions of transactions. Former Engineering Team Lead at <strong className="text-[#0D1738] font-semibold">Legiit</strong> (scaled AI Command Center to $1M ARR across 1,500+ orgs). Shipped 44 production AI systems with deterministic zero-drift boundaries and guaranteed SLA delivery.
+              {/* Flight Briefing Subtitle */}
+              <p className="text-sm sm:text-base text-slate-300 font-normal leading-relaxed max-w-2xl">
+                12+ years commanding fault-tolerant enterprise architectures that process millions of transactions. Former Engineering Team Lead at <strong className="text-white font-semibold">Legiit</strong> (scaled AI Command Center to $1M ARR across 1,500+ orgs). Shipped 44 production AI systems with deterministic zero-drift boundaries and guaranteed 99.98% SLA.
               </p>
 
-              {/* 3 Scannable Micro-Proof Metric Cards */}
+              {/* 3 Cockpit Telemetry HUD Cards */}
               <div className="grid grid-cols-3 gap-2.5 max-w-xl pt-0.5">
-                <div className="p-2.5 rounded-[6px] bg-[#F8FAFC] border border-[#EAECF0] hover:border-[#D9D6FE] transition-colors">
-                  <div className="text-[10px] uppercase font-bold tracking-wider text-[#667085]">Marketplace Scale</div>
-                  <div className="text-base sm:text-lg font-black text-[#0D1738] mt-0.5">400K+ Users</div>
-                  <div className="text-[10px] text-[#475467] truncate">17 Countries • 1M+ Orders</div>
+                <div className="p-2.5 rounded-[6px] bg-slate-900/80 border border-slate-700/80 hover:border-cyan-500/60 transition-all backdrop-blur-sm group">
+                  <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400 flex items-center justify-between">
+                    <span>FLEET SCALE</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 opacity-60 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  <div className="text-base sm:text-lg font-black text-white mt-0.5 tracking-tight">400K+ Users</div>
+                  <div className="text-[10px] text-slate-400 font-mono truncate">17 Countries • 1M+ Orders</div>
                 </div>
-                <div className="p-2.5 rounded-[6px] bg-[#F8FAFC] border border-[#EAECF0] hover:border-[#D9D6FE] transition-colors">
-                  <div className="text-[10px] uppercase font-bold tracking-wider text-[#667085]">AI Command Center</div>
-                  <div className="text-base sm:text-lg font-black text-[#533AFD] mt-0.5">$1M ARR</div>
-                  <div className="text-[10px] text-[#475467] truncate">1,500+ Connected Orgs</div>
+
+                <div className="p-2.5 rounded-[6px] bg-slate-900/80 border border-slate-700/80 hover:border-violet-500/60 transition-all backdrop-blur-sm group">
+                  <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400 flex items-center justify-between">
+                    <span>COMMAND CTR</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-violet-400 opacity-60 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  <div className="text-base sm:text-lg font-black text-violet-300 mt-0.5 tracking-tight">$1M ARR</div>
+                  <div className="text-[10px] text-slate-400 font-mono truncate">1,500+ Connected Orgs</div>
                 </div>
-                <div className="p-2.5 rounded-[6px] bg-[#F8FAFC] border border-[#EAECF0] hover:border-[#D9D6FE] transition-colors">
-                  <div className="text-[10px] uppercase font-bold tracking-wider text-[#667085]">AI Governance</div>
-                  <div className="text-base sm:text-lg font-black text-emerald-700 mt-0.5">NIST AI RMF</div>
-                  <div className="text-[10px] text-[#475467] truncate">AI TRiSM Certified</div>
+
+                <div className="p-2.5 rounded-[6px] bg-slate-900/80 border border-slate-700/80 hover:border-emerald-500/60 transition-all backdrop-blur-sm group">
+                  <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-slate-400 flex items-center justify-between">
+                    <span>GOVERNANCE</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 opacity-60 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  <div className="text-base sm:text-lg font-black text-emerald-400 mt-0.5 tracking-tight">NIST AI RMF</div>
+                  <div className="text-[10px] text-slate-400 font-mono truncate">AI TRiSM Certified</div>
                 </div>
               </div>
 
-              {/* Action Buttons */}
+              {/* Action Thrusters */}
               <div className="flex flex-wrap items-center gap-3 pt-1">
                 <a
                   href="https://calendly.com/shakilhq/30min"
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-primary shadow-sm hover:shadow-lg hover:shadow-[#533AFD]/20 hover:-translate-y-0.5 transition-all text-xs sm:text-sm font-semibold py-2.5 px-4"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-xs sm:text-sm font-semibold shadow-lg shadow-[#533AFD]/30 hover:shadow-[#533AFD]/50 hover:-translate-y-0.5 transition-all border border-violet-400/30"
                 >
                   <Calendar className="w-4 h-4" />
-                  Book Architecture Call
+                  Book Architecture Mission
                 </a>
 
                 <a
                   href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20would%20like%20to%20discuss%20an%20AI%20or%20SaaS%20project."
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-secondary shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all text-xs sm:text-sm font-semibold py-2.5 px-4"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-[4px] bg-slate-900 hover:bg-slate-800 text-slate-200 hover:text-white text-xs sm:text-sm font-semibold border border-slate-700 hover:border-slate-600 shadow-sm hover:-translate-y-0.5 transition-all"
                 >
-                  <MessageCircle className="w-4 h-4 text-emerald-600" />
-                  WhatsApp (+1 307 533-6678)
+                  <MessageCircle className="w-4 h-4 text-emerald-400" />
+                  Secure Comms (+1 307 533-6678)
                 </a>
 
                 <a
                   href="#ai-systems"
-                  className="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-[4px] bg-[#F4F3FF] border border-[#D9D6FE] text-xs font-bold text-[#533AFD] hover:bg-[#EBE9FE] transition-all"
+                  className="inline-flex items-center gap-1.5 px-3 py-2.5 rounded-[4px] bg-cyan-950/40 hover:bg-cyan-900/50 border border-cyan-500/40 text-xs font-bold text-cyan-300 hover:text-cyan-200 transition-all"
                 >
-                  <Sparkles className="w-3.5 h-3.5 text-[#533AFD]" />
-                  <span>Explore 44 AI Cockpits</span>
+                  <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                  <span>Engage 44 AI Cockpits</span>
                   <ArrowDownRight className="w-3.5 h-3.5" />
                 </a>
               </div>
 
-              {/* Systems Proof Strip */}
-              <div className="pt-2.5 border-t border-[#EAECF0] flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#667085]">
+              {/* Flight Telemetry Status Bar */}
+              <div className="pt-2.5 border-t border-slate-800 flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-slate-400 font-mono">
                 <div className="flex items-center gap-1.5">
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  <span className="font-semibold text-[#0D1738]">44 Verified Production AI Systems</span>
+                  <Check className="w-3.5 h-3.5 text-emerald-400" />
+                  <span className="font-semibold text-slate-200">44 Orbital AI Systems Active</span>
                 </div>
-                <span className="hidden sm:inline text-[#D0D5DD]">•</span>
+                <span className="hidden sm:inline text-slate-700">•</span>
                 <div className="flex items-center gap-1.5">
-                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
-                  <span className="font-semibold text-[#0D1738]">4.9 ★ • 127+ Reviews</span>
+                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  <span className="font-semibold text-slate-200">4.9 ★ • 127+ Missions</span>
                 </div>
-                <span className="hidden sm:inline text-[#D0D5DD]">•</span>
+                <span className="hidden sm:inline text-slate-700">•</span>
                 <div className="flex items-center gap-1.5">
-                  <Activity className="w-3.5 h-3.5 text-[#533AFD]" />
-                  <span>Sub-200ms Latency SLA</span>
+                  <Activity className="w-3.5 h-3.5 text-cyan-400" />
+                  <span className="text-slate-300">&lt;120ms Latency SLA</span>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Mission-Critical Production Demo Cockpit */}
+            {/* Right Column: Starship Tactical Viewport & Avionics Deck */}
             <div className="lg:col-span-5 space-y-3">
-              <div className="bg-[#0D1738] rounded-[8px] border border-slate-700 shadow-xl overflow-hidden">
+              <div className="bg-[#0A0F24] rounded-[8px] border border-cyan-500/30 shadow-2xl shadow-cyan-950/40 overflow-hidden">
                 
-                {/* Window Chrome Header with System Selector Tabs */}
-                <div className="bg-[#101828] px-3 py-2 border-b border-slate-800 flex items-center justify-between gap-2">
+                {/* Viewport HUD Header */}
+                <div className="bg-[#0D1533] px-3 py-2 border-b border-slate-800 flex items-center justify-between gap-2">
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] inline-block" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] inline-block shadow-sm shadow-red-500/50" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] inline-block shadow-sm shadow-amber-500/50" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] inline-block shadow-sm shadow-emerald-500/50" />
                   </div>
 
-                  {/* URL / Live Status Bar */}
-                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-slate-900/90 border border-slate-700/60 text-[10px] font-mono text-slate-300 max-w-[200px] truncate">
-                    <Lock className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
-                    <span className="text-slate-400">prod/</span>
-                    <span className="text-white font-semibold truncate">{HERO_FLAGSHIP_DEMOS[activeHeroDemo].id}</span>
+                  {/* Avionics Locator */}
+                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-slate-950/80 border border-slate-700/60 text-[10px] font-mono text-slate-300 max-w-[210px] truncate">
+                    <Lock className="w-2.5 h-2.5 text-cyan-400 shrink-0" />
+                    <span className="text-slate-500">ORBITAL //</span>
+                    <span className="text-cyan-300 font-semibold truncate">{HERO_FLAGSHIP_DEMOS[activeHeroDemo].id}</span>
                   </div>
 
-                  {/* Live Radar Beacon */}
+                  {/* Starship Live Beacon */}
                   <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-700/50 shrink-0">
                     <span className="relative flex h-1.5 w-1.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
                       <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
                     </span>
-                    <span className="hidden sm:inline">LIVE</span>
+                    <span className="hidden sm:inline">FLIGHT ACTIVE</span>
                   </div>
                 </div>
 
-                {/* Featured System Screenshot Viewport */}
-                <div className="relative h-[225px] sm:h-[245px] w-full bg-slate-950 overflow-hidden group">
+                {/* Viewport Display (Real System Screenshots) */}
+                <div className="relative h-[230px] sm:h-[250px] w-full bg-slate-950 overflow-hidden group">
                   <Image
                     key={HERO_FLAGSHIP_DEMOS[activeHeroDemo].id}
                     src={HERO_FLAGSHIP_DEMOS[activeHeroDemo].image}
@@ -1183,48 +1206,54 @@ export default function PortfolioPage() {
                     className="object-cover object-top transition-all duration-300 group-hover:scale-[1.01]"
                     priority
                   />
-                  {/* Dynamic dark vignette for text readability */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/25 to-slate-950/40 pointer-events-none" />
+                  {/* Atmospheric Cockpit Vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#0A0F24] via-[#0A0F24]/25 to-[#0A0F24]/40 pointer-events-none" />
+
+                  {/* HUD Corner Accents */}
+                  <div className="absolute top-1.5 left-1.5 w-3 h-3 border-t-2 border-l-2 border-cyan-400/60 pointer-events-none" />
+                  <div className="absolute top-1.5 right-1.5 w-3 h-3 border-t-2 border-r-2 border-cyan-400/60 pointer-events-none" />
+                  <div className="absolute bottom-1.5 left-1.5 w-3 h-3 border-b-2 border-l-2 border-cyan-400/60 pointer-events-none" />
+                  <div className="absolute bottom-1.5 right-1.5 w-3 h-3 border-b-2 border-r-2 border-cyan-400/60 pointer-events-none" />
 
                   {/* Top Floating Telemetry Overlay */}
                   <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-2 pointer-events-none">
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-[11px] text-white shadow-lg pointer-events-auto">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-slate-950/90 backdrop-blur-md border border-cyan-500/40 text-[11px] text-white shadow-lg pointer-events-auto">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
                       <span className="font-bold text-white truncate">{HERO_FLAGSHIP_DEMOS[activeHeroDemo].name}</span>
-                      <span className="text-slate-400 font-mono text-[10px]">• {HERO_FLAGSHIP_DEMOS[activeHeroDemo].latency}</span>
+                      <span className="text-cyan-300 font-mono text-[10px]">• {HERO_FLAGSHIP_DEMOS[activeHeroDemo].latency}</span>
                     </div>
 
                     <a
                       href={HERO_FLAGSHIP_DEMOS[activeHeroDemo].url || HERO_FLAGSHIP_DEMOS[activeHeroDemo].anchor}
                       target={HERO_FLAGSHIP_DEMOS[activeHeroDemo].url ? "_blank" : undefined}
                       rel="noreferrer"
-                      className="pointer-events-auto inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-[11px] font-bold shadow-md hover:shadow-lg transition-all"
+                      className="pointer-events-auto inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-[11px] font-bold shadow-md hover:shadow-cyan-500/30 transition-all border border-violet-400/40"
                     >
-                      <span>Live Cockpit</span>
+                      <span>Engage Cockpit</span>
                       <ArrowUpRight className="w-3 h-3" />
                     </a>
                   </div>
 
-                  {/* Bottom Floating Architecture & Metric Strip */}
+                  {/* Bottom Floating Architecture & Scale Telemetry */}
                   <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between gap-2 text-[11px] pointer-events-none">
                     <div className="flex flex-wrap items-center gap-1 pointer-events-auto">
                       {HERO_FLAGSHIP_DEMOS[activeHeroDemo].stack.map((tech) => (
                         <span
                           key={tech}
-                          className="px-1.5 py-0.5 rounded-[3px] bg-slate-900/90 backdrop-blur-sm border border-slate-700/80 font-mono text-[9px] text-slate-200"
+                          className="px-1.5 py-0.5 rounded-[3px] bg-slate-950/90 backdrop-blur-sm border border-slate-700/80 font-mono text-[9px] text-slate-300"
                         >
                           {tech}
                         </span>
                       ))}
                     </div>
-                    <span className="px-2 py-0.5 rounded-[3px] bg-emerald-950/90 border border-emerald-600/60 text-emerald-300 font-mono text-[10px] font-bold shrink-0 pointer-events-auto">
+                    <span className="px-2 py-0.5 rounded-[3px] bg-cyan-950/90 border border-cyan-500/60 text-cyan-300 font-mono text-[10px] font-bold shrink-0 pointer-events-auto shadow-sm">
                       {HERO_FLAGSHIP_DEMOS[activeHeroDemo].scale}
                     </span>
                   </div>
                 </div>
 
-                {/* Interactive 4-System Switcher Strip (Clickable tabs with live feedback) */}
-                <div className="p-2 bg-[#0D1738] border-t border-slate-800 grid grid-cols-4 gap-1.5">
+                {/* 4-System Avionics Console Buttons */}
+                <div className="p-2 bg-[#080D21] border-t border-slate-800 grid grid-cols-4 gap-1.5">
                   {HERO_FLAGSHIP_DEMOS.map((demo, idx) => {
                     const isActive = activeHeroDemo === idx;
                     return (
@@ -1234,20 +1263,20 @@ export default function PortfolioPage() {
                         onClick={() => setActiveHeroDemo(idx)}
                         className={`flex flex-col text-left p-1.5 rounded-[4px] transition-all border ${
                           isActive
-                            ? "bg-[#533AFD]/25 border-[#533AFD] shadow-sm ring-1 ring-[#533AFD]/50"
+                            ? "bg-cyan-950/50 border-cyan-500 shadow-sm ring-1 ring-cyan-500/50"
                             : "bg-slate-900/60 border-slate-800 hover:bg-slate-800 hover:border-slate-700"
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className={`text-[9px] font-mono font-bold ${isActive ? "text-[#D9D6FE]" : "text-slate-400"}`}>
+                          <span className={`text-[9px] font-mono font-bold ${isActive ? "text-cyan-400" : "text-slate-500"}`}>
                             0{idx + 1}
                           </span>
-                          {isActive && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />}
+                          {isActive && <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 shadow-sm shadow-cyan-400/80" />}
                         </div>
-                        <span className={`text-[11px] font-bold truncate mt-0.5 ${isActive ? "text-white" : "text-slate-300"}`}>
+                        <span className={`text-[11px] font-bold truncate mt-0.5 ${isActive ? "text-white" : "text-slate-400"}`}>
                           {demo.name}
                         </span>
-                        <span className="text-[9px] font-mono text-slate-400 truncate mt-0.5">
+                        <span className={`text-[9px] font-mono truncate mt-0.5 ${isActive ? "text-cyan-300" : "text-slate-500"}`}>
                           {demo.sla}
                         </span>
                       </button>
@@ -1257,14 +1286,14 @@ export default function PortfolioPage() {
 
               </div>
 
-              {/* Institutional Trust Banner Under Cockpit */}
-              <div className="px-3.5 py-2 rounded-[6px] bg-[#F8FAFC] border border-[#EAECF0] flex items-center justify-between text-xs text-[#344054]">
+              {/* Starship Safety & Governance Protocol Banner */}
+              <div className="px-3.5 py-2 rounded-[6px] bg-slate-900/80 border border-slate-800 flex items-center justify-between text-xs text-slate-300 backdrop-blur-sm">
                 <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-[#533AFD]" />
-                  <span className="font-semibold text-[#0D1738]">Gartner AI TRiSM &amp; NIST AI RMF Validated</span>
+                  <ShieldCheck className="w-4 h-4 text-cyan-400" />
+                  <span className="font-semibold text-slate-200">Gartner AI TRiSM &amp; NIST AI RMF Validated</span>
                 </div>
-                <span className="font-mono text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-bold border border-emerald-200">
-                  44 Systems
+                <span className="font-mono text-[10px] text-cyan-300 bg-cyan-950/80 px-2 py-0.5 rounded font-bold border border-cyan-700/50">
+                  44 Orbital Cockpits
                 </span>
               </div>
             </div>
