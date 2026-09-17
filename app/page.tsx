@@ -784,6 +784,88 @@ const EXCLUDED_REPOS = [
   "noonsmart"
 ];
 
+// --------------------------------------------------------------------------
+// Featured Hero Flagship Systems (Above-The-Fold Live Cockpit)
+// --------------------------------------------------------------------------
+interface HeroFlagshipDemo {
+  id: string;
+  name: string;
+  title: string;
+  tagline: string;
+  category: string;
+  image: string;
+  url: string;
+  anchor: string;
+  latency: string;
+  scale: string;
+  sla: string;
+  badge: string;
+  stack: string[];
+}
+
+const HERO_FLAGSHIP_DEMOS: HeroFlagshipDemo[] = [
+  {
+    id: "ledgerflow",
+    name: "LedgerFlow",
+    title: "LedgerFlow Core — Autonomous ACH Ledger",
+    tagline: "High-Frequency Autonomous Financial Ledger & Instant ACH Reconciliation",
+    category: "Fintech & Autonomous Ledger",
+    image: "/screenshots/ai/ledgerflow-core.png",
+    url: "https://ledgerflow.shakilhq.com",
+    anchor: "#ai-systems",
+    latency: "118ms",
+    scale: "$40M+ Escrow",
+    sla: "99.98% Zero-Drift",
+    badge: "Fintech Engine",
+    stack: ["FastAPI", "Next.js 15", "Supabase", "Inngest"]
+  },
+  {
+    id: "nightshift",
+    name: "NightShift",
+    title: "NightShift — Autonomous Inbox AI Employee",
+    tagline: "Grounded Enterprise Inbox Swarm with Strict HITL Approval Gates",
+    category: "Autonomous Swarms",
+    image: "/screenshots/ai/nightshift-preview.png",
+    url: "https://ai-employee-demo-mu.vercel.app",
+    anchor: "#ai-systems",
+    latency: "240ms",
+    scale: "Zero Drift",
+    sla: "Grounded RAG",
+    badge: "Multi-Agent Swarm",
+    stack: ["Claude 3.5 Sonnet", "Inngest", "pgvector", "Gmail API"]
+  },
+  {
+    id: "legiit",
+    name: "Legiit",
+    title: "Legiit AI Command Center ($1M ARR)",
+    tagline: "Global Freelance Marketplace Scaled to $1M ARR Across 1,500+ Orgs",
+    category: "High-Scale Marketplace",
+    image: "/screenshots/Legiit.png",
+    url: "https://legiit.com",
+    anchor: "#experience",
+    latency: "85ms",
+    scale: "400K+ Users",
+    sla: "1M+ Orders",
+    badge: "$1M ARR Flagship",
+    stack: ["Node.js", "React Native", "Redis Cluster", "AWS RDS"]
+  },
+  {
+    id: "gearsignal",
+    name: "GearSignal",
+    title: "GearSignal AI — Automotive Telemetry",
+    tagline: "Real-Time Vehicle Diagnostic Pipeline with Edge Inference",
+    category: "Real-time Telemetry",
+    image: "/screenshots/ai/gearsignal-ai.png",
+    url: "https://gearsignal.shakilhq.com",
+    anchor: "#ai-systems",
+    latency: "94ms",
+    scale: "12,000 Sigs/sec",
+    sla: "Edge Inference",
+    badge: "Telemetry Engine",
+    stack: ["TypeScript", "Turborepo", "WebSockets", "TimescaleDB"]
+  }
+];
+
 export default function PortfolioPage() {
   const pageRef = useRef<HTMLDivElement>(null);
   const [repos, setRepos] = useState<GitHubRepo[]>(CACHED_GITHUB_REPOS);
@@ -791,6 +873,7 @@ export default function PortfolioPage() {
   const [viewMode, setViewMode] = useState<"marquee" | "grid">("marquee");
   const [activeBlueprintIndex, setActiveBlueprintIndex] = useState<number>(0);
   const [codeComparisonTab, setCodeComparisonTab] = useState<"before" | "after">("after");
+  const [activeHeroDemo, setActiveHeroDemo] = useState<number>(0);
 
   // GSAP Entrance Choreography - Safe fade in, never trapping elements at opacity 0
   useEffect(() => {
@@ -939,8 +1022,8 @@ export default function PortfolioPage() {
       {/* -------------------------------------------------------------------- */}
       {/* 2. HERO SECTION - EXECUTIVE COMMAND STATION */}
       {/* -------------------------------------------------------------------- */}
-      <section id="top" className="relative pt-8 pb-10 lg:pt-12 lg:pb-14 border-b border-[#EAECF0] bg-white overflow-hidden">
-        {/* Subtle Ambient Architectural Grids & Gradient Glow */}
+      <section id="top" className="relative pt-8 pb-10 lg:pt-11 lg:pb-13 border-b border-[#EAECF0] bg-white overflow-hidden">
+        {/* Subtle Ambient Architectural Dot Grid & Gradient Glow */}
         <div className="absolute inset-0 bg-[radial-gradient(#EAECF0_1px,transparent_1px)] [background-size:24px_24px] opacity-60 pointer-events-none" />
         <div className="absolute -top-32 left-1/2 -translate-x-1/2 w-[850px] h-[360px] bg-gradient-to-b from-[#533AFD]/10 via-[#7F56D9]/5 to-transparent blur-3xl pointer-events-none" />
 
@@ -950,36 +1033,34 @@ export default function PortfolioPage() {
             {/* Left Column: Authoritative Engineering Positioning */}
             <div className="lg:col-span-7 space-y-4">
               
-              {/* Profile Status Badge */}
-              <div className="flex flex-wrap items-center gap-2">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white border border-[#D0D5DD] shadow-sm text-xs text-[#0D1738]">
-                  <div className="relative w-5 h-5 rounded-full overflow-hidden border border-slate-300 shrink-0 bg-slate-100">
-                    <Image
-                      src="/shakil-headshot.jpeg"
-                      alt="Shakil Ahmed"
-                      fill
-                      sizes="20px"
-                      className="object-cover object-top"
-                      priority
-                    />
-                  </div>
-                  <span className="font-semibold text-[#0D1738]">Shakil Ahmed</span>
-                  <span className="text-[#D0D5DD]">•</span>
-                  <span className="font-semibold text-[#533AFD]">Principal Systems Architect</span>
-                  <span className="text-[#D0D5DD]">•</span>
-                  <span className="text-emerald-700 font-medium flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
-                    Available for Contracts & MVPs
-                  </span>
+              {/* Only ONE Consolidated Master Status Badge */}
+              <div className="inline-flex flex-wrap items-center gap-2 px-3 py-1.5 rounded-full bg-white border border-[#D0D5DD] shadow-sm text-xs text-[#0D1738]">
+                <div className="relative w-5 h-5 rounded-full overflow-hidden border border-slate-300 shrink-0 bg-slate-100">
+                  <Image
+                    src="/shakil-headshot.jpeg"
+                    alt="Shakil Ahmed"
+                    fill
+                    sizes="20px"
+                    className="object-cover object-top"
+                    priority
+                  />
                 </div>
-
-                <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] text-[11px] font-bold uppercase tracking-wider">
+                <span className="font-bold text-[#0D1738]">Shakil Ahmed</span>
+                <span className="text-[#D0D5DD]">•</span>
+                <span className="font-semibold text-[#533AFD]">Principal Systems Architect</span>
+                <span className="text-[#D0D5DD]">•</span>
+                <span className="font-semibold text-[#344054] flex items-center gap-1">
                   <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD]" />
-                  <span>Securiti Certified AI Architect</span>
-                </div>
+                  Securiti Certified AI Architect
+                </span>
+                <span className="text-[#D0D5DD]">•</span>
+                <span className="text-emerald-700 font-semibold flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                  Available for Contracts &amp; MVPs
+                </span>
               </div>
 
-              {/* Main Headline - High-Impact, Balanced, Non-Wrapping */}
+              {/* Main Headline - Balanced, Generous Line-Height, Non-Wrapping */}
               <h1 className="text-3xl sm:text-4xl lg:text-[2.85rem] xl:text-[3.25rem] font-black text-[#0D1738] tracking-tight leading-[1.2] sm:leading-[1.2] lg:leading-[1.18] xl:leading-[1.16]">
                 Engineering Mission-Critical AI Systems &amp;{" "}
                 <span className="bg-gradient-to-r from-[#533AFD] via-[#6941C6] to-[#7F56D9] bg-clip-text text-transparent">
@@ -987,13 +1068,13 @@ export default function PortfolioPage() {
                 </span>
               </h1>
 
-              {/* Subtitle - Scannable, High-Signal, No Walls of Text */}
+              {/* Subtitle - Scannable, High-Signal */}
               <p className="text-sm sm:text-base text-[#475467] font-normal leading-relaxed max-w-2xl">
                 12+ years engineering fault-tolerant architectures that process millions of transactions. Former Engineering Team Lead at <strong className="text-[#0D1738] font-semibold">Legiit</strong> (scaled AI Command Center to $1M ARR across 1,500+ orgs). Shipped 44 production AI systems with deterministic zero-drift boundaries and guaranteed SLA delivery.
               </p>
 
               {/* 3 Scannable Micro-Proof Metric Cards */}
-              <div className="grid grid-cols-3 gap-2.5 max-w-xl pt-1">
+              <div className="grid grid-cols-3 gap-2.5 max-w-xl pt-0.5">
                 <div className="p-2.5 rounded-[6px] bg-[#F8FAFC] border border-[#EAECF0] hover:border-[#D9D6FE] transition-colors">
                   <div className="text-[10px] uppercase font-bold tracking-wider text-[#667085]">Marketplace Scale</div>
                   <div className="text-base sm:text-lg font-black text-[#0D1738] mt-0.5">400K+ Users</div>
@@ -1011,7 +1092,7 @@ export default function PortfolioPage() {
                 </div>
               </div>
 
-              {/* Action Buttons - Clear Hierarchy */}
+              {/* Action Buttons */}
               <div className="flex flex-wrap items-center gap-3 pt-1">
                 <a
                   href="https://calendly.com/shakilhq/30min"
@@ -1043,111 +1124,147 @@ export default function PortfolioPage() {
                 </a>
               </div>
 
-              {/* Verification Row */}
-              <div className="pt-3 border-t border-[#EAECF0] flex flex-wrap items-center gap-x-5 gap-y-2 text-xs text-[#667085]">
+              {/* Systems Proof Strip */}
+              <div className="pt-2.5 border-t border-[#EAECF0] flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#667085]">
                 <div className="flex items-center gap-1.5">
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD]" />
-                  <span className="font-semibold text-[#0D1738]">Securiti Certified AI Architect</span>
-                  <span className="text-[#667085]">(Cert ID: 14B411BCE)</span>
+                  <Check className="w-3.5 h-3.5 text-emerald-600" />
+                  <span className="font-semibold text-[#0D1738]">44 Verified Production AI Systems</span>
                 </div>
                 <span className="hidden sm:inline text-[#D0D5DD]">•</span>
                 <div className="flex items-center gap-1.5">
                   <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
-                  <span className="font-semibold text-[#0D1738]">4.9 ★ • 127+ Verified Reviews</span>
+                  <span className="font-semibold text-[#0D1738]">4.9 ★ • 127+ Reviews</span>
                 </div>
                 <span className="hidden sm:inline text-[#D0D5DD]">•</span>
                 <div className="flex items-center gap-1.5">
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  <span>100% On-Time SLA</span>
+                  <Activity className="w-3.5 h-3.5 text-[#533AFD]" />
+                  <span>Sub-200ms Latency SLA</span>
                 </div>
               </div>
             </div>
 
-            {/* Right Column: Mission-Critical Production Telemetry & Cockpit */}
+            {/* Right Column: Mission-Critical Production Demo Cockpit */}
             <div className="lg:col-span-5 space-y-3">
-              <div className="bg-white rounded-[8px] p-5 border border-[#D0D5DD] shadow-md hover:shadow-lg transition-shadow">
+              <div className="bg-[#0D1738] rounded-[8px] border border-slate-700 shadow-xl overflow-hidden">
                 
-                {/* Header */}
-                <div className="flex items-center justify-between pb-3 border-b border-[#EAECF0]">
-                  <div className="flex items-center gap-2">
-                    <span className="relative flex h-2 w-2">
+                {/* Window Chrome Header with System Selector Tabs */}
+                <div className="bg-[#101828] px-3 py-2 border-b border-slate-800 flex items-center justify-between gap-2">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] inline-block" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] inline-block" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] inline-block" />
+                  </div>
+
+                  {/* URL / Live Status Bar */}
+                  <div className="flex items-center gap-1.5 px-2 py-0.5 rounded bg-slate-900/90 border border-slate-700/60 text-[10px] font-mono text-slate-300 max-w-[200px] truncate">
+                    <Lock className="w-2.5 h-2.5 text-emerald-400 shrink-0" />
+                    <span className="text-slate-400">prod/</span>
+                    <span className="text-white font-semibold truncate">{HERO_FLAGSHIP_DEMOS[activeHeroDemo].id}</span>
+                  </div>
+
+                  {/* Live Radar Beacon */}
+                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-700/50 shrink-0">
+                    <span className="relative flex h-1.5 w-1.5">
                       <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
                     </span>
-                    <span className="text-xs font-bold uppercase tracking-wider text-[#344054]">Core Platform Telemetry</span>
-                  </div>
-                  <span className="text-[11px] font-mono px-2 py-0.5 rounded-[3px] bg-[#F4F3FF] text-[#533AFD] font-bold border border-[#D9D6FE]">
-                    Legiit Production
-                  </span>
-                </div>
-
-                {/* Top Metrics Grid */}
-                <div className="grid grid-cols-3 gap-2.5 my-3">
-                  <div className="p-2.5 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
-                    <div className="text-[10px] text-[#667085] font-semibold uppercase">Shipped Users</div>
-                    <div className="text-base font-black text-[#0D1738] mt-0.5">400,000+</div>
-                  </div>
-                  <div className="p-2.5 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
-                    <div className="text-[10px] text-[#667085] font-semibold uppercase">Query Latency</div>
-                    <div className="text-base font-black text-emerald-700 mt-0.5">118 ms</div>
-                  </div>
-                  <div className="p-2.5 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-center">
-                    <div className="text-[10px] text-[#667085] font-semibold uppercase">AI Command Ctr</div>
-                    <div className="text-base font-black text-[#533AFD] mt-0.5">$1M ARR</div>
+                    <span className="hidden sm:inline">LIVE</span>
                   </div>
                 </div>
 
-                {/* Recharts Area Chart */}
-                <div className="h-32 w-full pt-1">
-                  <ResponsiveContainer width="100%" height="100%">
-                    <AreaChart data={telemetryData} margin={{ top: 5, right: 5, left: -25, bottom: 0 }}>
-                      <defs>
-                        <linearGradient id="throughputGrad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#533AFD" stopOpacity={0.18} />
-                          <stop offset="95%" stopColor="#533AFD" stopOpacity={0} />
-                        </linearGradient>
-                      </defs>
-                      <CartesianGrid strokeDasharray="3 3" stroke="#F2F4F7" vertical={false} />
-                      <XAxis dataKey="month" tick={{ fontSize: 10, fill: "#667085" }} axisLine={false} tickLine={false} />
-                      <YAxis domain={[0, 4000]} tick={{ fontSize: 10, fill: "#667085" }} axisLine={false} tickLine={false} />
-                      <Tooltip content={<CustomTelemetryTooltip />} />
-                      <Area
-                        type="monotone"
-                        dataKey="throughput"
-                        stroke="#533AFD"
-                        strokeWidth={2}
-                        fillOpacity={1}
-                        fill="url(#throughputGrad)"
-                      />
-                    </AreaChart>
-                  </ResponsiveContainer>
+                {/* Featured System Screenshot Viewport */}
+                <div className="relative h-[225px] sm:h-[245px] w-full bg-slate-950 overflow-hidden group">
+                  <Image
+                    key={HERO_FLAGSHIP_DEMOS[activeHeroDemo].id}
+                    src={HERO_FLAGSHIP_DEMOS[activeHeroDemo].image}
+                    alt={HERO_FLAGSHIP_DEMOS[activeHeroDemo].title}
+                    fill
+                    sizes="(max-width: 1024px) 100vw, 550px"
+                    className="object-cover object-top transition-all duration-300 group-hover:scale-[1.01]"
+                    priority
+                  />
+                  {/* Dynamic dark vignette for text readability */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/25 to-slate-950/40 pointer-events-none" />
+
+                  {/* Top Floating Telemetry Overlay */}
+                  <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-2 pointer-events-none">
+                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-slate-900/90 backdrop-blur-md border border-slate-700/80 text-[11px] text-white shadow-lg pointer-events-auto">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <span className="font-bold text-white truncate">{HERO_FLAGSHIP_DEMOS[activeHeroDemo].name}</span>
+                      <span className="text-slate-400 font-mono text-[10px]">• {HERO_FLAGSHIP_DEMOS[activeHeroDemo].latency}</span>
+                    </div>
+
+                    <a
+                      href={HERO_FLAGSHIP_DEMOS[activeHeroDemo].url || HERO_FLAGSHIP_DEMOS[activeHeroDemo].anchor}
+                      target={HERO_FLAGSHIP_DEMOS[activeHeroDemo].url ? "_blank" : undefined}
+                      rel="noreferrer"
+                      className="pointer-events-auto inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-[11px] font-bold shadow-md hover:shadow-lg transition-all"
+                    >
+                      <span>Live Cockpit</span>
+                      <ArrowUpRight className="w-3 h-3" />
+                    </a>
+                  </div>
+
+                  {/* Bottom Floating Architecture & Metric Strip */}
+                  <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between gap-2 text-[11px] pointer-events-none">
+                    <div className="flex flex-wrap items-center gap-1 pointer-events-auto">
+                      {HERO_FLAGSHIP_DEMOS[activeHeroDemo].stack.map((tech) => (
+                        <span
+                          key={tech}
+                          className="px-1.5 py-0.5 rounded-[3px] bg-slate-900/90 backdrop-blur-sm border border-slate-700/80 font-mono text-[9px] text-slate-200"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                    <span className="px-2 py-0.5 rounded-[3px] bg-emerald-950/90 border border-emerald-600/60 text-emerald-300 font-mono text-[10px] font-bold shrink-0 pointer-events-auto">
+                      {HERO_FLAGSHIP_DEMOS[activeHeroDemo].scale}
+                    </span>
+                  </div>
                 </div>
 
-                {/* Architecture Telemetry Matrix */}
-                <div className="mt-3 pt-3 border-t border-[#EAECF0] grid grid-cols-3 gap-2 text-[11px] text-[#475467] font-medium">
-                  <span className="flex items-center gap-1">
-                    <Activity className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                    <span className="truncate">RAG: Grounded</span>
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Database className="w-3.5 h-3.5 text-[#533AFD] shrink-0" />
-                    <span className="truncate">Rubric: Invariant</span>
-                  </span>
-                  <span className="flex items-center gap-1">
-                    <Lock className="w-3.5 h-3.5 text-amber-600 shrink-0" />
-                    <span className="truncate">Escrow: $40M+</span>
-                  </span>
+                {/* Interactive 4-System Switcher Strip (Clickable tabs with live feedback) */}
+                <div className="p-2 bg-[#0D1738] border-t border-slate-800 grid grid-cols-4 gap-1.5">
+                  {HERO_FLAGSHIP_DEMOS.map((demo, idx) => {
+                    const isActive = activeHeroDemo === idx;
+                    return (
+                      <button
+                        key={demo.id}
+                        type="button"
+                        onClick={() => setActiveHeroDemo(idx)}
+                        className={`flex flex-col text-left p-1.5 rounded-[4px] transition-all border ${
+                          isActive
+                            ? "bg-[#533AFD]/25 border-[#533AFD] shadow-sm ring-1 ring-[#533AFD]/50"
+                            : "bg-slate-900/60 border-slate-800 hover:bg-slate-800 hover:border-slate-700"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className={`text-[9px] font-mono font-bold ${isActive ? "text-[#D9D6FE]" : "text-slate-400"}`}>
+                            0{idx + 1}
+                          </span>
+                          {isActive && <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />}
+                        </div>
+                        <span className={`text-[11px] font-bold truncate mt-0.5 ${isActive ? "text-white" : "text-slate-300"}`}>
+                          {demo.name}
+                        </span>
+                        <span className="text-[9px] font-mono text-slate-400 truncate mt-0.5">
+                          {demo.sla}
+                        </span>
+                      </button>
+                    );
+                  })}
                 </div>
+
               </div>
 
-              {/* Bottom Institutional Trust Banner */}
-              <div className="px-4 py-2.5 rounded-[6px] bg-[#F8F9FC] border border-[#EAECF0] flex items-center justify-between text-xs text-[#344054]">
+              {/* Institutional Trust Banner Under Cockpit */}
+              <div className="px-3.5 py-2 rounded-[6px] bg-[#F8FAFC] border border-[#EAECF0] flex items-center justify-between text-xs text-[#344054]">
                 <div className="flex items-center gap-2">
                   <ShieldCheck className="w-4 h-4 text-[#533AFD]" />
-                  <span className="font-semibold text-[#0D1738]">Gartner AI TRiSM &amp; NIST AI RMF</span>
+                  <span className="font-semibold text-[#0D1738]">Gartner AI TRiSM &amp; NIST AI RMF Validated</span>
                 </div>
                 <span className="font-mono text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded font-bold border border-emerald-200">
-                  Validated
+                  44 Systems
                 </span>
               </div>
             </div>
