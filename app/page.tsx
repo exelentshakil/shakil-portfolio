@@ -1378,7 +1378,7 @@ export default function PortfolioPage() {
                   {/* Undulating sinusoidal rope path centered vertically with ample clearance */}
                   <path
                     id="telemetryRopePath"
-                    d="M -1440,38 Q -1080,18 -720,38 T 0,38 T 720,38 T 1440,38 T 2160,38 T 2880,38"
+                    d="M -1440,43 Q -1080,25 -720,43 T 0,43 T 720,43 T 1440,43 T 2160,43 T 2880,43"
                     fill="none"
                   />
                   {/* High-contrast brand gradient for flowing text */}
@@ -1392,7 +1392,7 @@ export default function PortfolioPage() {
 
                 {/* Braided Rope Guideline 1 (Solid accent strand) */}
                 <path
-                  d="M -1440,38 Q -1080,18 -720,38 T 0,38 T 720,38 T 1440,38 T 2160,38 T 2880,38"
+                  d="M -1440,43 Q -1080,25 -720,43 T 0,43 T 720,43 T 1440,43 T 2160,43 T 2880,43"
                   fill="none"
                   stroke="#533AFD"
                   strokeOpacity="0.28"
@@ -1401,7 +1401,7 @@ export default function PortfolioPage() {
 
                 {/* Braided Rope Guideline 2 (Dashed secondary strand) */}
                 <path
-                  d="M -1440,42 Q -1080,22 -720,42 T 0,42 T 720,42 T 1440,42 T 2160,42 T 2880,42"
+                  d="M -1440,47 Q -1080,29 -720,47 T 0,47 T 720,47 T 1440,47 T 2160,47 T 2880,47"
                   fill="none"
                   stroke="#0BA5EC"
                   strokeOpacity="0.35"
