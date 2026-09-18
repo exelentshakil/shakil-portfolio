@@ -2269,31 +2269,31 @@ export default function PortfolioPage() {
                       <div className="flex items-center gap-2">
                         <ShieldCheck className="w-4 h-4 text-[#533AFD] shrink-0" />
                         <span className="font-semibold text-[#0D1738]">Securiti Certified AI Architect</span>
-                        <span className="text-[10px] text-[#667085] font-mono">• NIST AI RMF</span>
+                        <span className="text-[10px] text-[#533AFD] font-mono font-semibold bg-[#F4F3FF] px-1.5 py-0.5 rounded border border-[#D9D6FE]">NIST AI RMF</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Zap className="w-4 h-4 text-[#533AFD] shrink-0" />
-                        <span className="font-semibold text-[#0D1738]">Former Engineering Team Lead</span>
-                        <span className="text-[10px] text-[#667085] font-mono">• Legiit ($1M ARR)</span>
+                        <span className="font-semibold text-[#0D1738]">Former Team Lead at Legiit</span>
+                        <span className="text-[10px] text-[#667085] font-mono">$1M ARR Scale</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
                         <span className="font-semibold text-[#0D1738]">44 Production AI Systems Shipped</span>
-                        <span className="text-[10px] text-emerald-700 font-mono font-semibold">• 99.98% SLA</span>
+                        <span className="text-[10px] text-emerald-700 font-mono font-semibold">99.98% SLA</span>
                       </div>
                     </div>
 
-                    <div className="pt-2.5 border-t border-[#EAECF0] flex items-center justify-between text-xs font-mono">
+                    <div className="pt-2.5 border-t border-[#EAECF0] flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
                       <a
                         href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-[#533AFD] hover:text-[#4327F5] font-bold"
+                        className="inline-flex items-center gap-1.5 text-[#533AFD] hover:text-[#4327F5] font-bold whitespace-nowrap"
                       >
-                        <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
-                        <span>+1 (307) 533-6678</span>
+                        <MessageCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                        <span>+1 307 533-6678</span>
                       </a>
-                      <span className="text-[#667085] text-[11px]">US Mountain Time (MDT)</span>
+                      <span className="text-[#667085] text-[11px] whitespace-nowrap">Sheridan, WY (US MDT)</span>
                     </div>
                   </div>
 
