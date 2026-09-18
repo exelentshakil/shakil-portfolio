@@ -2217,81 +2217,195 @@ export default function PortfolioPage() {
       {/* -------------------------------------------------------------------- */}
       <section className="section-pad bg-white border-b border-[#EAECF0]">
         <div className="site-container">
-          <div className="bg-[#F8FAFC] rounded-[4px] border border-[#D0D5DD] p-6 lg:p-10 shadow-sm">
-            <div className="grid lg:grid-cols-12 gap-8 items-center">
+          <div className="bg-[#F8FAFC] rounded-[8px] border border-[#D0D5DD] p-6 lg:p-8 shadow-sm">
+            <div className="grid lg:grid-cols-12 gap-8 items-stretch">
               
-              {/* Headshot Portrait */}
-              <div className="lg:col-span-4 flex flex-col items-center sm:items-start">
-                <div className="relative w-full max-w-[260px] aspect-square rounded-[4px] overflow-hidden border border-[#D0D5DD] bg-white shadow-sm">
-                  <Image
-                    src="/shakil-headshot.jpeg"
-                    alt="Shakil Ahmed - Senior Full-Stack Engineer & System Architect"
-                    fill
-                    sizes="(max-width: 768px) 260px, 300px"
-                    className="object-cover object-top"
-                  />
-                  <div className="absolute bottom-2.5 left-2.5 right-2.5 px-2.5 py-1.5 rounded-[2px] bg-[#0D1738]/90 backdrop-blur text-white text-[11px] font-semibold flex items-center justify-between">
-                    <span>Shakil Ahmed</span>
-                    <span className="text-[#8D7BFF] font-mono text-[10px]">12+ Yrs Exp</span>
+              {/* Left Column: Executive Architect Dossier Card */}
+              <div className="lg:col-span-5 flex flex-col">
+                <div className="bg-white rounded-[6px] border border-[#D0D5DD] shadow-sm overflow-hidden flex flex-col justify-between h-full">
+                  
+                  {/* Portrait Headshot with Overlays */}
+                  <div className="relative h-[340px] sm:h-[380px] w-full bg-slate-900 overflow-hidden">
+                    <Image
+                      src="/shakil-headshot.jpeg"
+                      alt="Shakil Ahmed - Principal Systems Architect"
+                      fill
+                      sizes="(max-width: 1024px) 100vw, 450px"
+                      className="object-cover object-top"
+                      priority
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0D1738]/90 via-[#0D1738]/20 to-transparent pointer-events-none" />
+
+                    {/* Top Status Pill */}
+                    <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-[#EAECF0] text-[11px] font-mono text-[#0D1738] shadow-sm flex items-center gap-1.5">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
+                      </span>
+                      <span className="font-bold text-emerald-700">AVAILABLE FOR CONTRACTS</span>
+                    </div>
+
+                    {/* Bottom Profile Identity Bar */}
+                    <div className="absolute bottom-3 left-3 right-3 p-3 rounded-[4px] bg-[#0D1738]/90 backdrop-blur-md border border-white/10 text-white">
+                      <div className="flex items-center justify-between gap-2">
+                        <div>
+                          <div className="text-base font-bold text-white leading-tight">Shakil Ahmed</div>
+                          <div className="text-xs text-[#D9D6FE] font-medium mt-0.5">Principal Systems Architect</div>
+                        </div>
+                        <span className="px-2 py-0.5 rounded bg-[#533AFD] text-white text-[10px] font-mono font-bold shrink-0">
+                          12+ Yrs Exp
+                        </span>
+                      </div>
+                      <div className="text-[11px] text-slate-300 mt-1.5 flex items-center gap-1.5">
+                        <MapPin className="w-3 h-3 text-[#533AFD] shrink-0" />
+                        <span>Founder, BarakahSoft LLC • Sheridan, WY</span>
+                      </div>
+                    </div>
                   </div>
+
+                  {/* Verified Credentials Checklist & Contact Info */}
+                  <div className="p-4 bg-[#F8F9FC] border-t border-[#EAECF0] space-y-2.5 flex-1 flex flex-col justify-between">
+                    <div className="space-y-2 text-xs text-[#344054]">
+                      <div className="flex items-center gap-2">
+                        <ShieldCheck className="w-4 h-4 text-[#533AFD] shrink-0" />
+                        <span className="font-semibold text-[#0D1738]">Securiti Certified AI Architect</span>
+                        <span className="text-[10px] text-[#667085] font-mono">• NIST AI RMF</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Zap className="w-4 h-4 text-[#533AFD] shrink-0" />
+                        <span className="font-semibold text-[#0D1738]">Former Engineering Team Lead</span>
+                        <span className="text-[10px] text-[#667085] font-mono">• Legiit ($1M ARR)</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
+                        <span className="font-semibold text-[#0D1738]">44 Production AI Systems Shipped</span>
+                        <span className="text-[10px] text-emerald-700 font-mono font-semibold">• 99.98% SLA</span>
+                      </div>
+                    </div>
+
+                    <div className="pt-2.5 border-t border-[#EAECF0] flex items-center justify-between text-xs font-mono">
+                      <a
+                        href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex items-center gap-1.5 text-[#533AFD] hover:text-[#4327F5] font-bold"
+                      >
+                        <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
+                        <span>+1 (307) 533-6678</span>
+                      </a>
+                      <span className="text-[#667085] text-[11px]">US Mountain Time (MDT)</span>
+                    </div>
+                  </div>
+
                 </div>
               </div>
 
-              {/* Profile Bio & Direct Access Commitment */}
-              <div className="lg:col-span-8 space-y-3.5">
-                <span className="badge-tag">Direct Engineering Partnership</span>
-                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-[4px] bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] text-[11px] font-bold uppercase tracking-wider">
-                  Principal AI & Systems Architect • Enterprise SaaS & Swarms
-                </div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-[#0D1738] tracking-tight">
-                  Direct technical leadership — no junior handoffs, no agency bloat.
-                </h2>
-                <p className="text-xs sm:text-sm text-[#475467] leading-relaxed">
-                  I build production SaaS platforms, AI applications, and mobile apps. Not demos, not prototypes that die after the pitch deck. 12+ years of production engineering. 125+ five-star reviews. Clean code, clear communication, software built for real users.
-                </p>
-                <p className="text-xs sm:text-sm text-[#475467] leading-relaxed">
-                  I also rescue and ship AI-generated MVPs (Lovable, Bolt, Replit, Base44, v0, Supabase) that stalled before production. If your AI tool got you 80% there and you need a real engineer to finish it, that&apos;s exactly my lane.
-                </p>
-                <div className="text-xs text-[#344054] font-medium pt-1">
-                  <strong>Stack:</strong> React, Next.js, React Native, Node.js, NestJS, TypeScript, PostgreSQL, MongoDB, Redis, AWS, Supabase, Stripe, Gemini/OpenAI/Claude API integration.
-                </div>
+              {/* Right Column: Strategic Partnership Narrative & Telemetry */}
+              <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
                 
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 pt-1">
-                  <div className="p-2.5 rounded-[2px] bg-white border border-[#EAECF0]">
-                    <div className="text-[10px] uppercase font-bold text-[#667085]">Founder</div>
-                    <div className="text-xs font-bold text-[#0D1738] mt-0.5">BarakahSoft LLC (USA)</div>
+                <div className="space-y-3">
+                  {/* Unified Eyebrow Badges */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="badge-tag">Direct Engineering Partnership</span>
+                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[4px] bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] text-[11px] font-bold uppercase tracking-wider">
+                      <ShieldCheck className="w-3.5 h-3.5" />
+                      100% Senior Architect Delivery • Zero Junior Handoffs
+                    </div>
                   </div>
-                  <div className="p-2.5 rounded-[2px] bg-white border border-[#EAECF0]">
-                    <div className="text-[10px] uppercase font-bold text-[#667085]">Track Record</div>
-                    <div className="text-xs font-bold text-[#0D1738] mt-0.5">1,000+ Shipped Builds</div>
+
+                  {/* Balanced Headline with No Awkward Orphans */}
+                  <h2 className="text-2xl sm:text-3xl lg:text-[2.2rem] font-black text-[#0D1738] tracking-tight leading-[1.22] [text-wrap:balance]">
+                    Direct Technical Leadership —{" "}
+                    <span className="bg-gradient-to-r from-[#533AFD] via-[#7F56D9] to-[#0BA5EC] bg-clip-text text-transparent">
+                      No Junior Handoffs, No Agency Bloat.
+                    </span>
+                  </h2>
+
+                  <p className="text-xs sm:text-sm text-[#475467] leading-relaxed">
+                    When you partner with me, you collaborate directly with a 12-year systems architect on every line of code, architecture decision, and deployment. No account managers, no junior developers learning on your project, and no agency overhead.
+                  </p>
+                </div>
+
+                {/* Two Specialized Capability Pillars */}
+                <div className="grid sm:grid-cols-2 gap-3">
+                  <div className="p-3 rounded-[6px] bg-white border border-[#EAECF0] hover:border-[#D9D6FE] shadow-sm transition-all">
+                    <div className="flex items-center gap-2 text-xs font-bold text-[#0D1738]">
+                      <Server className="w-4 h-4 text-[#533AFD]" />
+                      <span>Production SaaS &amp; Swarms</span>
+                    </div>
+                    <p className="text-xs text-[#667085] mt-1.5 leading-relaxed">
+                      High-throughput architectures in Next.js 15, FastAPI, Supabase, Inngest durable step-swarms, and NIST AI RMF governance boundaries.
+                    </p>
                   </div>
-                  <div className="p-2.5 rounded-[2px] bg-white border border-[#EAECF0]">
-                    <div className="text-[10px] uppercase font-bold text-[#667085]">Direct Contact</div>
-                    <div className="text-xs font-bold text-[#533AFD] mt-0.5">+1 (307) 533-6678</div>
+
+                  <div className="p-3 rounded-[6px] bg-white border border-[#EAECF0] hover:border-[#D9D6FE] shadow-sm transition-all">
+                    <div className="flex items-center gap-2 text-xs font-bold text-[#0D1738]">
+                      <Wrench className="w-4 h-4 text-amber-500" />
+                      <span>Stalled MVP Rescue</span>
+                    </div>
+                    <p className="text-xs text-[#667085] mt-1.5 leading-relaxed">
+                      Taking AI-generated codebases (Lovable, Bolt, v0, Replit, Base44) through schema refactoring, auth fixing, security hardening, and live production launch.
+                    </p>
                   </div>
                 </div>
 
-                <div className="pt-2 flex flex-wrap items-center gap-3">
-                  <a href="https://calendly.com/shakilhq/30min" target="_blank" rel="noreferrer" className="btn-primary text-xs">
-                    <Calendar className="w-3.5 h-3.5" />
-                    Book Strategy Call with Shakil
+                {/* Core Stack Pill Strip */}
+                <div className="p-2.5 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-xs text-[#344054]">
+                  <strong className="text-[#0D1738] font-semibold">Core Stack:</strong> Next.js 15, Python (FastAPI), React Native, Node.js, TypeScript, PostgreSQL, Supabase, Redis, AWS, Inngest, Stripe, Gemini / OpenAI / Claude API integration.
+                </div>
+
+                {/* 3 Metric KPI Cards */}
+                <div className="grid grid-cols-3 gap-2.5">
+                  <div className="p-2.5 rounded-[4px] bg-white border border-[#EAECF0] shadow-sm">
+                    <div className="text-[10px] uppercase font-mono font-bold text-[#667085]">EXPERIENCE</div>
+                    <div className="text-base sm:text-lg font-black text-[#0D1738] mt-0.5">12+ Years</div>
+                    <div className="text-[10px] text-[#667085] font-mono">Systems Eng</div>
+                  </div>
+                  <div className="p-2.5 rounded-[4px] bg-white border border-[#EAECF0] shadow-sm">
+                    <div className="text-[10px] uppercase font-mono font-bold text-[#667085]">AI FLEET</div>
+                    <div className="text-base sm:text-lg font-black text-[#533AFD] mt-0.5">44 Systems</div>
+                    <div className="text-[10px] text-[#667085] font-mono">Shipped &amp; Live</div>
+                  </div>
+                  <div className="p-2.5 rounded-[4px] bg-white border border-[#EAECF0] shadow-sm">
+                    <div className="text-[10px] uppercase font-mono font-bold text-[#667085]">TRACK RECORD</div>
+                    <div className="text-base sm:text-lg font-black text-[#027A48] mt-0.5">125+ Reviews</div>
+                    <div className="text-[10px] text-[#667085] font-mono">5.0 ★ Verified</div>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+                  <a
+                    href="https://calendly.com/shakilhq/30min"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-primary gap-2 text-xs sm:text-sm font-semibold justify-center py-2.5 px-5 shadow-md shadow-[#533AFD]/20"
+                  >
+                    <Calendar className="w-4 h-4" />
+                    <span>Book Strategy Call with Shakil</span>
                   </a>
-                  <a href="https://wa.me/13075336678" target="_blank" rel="noreferrer" className="btn-secondary text-xs">
-                    <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
-                    Chat on WhatsApp
+                  <a
+                    href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
+                    target="_blank"
+                    rel="noreferrer"
+                    className="btn-secondary gap-2 text-xs sm:text-sm font-semibold justify-center py-2.5 px-4 shadow-sm"
+                  >
+                    <MessageCircle className="w-4 h-4 text-emerald-600" />
+                    <span>Chat on WhatsApp</span>
                   </a>
                 </div>
+
               </div>
 
             </div>
-          </div>
 
-          {/* Attribution Notice */}
-          <div className="mt-4 p-4 rounded-[4px] bg-white border border-[#EAECF0] flex items-center gap-3 text-xs text-[#667085]">
-            <ShieldCheck className="w-4 h-4 text-[#533AFD] shrink-0" />
-            <span>
-              <strong className="text-[#0D1738]">Engineering Attribution:</strong> Many featured enterprise case studies (Legiit, Steve Weatherford, agency lead engines) were architected during my tenure as <em>Lead Technical Architect</em> at <strong>No Half Cakes</strong>. I deliver that same agency-grade discipline directly to your business.
-            </span>
+            {/* Attribution Notice */}
+            <div className="mt-5 p-3.5 rounded-[6px] bg-white border border-[#EAECF0] flex items-center gap-3 text-xs text-[#667085] shadow-sm">
+              <ShieldCheck className="w-4 h-4 text-[#533AFD] shrink-0" />
+              <span>
+                <strong className="text-[#0D1738]">Engineering Attribution:</strong> Many featured enterprise case studies (Legiit, Steve Weatherford, agency lead engines) were architected during my tenure as <em>Lead Technical Architect</em> at <strong>No Half Cakes</strong>. I deliver that same agency-grade discipline directly to your business.
+              </span>
+            </div>
           </div>
         </div>
       </section>
