@@ -894,6 +894,14 @@ const HERO_FLAGSHIP_DEMOS: HeroFlagshipDemo[] = [
   }
 ];
 
+const ROTATING_DOMAINS = [
+  "Autonomous Swarms.",
+  "Production AI Fleets.",
+  "Enterprise LLM Firewalls.",
+  "Fault-Tolerant Ledgers.",
+  "Self-Healing Pipelines.",
+];
+
 export default function PortfolioPage() {
   const pageRef = useRef<HTMLDivElement>(null);
   const [repos, setRepos] = useState<GitHubRepo[]>(CACHED_GITHUB_REPOS);
@@ -902,6 +910,14 @@ export default function PortfolioPage() {
   const [activeBlueprintIndex, setActiveBlueprintIndex] = useState<number>(0);
   const [codeComparisonTab, setCodeComparisonTab] = useState<"before" | "after">("after");
   const [activeHeroDemo, setActiveHeroDemo] = useState<number>(0);
+  const [rotatingDomainIdx, setRotatingDomainIdx] = useState<number>(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setRotatingDomainIdx((prev) => (prev + 1) % ROTATING_DOMAINS.length);
+    }, 2800);
+    return () => clearInterval(timer);
+  }, []);
 
   // GSAP Entrance Choreography - Safe fade in, never trapping elements at opacity 0
   useEffect(() => {
@@ -981,8 +997,8 @@ export default function PortfolioPage() {
           
           {/* Brand */}
           <a href="#top" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-[4px] bg-[#F4F3FF] flex items-center justify-center p-1 border border-[#D9D6FE] shadow-sm group-hover:border-[#533AFD] transition-colors">
-              <Image src="/logo.png" alt="Shakil HQ" width={24} height={24} className="object-contain" priority />
+            <div className="w-8 h-8 rounded-[6px] bg-[#0D1738] flex items-center justify-center p-1.5 border border-[#1D2939] shadow-sm group-hover:bg-[#533AFD] group-hover:border-[#533AFD] transition-all">
+              <Image src="/logo.png" alt="Shakil HQ" width={20} height={20} className="object-contain" priority />
             </div>
             <div>
               <div className="flex items-center gap-1.5 font-bold text-sm text-[#0D1738] leading-none">
@@ -1062,52 +1078,6 @@ export default function PortfolioPage() {
         <div className="absolute -top-32 left-1/4 w-[750px] h-[380px] bg-gradient-to-b from-[#533AFD]/07 via-[#06B6D4]/04 to-transparent blur-[120px] pointer-events-none" />
         <div className="absolute top-1/3 -right-20 w-[550px] h-[350px] bg-[#533AFD]/05 blur-[100px] pointer-events-none" />
 
-        {/* =================================================================== */}
-        {/* FLYING AI PROJECT BLURBS (BACKGROUND STREAM) */}
-        {/* Dual continuous marquee drifting subtly behind the scene */}
-        {/* =================================================================== */}
-        <div className="absolute inset-0 overflow-hidden pointer-events-none select-none z-0 flex flex-col justify-around opacity-40 [mask-image:linear-gradient(to_bottom,transparent,black_15%,black_85%,transparent)]">
-          
-          {/* Track 1: Drifting Left */}
-          <div className="animate-marquee-left flex items-center gap-3">
-            {[...HERO_FLOATING_BLURBS_TOP, ...HERO_FLOATING_BLURBS_TOP].map((item, idx) => (
-              <div
-                key={`track1-${idx}`}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-[#E2E8F0] shadow-sm backdrop-blur-[1px] text-[11px] font-mono text-[#475467] shrink-0"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-[#533AFD]" />
-                <span className="font-bold text-[#0D1738]">{item.name}</span>
-                <span className="text-slate-300">•</span>
-                <span className="text-[#667085]">{item.desc}</span>
-                <span className={`px-1.5 py-0.5 text-[9px] font-bold rounded border ${item.color}`}>
-                  {item.metric}
-                </span>
-                <span className="text-[10px] text-slate-400 font-semibold">{item.latency}</span>
-              </div>
-            ))}
-          </div>
-
-          {/* Track 2: Drifting Right */}
-          <div className="animate-marquee-right flex items-center gap-3">
-            {[...HERO_FLOATING_BLURBS_BOTTOM, ...HERO_FLOATING_BLURBS_BOTTOM].map((item, idx) => (
-              <div
-                key={`track2-${idx}`}
-                className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/90 border border-[#E2E8F0] shadow-sm backdrop-blur-[1px] text-[11px] font-mono text-[#475467] shrink-0"
-              >
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500" />
-                <span className="font-bold text-[#0D1738]">{item.name}</span>
-                <span className="text-slate-300">•</span>
-                <span className="text-[#667085]">{item.desc}</span>
-                <span className={`px-1.5 py-0.5 text-[9px] font-bold rounded border ${item.color}`}>
-                  {item.metric}
-                </span>
-                <span className="text-[10px] text-slate-400 font-semibold">{item.latency}</span>
-              </div>
-            ))}
-          </div>
-
-        </div>
-
         {/* Foreground Content */}
         <div className="site-container relative z-10">
           
@@ -1145,10 +1115,15 @@ export default function PortfolioPage() {
             {/* Left Column */}
             <div className="lg:col-span-7 space-y-4">
               
-              <h1 className="text-3xl sm:text-4xl lg:text-[2.65rem] xl:text-[3.05rem] font-black text-[#0D1738] tracking-tight leading-[1.2] sm:leading-[1.2] lg:leading-[1.18]">
+              <h1 className="text-[1.75rem] sm:text-4xl lg:text-[2.65rem] xl:text-[3.05rem] font-black text-[#0D1738] tracking-tight leading-[1.2] sm:leading-[1.2] lg:leading-[1.18]">
                 Engineering Mission-Critical AI Systems &amp;{" "}
-                <span className="bg-gradient-to-r from-[#533AFD] via-[#7F56D9] to-[#0BA5EC] bg-clip-text text-transparent">
-                  Autonomous Swarms.
+                <span className="block sm:inline-block relative overflow-hidden min-h-[1.3em] align-bottom perspective-[1000px]">
+                  <span
+                    key={rotatingDomainIdx}
+                    className="inline-block animate-cylinder-roll bg-gradient-to-r from-[#533AFD] via-[#7F56D9] to-[#0BA5EC] bg-clip-text text-transparent pb-1"
+                  >
+                    {ROTATING_DOMAINS[rotatingDomainIdx]}
+                  </span>
                 </span>
               </h1>
 
@@ -1360,6 +1335,118 @@ export default function PortfolioPage() {
                 <span className="font-mono text-[10px] text-[#533AFD] bg-[#F4F3FF] px-2 py-0.5 rounded font-bold border border-[#D9D6FE]">
                   44 Orbital Cockpits
                 </span>
+              </div>
+            </div>
+
+          </div>
+
+          {/* =================================================================== */}
+          {/* KINETIC ROTATING ROPE TELEMETRY RIBBON (ZERO-CONFLICT DEDICATED RAIL) */}
+          {/* Undulating Wavy SVG Rope carrying continuous system telemetry */}
+          {/* =================================================================== */}
+          <div className="mt-8 pt-6 border-t border-[#EAECF0] relative">
+            
+            {/* Header & Verification Telemetry */}
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5 text-xs font-mono">
+              <div className="flex items-center gap-2">
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#533AFD] opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#533AFD]" />
+                </span>
+                <span className="font-bold text-[#0D1738] uppercase tracking-wider text-[11px]">
+                  Continuous Telemetry Stream // 44 Orbital AI Systems
+                </span>
+              </div>
+              <div className="text-[11px] text-[#667085] hidden sm:flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD]" />
+                <span>NIST AI RMF &amp; AI TRiSM</span>
+                <span>•</span>
+                <span className="text-[#533AFD] font-bold">99.98% Guaranteed SLA</span>
+              </div>
+            </div>
+
+            {/* Kinetic Undulating SVG Rope Marquee */}
+            <div className="relative w-full h-14 sm:h-16 overflow-hidden rounded-[6px] bg-[#F8F9FC] border border-[#EAECF0] shadow-inner flex items-center">
+              <svg
+                width="100%"
+                height="100%"
+                viewBox="0 0 1440 68"
+                preserveAspectRatio="none"
+                className="overflow-visible select-none pointer-events-none"
+              >
+                <defs>
+                  {/* Undulating sinusoidal rope path centered vertically with ample clearance */}
+                  <path
+                    id="telemetryRopePath"
+                    d="M -1440,38 Q -1080,18 -720,38 T 0,38 T 720,38 T 1440,38 T 2160,38 T 2880,38"
+                    fill="none"
+                  />
+                  {/* High-contrast brand gradient for flowing text */}
+                  <linearGradient id="ropeTextGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                    <stop offset="0%" stopColor="#4327F5" />
+                    <stop offset="30%" stopColor="#0086C9" />
+                    <stop offset="65%" stopColor="#6938EF" />
+                    <stop offset="100%" stopColor="#4327F5" />
+                  </linearGradient>
+                </defs>
+
+                {/* Braided Rope Guideline 1 (Solid accent strand) */}
+                <path
+                  d="M -1440,38 Q -1080,18 -720,38 T 0,38 T 720,38 T 1440,38 T 2160,38 T 2880,38"
+                  fill="none"
+                  stroke="#533AFD"
+                  strokeOpacity="0.28"
+                  strokeWidth="2.5"
+                />
+
+                {/* Braided Rope Guideline 2 (Dashed secondary strand) */}
+                <path
+                  d="M -1440,42 Q -1080,22 -720,42 T 0,42 T 720,42 T 1440,42 T 2160,42 T 2880,42"
+                  fill="none"
+                  stroke="#0BA5EC"
+                  strokeOpacity="0.35"
+                  strokeWidth="1.5"
+                  strokeDasharray="6 5"
+                />
+
+                {/* Animated Text flowing along the Rope Path */}
+                <text
+                  fill="url(#ropeTextGrad)"
+                  className="font-mono font-bold uppercase text-[12px] tracking-widest"
+                >
+                  <textPath href="#telemetryRopePath" startOffset="0%">
+                    ⚡ 44 PRODUCTION AI SYSTEMS SHIPPED • LEDGERFLOW CORE ($40M+ ESCROW // 118ms) • NIGHTSHIFT AI (GROUNDED INBOX SWARM // 240ms) • LEGIIT COMMAND CTR ($1M ARR // 1M+ ORDERS) • NIST AI RMF SECURED (TRiSM VALIDATED) • GEARSIGNAL AI (12K SIGS/SEC) • THERACORE CLINICAL INTAKE (HIPAA) • CALREALTY OPS (99.98% SLA) • SUPABASE PGVECTOR (SUB-50ms) • INNGEST FAULT-TOLERANT STEP SWARMS • FASTAPI ASYNC ENGINE (38ms) •
+                    <animate
+                      attributeName="startOffset"
+                      from="0%"
+                      to="-50%"
+                      dur="32s"
+                      repeatCount="indefinite"
+                    />
+                  </textPath>
+                </text>
+              </svg>
+            </div>
+
+            {/* Interactive System Capsule Rail (Zero-Conflict Horizontal Stream) */}
+            <div className="mt-2.5 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)]">
+              <div className="animate-marquee-left flex items-center gap-2.5 hover:[animation-play-state:paused]">
+                {[...HERO_FLOATING_BLURBS_TOP, ...HERO_FLOATING_BLURBS_BOTTOM, ...HERO_FLOATING_BLURBS_TOP, ...HERO_FLOATING_BLURBS_BOTTOM].map((item, idx) => (
+                  <a
+                    key={`rope-chip-${idx}`}
+                    href="#ai-systems"
+                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white hover:bg-[#F4F3FF] border border-[#EAECF0] hover:border-[#D9D6FE] shadow-sm text-[11px] font-mono text-[#475467] shrink-0 transition-all cursor-pointer group"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#533AFD] group-hover:scale-125 transition-transform" />
+                    <span className="font-bold text-[#0D1738] group-hover:text-[#533AFD] transition-colors">{item.name}</span>
+                    <span className="text-slate-300">•</span>
+                    <span className="text-[#667085]">{item.desc}</span>
+                    <span className={`px-1.5 py-0.5 text-[9px] font-bold rounded border ${item.color}`}>
+                      {item.metric}
+                    </span>
+                    <span className="text-[10px] text-slate-400 font-semibold">{item.latency}</span>
+                  </a>
+                ))}
               </div>
             </div>
 

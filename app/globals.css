@@ -117,6 +117,34 @@ body {
   animation-play-state: paused;
 }
 
+/* 3D Rotating Word Cylinder / Rope Tumbler Roll */
+@keyframes cylinder-roll {
+  0% {
+    transform: translateY(100%) rotateX(-80deg);
+    opacity: 0;
+  }
+  15% {
+    transform: translateY(0%) rotateX(0deg);
+    opacity: 1;
+  }
+  85% {
+    transform: translateY(0%) rotateX(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-100%) rotateX(80deg);
+    opacity: 0;
+  }
+}
+
+.animate-cylinder-roll {
+  animation: cylinder-roll 2.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  transform-origin: center center -15px;
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+
 @layer components {
   .site-container {
     width: 100%;
