@@ -118,12 +118,12 @@ export function AiMvpRescueSection() {
           </div>
 
           <a
-            href="https://calendly.com/shakilhq/30min"
+            href="https://www.upwork.com/freelancers/~01e19084859cda495e"
             target="_blank"
             rel="noreferrer"
             className="btn-primary text-xs sm:text-sm whitespace-nowrap shrink-0 w-full sm:w-auto text-center"
           >
-            <span>Request MVP Architecture Review</span>
+            <span>Request MVP Review on Upwork</span>
             <ArrowUpRight className="w-4 h-4" />
           </a>
         </div>

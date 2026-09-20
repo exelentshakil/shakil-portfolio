@@ -25,14 +25,14 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: "Shakil Ahmed | Principal AI & Systems Architect | 44 Production AI Systems",
+    default: "Shakil Ahmed | Principal AI & Systems Architect | 50+ Production AI Systems",
     template: "%s | Shakil Ahmed",
   },
   icons: {
     icon: '/icon.png?v=2',
   },
   description:
-      "Principal AI & Systems Architect and Founder of BarakahSoft LLC. 12+ years engineering mission-critical architectures. Former Engineering Team Lead at Legiit (scaled AI Command Center to $1M ARR across 1,500+ businesses). Shipped 44 verified production AI applications, autonomous agent swarms, and enterprise SaaS systems. Securiti Certified AI Security & Governance Architect.",
+      "Principal AI & Systems Architect and Founder of BarakahSoft LLC. 12+ years engineering mission-critical architectures. Former Engineering Team Lead at Legiit (scaled AI Command Center to $1M ARR across 1,500+ businesses). Shipped 50+ verified production AI applications, autonomous agent swarms, and enterprise SaaS systems. Securiti Certified AI Security & Governance Architect.",
   keywords: [
     "AI Full Stack Developer",
     "AI MVP Developer",
@@ -86,7 +86,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Shakil Ahmed | Principal AI & Systems Architect",
-    description: "Architected $1M ARR AI Command Center at Legiit. 44 verified production AI systems, autonomous swarms & high-concurrency SaaS platforms. 12+ years systems engineering.",
+    description: "Architected $1M ARR AI Command Center at Legiit. 50+ verified production AI systems, autonomous swarms & high-concurrency SaaS platforms. 12+ years systems engineering.",
     images: ["/og-image.jpg"],
   },
   alternates: {

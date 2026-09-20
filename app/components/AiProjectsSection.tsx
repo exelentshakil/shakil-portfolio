@@ -173,7 +173,7 @@ export function AiProjectsSection() {
             </h2>
 
             <p className="text-sm text-[#475467] leading-relaxed">
-              Browse <strong>44 verified live applications</strong> spanning autonomous agent swarms, governed RAG pipelines, computer vision estimators, and financial state machines with deterministic zero-drift boundaries.
+              Browse <strong>50+ verified live applications</strong> spanning autonomous agent swarms, governed RAG pipelines, computer vision estimators, and financial state machines with deterministic zero-drift boundaries.
             </p>
           </div>
 
@@ -182,7 +182,7 @@ export function AiProjectsSection() {
             <div className="px-3.5 py-2 rounded-[6px] bg-white border border-[#E4E7EC] shadow-xs flex items-center gap-3 text-xs text-[#344054]">
               <div className="flex items-center gap-1.5 text-emerald-600 font-semibold">
                 <ShieldCheck className="w-4 h-4 text-emerald-600" />
-                <span>44 / 44 Verified Live</span>
+                <span>50+ / 50+ Verified Live</span>
               </div>
               <span className="text-slate-300">|</span>
               <span className="font-mono text-[11px] text-[#667085]">Zero-Drift Invariants</span>
@@ -770,21 +770,21 @@ export function AiProjectsSection() {
           </div>
           <div className="flex items-center gap-3 shrink-0 w-full md:w-auto">
             <a
-              href="https://calendly.com/shakilhq/30min"
+              href="https://www.upwork.com/freelancers/~01e19084859cda495e"
               target="_blank"
               rel="noreferrer"
               className="px-4 py-2.5 rounded-[4px] bg-[#533AFD] hover:bg-[#4326EB] text-white font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 w-full md:w-auto shadow-sm"
             >
-              <span>Book Strategy Call</span>
+              <span>Hire on Upwork</span>
               <ArrowUpRight className="w-4 h-4" />
             </a>
             <a
-              href="https://wa.me/13075336678?text=Hi%20Shakil,%20I'd%20like%20to%20discuss%20an%20AI%20project."
+              href="https://www.upwork.com/freelancers/~01e19084859cda495e"
               target="_blank"
               rel="noreferrer"
               className="px-4 py-2.5 rounded-[4px] bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 w-full md:w-auto border border-white/20"
             >
-              <span>WhatsApp</span>
+              <span>Verified Partner Profile</span>
             </a>
           </div>
         </div>

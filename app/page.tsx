@@ -9,6 +9,7 @@ import {
   ArrowDown,
   AlertTriangle,
   Check,
+  CheckCircle2,
   Github,
   Layers3,
   ShieldCheck,
@@ -1042,24 +1043,24 @@ export default function PortfolioPage() {
             </a>
           </nav>
 
-          {/* Action CTAs */}
+          {/* Action CTAs - 100% Upwork Compliant */}
           <div className="flex items-center gap-2.5">
             <a
-              href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
+              href="https://www.upwork.com/freelancers/~01e19084859cda495e"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] bg-white hover:bg-[#F8F9FC] text-[#344054] hover:text-[#0D1738] text-xs font-semibold border border-[#D0D5DD] transition-all hidden sm:inline-flex shadow-sm"
             >
-              <MessageCircle className="w-3.5 h-3.5 text-emerald-600" />
-              WhatsApp
+              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
+              Verified Partner
             </a>
             <a
-              href="https://calendly.com/shakilhq/30min"
+              href="https://www.upwork.com/freelancers/~01e19084859cda495e"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-xs font-semibold shadow-sm hover:shadow-md transition-all border border-transparent"
             >
-              Book Mission
+              Hire on Upwork
               <ArrowUpRight className="w-3.5 h-3.5" />
             </a>
           </div>
@@ -1128,7 +1129,7 @@ export default function PortfolioPage() {
               </h1>
 
               <p className="text-sm sm:text-base text-[#475467] font-normal leading-relaxed max-w-2xl">
-                12+ years commanding fault-tolerant enterprise architectures that process millions of transactions. Former Engineering Team Lead at <strong className="text-[#0D1738] font-semibold">Legiit</strong> (scaled AI Command Center to $1M ARR across 1,500+ orgs). Shipped 44 production AI systems with deterministic zero-drift boundaries and guaranteed 99.98% SLA.
+                12+ years commanding fault-tolerant enterprise architectures that process millions of transactions. Former Engineering Team Lead at <strong className="text-[#0D1738] font-semibold">Legiit</strong> (scaled AI Command Center to $1M ARR across 1,500+ orgs). Shipped 50+ production AI systems with deterministic zero-drift boundaries and guaranteed 99.98% SLA.
               </p>
 
               {/* 3 Stripe HUD Telemetry Cards */}
@@ -1161,16 +1162,17 @@ export default function PortfolioPage() {
                 </div>
               </div>
 
-              {/* Action Buttons: ZERO Awkward Whitespace - Perfectly Balanced */}
+              {/* Action Buttons: ZERO Awkward Whitespace - 100% Upwork Compliant */}
               <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                 <a
-                  href="https://calendly.com/shakilhq/30min"
+                  href="https://www.upwork.com/freelancers/~01e19084859cda495e"
                   target="_blank"
                   rel="noreferrer"
                   className="btn-primary gap-2 shadow-md shadow-[#533AFD]/20 hover:shadow-[#533AFD]/35 text-xs sm:text-sm font-semibold justify-center py-2.5 px-5"
                 >
-                  <Calendar className="w-4 h-4" />
-                  <span>Book Architecture Mission</span>
+                  <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+                  <span>Hire on Upwork (Verified Partner)</span>
+                  <ArrowUpRight className="w-4 h-4" />
                 </a>
 
                 <a
@@ -1178,18 +1180,18 @@ export default function PortfolioPage() {
                   className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-[4px] bg-[#F4F3FF] hover:bg-[#EBE9FE] text-[#533AFD] hover:text-[#4327F5] border border-[#D9D6FE] hover:border-[#533AFD] transition-all text-xs sm:text-sm font-semibold shadow-sm"
                 >
                   <Sparkles className="w-4 h-4 text-[#533AFD]" />
-                  <span>Engage 44 AI Cockpits</span>
+                  <span>Explore 50+ Production Cockpits</span>
                   <ArrowDown className="w-3.5 h-3.5" />
                 </a>
 
                 <a
-                  href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
+                  href="https://www.upwork.com/freelancers/~01e19084859cda495e"
                   target="_blank"
                   rel="noreferrer"
                   className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-[4px] bg-white hover:bg-[#F8F9FC] text-[#344054] hover:text-[#0D1738] border border-[#D0D5DD] hover:border-[#98A2B3] transition-all text-xs font-mono shadow-sm"
                 >
-                  <MessageCircle className="w-4 h-4 text-emerald-600" />
-                  <span>+1 307 533-6678</span>
+                  <ShieldCheck className="w-4 h-4 text-[#533AFD]" />
+                  <span>100% Upwork Compliant</span>
                 </a>
               </div>
 
@@ -1197,7 +1199,7 @@ export default function PortfolioPage() {
               <div className="pt-2.5 border-t border-[#EAECF0] flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#667085] font-mono">
                 <div className="flex items-center gap-1.5">
                   <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  <span className="font-semibold text-[#0D1738]">44 Orbital AI Systems Active</span>
+                  <span className="font-semibold text-[#0D1738]">50+ Orbital AI Systems Active</span>
                 </div>
                 <span className="hidden sm:inline text-slate-300">•</span>
                 <div className="flex items-center gap-1.5">
@@ -1333,7 +1335,7 @@ export default function PortfolioPage() {
                   <span className="font-semibold text-[#0D1738]">Gartner AI TRiSM &amp; NIST AI RMF Validated</span>
                 </div>
                 <span className="font-mono text-[10px] text-[#533AFD] bg-[#F4F3FF] px-2 py-0.5 rounded font-bold border border-[#D9D6FE]">
-                  44 Orbital Cockpits
+                  50+ Orbital Cockpits
                 </span>
               </div>
             </div>
@@ -1354,7 +1356,7 @@ export default function PortfolioPage() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#533AFD]" />
                 </span>
                 <span className="font-bold text-[#0D1738] uppercase tracking-wider text-[11px]">
-                  Continuous Telemetry Stream // 44 Orbital AI Systems
+                  Continuous Telemetry Stream // 50+ Orbital AI Systems
                 </span>
               </div>
               <div className="text-[11px] text-[#667085] hidden sm:flex items-center gap-1.5">
@@ -1415,7 +1417,7 @@ export default function PortfolioPage() {
                   className="font-mono font-bold uppercase text-[12px] tracking-widest"
                 >
                   <textPath href="#telemetryRopePath" startOffset="0%">
-                    ⚡ 44 PRODUCTION AI SYSTEMS SHIPPED • LEDGERFLOW CORE ($40M+ ESCROW // 118ms) • NIGHTSHIFT AI (GROUNDED INBOX SWARM // 240ms) • LEGIIT COMMAND CTR ($1M ARR // 1M+ ORDERS) • NIST AI RMF SECURED (TRiSM VALIDATED) • GEARSIGNAL AI (12K SIGS/SEC) • THERACORE CLINICAL INTAKE (HIPAA) • CALREALTY OPS (99.98% SLA) • SUPABASE PGVECTOR (SUB-50ms) • INNGEST FAULT-TOLERANT STEP SWARMS • FASTAPI ASYNC ENGINE (38ms) •
+                    ⚡ 50+ PRODUCTION AI SYSTEMS SHIPPED • LEDGERFLOW CORE ($40M+ ESCROW // 118ms) • NIGHTSHIFT AI (GROUNDED INBOX SWARM // 240ms) • LEGIIT COMMAND CTR ($1M ARR // 1M+ ORDERS) • NIST AI RMF SECURED (TRiSM VALIDATED) • GEARSIGNAL AI (12K SIGS/SEC) • THERACORE CLINICAL INTAKE (HIPAA) • CALREALTY OPS (99.98% SLA) • SUPABASE PGVECTOR (SUB-50ms) • INNGEST FAULT-TOLERANT STEP SWARMS • FASTAPI ASYNC ENGINE (38ms) •
                     <animate
                       attributeName="startOffset"
                       from="0%"
@@ -1502,7 +1504,7 @@ export default function PortfolioPage() {
                   NIST AI RMF
                 </span>
               </div>
-              <div className="text-2xl sm:text-3xl font-bold text-[#0D1738] tracking-tight">44 Systems</div>
+              <div className="text-2xl sm:text-3xl font-bold text-[#0D1738] tracking-tight">50+ Systems</div>
               <div className="text-xs font-semibold text-[#344054] mt-1">Production AI Architectures</div>
               <p className="text-[11px] text-[#667085] mt-1 leading-relaxed">
                 Autonomous swarms, governed RAG pipelines, multimodal vision & enterprise quoting.
@@ -2365,22 +2367,22 @@ export default function PortfolioPage() {
                       </div>
                       <div className="flex items-center gap-2">
                         <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
-                        <span className="font-semibold text-[#0D1738]">44 Production AI Systems Shipped</span>
+                        <span className="font-semibold text-[#0D1738]">50+ Production AI Systems Shipped</span>
                         <span className="text-[10px] text-emerald-700 font-mono font-semibold">99.98% SLA</span>
                       </div>
                     </div>
 
                     <div className="pt-2.5 border-t border-[#EAECF0] flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
                       <a
-                        href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
+                        href="https://www.upwork.com/freelancers/~01e19084859cda495e"
                         target="_blank"
                         rel="noreferrer"
                         className="inline-flex items-center gap-1.5 text-[#533AFD] hover:text-[#4327F5] font-bold whitespace-nowrap"
                       >
-                        <MessageCircle className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                        <span>+1 307 533-6678</span>
+                        <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD] shrink-0" />
+                        <span>Upwork Direct Messaging</span>
                       </a>
-                      <span className="text-[#667085] text-[11px] whitespace-nowrap">Sheridan, WY (US MDT)</span>
+                      <span className="text-[#667085] text-[11px] whitespace-nowrap">US MDT • Verified Identity</span>
                     </div>
                   </div>
 
@@ -2450,7 +2452,7 @@ export default function PortfolioPage() {
                   </div>
                   <div className="p-2.5 rounded-[4px] bg-white border border-[#EAECF0] shadow-sm">
                     <div className="text-[10px] uppercase font-mono font-bold text-[#667085]">AI FLEET</div>
-                    <div className="text-base sm:text-lg font-black text-[#533AFD] mt-0.5">44 Systems</div>
+                    <div className="text-base sm:text-lg font-black text-[#533AFD] mt-0.5">50+ Systems</div>
                     <div className="text-[10px] text-[#667085] font-mono">Shipped &amp; Live</div>
                   </div>
                   <div className="p-2.5 rounded-[4px] bg-white border border-[#EAECF0] shadow-sm">
@@ -2463,22 +2465,21 @@ export default function PortfolioPage() {
                 {/* Action Buttons */}
                 <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                   <a
-                    href="https://calendly.com/shakilhq/30min"
+                    href="https://www.upwork.com/freelancers/~01e19084859cda495e"
                     target="_blank"
                     rel="noreferrer"
                     className="btn-primary gap-2 text-xs sm:text-sm font-semibold justify-center py-2.5 px-5 shadow-md shadow-[#533AFD]/20"
                   >
-                    <Calendar className="w-4 h-4" />
-                    <span>Book Strategy Call with Shakil</span>
+                    <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+                    <span>Start Contract or Interview on Upwork</span>
+                    <ArrowUpRight className="w-4 h-4" />
                   </a>
                   <a
-                    href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20saw%20your%20portfolio%20and%20would%20like%20to%20discuss%20a%20project."
-                    target="_blank"
-                    rel="noreferrer"
+                    href="#ai-systems"
                     className="btn-secondary gap-2 text-xs sm:text-sm font-semibold justify-center py-2.5 px-4 shadow-sm"
                   >
-                    <MessageCircle className="w-4 h-4 text-emerald-600" />
-                    <span>Chat on WhatsApp</span>
+                    <Sparkles className="w-4 h-4 text-[#533AFD]" />
+                    <span>Review 50+ Production Systems</span>
                   </a>
                 </div>
 
@@ -2590,23 +2591,24 @@ export default function PortfolioPage() {
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <a
-                  href="https://calendly.com/shakilhq/30min"
+                  href="https://www.upwork.com/freelancers/~01e19084859cda495e"
                   target="_blank"
                   rel="noreferrer"
                   className="btn-primary text-xs py-2.5 px-4"
                 >
-                  <Calendar className="w-4 h-4" />
-                  Schedule 30-Minute Strategy Call
+                  <CheckCircle2 className="w-4 h-4 text-emerald-300" />
+                  Hire or Interview on Upwork
+                  <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
 
                 <a
-                  href="https://wa.me/13075336678?text=Hi%20Shakil,%20I%20would%20like%20to%20discuss%20a%20new%20project."
+                  href="https://www.upwork.com/freelancers/~01e19084859cda495e"
                   target="_blank"
                   rel="noreferrer"
                   className="btn-secondary text-xs py-2.5 px-4 bg-white text-[#0D1738] hover:bg-slate-100"
                 >
-                  <MessageCircle className="w-4 h-4 text-emerald-600" />
-                  WhatsApp (+1 307 533-6678)
+                  <ShieldCheck className="w-4 h-4 text-[#533AFD]" />
+                  Upwork Verified Partner (100% Compliant)
                 </a>
               </div>
             </div>
@@ -2643,25 +2645,26 @@ export default function PortfolioPage() {
                 <div className="space-y-3 text-xs text-slate-300">
                   <div className="flex items-start gap-3">
                     <div className="w-7 h-7 rounded-[4px] bg-[#533AFD]/20 text-[#D9D6FE] flex items-center justify-center shrink-0 mt-0.5">
-                      <Phone className="w-3.5 h-3.5" />
+                      <ShieldCheck className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Phone & WhatsApp</div>
-                      <a href="tel:+13075336678" className="text-white font-semibold hover:text-[#D9D6FE] transition-colors">
-                        +1 (307) 533-6678
+                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Upwork Verified Profile</div>
+                      <a href="https://www.upwork.com/freelancers/~01e19084859cda495e" target="_blank" rel="noreferrer" className="text-white font-semibold hover:text-[#D9D6FE] transition-colors flex items-center gap-1">
+                        <span>upwork.com/freelancers/~01e19084859cda495e</span>
+                        <ArrowUpRight className="w-3 h-3 text-emerald-400" />
                       </a>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
                     <div className="w-7 h-7 rounded-[4px] bg-[#533AFD]/20 text-[#D9D6FE] flex items-center justify-center shrink-0 mt-0.5">
-                      <Mail className="w-3.5 h-3.5" />
+                      <Lock className="w-3.5 h-3.5" />
                     </div>
                     <div>
-                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Email Direct</div>
-                      <a href="mailto:hello@barakahsoft.com" className="text-white font-semibold hover:text-[#D9D6FE] transition-colors">
-                        hello@barakahsoft.com
-                      </a>
+                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Enterprise Engagement Policy</div>
+                      <div className="text-slate-200">
+                        100% Upwork Terms Compliant • Contracts & Messages On-Platform
+                      </div>
                     </div>
                   </div>
 
@@ -2733,7 +2736,7 @@ export default function PortfolioPage() {
           </div>
 
           <div className="text-slate-400">
-            30 N. Gould St. Ste R, Sheridan, WY 82801 • Tel: +1 (307) 533-6678
+            30 N. Gould St. Ste R, Sheridan, WY 82801 • All Upwork engagements contracted on-platform
           </div>
         </div>
       </footer>
