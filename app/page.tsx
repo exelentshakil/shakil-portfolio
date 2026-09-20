@@ -1046,7 +1046,7 @@ export default function PortfolioPage() {
           {/* Action CTAs - 100% Upwork Compliant */}
           <div className="flex items-center gap-2.5">
             <a
-              href="https://www.upwork.com/freelancers/~01e19084859cda495e"
+              href="https://www.upwork.com/freelancers/shakilhq"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] bg-white hover:bg-[#F8F9FC] text-[#344054] hover:text-[#0D1738] text-xs font-semibold border border-[#D0D5DD] transition-all hidden sm:inline-flex shadow-sm"
@@ -1055,7 +1055,7 @@ export default function PortfolioPage() {
               Verified Partner
             </a>
             <a
-              href="https://www.upwork.com/freelancers/~01e19084859cda495e"
+              href="https://www.upwork.com/freelancers/shakilhq"
               target="_blank"
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-xs font-semibold shadow-sm hover:shadow-md transition-all border border-transparent"
@@ -1163,35 +1163,35 @@ export default function PortfolioPage() {
               </div>
 
               {/* Action Buttons: ZERO Awkward Whitespace - 100% Upwork Compliant */}
-              <div className="pt-2 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+              <div className="pt-2 flex flex-wrap items-center gap-2.5 sm:gap-3">
                 <a
-                  href="https://www.upwork.com/freelancers/~01e19084859cda495e"
+                  href="https://www.upwork.com/freelancers/shakilhq"
                   target="_blank"
                   rel="noreferrer"
-                  className="btn-primary gap-2 shadow-md shadow-[#533AFD]/20 hover:shadow-[#533AFD]/35 text-xs sm:text-sm font-semibold justify-center py-2.5 px-5"
+                  className="btn-primary gap-2 shadow-md shadow-[#533AFD]/20 hover:shadow-[#533AFD]/35 text-xs sm:text-sm font-semibold justify-center py-2.5 px-4 sm:px-5 whitespace-nowrap shrink-0"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-emerald-300" />
-                  <span>Hire on Upwork (Verified Partner)</span>
-                  <ArrowUpRight className="w-4 h-4" />
+                  <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0" />
+                  <span className="whitespace-nowrap">Hire on Upwork</span>
+                  <ArrowUpRight className="w-4 h-4 shrink-0" />
                 </a>
 
                 <a
                   href="#ai-systems"
-                  className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-[4px] bg-[#F4F3FF] hover:bg-[#EBE9FE] text-[#533AFD] hover:text-[#4327F5] border border-[#D9D6FE] hover:border-[#533AFD] transition-all text-xs sm:text-sm font-semibold shadow-sm"
+                  className="inline-flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-[4px] bg-[#F4F3FF] hover:bg-[#EBE9FE] text-[#533AFD] hover:text-[#4327F5] border border-[#D9D6FE] hover:border-[#533AFD] transition-all text-xs sm:text-sm font-semibold shadow-sm whitespace-nowrap shrink-0"
                 >
-                  <Sparkles className="w-4 h-4 text-[#533AFD]" />
-                  <span>Explore 50+ Production Cockpits</span>
-                  <ArrowDown className="w-3.5 h-3.5" />
+                  <Sparkles className="w-4 h-4 text-[#533AFD] shrink-0" />
+                  <span className="whitespace-nowrap">Explore 50+ Systems</span>
+                  <ArrowDown className="w-3.5 h-3.5 shrink-0" />
                 </a>
 
                 <a
-                  href="https://www.upwork.com/freelancers/~01e19084859cda495e"
+                  href="https://www.upwork.com/freelancers/shakilhq"
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 rounded-[4px] bg-white hover:bg-[#F8F9FC] text-[#344054] hover:text-[#0D1738] border border-[#D0D5DD] hover:border-[#98A2B3] transition-all text-xs font-mono shadow-sm"
+                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-[4px] bg-white hover:bg-[#F8F9FC] text-[#344054] hover:text-[#0D1738] border border-[#D0D5DD] hover:border-[#98A2B3] transition-all text-xs font-mono shadow-sm whitespace-nowrap shrink-0"
                 >
-                  <ShieldCheck className="w-4 h-4 text-[#533AFD]" />
-                  <span>100% Upwork Compliant</span>
+                  <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD] shrink-0" />
+                  <span className="whitespace-nowrap">Verified Partner</span>
                 </a>
               </div>
 
@@ -2210,7 +2210,7 @@ export default function PortfolioPage() {
 
               <div className="pt-2 md:pt-0 md:px-4 text-center">
                 <div className="text-[#0D1738] font-bold text-lg">Top 1%</div>
-                <div className="text-[11px] text-[#475467] font-medium mt-0.5">Preferred Freelancer SLA</div>
+                <div className="text-[11px] text-[#475467] font-medium mt-0.5">Engineering Partner SLA</div>
               </div>
             </div>
           </div>
@@ -2346,8 +2346,8 @@ export default function PortfolioPage() {
                         </span>
                       </div>
                       <div className="text-[11px] text-slate-300 mt-1.5 flex items-center gap-1.5">
-                        <MapPin className="w-3 h-3 text-[#533AFD] shrink-0" />
-                        <span>Founder, BarakahSoft LLC • Sheridan, WY</span>
+                        <Layers3 className="w-3 h-3 text-[#533AFD] shrink-0" />
+                        <span>Founder, BarakahSoft LLC • Enterprise Systems Engineering</span>
                       </div>
                     </div>
                   </div>
@@ -2374,7 +2374,7 @@ export default function PortfolioPage() {
 
                     <div className="pt-2.5 border-t border-[#EAECF0] flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
                       <a
-                        href="https://www.upwork.com/freelancers/~01e19084859cda495e"
+                        href="https://www.upwork.com/freelancers/shakilhq"
                         target="_blank"
                         rel="noreferrer"
                         className="inline-flex items-center gap-1.5 text-[#533AFD] hover:text-[#4327F5] font-bold whitespace-nowrap"
@@ -2465,14 +2465,14 @@ export default function PortfolioPage() {
                 {/* Action Buttons */}
                 <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
                   <a
-                    href="https://www.upwork.com/freelancers/~01e19084859cda495e"
+                    href="https://www.upwork.com/freelancers/shakilhq"
                     target="_blank"
                     rel="noreferrer"
-                    className="btn-primary gap-2 text-xs sm:text-sm font-semibold justify-center py-2.5 px-5 shadow-md shadow-[#533AFD]/20"
+                    className="btn-primary gap-2 text-xs sm:text-sm font-semibold justify-center py-2.5 px-5 shadow-md shadow-[#533AFD]/20 whitespace-nowrap shrink-0"
                   >
-                    <CheckCircle2 className="w-4 h-4 text-emerald-300" />
-                    <span>Start Contract or Interview on Upwork</span>
-                    <ArrowUpRight className="w-4 h-4" />
+                    <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0" />
+                    <span className="whitespace-nowrap">Hire on Upwork</span>
+                    <ArrowUpRight className="w-4 h-4 shrink-0" />
                   </a>
                   <a
                     href="#ai-systems"
@@ -2591,7 +2591,7 @@ export default function PortfolioPage() {
 
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <a
-                  href="https://www.upwork.com/freelancers/~01e19084859cda495e"
+                  href="https://www.upwork.com/freelancers/shakilhq"
                   target="_blank"
                   rel="noreferrer"
                   className="btn-primary text-xs py-2.5 px-4"
@@ -2602,7 +2602,7 @@ export default function PortfolioPage() {
                 </a>
 
                 <a
-                  href="https://www.upwork.com/freelancers/~01e19084859cda495e"
+                  href="https://www.upwork.com/freelancers/shakilhq"
                   target="_blank"
                   rel="noreferrer"
                   className="btn-secondary text-xs py-2.5 px-4 bg-white text-[#0D1738] hover:bg-slate-100"
@@ -2645,12 +2645,12 @@ export default function PortfolioPage() {
                 <div className="space-y-3 text-xs text-slate-300">
                   <div className="flex items-start gap-3">
                     <div className="w-7 h-7 rounded-[4px] bg-[#533AFD]/20 text-[#D9D6FE] flex items-center justify-center shrink-0 mt-0.5">
-                      <ShieldCheck className="w-3.5 h-3.5" />
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
                     </div>
                     <div>
-                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Upwork Verified Profile</div>
-                      <a href="https://www.upwork.com/freelancers/~01e19084859cda495e" target="_blank" rel="noreferrer" className="text-white font-semibold hover:text-[#D9D6FE] transition-colors flex items-center gap-1">
-                        <span>upwork.com/freelancers/~01e19084859cda495e</span>
+                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Official Upwork Profile</div>
+                      <a href="https://www.upwork.com/freelancers/shakilhq" target="_blank" rel="noreferrer" className="text-white font-semibold hover:text-[#D9D6FE] transition-colors flex items-center gap-1">
+                        <span>upwork.com/freelancers/shakilhq</span>
                         <ArrowUpRight className="w-3 h-3 text-emerald-400" />
                       </a>
                     </div>
@@ -2658,62 +2658,40 @@ export default function PortfolioPage() {
 
                   <div className="flex items-start gap-3">
                     <div className="w-7 h-7 rounded-[4px] bg-[#533AFD]/20 text-[#D9D6FE] flex items-center justify-center shrink-0 mt-0.5">
-                      <Lock className="w-3.5 h-3.5" />
+                      <Lock className="w-3.5 h-3.5 text-[#533AFD]" />
                     </div>
                     <div>
-                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Enterprise Engagement Policy</div>
+                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Engagement & Compliance Policy</div>
                       <div className="text-slate-200">
-                        100% Upwork Terms Compliant • Contracts & Messages On-Platform
+                        100% Upwork Terms Compliant • All Contracts &amp; Messages On-Platform
                       </div>
                     </div>
                   </div>
 
                   <div className="flex items-start gap-3">
                     <div className="w-7 h-7 rounded-[4px] bg-[#533AFD]/20 text-[#D9D6FE] flex items-center justify-center shrink-0 mt-0.5">
-                      <MapPin className="w-3.5 h-3.5" />
+                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
                     </div>
                     <div>
-                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Business Headquarters</div>
+                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Escrow Payment Protection</div>
                       <div className="text-slate-200">
-                        30 N. Gould St. Ste R, Sheridan, WY 82801, USA
+                        Escrow-Funded Milestones &amp; Verified Upwork Hourly Billing
                       </div>
                     </div>
                   </div>
                 </div>
 
-                {/* Freelancer & Platform Profiles */}
-                <div className="pt-4 border-t border-slate-700/80 flex flex-wrap items-center gap-2 text-xs">
+                {/* Upwork Direct CTA Strip */}
+                <div className="pt-4 border-t border-slate-700/80 flex items-center justify-between gap-3">
+                  <span className="text-[11px] text-slate-400 font-mono">Available for Upwork Contracts</span>
                   <a
-                    href="https://www.upwork.com/freelancers/~01e19084859cda495e"
+                    href="https://www.upwork.com/freelancers/shakilhq"
                     target="_blank"
                     rel="noreferrer"
-                    className="px-2.5 py-1 rounded-[2px] bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors text-[11px]"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-xs font-semibold shadow-sm transition-all whitespace-nowrap"
                   >
-                    Upwork Top Talent ↗
-                  </a>
-                  <a
-                    href="https://www.freelancer.com/u/exelentshakil"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-2.5 py-1 rounded-[2px] bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors text-[11px]"
-                  >
-                    Freelancer.com ↗
-                  </a>
-                  <a
-                    href="https://github.com/exelentshakil"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-2.5 py-1 rounded-[2px] bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors text-[11px]"
-                  >
-                    GitHub ↗
-                  </a>
-                  <a
-                    href="https://x.com/shakilhq"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="px-2.5 py-1 rounded-[2px] bg-slate-800 hover:bg-slate-700 text-slate-200 transition-colors text-[11px]"
-                  >
-                    Twitter / X ↗
+                    <span>Hire on Upwork</span>
+                    <ArrowUpRight className="w-3.5 h-3.5" />
                   </a>
                 </div>
 
@@ -2736,7 +2714,7 @@ export default function PortfolioPage() {
           </div>
 
           <div className="text-slate-400">
-            30 N. Gould St. Ste R, Sheridan, WY 82801 • All Upwork engagements contracted on-platform
+            All client engagements contracted strictly on-platform via Upwork
           </div>
         </div>
       </footer>

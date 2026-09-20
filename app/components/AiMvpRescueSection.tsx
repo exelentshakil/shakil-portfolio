@@ -118,7 +118,7 @@ export function AiMvpRescueSection() {
           </div>
 
           <a
-            href="https://www.upwork.com/freelancers/~01e19084859cda495e"
+            href="https://www.upwork.com/freelancers/shakilhq"
             target="_blank"
             rel="noreferrer"
             className="btn-primary text-xs sm:text-sm whitespace-nowrap shrink-0 w-full sm:w-auto text-center"

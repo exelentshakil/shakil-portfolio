@@ -165,6 +165,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
     gap: 7px;
     padding: 9.5px 18px;
     border-radius: 4px;
@@ -191,6 +192,7 @@ body {
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
     gap: 7px;
     padding: 9.5px 18px;
     border-radius: 4px;

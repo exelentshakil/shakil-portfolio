@@ -107,7 +107,7 @@ export default function RootLayout({
     "url": BASE_URL,
     "image": `${BASE_URL}/profile-photo.jpg`,
     "sameAs": [
-      "https://www.upwork.com/freelancers/~01e19084859cda495e",
+      "https://www.upwork.com/freelancers/shakilhq",
       "https://legiit.com",
       "https://barakahsoft.com"
     ],

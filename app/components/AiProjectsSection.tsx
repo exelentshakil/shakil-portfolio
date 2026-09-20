@@ -770,7 +770,7 @@ export function AiProjectsSection() {
           </div>
           <div className="flex items-center gap-3 shrink-0 w-full md:w-auto">
             <a
-              href="https://www.upwork.com/freelancers/~01e19084859cda495e"
+              href="https://www.upwork.com/freelancers/shakilhq"
               target="_blank"
               rel="noreferrer"
               className="px-4 py-2.5 rounded-[4px] bg-[#533AFD] hover:bg-[#4326EB] text-white font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-2 w-full md:w-auto shadow-sm"
@@ -779,7 +779,7 @@ export function AiProjectsSection() {
               <ArrowUpRight className="w-4 h-4" />
             </a>
             <a
-              href="https://www.upwork.com/freelancers/~01e19084859cda495e"
+              href="https://www.upwork.com/freelancers/shakilhq"
               target="_blank"
               rel="noreferrer"
               className="px-4 py-2.5 rounded-[4px] bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 w-full md:w-auto border border-white/20"
