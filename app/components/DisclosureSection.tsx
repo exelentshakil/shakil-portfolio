@@ -34,7 +34,7 @@ export function DisclosureSection() {
 
                         <div className="text-sm md:text-base text-neutral-400 leading-relaxed space-y-2">
                             <p>
-                                Integrity is the foundation of my work. Please note that many of the large-scale projects and case studies featured in this portfolio—including Legiit, Steve Weatherford, and others—were architected and executed during my tenure as the <span className="text-emerald-400 font-medium">Lead Technical Architect</span> at <span className="text-white font-medium">No Half Cakes</span>.
+                                Integrity is the foundation of my work. Please note that many of the large-scale projects and case studies featured in this portfolio, including Legiit, Steve Weatherford, and others, were architected and executed during my tenure as the <span className="text-emerald-400 font-medium">Lead Technical Architect</span> at <span className="text-white font-medium">No Half Cakes</span>.
                             </p>
                             <p>
                                 I was the technical engine behind these brands, delivering agency-level results with enterprise reliability.

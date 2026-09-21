@@ -896,11 +896,11 @@ const HERO_FLAGSHIP_DEMOS: HeroFlagshipDemo[] = [
 ];
 
 const ROTATING_DOMAINS = [
-  "Autonomous Swarms.",
-  "Production AI Fleets.",
+  "Private Custom ML Containers.",
+  "4-Bit LoRA vLLM Infrastructure.",
   "Enterprise LLM Firewalls.",
-  "Fault-Tolerant Ledgers.",
-  "Self-Healing Pipelines.",
+  "Autonomous Agent Fleets.",
+  "Fault-Tolerant Cloud Backends.",
 ];
 
 export default function PortfolioPage() {
@@ -1010,7 +1010,7 @@ export default function PortfolioPage() {
                 </span>
               </div>
               <div className="text-[11px] font-mono text-[#667085] leading-none mt-1">
-                Principal Systems Architect
+                Enterprise AI &amp; Private ML Architect
               </div>
             </div>
           </a>
@@ -1097,7 +1097,7 @@ export default function PortfolioPage() {
               </div>
               <span className="font-bold text-[#0D1738] tracking-wide shrink-0">Shakil Ahmed</span>
               <span className="text-slate-300 shrink-0">•</span>
-              <span className="font-semibold text-[#533AFD] shrink-0">Principal Systems Architect</span>
+              <span className="font-semibold text-[#533AFD] shrink-0">Enterprise AI &amp; Private ML Architect</span>
               <span className="text-slate-300 hidden sm:inline shrink-0">•</span>
               <span className="text-[#344054] font-medium hidden sm:inline-flex items-center gap-1 shrink-0">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD]" />
@@ -1129,7 +1129,7 @@ export default function PortfolioPage() {
               </h1>
 
               <p className="text-sm sm:text-base text-[#475467] font-normal leading-relaxed max-w-2xl">
-                12+ years commanding fault-tolerant enterprise architectures that process millions of transactions. Former Engineering Team Lead at <strong className="text-[#0D1738] font-semibold">Legiit</strong> (scaled AI Command Center to $1M ARR across 1,500+ orgs). Shipped 50+ production AI systems with deterministic zero-drift boundaries and guaranteed 99.98% SLA.
+                12+ years commanding fault-tolerant enterprise systems and private machine learning architectures. Former Engineering Team Lead at <strong className="text-[#0D1738] font-semibold">Legiit</strong> (scaled core marketplace and AI Command Center to $1M ARR across 400K+ users). Specializing in 4-bit LoRA private cloud containers, sub-50ms execution, zero third-party data leaks, and Securiti certified AI governance.
               </p>
 
               {/* 3 Stripe HUD Telemetry Cards */}
@@ -2347,7 +2347,7 @@ export default function PortfolioPage() {
                       </div>
                       <div className="text-[11px] text-slate-300 mt-1.5 flex items-center gap-1.5">
                         <Layers3 className="w-3 h-3 text-[#533AFD] shrink-0" />
-                        <span>Founder, BarakahSoft LLC • Enterprise Systems Engineering</span>
+                        <span>Founder, BarakahSoft LLC • Single-Member Consultancy (100% Direct Hands-On)</span>
                       </div>
                     </div>
                   </div>
@@ -2369,6 +2369,11 @@ export default function PortfolioPage() {
                         <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
                         <span className="font-semibold text-[#0D1738]">50+ Production AI Systems Shipped</span>
                         <span className="text-[10px] text-emerald-700 font-mono font-semibold">99.98% SLA</span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Lock className="w-4 h-4 text-[#533AFD] shrink-0" />
+                        <span className="font-semibold text-[#0D1738]">Direct Hands-On Collaboration</span>
+                        <span className="text-[10px] text-[#533AFD] font-mono font-semibold bg-[#F4F3FF] px-1.5 py-0.5 rounded border border-[#D9D6FE]">Zero Subcontracting</span>
                       </div>
                     </div>
 

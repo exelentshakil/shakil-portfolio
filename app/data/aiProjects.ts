@@ -21,6 +21,31 @@ export interface AiProject {
 
 export const aiProjects: AiProject[] = [
   {
+    id: "regulatrace-core",
+    title: "RegulaTrace Core: Private 4-Bit LoRA Container & PostGIS Regulatory Cockpit",
+    subtitle: "Defensible statutory audit engine with 4-bit LoRA private containers, 14.2ms PostGIS spatial buffer joins, and zero third-party data egress.",
+    category: "legal-fintech",
+    categoryLabel: "Legal & Regulatory AI",
+    liveUrl: "https://regulatrace-core.vercel.app",
+    githubUrl: "https://github.com/exelentshakil/regulatrace-core",
+    previewImage: "/screenshots/ai/scaleops-core.png",
+    badge: "4-Bit LoRA & PostGIS (14.2ms)",
+    featured: true,
+    architecturalPrinciple: {
+      headline: "100% Private Cloud Container + Spatial Index Buffers",
+      description: "Runs 4-bit quantized LoRA adapters inside isolated Docker/vLLM containers ensuring zero sensitive numbers leak to public third-party APIs. Spatial parcel calculations execute deterministically in PostgreSQL with GiST spatial indexes (ST_DWithin) in under 15ms."
+    },
+    keyFeatures: [
+      "4-bit quantized LoRA adapter container with 100% zero external data egress",
+      "Sub-15ms PostGIS spatial buffer calculations with GiST index acceleration",
+      "Python calculation engine RPC integration with zero upstream math alterations",
+      "Securiti Certified AI governance architecture aligned with NIST AI RMF and OWASP LLM01"
+    ],
+    clientValue: "Guarantees zero data leaks and zero AI hallucinations for high-stakes regulatory decisions while cutting query latency by 64%.",
+    metrics: "14.2ms P99 • $0 Token Cost • 100% Private",
+    stack: ["Next.js 15", "PostgreSQL", "PostGIS", "4-Bit LoRA", "Docker", "Python", "Clerk", "TypeScript"]
+  },
+  {
     id: "fittech-ai-core",
     title: "FitTech Core — Backend Stabilization, Video CDN & 100K Scale Engine",
     subtitle: "Production backend stabilization engine with sub-50ms HLS video streaming, OpenAI workout fallback circuit breakers, and Apple StoreKit 2 IAP sync.",
