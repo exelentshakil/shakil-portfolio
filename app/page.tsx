@@ -2337,17 +2337,20 @@ export default function PortfolioPage() {
                     {/* Bottom Profile Identity Bar */}
                     <div className="absolute bottom-3 left-3 right-3 p-3 rounded-[4px] bg-[#0D1738]/90 backdrop-blur-md border border-white/10 text-white">
                       <div className="flex items-center justify-between gap-2">
-                        <div>
+                        <div className="min-w-0">
                           <div className="text-base font-bold text-white leading-tight">Shakil Ahmed</div>
-                          <div className="text-xs text-[#D9D6FE] font-medium mt-0.5">Principal Systems Architect</div>
+                          <div className="text-xs text-[#D9D6FE] font-medium mt-0.5 truncate">Enterprise AI &amp; Private ML Architect</div>
                         </div>
-                        <span className="px-2 py-0.5 rounded bg-[#533AFD] text-white text-[10px] font-mono font-bold shrink-0">
+                        <span className="px-2 py-0.5 rounded bg-[#533AFD] text-white text-[10px] font-mono font-bold shrink-0 whitespace-nowrap">
                           12+ Yrs Exp
                         </span>
                       </div>
-                      <div className="text-[11px] text-slate-300 mt-1.5 flex items-center gap-1.5">
-                        <Layers3 className="w-3 h-3 text-[#533AFD] shrink-0" />
-                        <span>Founder, BarakahSoft LLC • Single-Member Consultancy (100% Direct Hands-On)</span>
+                      <div className="text-[11px] text-slate-300 mt-1.5 flex items-center justify-between gap-1.5">
+                        <div className="flex items-center gap-1.5 min-w-0">
+                          <Layers3 className="w-3 h-3 text-[#533AFD] shrink-0" />
+                          <span className="truncate">Founder, BarakahSoft LLC</span>
+                        </div>
+                        <span className="text-[10px] text-[#D9D6FE] font-mono shrink-0 whitespace-nowrap">Single-Member</span>
                       </div>
                     </div>
                   </div>
