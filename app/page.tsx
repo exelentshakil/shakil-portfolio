@@ -1129,7 +1129,7 @@ export default function PortfolioPage() {
               </h1>
 
               <p className="text-sm sm:text-base text-[#475467] font-normal leading-relaxed max-w-2xl">
-                12+ years commanding fault-tolerant enterprise systems and private machine learning architectures. Former Engineering Team Lead at <strong className="text-[#0D1738] font-semibold">Legiit</strong> (scaled core marketplace and AI Command Center to $1M ARR across 400K+ users). Specializing in 4-bit LoRA private cloud containers, sub-50ms execution, zero third-party data leaks, and Securiti certified AI governance.
+                15+ years commanding fault-tolerant enterprise systems and private machine learning architectures. Former Engineering Team Lead at <strong className="text-[#0D1738] font-semibold">Legiit</strong> (scaled core marketplace and AI Command Center to $1M ARR across 400K+ users). Specializing in 4-bit LoRA private cloud containers, sub-50ms execution, zero third-party data leaks, and Securiti certified AI governance.
               </p>
 
               {/* 3 Stripe HUD Telemetry Cards */}
@@ -1523,7 +1523,7 @@ export default function PortfolioPage() {
               <div className="text-2xl sm:text-3xl font-bold text-[#0D1738] tracking-tight">125+ Reviews</div>
               <div className="text-xs font-semibold text-[#344054] mt-1">Verified Five-Star Track Record</div>
               <p className="text-[11px] text-[#667085] mt-1 leading-relaxed">
-                12+ years of enterprise systems engineering. Guaranteed milestone delivery.
+                15+ years of enterprise systems engineering. Guaranteed milestone delivery.
               </p>
             </div>
 
@@ -2342,7 +2342,7 @@ export default function PortfolioPage() {
                           <div className="text-xs text-[#D9D6FE] font-medium mt-0.5 truncate">Senior Systems and Integration Engineer</div>
                         </div>
                         <span className="px-2 py-0.5 rounded bg-[#533AFD] text-white text-[10px] font-mono font-bold shrink-0 whitespace-nowrap">
-                          12+ Yrs Exp
+                          15+ Yrs Exp
                         </span>
                       </div>
                       <div className="text-[11px] text-slate-300 mt-1.5 flex items-center justify-between gap-1.5">
@@ -2419,7 +2419,7 @@ export default function PortfolioPage() {
                   </h2>
 
                   <p className="text-xs sm:text-sm text-[#475467] leading-relaxed">
-                    When you partner with me, you collaborate directly with a 12-year systems architect on every line of code, architecture decision, and deployment. No account managers, no junior developers learning on your project, and no agency overhead.
+                    When you partner with me, you collaborate directly with a 15-year systems architect on every line of code, architecture decision, and deployment. No account managers, no junior developers learning on your project, and no agency overhead.
                   </p>
                 </div>
 
@@ -2455,7 +2455,7 @@ export default function PortfolioPage() {
                 <div className="grid grid-cols-3 gap-2.5">
                   <div className="p-2.5 rounded-[4px] bg-white border border-[#EAECF0] shadow-sm">
                     <div className="text-[10px] uppercase font-mono font-bold text-[#667085]">EXPERIENCE</div>
-                    <div className="text-base sm:text-lg font-black text-[#0D1738] mt-0.5">12+ Years</div>
+                    <div className="text-base sm:text-lg font-black text-[#0D1738] mt-0.5">15+ Years</div>
                     <div className="text-[10px] text-[#667085] font-mono">Systems Eng</div>
                   </div>
                   <div className="p-2.5 rounded-[4px] bg-white border border-[#EAECF0] shadow-sm">
