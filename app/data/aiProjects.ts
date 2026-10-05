@@ -47,7 +47,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "fittech-ai-core",
-    title: "FitTech Core — Backend Stabilization, Video CDN & 100K Scale Engine",
+    title: "FitTech Core - Backend Stabilization, Video CDN & 100K Scale Engine",
     subtitle: "Production backend stabilization engine with sub-50ms HLS video streaming, OpenAI workout fallback circuit breakers, and Apple StoreKit 2 IAP sync.",
     category: "workflow-orchestration",
     categoryLabel: "Scale & Workflow Orchestration",
@@ -72,7 +72,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "twilio-voice-agent",
-    title: "Twilio Voice Agent — Real-time Autonomous Dispatch & Inbound Voice Engine",
+    title: "Twilio Voice Agent - Real-time Autonomous Dispatch & Inbound Voice Engine",
     subtitle: "Enterprise telecommunication gateway with ultra-low latency WebSocket bi-directional audio streaming, automated caller intent routing, and real-time CRM ingestion.",
     category: "autonomous-agents",
     categoryLabel: "Autonomous Voice & Agents",
@@ -97,7 +97,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "woo-whatsapp-agent",
-    title: "WooCommerce AI WhatsApp Agent — Autonomous Cart Recovery & Conversational Commerce",
+    title: "WooCommerce AI WhatsApp Agent - Autonomous Cart Recovery & Conversational Commerce",
     subtitle: "Official Meta Cloud API commerce agent with real-time WooCommerce catalog synchronization, abandoned checkout recovery, and multi-currency order tracking.",
     category: "autonomous-agents",
     categoryLabel: "Autonomous Agents & Commerce",
@@ -122,7 +122,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "meet-eric-core",
-    title: "Meet Eric Core — AI Executive Calendar & Priority Meeting Dispatcher",
+    title: "Meet Eric Core - AI Executive Calendar & Priority Meeting Dispatcher",
     subtitle: "Autonomous executive scheduling assistant with natural language email parsing, timezone reconciliation, and calendar conflict defense.",
     category: "workflow-orchestration",
     categoryLabel: "Workflow Orchestration",
@@ -147,7 +147,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "venuestrike-core",
-    title: "VenueStrike Core — Multi-Location Venue Scheduling & Real-Time Event Dispatch",
+    title: "VenueStrike Core - Multi-Location Venue Scheduling & Real-Time Event Dispatch",
     subtitle: "Enterprise hospitality and event management engine with live floor plan allocation, real-time staff roster sync, and automated VIP guest dispatch.",
     category: "workflow-orchestration",
     categoryLabel: "Workflow Orchestration",
@@ -172,7 +172,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "cliniko-ai-ops",
-    title: "Cliniko AI Ops — Healthcare Telehealth EHR Automation & Patient Voice Intake",
+    title: "Cliniko AI Ops - Healthcare Telehealth EHR Automation & Patient Voice Intake",
     subtitle: "HIPAA/GDPR-aligned healthcare operations cockpit integrating Cliniko EHR with automated patient intake transcription, diagnostic code mapping, and clinical note generation.",
     category: "legal-fintech",
     categoryLabel: "Healthcare & Compliance AI",
@@ -197,7 +197,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "nightshift-ai-employee",
-    title: "NightShift — Autonomous Inbox Agent & AI Employee",
+    title: "NightShift - Autonomous Inbox Agent & AI Employee",
     subtitle: "Enterprise inbox agent with grounded knowledge retrieval and human-in-the-loop approval gates.",
     category: "autonomous-agents",
     categoryLabel: "Autonomous Agents",
@@ -207,7 +207,7 @@ export const aiProjects: AiProject[] = [
     featured: true,
     architecturalPrinciple: {
       headline: "Grounded RAG + Approval-Gated Actions",
-      description: "Answers strictly cite ingested company documentation. Every external side effect (Gmail draft, CRM update, calendar booking) queues in 'pending' status — zero writes without explicit human approval."
+      description: "Answers strictly cite ingested company documentation. Every external side effect (Gmail draft, CRM update, calendar booking) queues in 'pending' status - zero writes without explicit human approval."
     },
     keyFeatures: [
       "Strict citation-grounded RAG: Refuses to invent policies or hallucinate customer replies",
@@ -221,7 +221,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "prospect-os",
-    title: "Prospect OS — Autonomous Outbound Engine",
+    title: "Prospect OS - Autonomous Outbound Engine",
     subtitle: "End-to-end B2B sales automation engine powered by 8 specialized sub-agents with auditable rubric scoring.",
     category: "autonomous-agents",
     categoryLabel: "Autonomous Agents",
@@ -246,7 +246,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "parcelquote",
-    title: "ParcelQuote — Instant Property Quoting Platform",
+    title: "ParcelQuote - Instant Property Quoting Platform",
     subtitle: "High-precision commercial and residential property quoting engine using OpenStreetMap polygon geometry.",
     category: "workflow-orchestration",
     categoryLabel: "Quoting & Geospatial",
@@ -296,7 +296,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "ledgerflow-core",
-    title: "LedgerFlow Core — Autonomous Payment & Ledger Compliance Engine",
+    title: "LedgerFlow Core - Autonomous Payment & Ledger Compliance Engine",
     subtitle: "Enterprise fintech settlement engine with NACHA 94-char ACH compilation, double-entry ledger invariants, and dual-provider AI compliance.",
     category: "legal-fintech",
     categoryLabel: "FinTech & Payments AI",
@@ -321,7 +321,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "forward-rag-os",
-    title: "Forward RAG OS — Enterprise Knowledge Base & Boundary Shield",
+    title: "Forward RAG OS - Enterprise Knowledge Base & Boundary Shield",
     subtitle: "Governed RAG architecture with air-gapped data tiering, de-identification quarantine, and ChatGPT Boundary Shield.",
     category: "rag-knowledge",
     categoryLabel: "Governed RAG & Knowledge Systems",
@@ -371,7 +371,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "ai-automation-hub",
-    title: "AI Automation Hub — Multi-Pipeline Orchestrator",
+    title: "AI Automation Hub - Multi-Pipeline Orchestrator",
     subtitle: "Confidence-routed operational ecosystem spanning customer email, CRM lead scoring, and automated task dispatch.",
     category: "workflow-orchestration",
     categoryLabel: "Workflow Orchestration",
@@ -396,7 +396,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "callscore-ai",
-    title: "CallScore AI — Deterministic Call Grading Engine",
+    title: "CallScore AI - Deterministic Call Grading Engine",
     subtitle: "Voice call transcription, speaker diarization, and drift-free employee performance evaluation.",
     category: "rag-knowledge",
     categoryLabel: "Audio AI & QA",
@@ -421,7 +421,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "intercapital-lending-ai",
-    title: "InterCapital Funding — AI Commercial Lending Platform",
+    title: "InterCapital Funding - AI Commercial Lending Platform",
     subtitle: "Intelligent commercial real estate lending dashboard with automated OCR document extraction and RAG underwriting.",
     category: "legal-fintech",
     categoryLabel: "FinTech & Real Estate",
@@ -446,7 +446,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "carfix-ai",
-    title: "CarFix AI — Multimodal Damage Assessment Engine",
+    title: "CarFix AI - Multimodal Damage Assessment Engine",
     subtitle: "Automated vehicle damage detection and repair cost range estimation via multimodal vision and background queues.",
     category: "multimodal-vision",
     categoryLabel: "Multimodal AI",
@@ -471,7 +471,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "isocore-saas",
-    title: "IsoCore SaaS — Multi-Tenant Kernel RLS & Invariant Ledger",
+    title: "IsoCore SaaS - Multi-Tenant Kernel RLS & Invariant Ledger",
     subtitle: "Enterprise SaaS kernel with multi-tenant row-level security, deterministic ledger invariants, and 5-role RBAC.",
     category: "legal-fintech",
     categoryLabel: "Legal & FinTech AI",
@@ -496,7 +496,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "taxflow-core",
-    title: "TaxFlow Core — 14-Step Tax Pipeline OCR & Filing Engine",
+    title: "TaxFlow Core - 14-Step Tax Pipeline OCR & Filing Engine",
     subtitle: "End-to-end tax practice automation pipeline with dual AI OCR extraction, Form 8879 gates, and Drake/UltraTax bridges.",
     category: "legal-fintech",
     categoryLabel: "Legal & FinTech AI",
@@ -521,7 +521,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "therascore-ai",
-    title: "TheraScore AI — Clinical Psychotherapy Quality & Adherence Platform",
+    title: "TheraScore AI - Clinical Psychotherapy Quality & Adherence Platform",
     subtitle: "HIPAA-compliant psychotherapy session evaluation engine computing DBT-ARS and CTRS adherence scores with inline safety firewalls.",
     category: "legal-fintech",
     categoryLabel: "Legal & FinTech AI",
@@ -546,7 +546,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "sdr-resume-os",
-    title: "SDR Resume OS — Vector RAG Career Positioning & Transformation Engine",
+    title: "SDR Resume OS - Vector RAG Career Positioning & Transformation Engine",
     subtitle: "Career positioning platform utilizing 50+ exemplar vector embeddings and a VP of Sales 6-second glance evaluation model.",
     category: "rag-knowledge",
     categoryLabel: "Governed RAG & Knowledge",
@@ -571,7 +571,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "gearsignal-ai",
-    title: "GearSignal AI — Modular Social-Listening & Lead Discovery MVP",
+    title: "GearSignal AI - Modular Social-Listening & Lead Discovery MVP",
     subtitle: "Autonomous social listening engine monitoring Reddit and guitar marketplaces with centralized keyword routing and Slack Block Kit alerts.",
     category: "rag-knowledge",
     categoryLabel: "Governed RAG & Knowledge",
@@ -596,7 +596,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "squiderp-agentic-governance",
-    title: "SquidERP — Agentic Architecture Governance & Drift Firewall",
+    title: "SquidERP - Agentic Architecture Governance & Drift Firewall",
     subtitle: "Enterprise ERP agentic control plane governing multi-agent ERP operations with drift detection and compliance gates.",
     category: "workflow-orchestration",
     categoryLabel: "Orchestration & Quoting",
@@ -621,7 +621,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "callguard-ops",
-    title: "CallGuard Ops — Trade Answering Voice AI & Dispatch Cockpit",
+    title: "CallGuard Ops - Trade Answering Voice AI & Dispatch Cockpit",
     subtitle: "Voice AI telephone answering system with Retell Scottish trade prompt bench, Make.com DLQ handlers, and Twilio failover.",
     category: "autonomous-agents",
     categoryLabel: "Autonomous Agents",
@@ -646,7 +646,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "revops-orchestrator-ai",
-    title: "RevOps Orchestrator — Enterprise Revenue Automation Engine",
+    title: "RevOps Orchestrator - Enterprise Revenue Automation Engine",
     subtitle: "Enterprise RevOps orchestration platform synchronizing Salesforce, HubSpot, and billing systems via multi-agent state machines.",
     category: "workflow-orchestration",
     categoryLabel: "Orchestration & Quoting",
@@ -671,7 +671,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "docref-vault",
-    title: "DocRef Vault — Full-Stack Document Reference & Filing System",
+    title: "DocRef Vault - Full-Stack Document Reference & Filing System",
     subtitle: "Regulatory document reference and semantic filing platform with deterministic section citation and metadata extraction.",
     category: "rag-knowledge",
     categoryLabel: "Governed RAG & Knowledge",
@@ -696,7 +696,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "claude-dev-cockpit",
-    title: "Claude Dev Cockpit — Anthropic Architecture & Workflow Bench",
+    title: "Claude Dev Cockpit - Anthropic Architecture & Workflow Bench",
     subtitle: "Production architecture workbench and evaluation cockpit for multi-agent workflows, prompt caching, and tool execution.",
     category: "rag-knowledge",
     categoryLabel: "Governed RAG & Knowledge",
@@ -721,7 +721,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "erate-procure-iq",
-    title: "E-Rate Procure IQ — USAC Form 470 School Procurement Platform",
+    title: "E-Rate Procure IQ - USAC Form 470 School Procurement Platform",
     subtitle: "Public sector procurement intelligence engine parsing USAC E-Rate Form 470 RFP filings for school hardware and telecom contracts.",
     category: "rag-knowledge",
     categoryLabel: "Governed RAG & Knowledge",
@@ -746,7 +746,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "cozad-priorauth",
-    title: "Cozad Medical Ops — Healthcare Prior Authorization AI",
+    title: "Cozad Medical Ops - Healthcare Prior Authorization AI",
     subtitle: "Clinical documentation and prior authorization engine matching patient EHR records to insurance payer medical necessity rubrics.",
     category: "legal-fintech",
     categoryLabel: "Legal & FinTech AI",
@@ -771,7 +771,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "nassau-clean-ai",
-    title: "Nassau Clean AI — Residential Cleaning Booking & Route Dispatch",
+    title: "Nassau Clean AI - Residential Cleaning Booking & Route Dispatch",
     subtitle: "Autonomous residential cleaning quote and booking engine with real-time distance matrix calculations and crew scheduling.",
     category: "multimodal-vision",
     categoryLabel: "Computer Vision & Multimodal",
@@ -796,7 +796,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "influencer-reach-crm",
-    title: "Influencer Reach CRM — Platform-Compliant Creator Engine",
+    title: "Influencer Reach CRM - Platform-Compliant Creator Engine",
     subtitle: "Enterprise creator outreach platform built strictly around official Meta Graph and TikTok APIs with automated rate-card tracking.",
     category: "legal-fintech",
     categoryLabel: "Legal & FinTech AI",
@@ -821,7 +821,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "pipedrive-integrations-hub",
-    title: "Pipedrive Integrations Hub — Bi-Directional Webhook & SMS Sync",
+    title: "Pipedrive Integrations Hub - Bi-Directional Webhook & SMS Sync",
     subtitle: "Unified integration hub connecting Pipedrive CRM to Sinch AI SMS agents, attribution tracking, and Power BI data pipelines.",
     category: "workflow-orchestration",
     categoryLabel: "Orchestration & Quoting",
@@ -846,7 +846,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "n8n-hospitality-crm-ai",
-    title: "N8N Hospitality CRM — Multilingual Guest Orchestrator",
+    title: "N8N Hospitality CRM - Multilingual Guest Orchestrator",
     subtitle: "Autonomous hospitality management engine orchestrating guest inquiries, upsells, and multilingual support via n8n workflows.",
     category: "workflow-orchestration",
     categoryLabel: "Orchestration & Quoting",
@@ -871,7 +871,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "trendpulse-ai-agent",
-    title: "TrendPulse AI — Social Intelligence & Video Scripting Agent",
+    title: "TrendPulse AI - Social Intelligence & Video Scripting Agent",
     subtitle: "Autonomous multi-channel intelligence agent analyzing viral TikTok and YouTube trends to generate validated video scripts.",
     category: "autonomous-agents",
     categoryLabel: "Autonomous Agents",
@@ -896,7 +896,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "nextdrip-va-phone",
-    title: "NextDrip VA Phone — Healthcare IVR & Concierge Telephony",
+    title: "NextDrip VA Phone - Healthcare IVR & Concierge Telephony",
     subtitle: "Virtual assistant telephony and SMS routing engine for specialty medical wellness and concierge IV therapy practices.",
     category: "autonomous-agents",
     categoryLabel: "Autonomous Agents",
@@ -921,7 +921,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "vsl-pipeline-qa",
-    title: "VSL Pipeline QA — Video Script Generation & Compliance Studio",
+    title: "VSL Pipeline QA - Video Script Generation & Compliance Studio",
     subtitle: "Autonomous video sales letter pipeline generator with psychological hook modeling and FTC compliance verification.",
     category: "multimodal-vision",
     categoryLabel: "Computer Vision & Multimodal",
@@ -946,7 +946,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "freedom-motors-sync",
-    title: "Freedom Motors Sync — Automotive Inventory & Sanity CMS Bridge",
+    title: "Freedom Motors Sync - Automotive Inventory & Sanity CMS Bridge",
     subtitle: "Automotive dealer inventory synchronization platform linking dealer management systems (DMS) to Next.js 15 and Sanity CMS.",
     category: "multimodal-vision",
     categoryLabel: "Computer Vision & Multimodal",
@@ -971,7 +971,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "fsm-protocol-studio",
-    title: "FSM Protocol Studio — Frequency Research & Code Compiler",
+    title: "FSM Protocol Studio - Frequency Research & Code Compiler",
     subtitle: "Clinical research and protocol compilation engine for Frequency Specific Microcurrent (FSM) hardware and medical devices.",
     category: "rag-knowledge",
     categoryLabel: "Governed RAG & Knowledge",
@@ -996,7 +996,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "cal-realty-ops",
-    title: "Cal Realty Ops — California Real Estate Autonomous Transaction Layer",
+    title: "Cal Realty Ops - California Real Estate Autonomous Transaction Layer",
     subtitle: "Autonomous real estate transaction coordinator platform managing California Association of Realtors (CAR) forms and escrow timelines.",
     category: "workflow-orchestration",
     categoryLabel: "Orchestration & Quoting",
@@ -1021,7 +1021,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "augusta-lights-ai",
-    title: "Augusta Lights AI — Architectural Lighting Visualization & Quote Platform",
+    title: "Augusta Lights AI - Architectural Lighting Visualization & Quote Platform",
     subtitle: "Mobile-first architectural holiday and commercial lighting quotation platform with interactive multi-zone rendering.",
     category: "multimodal-vision",
     categoryLabel: "Computer Vision & Multimodal",
@@ -1046,7 +1046,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "personaflow-ai",
-    title: "PersonaFlow AI — Consumer AI Simulation & Qualitative Intelligence",
+    title: "PersonaFlow AI - Consumer AI Simulation & Qualitative Intelligence",
     subtitle: "Consumer persona simulation engine conducting synthetic focus groups and generating automated PDF market research dossiers.",
     category: "autonomous-agents",
     categoryLabel: "Autonomous Agents",
@@ -1071,7 +1071,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "ai-systems-cockpit",
-    title: "AI Systems Cockpit — Fractional Systems Advisor & Cost Router",
+    title: "AI Systems Cockpit - Fractional Systems Advisor & Cost Router",
     subtitle: "Fractional AI systems executive console featuring multi-model cost routing, latency benchmarking, and architecture governance.",
     category: "rag-knowledge",
     categoryLabel: "Governed RAG & Knowledge",
@@ -1096,7 +1096,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "ontario-student-voice",
-    title: "Ontario Student Voice — Career College Enrollment Voice Agent",
+    title: "Ontario Student Voice - Career College Enrollment Voice Agent",
     subtitle: "Autonomous outbound voice verification and qualification pipeline for Ontario career colleges adhering to Ministry standards.",
     category: "autonomous-agents",
     categoryLabel: "Autonomous Agents",
@@ -1121,7 +1121,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "retirement-scorecard-app",
-    title: "Retirement Scorecard — Advisory Diagnostics & Wealth Simulator",
+    title: "Retirement Scorecard - Advisory Diagnostics & Wealth Simulator",
     subtitle: "Wealth advisory diagnostics engine assessing retirement readiness, tax drag, and portfolio longevity across 4 risk vectors.",
     category: "legal-fintech",
     categoryLabel: "Legal & FinTech AI",
@@ -1146,7 +1146,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "home-loan-review-ai",
-    title: "HomeLoanRev AI — Mortgage Client Reactivation & Review Engine",
+    title: "HomeLoanRev AI - Mortgage Client Reactivation & Review Engine",
     subtitle: "Conversational mortgage client engagement platform conducting annual home loan reviews and refinancing qualification.",
     category: "autonomous-agents",
     categoryLabel: "Autonomous Agents",
@@ -1171,7 +1171,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "shk-process-ops",
-    title: "W\u00e4rme Wimmer SHK Ops — Plumbing & HVAC Autonomous Dispatch",
+    title: "W\u00e4rme Wimmer SHK Ops - Plumbing & HVAC Autonomous Dispatch",
     subtitle: "German sanitary, heating, and air conditioning (SHK) business process platform with automated emergency dispatch and n8n pipelines.",
     category: "workflow-orchestration",
     categoryLabel: "Orchestration & Quoting",
@@ -1196,7 +1196,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "atelier-barbershop",
-    title: "Atelier Grooming — Bespoke Editorial Barbershop Platform",
+    title: "Atelier Grooming - Bespoke Editorial Barbershop Platform",
     subtitle: "High-density editorial barbershop web platform featuring split-drag before/after visualizers and friction-free booking.",
     category: "multimodal-vision",
     categoryLabel: "Computer Vision & Multimodal",
@@ -1221,7 +1221,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "buildinspect-ai",
-    title: "BuildInspect AI — Computer Vision Construction & OSHA Compliance",
+    title: "BuildInspect AI - Computer Vision Construction & OSHA Compliance",
     subtitle: "Computer vision building inspection platform detecting structural defects and OSHA code violations in real time.",
     category: "multimodal-vision",
     categoryLabel: "Computer Vision & Multimodal",
@@ -1246,7 +1246,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "agentops-core",
-    title: "AgentOps Core — Multi-Agent Swarm Orchestration & Trace Console",
+    title: "AgentOps Core - Multi-Agent Swarm Orchestration & Trace Console",
     subtitle: "Production-grade multi-agent governance platform providing DAG workflow scheduling, trace observability, and token telemetry.",
     category: "autonomous-agents",
     categoryLabel: "Autonomous Agents",
@@ -1271,7 +1271,7 @@ export const aiProjects: AiProject[] = [
   },
   {
     id: "scaleops-core",
-    title: "ScaleOps Core — SaaS Infrastructure Reliability & Chaos Console",
+    title: "ScaleOps Core - SaaS Infrastructure Reliability & Chaos Console",
     subtitle: "SaaS backend reliability and autoscaling platform with automated failover testing, database query profiling, and queue monitors.",
     category: "workflow-orchestration",
     categoryLabel: "Orchestration & Quoting",

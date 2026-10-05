@@ -172,7 +172,7 @@ function CustomTelemetryTooltip({ active, payload, label }: TooltipProps) {
 }
 
 // --------------------------------------------------------------------------
-// 10 Common Scalable System Bottlenecks — Diagnosed & Resolved
+// 10 Common Scalable System Bottlenecks - Diagnosed & Resolved
 // --------------------------------------------------------------------------
 interface BottleneckStudy {
   id: string;
@@ -836,7 +836,7 @@ const HERO_FLAGSHIP_DEMOS: HeroFlagshipDemo[] = [
   {
     id: "ledgerflow",
     name: "LedgerFlow",
-    title: "LedgerFlow Core — Autonomous ACH Ledger",
+    title: "LedgerFlow Core - Autonomous ACH Ledger",
     tagline: "High-Frequency Autonomous Financial Ledger & Instant ACH Reconciliation",
     category: "Fintech & Autonomous Ledger",
     image: "/screenshots/ai/ledgerflow-core.png",
@@ -851,7 +851,7 @@ const HERO_FLAGSHIP_DEMOS: HeroFlagshipDemo[] = [
   {
     id: "nightshift",
     name: "NightShift",
-    title: "NightShift — Autonomous Inbox AI Employee",
+    title: "NightShift - Autonomous Inbox AI Employee",
     tagline: "Grounded Enterprise Inbox Swarm with Strict HITL Approval Gates",
     category: "Autonomous Swarms",
     image: "/screenshots/ai/nightshift-preview.png",
@@ -881,7 +881,7 @@ const HERO_FLAGSHIP_DEMOS: HeroFlagshipDemo[] = [
   {
     id: "gearsignal",
     name: "GearSignal",
-    title: "GearSignal AI — Automotive Telemetry",
+    title: "GearSignal AI - Automotive Telemetry",
     tagline: "Real-Time Vehicle Diagnostic Pipeline with Edge Inference",
     category: "Real-time Telemetry",
     image: "/screenshots/ai/gearsignal-ai.png",
@@ -1010,7 +1010,7 @@ export default function PortfolioPage() {
                 </span>
               </div>
               <div className="text-[11px] font-mono text-[#667085] leading-none mt-1">
-                Enterprise AI &amp; Private ML Architect
+                Senior Systems and Integration Engineer
               </div>
             </div>
           </a>
@@ -1097,11 +1097,11 @@ export default function PortfolioPage() {
               </div>
               <span className="font-bold text-[#0D1738] tracking-wide shrink-0">Shakil Ahmed</span>
               <span className="text-slate-300 shrink-0">•</span>
-              <span className="font-semibold text-[#533AFD] shrink-0">Enterprise AI &amp; Private ML Architect</span>
+              <span className="font-semibold text-[#533AFD] shrink-0">Senior Systems and Integration Engineer</span>
               <span className="text-slate-300 hidden sm:inline shrink-0">•</span>
               <span className="text-[#344054] font-medium hidden sm:inline-flex items-center gap-1 shrink-0">
                 <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD]" />
-                Securiti Certified AI Architect
+                Securiti Certified Systems & AI Architect
               </span>
               <span className="text-slate-300 hidden md:inline shrink-0">•</span>
               <span className="text-[#027A48] font-semibold hidden md:inline-flex items-center gap-1.5 shrink-0">
@@ -1649,7 +1649,7 @@ export default function PortfolioPage() {
                     &quot;He didn&apos;t just patch features together, he engineered the architecture that allows us to scale safely.&quot;
                   </p>
                   <span className="block not-italic font-bold text-[#0D1738] mt-1.5 text-[11px] tracking-tight">
-                    — Chris M. Walker, CEO of Legiit
+                    - Chris M. Walker, CEO of Legiit
                   </span>
                 </div>
 
@@ -1730,7 +1730,7 @@ export default function PortfolioPage() {
       <AiMvpRescueSection />
 
       {/* -------------------------------------------------------------------- */}
-      {/* 4.5 10 CRITICAL BOTTLENECKS IN SCALABLE SYSTEMS — INTERACTIVE LAB */}
+      {/* 4.5 10 CRITICAL BOTTLENECKS IN SCALABLE SYSTEMS - INTERACTIVE LAB */}
       {/* -------------------------------------------------------------------- */}
       <section className="section-pad bg-white border-b border-[#EAECF0]">
         <div className="site-container">
@@ -1740,7 +1740,7 @@ export default function PortfolioPage() {
             <div className="max-w-2xl">
               <span className="badge-tag mb-2">Architectural Strategy Lab</span>
               <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0D1738] tracking-tight">
-                10 Bottlenecks in Scalable Systems — Diagnosed & Resolved
+                10 Bottlenecks in Scalable Systems - Diagnosed & Resolved
               </h2>
               <p className="text-xs sm:text-sm text-[#475467] mt-1.5 leading-relaxed">
                 How I identify root causes, evaluate framework trade-offs, and engineer high-concurrency solutions that keep systems fast and reliable under heavy traffic.
@@ -1787,7 +1787,7 @@ export default function PortfolioPage() {
                   }`}
                 >
                   <span className="font-mono text-[11px] opacity-80">{study.num}</span>
-                  <span>{study.title.split("&")[0].split("—")[0].trim()}</span>
+                  <span>{study.title.split("&")[0].split(" - ")[0].trim()}</span>
                 </button>
               ))}
             </div>
@@ -2309,7 +2309,7 @@ export default function PortfolioPage() {
           <div className="bg-[#F8FAFC] rounded-[8px] border border-[#D0D5DD] p-6 lg:p-8 shadow-sm">
             <div className="grid lg:grid-cols-12 gap-8 items-stretch">
               
-              {/* Left Column: Executive Architect Dossier Card */}
+              {/* Left Column: Executive Systems Engineer Dossier Card */}
               <div className="lg:col-span-5 flex flex-col">
                 <div className="bg-white rounded-[6px] border border-[#D0D5DD] shadow-sm overflow-hidden flex flex-col justify-between h-full">
                   
@@ -2317,7 +2317,7 @@ export default function PortfolioPage() {
                   <div className="relative h-[340px] sm:h-[380px] w-full bg-slate-900 overflow-hidden">
                     <Image
                       src="/shakil-headshot.jpeg"
-                      alt="Shakil Ahmed - Principal Systems Architect"
+                      alt="Shakil Ahmed - Principal Systems Engineer"
                       fill
                       sizes="(max-width: 1024px) 100vw, 450px"
                       className="object-cover object-top"
@@ -2339,7 +2339,7 @@ export default function PortfolioPage() {
                       <div className="flex items-center justify-between gap-2">
                         <div className="min-w-0">
                           <div className="text-base font-bold text-white leading-tight">Shakil Ahmed</div>
-                          <div className="text-xs text-[#D9D6FE] font-medium mt-0.5 truncate">Enterprise AI &amp; Private ML Architect</div>
+                          <div className="text-xs text-[#D9D6FE] font-medium mt-0.5 truncate">Senior Systems and Integration Engineer</div>
                         </div>
                         <span className="px-2 py-0.5 rounded bg-[#533AFD] text-white text-[10px] font-mono font-bold shrink-0 whitespace-nowrap">
                           12+ Yrs Exp
@@ -2360,7 +2360,7 @@ export default function PortfolioPage() {
                     <div className="space-y-2 text-xs text-[#344054]">
                       <div className="flex items-center gap-2">
                         <ShieldCheck className="w-4 h-4 text-[#533AFD] shrink-0" />
-                        <span className="font-semibold text-[#0D1738]">Securiti Certified AI Architect</span>
+                        <span className="font-semibold text-[#0D1738]">Securiti Certified Systems & AI Architect</span>
                         <span className="text-[10px] text-[#533AFD] font-mono font-semibold bg-[#F4F3FF] px-1.5 py-0.5 rounded border border-[#D9D6FE]">NIST AI RMF</span>
                       </div>
                       <div className="flex items-center gap-2">
@@ -2406,13 +2406,13 @@ export default function PortfolioPage() {
                     <span className="badge-tag">Direct Engineering Partnership</span>
                     <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[4px] bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] text-[11px] font-bold uppercase tracking-wider">
                       <ShieldCheck className="w-3.5 h-3.5" />
-                      100% Senior Architect Delivery • Zero Junior Handoffs
+                      100% Senior Engineer Delivery • Zero Junior Handoffs
                     </div>
                   </div>
 
                   {/* Balanced Headline with No Awkward Orphans */}
                   <h2 className="text-2xl sm:text-3xl lg:text-[2.2rem] font-black text-[#0D1738] tracking-tight leading-[1.22] [text-wrap:balance]">
-                    Direct Technical Leadership —{" "}
+                    Direct Technical Leadership - {" "}
                     <span className="bg-gradient-to-r from-[#533AFD] via-[#7F56D9] to-[#0BA5EC] bg-clip-text text-transparent">
                       No Junior Handoffs, No Agency Bloat.
                     </span>
@@ -2499,7 +2499,7 @@ export default function PortfolioPage() {
             <div className="mt-5 p-3.5 rounded-[6px] bg-white border border-[#EAECF0] flex items-center gap-3 text-xs text-[#667085] shadow-sm">
               <ShieldCheck className="w-4 h-4 text-[#533AFD] shrink-0" />
               <span>
-                <strong className="text-[#0D1738]">Engineering Attribution:</strong> Many featured enterprise case studies (Legiit, Steve Weatherford, agency lead engines) were architected during my tenure as <em>Lead Technical Architect</em> at <strong>No Half Cakes</strong>. I deliver that same agency-grade discipline directly to your business.
+                <strong className="text-[#0D1738]">Engineering Attribution:</strong> Many featured enterprise case studies (Legiit, Steve Weatherford, agency lead engines) were architected during my tenure as <em>Lead Technical Systems Engineer</em> at <strong>No Half Cakes</strong>. I deliver that same agency-grade discipline directly to your business.
               </span>
             </div>
           </div>

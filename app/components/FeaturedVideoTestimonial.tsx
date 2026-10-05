@@ -104,7 +104,7 @@ export function FeaturedVideoTestimonial() {
                             </div>
                         </div>
                         <p className="text-neutral-300 italic text-lg leading-relaxed">
-                             &quot;Most people don&apos;t know this, but Shaq is the man. He builds the platform itself... He didn&apos;t just patch features together—he engineered the architecture that allows us to scale safely.&quot;
+                             &quot;Most people don&apos;t know this, but Shaq is the man. He builds the platform itself... He didn&apos;t just patch features together - he engineered the architecture that allows us to scale safely.&quot;
                         </p>
                     </motion.div>
 

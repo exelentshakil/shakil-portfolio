@@ -198,7 +198,7 @@ export const sites: Site[] = [
     technologies: ["Next.js", "Gemini Vision", "Inngest", "Supabase"]
   },
   {
-    name: "IsoCore SaaS \— Multi-Tenant Kernel RLS & Invariant Ledger",
+    name: "IsoCore SaaS \ -  Multi-Tenant Kernel RLS & Invariant Ledger",
     url: "isocore-saas.vercel.app",
     category: "ai",
     featured: true,
@@ -214,7 +214,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "PostgreSQL 16", "Supabase", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "TaxFlow Core \— 14-Step Tax Pipeline OCR & Filing Engine",
+    name: "TaxFlow Core \ -  14-Step Tax Pipeline OCR & Filing Engine",
     url: "taxflow-core.vercel.app",
     category: "ai",
     featured: true,
@@ -230,7 +230,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "OpenAI Vision", "Gemini 2.5 Flash", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "TheraScore AI \— Clinical Psychotherapy Quality & Adherence Platform",
+    name: "TheraScore AI \ -  Clinical Psychotherapy Quality & Adherence Platform",
     url: "therascore-ai.vercel.app",
     category: "ai",
     featured: true,
@@ -246,7 +246,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "OpenAI API", "Gemini API", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "SDR Resume OS \— Vector RAG Career Positioning & Transformation Engine",
+    name: "SDR Resume OS \ -  Vector RAG Career Positioning & Transformation Engine",
     url: "sdr-resume-os.vercel.app",
     category: "ai",
     featured: true,
@@ -262,7 +262,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Supabase pgvector", "OpenAI API", "Gemini API", "Tailwind CSS"]
   },
   {
-    name: "GearSignal AI \— Modular Social-Listening & Lead Discovery MVP",
+    name: "GearSignal AI \ -  Modular Social-Listening & Lead Discovery MVP",
     url: "gearsignal-ai.vercel.app",
     category: "ai",
     featured: true,
@@ -278,7 +278,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "OpenAI API", "Gemini API", "Slack API", "Tailwind CSS"]
   },
   {
-    name: "SquidERP \— Agentic Architecture Governance & Drift Firewall",
+    name: "SquidERP \ -  Agentic Architecture Governance & Drift Firewall",
     url: "squiderp-agentic-governance.vercel.app",
     category: "ai",
     featured: true,
@@ -294,7 +294,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Claude API", "OpenAI API", "Supabase", "Tailwind CSS"]
   },
   {
-    name: "CallGuard Ops \— Trade Answering Voice AI & Dispatch Cockpit",
+    name: "CallGuard Ops \ -  Trade Answering Voice AI & Dispatch Cockpit",
     url: "callguard-ops.vercel.app",
     category: "ai",
     featured: true,
@@ -310,7 +310,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Retell AI", "Twilio API", "Make.com", "Tailwind CSS"]
   },
   {
-    name: "RevOps Orchestrator \— Enterprise Revenue Automation Engine",
+    name: "RevOps Orchestrator \ -  Enterprise Revenue Automation Engine",
     url: "revops-orchestrator-ai.vercel.app",
     category: "ai",
     featured: true,
@@ -326,7 +326,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Inngest", "Salesforce API", "HubSpot API", "Tailwind CSS"]
   },
   {
-    name: "DocRef Vault \— Full-Stack Document Reference & Filing System",
+    name: "DocRef Vault \ -  Full-Stack Document Reference & Filing System",
     url: "docref-vault.vercel.app",
     category: "ai",
     featured: true,
@@ -342,7 +342,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "PostgreSQL", "Supabase pgvector", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "Claude Dev Cockpit \— Anthropic Architecture & Workflow Bench",
+    name: "Claude Dev Cockpit \ -  Anthropic Architecture & Workflow Bench",
     url: "claude-dev-cockpit.vercel.app",
     category: "ai",
     featured: false,
@@ -358,7 +358,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Claude API", "Prompt Caching", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "E-Rate Procure IQ \— USAC Form 470 School Procurement Platform",
+    name: "E-Rate Procure IQ \ -  USAC Form 470 School Procurement Platform",
     url: "erate-procure-iq.vercel.app",
     category: "ai",
     featured: false,
@@ -374,7 +374,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Gemini API", "OpenAI API", "Supabase", "Tailwind CSS"]
   },
   {
-    name: "Cozad Medical Ops \— Healthcare Prior Authorization AI",
+    name: "Cozad Medical Ops \ -  Healthcare Prior Authorization AI",
     url: "cozad-priorauth.vercel.app",
     category: "ai",
     featured: false,
@@ -390,7 +390,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "OpenAI API", "HIPAA Compliance", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "Nassau Clean AI \— Residential Cleaning Booking & Route Dispatch",
+    name: "Nassau Clean AI \ -  Residential Cleaning Booking & Route Dispatch",
     url: "nassau-clean-ai.vercel.app",
     category: "ai",
     featured: false,
@@ -406,7 +406,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Stripe API", "Google Maps API", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "Influencer Reach CRM \— Platform-Compliant Creator Engine",
+    name: "Influencer Reach CRM \ -  Platform-Compliant Creator Engine",
     url: "influencer-reach-crm.vercel.app",
     category: "ai",
     featured: false,
@@ -422,7 +422,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Meta Graph API", "TikTok API", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "Pipedrive Integrations Hub \— Bi-Directional Webhook & SMS Sync",
+    name: "Pipedrive Integrations Hub \ -  Bi-Directional Webhook & SMS Sync",
     url: "pipedrive-integrations-hub.vercel.app",
     category: "ai",
     featured: false,
@@ -438,7 +438,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Pipedrive API", "Sinch API", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "N8N Hospitality CRM \— Multilingual Guest Orchestrator",
+    name: "N8N Hospitality CRM \ -  Multilingual Guest Orchestrator",
     url: "n8n-hospitality-crm-ai.vercel.app",
     category: "ai",
     featured: false,
@@ -454,7 +454,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "n8n", "OpenAI API", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "TrendPulse AI \— Social Intelligence & Video Scripting Agent",
+    name: "TrendPulse AI \ -  Social Intelligence & Video Scripting Agent",
     url: "trendpulse-ai-agent.vercel.app",
     category: "ai",
     featured: false,
@@ -470,7 +470,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "OpenAI API", "Gemini API", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "NextDrip VA Phone \— Healthcare IVR & Concierge Telephony",
+    name: "NextDrip VA Phone \ -  Healthcare IVR & Concierge Telephony",
     url: "nextdrip-va-phone.vercel.app",
     category: "ai",
     featured: false,
@@ -486,7 +486,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Twilio Voice API", "Twilio SMS", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "VSL Pipeline QA \— Video Script Generation & Compliance Studio",
+    name: "VSL Pipeline QA \ -  Video Script Generation & Compliance Studio",
     url: "vsl-pipeline-qa.vercel.app",
     category: "ai",
     featured: false,
@@ -502,7 +502,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Claude API", "OpenAI API", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "Freedom Motors Sync \— Automotive Inventory & Sanity CMS Bridge",
+    name: "Freedom Motors Sync \ -  Automotive Inventory & Sanity CMS Bridge",
     url: "freedom-motors-sync.vercel.app",
     category: "ai",
     featured: false,
@@ -518,7 +518,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Sanity CMS", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "FSM Protocol Studio \— Frequency Research & Code Compiler",
+    name: "FSM Protocol Studio \ -  Frequency Research & Code Compiler",
     url: "fsm-protocol-studio.vercel.app",
     category: "ai",
     featured: false,
@@ -534,7 +534,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Claude API", "Rust/C Codegen", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "Cal Realty Ops \— California Real Estate Autonomous Transaction Layer",
+    name: "Cal Realty Ops \ -  California Real Estate Autonomous Transaction Layer",
     url: "cal-realty-ops.vercel.app",
     category: "ai",
     featured: false,
@@ -550,7 +550,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Supabase", "OpenAI API", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "Augusta Lights AI \— Architectural Lighting Visualization & Quote Platform",
+    name: "Augusta Lights AI \ -  Architectural Lighting Visualization & Quote Platform",
     url: "augusta-lights-ai.vercel.app",
     category: "ai",
     featured: false,
@@ -566,7 +566,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "HTML5 Canvas", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "PersonaFlow AI \— Consumer AI Simulation & Qualitative Intelligence",
+    name: "PersonaFlow AI \ -  Consumer AI Simulation & Qualitative Intelligence",
     url: "personaflow-ai-phi.vercel.app",
     category: "ai",
     featured: false,
@@ -582,7 +582,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "OpenAI API", "Claude API", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "AI Systems Cockpit \— Fractional Systems Advisor & Cost Router",
+    name: "AI Systems Cockpit \ -  Fractional Systems Advisor & Cost Router",
     url: "ai-systems-cockpit.vercel.app",
     category: "ai",
     featured: false,
@@ -598,7 +598,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "OpenAI API", "Claude API", "Gemini API", "Tailwind CSS"]
   },
   {
-    name: "Ontario Student Voice \— Career College Enrollment Voice Agent",
+    name: "Ontario Student Voice \ -  Career College Enrollment Voice Agent",
     url: "ontario-student-voice.vercel.app",
     category: "ai",
     featured: false,
@@ -614,7 +614,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Retell AI", "Twilio API", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "Retirement Scorecard \— Advisory Diagnostics & Wealth Simulator",
+    name: "Retirement Scorecard \ -  Advisory Diagnostics & Wealth Simulator",
     url: "retirement-scorecard-app.vercel.app",
     category: "ai",
     featured: false,
@@ -630,7 +630,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Chart.js", "OpenAI API", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "HomeLoanRev AI \— Mortgage Client Reactivation & Review Engine",
+    name: "HomeLoanRev AI \ -  Mortgage Client Reactivation & Review Engine",
     url: "home-loan-review-ai.vercel.app",
     category: "ai",
     featured: false,
@@ -646,7 +646,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "OpenAI API", "Supabase", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "W\\u00e4rme Wimmer SHK Ops \— Plumbing & HVAC Autonomous Dispatch",
+    name: "W\\u00e4rme Wimmer SHK Ops \ -  Plumbing & HVAC Autonomous Dispatch",
     url: "shk-process-ops.vercel.app",
     category: "ai",
     featured: false,
@@ -662,7 +662,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "n8n", "OpenAI API", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "Atelier Grooming \— Bespoke Editorial Barbershop Platform",
+    name: "Atelier Grooming \ -  Bespoke Editorial Barbershop Platform",
     url: "atelier-barbershop.vercel.app",
     category: "ai",
     featured: false,
@@ -678,7 +678,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "BuildInspect AI \— Computer Vision Construction & OSHA Compliance",
+    name: "BuildInspect AI \ -  Computer Vision Construction & OSHA Compliance",
     url: "buildinspect-ai.vercel.app",
     category: "ai",
     featured: false,
@@ -694,7 +694,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "OpenAI Vision", "Gemini 2.5 Flash", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "AgentOps Core \— Multi-Agent Swarm Orchestration & Trace Console",
+    name: "AgentOps Core \ -  Multi-Agent Swarm Orchestration & Trace Console",
     url: "agentops-core.vercel.app",
     category: "ai",
     featured: false,
@@ -710,7 +710,7 @@ export const sites: Site[] = [
     technologies: ["Next.js 15", "TypeScript", "OpenAI API", "Claude API", "Tailwind CSS", "Vercel"]
   },
   {
-    name: "ScaleOps Core \— SaaS Infrastructure Reliability & Chaos Console",
+    name: "ScaleOps Core \ -  SaaS Infrastructure Reliability & Chaos Console",
     url: "scaleops-core.vercel.app",
     category: "ai",
     featured: false,
