@@ -1009,14 +1009,14 @@ export default function PortfolioPage() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
                 </span>
               </div>
-              <div className="text-[11px] font-mono text-[#667085] leading-none mt-1">
-                Senior Systems and Integration Engineer
+              <div className="text-[11px] font-mono text-[#667085] leading-none mt-1 whitespace-nowrap">
+                Systems &amp; Integration
               </div>
             </div>
           </a>
 
           {/* Clean Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center gap-6 text-xs font-semibold text-[#475467]">
+          <nav className="hidden lg:flex items-center xl:gap-5 gap-3.5 text-xs font-semibold text-[#475467] whitespace-nowrap">
             <a href="#ai-systems" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
               <Sparkles className="w-3.5 h-3.5 text-[#533AFD]" />
               <span>AI Systems</span>
