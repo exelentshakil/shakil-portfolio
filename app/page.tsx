@@ -50,7 +50,6 @@ import {
   XAxis,
   YAxis
 } from "recharts";
-import { sites, getSiteImage, getSiteFallback, Site } from "./data/sites";
 import { AiProjectsSection } from "./components/AiProjectsSection";
 import { AiMvpRescueSection } from "./components/AiMvpRescueSection";
 
@@ -906,8 +905,6 @@ const ROTATING_DOMAINS = [
 export default function PortfolioPage() {
   const pageRef = useRef<HTMLDivElement>(null);
   const [repos, setRepos] = useState<GitHubRepo[]>(CACHED_GITHUB_REPOS);
-  const [activeCategory, setActiveCategory] = useState<string>("all");
-  const [viewMode, setViewMode] = useState<"marquee" | "grid">("marquee");
   const [activeBlueprintIndex, setActiveBlueprintIndex] = useState<number>(0);
   const [codeComparisonTab, setCodeComparisonTab] = useState<"before" | "after">("after");
   const [activeHeroDemo, setActiveHeroDemo] = useState<number>(0);
@@ -965,27 +962,6 @@ export default function PortfolioPage() {
     return () => ctx.revert();
   }, []);
 
-  const categories = useMemo(() => [
-    "all",
-    "ai",
-    "marketplace",
-    "healthcare",
-    "legal",
-    "sports",
-    "agency",
-    "ecommerce",
-    "business",
-    "lifestyle"
-  ], []);
-
-  const filteredSites = useMemo(() => {
-    if (activeCategory === "all") return sites;
-    return sites.filter((s) => s.category === activeCategory);
-  }, [activeCategory]);
-
-  // Dual Marquee split (Even / Odd) to display ALL 60+ screenshots in dual smooth rolling tracks
-  const marqueeTrack1 = useMemo(() => sites.filter((_, i) => i % 2 === 0), []);
-  const marqueeTrack2 = useMemo(() => sites.filter((_, i) => i % 2 !== 0), []);
 
   return (
     <div ref={pageRef} className="min-h-screen bg-white text-[#0D1738]">
@@ -1954,114 +1930,6 @@ export default function PortfolioPage() {
         </div>
       </section>
 
-      {/* -------------------------------------------------------------------- */}
-      {/* 5. "DIFFERENT INDUSTRIES. SAME STANDARD." (ALL 60+ SCREENSHOTS) */}
-      {/* -------------------------------------------------------------------- */}
-      <section id="portfolio" className="section-pad bg-white border-b border-[#EAECF0] overflow-hidden">
-        <div className="site-container mb-6">
-          
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-            <div>
-              <span className="badge-tag mb-2">Production Catalog</span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0D1738] tracking-tight">
-                Different Industries. Same Standard.
-              </h2>
-              <p className="text-xs sm:text-sm text-[#475467] mt-1 max-w-xl">
-                Showcasing 60+ production platforms from 115+ delivered client projects across healthcare (8+ HIPAA systems), legal (5+ law firms), marketing agencies (8+), and sports organizations (12+).
-              </p>
-            </div>
-
-            {/* View Mode Toggle */}
-            <div className="flex items-center gap-2">
-              <button
-                onClick={() => setViewMode("marquee")}
-                className={`px-3 py-1.5 rounded-[4px] text-xs font-semibold flex items-center gap-1.5 transition-all ${
-                  viewMode === "marquee"
-                    ? "bg-[#533AFD] text-white"
-                    : "bg-[#F2F4F7] text-[#344054] hover:bg-[#EAECF0]"
-                }`}
-              >
-                <SlidersHorizontal className="w-3.5 h-3.5" />
-                Live Scrolling Marquee
-              </button>
-
-              <button
-                onClick={() => setViewMode("grid")}
-                className={`px-3 py-1.5 rounded-[4px] text-xs font-semibold flex items-center gap-1.5 transition-all ${
-                  viewMode === "grid"
-                    ? "bg-[#533AFD] text-white"
-                    : "bg-[#F2F4F7] text-[#344054] hover:bg-[#EAECF0]"
-                }`}
-              >
-                <Grid className="w-3.5 h-3.5" />
-                Filterable Bento Grid
-              </button>
-            </div>
-          </div>
-
-          {/* Category Filter Pills */}
-          <div className="flex flex-wrap gap-1.5 mt-6 pt-3 border-t border-[#EAECF0]">
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                onClick={() => {
-                  setActiveCategory(cat);
-                  if (viewMode === "marquee") setViewMode("grid");
-                }}
-                className={`px-3 py-1 rounded-[4px] text-xs font-semibold uppercase tracking-wider transition-all ${
-                  activeCategory === cat
-                    ? "bg-[#0D1738] text-white"
-                    : "bg-[#F2F4F7] text-[#475467] hover:bg-[#EAECF0]"
-                }`}
-              >
-                {cat}
-              </button>
-            ))}
-          </div>
-
-        </div>
-
-        {/* --- VIEW MODE 1: NATURAL SMOOTH MARQUEE SLIDERS (ALL SCREENSHOTS) --- */}
-        {viewMode === "marquee" ? (
-          <div className="space-y-4 pt-2">
-            
-            {/* Track 1: Scrolling Left */}
-            <div className="overflow-hidden whitespace-nowrap py-1">
-              <div className="animate-marquee-left flex gap-4">
-                {[...marqueeTrack1, ...marqueeTrack1].map((site, index) => (
-                  <MarqueeSiteCard key={`track1-${site.url}-${index}`} site={site} />
-                ))}
-              </div>
-            </div>
-
-            {/* Track 2: Scrolling Right */}
-            <div className="overflow-hidden whitespace-nowrap py-1">
-              <div className="animate-marquee-right flex gap-4">
-                {[...marqueeTrack2, ...marqueeTrack2].map((site, index) => (
-                  <MarqueeSiteCard key={`track2-${site.url}-${index}`} site={site} />
-                ))}
-              </div>
-            </div>
-
-            <div className="site-container text-center pt-4">
-              <p className="text-[11px] text-[#667085]">
-                Continuous live catalog of 60+ client systems. Hover any card to pause and inspect metrics.
-              </p>
-            </div>
-
-          </div>
-        ) : (
-          /* --- VIEW MODE 2: FILTERABLE BENTO GRID --- */
-          <div className="site-container pt-4">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {filteredSites.map((site) => (
-                <GridSiteCard key={`grid-${site.url}`} site={site} />
-              ))}
-            </div>
-          </div>
-        )}
-
-      </section>
 
       {/* -------------------------------------------------------------------- */}
       {/* 6. TECHNICAL ARCHITECTURE & BENCHMARKS (RECHARTS) */}
@@ -2731,125 +2599,3 @@ export default function PortfolioPage() {
   );
 }
 
-// --------------------------------------------------------------------------
-// Subcomponent: Natural Marquee Card (Displays Full-Color Crisp Screenshots)
-// --------------------------------------------------------------------------
-function MarqueeSiteCard({ site }: { site: Site }) {
-  const imageSrc = getSiteImage(site);
-  const [hasError, setHasError] = useState(false);
-
-  return (
-    <a
-      href={`https://${site.url}`}
-      target="_blank"
-      rel="noreferrer"
-      className="inline-block w-[300px] bg-white rounded-[4px] border border-[#D0D5DD] overflow-hidden hover:border-[#533AFD] transition-all text-left select-none group"
-    >
-      {/* Screenshot Section */}
-      <div className="relative aspect-[16/10] bg-slate-100 overflow-hidden">
-        {!hasError ? (
-          <Image
-            src={imageSrc}
-            alt={site.name}
-            fill
-            sizes="300px"
-            className="object-cover object-top"
-            onError={() => setHasError(true)}
-          />
-        ) : (
-          <div className={`w-full h-full bg-gradient-to-br ${getSiteFallback(site)} flex items-center justify-center text-white font-bold text-lg`}>
-            {site.name}
-          </div>
-        )}
-
-        <div className="absolute top-2 left-2 px-1.5 py-0.5 rounded-[2px] bg-white/95 border border-[#D0D5DD] text-[#0D1738] text-[9px] font-bold uppercase tracking-wider">
-          {site.category}
-        </div>
-      </div>
-
-      {/* Content Section */}
-      <div className="p-3 space-y-1.5">
-        <div className="flex items-center justify-between">
-          <h4 className="font-bold text-[#0D1738] text-xs truncate group-hover:text-[#533AFD] transition-colors">
-            {site.name}
-          </h4>
-          <ArrowUpRight className="w-3 h-3 text-[#667085] group-hover:text-[#533AFD] transition-colors shrink-0" />
-        </div>
-
-        <p className="text-[11px] text-[#475467] line-clamp-2 leading-relaxed">
-          {site.hook || `Production web system engineered for ${site.clientType || "client"}.`}
-        </p>
-
-        {site.metric && (
-          <div className="pt-1.5 border-t border-[#EAECF0] flex items-center gap-1 text-[10px] font-bold text-emerald-700">
-            <Check className="w-3 h-3" />
-            <span>{site.metric}</span>
-          </div>
-        )}
-      </div>
-    </a>
-  );
-}
-
-// --------------------------------------------------------------------------
-// Subcomponent: Grid Site Card (For Filterable Bento Mode)
-// --------------------------------------------------------------------------
-function GridSiteCard({ site }: { site: Site }) {
-  const imageSrc = getSiteImage(site);
-  const [hasError, setHasError] = useState(false);
-
-  return (
-    <a
-      href={`https://${site.url}`}
-      target="_blank"
-      rel="noreferrer"
-      className="bg-white rounded-[4px] border border-[#D0D5DD] overflow-hidden hover:border-[#533AFD] transition-all flex flex-col group"
-    >
-      <div className="relative aspect-[16/10] bg-slate-100 overflow-hidden">
-        {!hasError ? (
-          <Image
-            src={imageSrc}
-            alt={site.name}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-            className="object-cover object-top"
-            onError={() => setHasError(true)}
-          />
-        ) : (
-          <div className={`w-full h-full bg-gradient-to-br ${getSiteFallback(site)} flex items-center justify-center text-white font-bold text-xl`}>
-            {site.name}
-          </div>
-        )}
-
-        <div className="absolute top-2 left-2 px-2 py-0.5 rounded-[2px] bg-white/95 border border-[#D0D5DD] text-[#0D1738] text-[10px] font-bold uppercase tracking-wider">
-          {site.category}
-        </div>
-      </div>
-
-      <div className="p-4 flex-1 flex flex-col justify-between space-y-3">
-        <div>
-          <div className="flex items-center justify-between mb-1">
-            <h4 className="font-bold text-[#0D1738] text-sm group-hover:text-[#533AFD] transition-colors truncate">
-              {site.name}
-            </h4>
-            <ArrowUpRight className="w-3.5 h-3.5 text-[#667085] group-hover:text-[#533AFD] transition-colors shrink-0" />
-          </div>
-
-          <p className="text-xs text-[#475467] line-clamp-2 leading-relaxed">
-            {site.hook || `Tailored production system engineered for ${site.clientType || "client requirements"}.`}
-          </p>
-        </div>
-
-        {site.technologies && (
-          <div className="pt-2.5 border-t border-[#EAECF0] flex flex-wrap gap-1">
-            {site.technologies.slice(0, 3).map((tech) => (
-              <span key={tech} className="px-1.5 py-0.5 rounded-[2px] bg-[#F2F4F7] text-[#344054] font-mono text-[10px] font-medium">
-                {tech}
-              </span>
-            ))}
-          </div>
-        )}
-      </div>
-    </a>
-  );
-}
