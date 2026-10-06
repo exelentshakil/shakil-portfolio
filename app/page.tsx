@@ -1062,12 +1062,12 @@ export default function PortfolioPage() {
           {/* Single Consolidated Aerospace Flight Status Badge - Stripe White */}
           <div className="mb-4 lg:mb-5">
             <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-[#D9D6FE] shadow-sm text-[11px] text-[#475467] backdrop-blur-md max-w-full overflow-hidden whitespace-nowrap">
-              <div className="relative w-4.5 h-4.5 rounded-full overflow-hidden border border-[#D9D6FE] shrink-0 bg-slate-100">
+              <div className="relative w-5 h-5 rounded-full overflow-hidden border border-[#D9D6FE] shrink-0 bg-slate-100">
                 <Image
                   src="/shakil-headshot.jpeg"
                   alt="Shakil Ahmed"
                   fill
-                  sizes="18px"
+                  sizes="20px"
                   className="object-cover object-top"
                   priority
                 />
