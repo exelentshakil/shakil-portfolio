@@ -1006,9 +1006,9 @@ export default function PortfolioPage() {
               <Wrench className="w-3.5 h-3.5 text-amber-500" />
               <span>MVP Rescue</span>
             </a>
-            <a href="#portfolio" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
+            <a href="#labs" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
               <Grid className="w-3.5 h-3.5 text-[#667085]" />
-              <span>Deployments</span>
+              <span>Labs</span>
             </a>
             <a href="#architecture" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
               <Layers3 className="w-3.5 h-3.5 text-violet-500" />
@@ -2368,7 +2368,7 @@ export default function PortfolioPage() {
       {/* -------------------------------------------------------------------- */}
       {/* 9. OPEN SOURCE SIGNAL (GITHUB LIVE FEED) */}
       {/* -------------------------------------------------------------------- */}
-      <section className="section-pad bg-white border-b border-[#EAECF0]">
+      <section id="labs" className="section-pad bg-white border-b border-[#EAECF0]">
         <div className="site-container">
           
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
