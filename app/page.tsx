@@ -1059,30 +1059,30 @@ export default function PortfolioPage() {
         <div className="site-container relative z-10">
           
           {/* Single Consolidated Aerospace Flight Status Badge - Stripe White */}
-          <div className="mb-5 lg:mb-6">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white border border-[#D9D6FE] shadow-sm text-xs text-[#344054] backdrop-blur-md max-w-full overflow-hidden whitespace-nowrap">
-              <div className="relative w-5 h-5 rounded-full overflow-hidden border border-[#D9D6FE] shrink-0 bg-slate-100">
+          <div className="mb-4 lg:mb-5">
+            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-[#D9D6FE] shadow-sm text-[11px] text-[#475467] backdrop-blur-md max-w-full overflow-hidden whitespace-nowrap">
+              <div className="relative w-4.5 h-4.5 rounded-full overflow-hidden border border-[#D9D6FE] shrink-0 bg-slate-100">
                 <Image
                   src="/shakil-headshot.jpeg"
                   alt="Shakil Ahmed"
                   fill
-                  sizes="20px"
+                  sizes="18px"
                   className="object-cover object-top"
                   priority
                 />
               </div>
               <span className="font-bold text-[#0D1738] tracking-wide shrink-0">Shakil Ahmed</span>
               <span className="text-slate-300 shrink-0">•</span>
-              <span className="font-semibold text-[#533AFD] shrink-0">Senior Systems and Integration Engineer</span>
+              <span className="font-semibold text-[#533AFD] shrink-0">Senior Systems &amp; Integration Engineer</span>
               <span className="text-slate-300 hidden sm:inline shrink-0">•</span>
               <span className="text-[#344054] font-medium hidden sm:inline-flex items-center gap-1 shrink-0">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD]" />
-                Securiti Certified Systems & AI Architect
+                <ShieldCheck className="w-3 h-3 text-[#533AFD]" />
+                Securiti Certified AI Architect
               </span>
               <span className="text-slate-300 hidden md:inline shrink-0">•</span>
               <span className="text-[#027A48] font-semibold hidden md:inline-flex items-center gap-1.5 shrink-0">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 inline-block animate-pulse" />
-                Available for Contracts &amp; MVPs
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
+                Available for Contracts
               </span>
             </div>
           </div>
