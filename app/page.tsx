@@ -760,6 +760,7 @@ export class CircuitBreaker {
 
 // Repositories to exclude from portfolio showcase
 const EXCLUDED_REPOS = [
+  "shakil-portfolio",
   "your-dining-club",
   "dotfiles",
   "exelentshakil",
@@ -1147,7 +1148,7 @@ export default function PortfolioPage() {
                   className="btn-primary gap-2 shadow-md shadow-[#533AFD]/20 hover:shadow-[#533AFD]/35 text-xs sm:text-sm font-semibold justify-center py-2.5 px-4 sm:px-5 whitespace-nowrap shrink-0"
                 >
                   <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0" />
-                  <span className="whitespace-nowrap">Hire on Upwork</span>
+                  <span className="whitespace-nowrap">Hire on Upwork - Verified Partner Profile</span>
                   <ArrowUpRight className="w-4 h-4 shrink-0" />
                 </a>
 
@@ -1158,16 +1159,6 @@ export default function PortfolioPage() {
                   <Sparkles className="w-4 h-4 text-[#533AFD] shrink-0" />
                   <span className="whitespace-nowrap">Explore 50+ Systems</span>
                   <ArrowDown className="w-3.5 h-3.5 shrink-0" />
-                </a>
-
-                <a
-                  href="https://www.upwork.com/freelancers/shakilhq"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-[4px] bg-white hover:bg-[#F8F9FC] text-[#344054] hover:text-[#0D1738] border border-[#D0D5DD] hover:border-[#98A2B3] transition-all text-xs font-mono shadow-sm whitespace-nowrap shrink-0"
-                >
-                  <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD] shrink-0" />
-                  <span className="whitespace-nowrap">Verified Partner</span>
                 </a>
               </div>
 
