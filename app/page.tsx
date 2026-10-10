@@ -549,14 +549,36 @@ export default function Home() {
                     </div>
 
                     {c.image && (
-                      <div className="relative min-h-[260px] border-t border-[#EAECF0] bg-[#F2F4F7] lg:border-l lg:border-t-0">
-                        <Image
-                          src={c.image}
-                          alt={c.title}
-                          fill
-                          sizes="(min-width: 1024px) 500px, 100vw"
-                          className="object-cover object-top"
-                        />
+                      <div className="flex flex-col justify-center border-t border-[#EAECF0] bg-[#F8F9FC] p-4 sm:p-6 lg:border-l lg:border-t-0">
+                        <a
+                          href={c.image}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="group/img block overflow-hidden rounded-xl border border-[#EAECF0] bg-white shadow-sm transition hover:border-[#D9D6FE] hover:shadow-md"
+                          title="Click to view full screenshot"
+                        >
+                          <div className="flex items-center justify-between border-b border-[#EAECF0] bg-[#F2F4F7] px-3.5 py-2">
+                            <div className="flex items-center gap-1.5">
+                              <span className="h-2 w-2 rounded-full bg-slate-300" />
+                              <span className="h-2 w-2 rounded-full bg-slate-300" />
+                              <span className="h-2 w-2 rounded-full bg-slate-300" />
+                              <span className="ml-2 font-mono text-[11px] text-slate-500">legiit.com</span>
+                            </div>
+                            <span className="flex items-center gap-1 text-[11px] font-medium text-[#533AFD] opacity-0 transition group-hover/img:opacity-100">
+                              <span>Full size</span>
+                              <ExternalLink className="h-3 w-3" />
+                            </span>
+                          </div>
+                          <div className="relative aspect-[1555/1176] w-full bg-white">
+                            <Image
+                              src={c.image}
+                              alt={c.title}
+                              fill
+                              sizes="(min-width: 1024px) 480px, 100vw"
+                              className="object-contain"
+                            />
+                          </div>
+                        </a>
                       </div>
                     )}
                   </div>
