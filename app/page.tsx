@@ -1,2592 +1,765 @@
-"use client";
-
-import { useEffect, useRef, useState, useMemo } from "react";
-import { gsap } from "gsap";
 import Image from "next/image";
 import {
   ArrowUpRight,
-  ArrowDownRight,
-  ArrowDown,
-  AlertTriangle,
   Check,
   CheckCircle2,
-  Github,
-  Layers3,
-  ShieldCheck,
-  ExternalLink,
-  Phone,
-  Mail,
-  MapPin,
-  Star,
-  Activity,
-  Database,
-  Server,
-  Lock,
-  CreditCard,
-  MessageCircle,
-  Calendar,
-  Grid,
-  SlidersHorizontal,
-  Code2,
-  Zap,
-  Cpu,
-  Sparkles,
-  Bot,
-  Wrench,
-  ChevronLeft,
   ChevronRight,
-  Globe2,
-  Smartphone,
-  Users
+  Code2,
+  Cpu,
+  Database,
+  ExternalLink,
+  Github,
+  Layers,
+  Play,
+  Server,
+  ShieldCheck,
+  Sparkles,
+  Star,
+  Terminal,
+  Zap,
 } from "lucide-react";
-import {
-  Area,
-  AreaChart,
-  Bar,
-  BarChart,
-  CartesianGrid,
-  ResponsiveContainer,
-  Tooltip,
-  XAxis,
-  YAxis
-} from "recharts";
-import { AiProjectsSection } from "./components/AiProjectsSection";
-import { AiMvpRescueSection } from "./components/AiMvpRescueSection";
 
-// --------------------------------------------------------------------------
-// Real Architectural Benchmarks & Telemetry Data
-// --------------------------------------------------------------------------
-const telemetryData = [
-  { month: "Base", throughput: 320, latency: 820 },
-  { month: "Q1 Indexing", throughput: 850, latency: 420 },
-  { month: "Q2 Redis & Queues", throughput: 1650, latency: 240 },
-  { month: "Q3 Cluster Tuning", throughput: 2400, latency: 155 },
-  { month: "Production Peak", throughput: 3850, latency: 118 },
+const UPWORK_URL = "https://www.upwork.com/freelancers/shakilhq";
+const GITHUB_URL = "https://github.com/exelentshakil";
+
+const NAV = [
+  { href: "#work", label: "Work" },
+  { href: "#endorsements", label: "Endorsements" },
+  { href: "#how", label: "How I work" },
+  { href: "#stack", label: "Stack" },
+  { href: "#faq", label: "FAQ" },
+  { href: "#contact", label: "Contact" },
 ];
 
-const benchmarkComparisonData = [
-  { metric: "Query Latency", customEngineered: 98, genericBuild: 45 },
-  { metric: "Concurrency Scaling", customEngineered: 96, genericBuild: 40 },
-  { metric: "Escrow & Payment Safety", customEngineered: 100, genericBuild: 50 },
-  { metric: "Memory Efficiency", customEngineered: 94, genericBuild: 38 },
-  { metric: "Database Indexing", customEngineered: 95, genericBuild: 35 },
+const METRICS = [
+  {
+    value: "15+ Years",
+    label: "Software Engineering",
+    sub: "Production web apps, APIs and distributed systems",
+  },
+  {
+    value: "$1M+ ARR",
+    label: "Marketplace Scaled",
+    sub: "Lead engineer at Legiit across 400k+ users",
+  },
+  {
+    value: "100% JSS",
+    label: "Upwork Job Success",
+    sub: "Top Rated track record with 5.0 client feedback",
+  },
+  {
+    value: "US Eastern",
+    label: "9am to 5pm EST",
+    sub: "Full daily overlap on Slack with US teams",
+  },
 ];
 
-// Custom rich descriptions for GitHub projects
-const CUSTOM_REPO_DESCRIPTIONS: Record<string, string> = {
-  "ai-tool": "Multi-purpose AI toolkit featuring automated content generation, image analysis, and text processing with GPT-4 & Anthropic APIs.",
-  "seo-generator": "AI-powered SEO content generator using OpenAI API. Automatically creates meta titles, descriptions, and rank-optimized web content.",
-  "supplier-portal": "E-commerce supplier management system with Next.js frontend, Shopify API integration, and real-time inventory tracking.",
-  "eticket-api": "High-concurrency RESTful API for event ticketing with QR code validation, seat reservation locking, and payment webhooks.",
-  "barakah-school-suite": "Islamic school management system with attendance, automated fee collection via SSLCommerz, and student performance reports.",
-  "heartcore-guardian": "Real-time health monitoring dashboard for tracking patient vital signs and wellness metrics with WebSocket data feeds.",
-  "LearnWorld": "E-learning platform with course management, video streaming, progress tracking, and certificate generation.",
-  "eticket": "Event ticketing system with QR code generation, seat selection, and payment integration for multiple venues.",
-  "gigify": "Freelance marketplace platform with service listings, order management, real-time messaging, and escrow payments.",
-  "skilljet": "Skills assessment and certification platform with interactive quizzes and digital certificate generation."
-};
-
-// Pre-cached verified repositories to prevent GitHub API rate limiting
-const CACHED_GITHUB_REPOS: GitHubRepo[] = [
-  {
-    name: "ai-tool",
-    description: CUSTOM_REPO_DESCRIPTIONS["ai-tool"],
-    html_url: "https://github.com/exelentshakil/ai-tool",
-    language: "TypeScript",
-    stargazers_count: 14,
-    forks_count: 5
-  },
-  {
-    name: "seo-generator",
-    description: CUSTOM_REPO_DESCRIPTIONS["seo-generator"],
-    html_url: "https://github.com/exelentshakil/seo-generator",
-    language: "Python",
-    stargazers_count: 18,
-    forks_count: 4
-  },
-  {
-    name: "supplier-portal",
-    description: CUSTOM_REPO_DESCRIPTIONS["supplier-portal"],
-    html_url: "https://github.com/exelentshakil/supplier-portal",
-    language: "TypeScript",
-    stargazers_count: 11,
-    forks_count: 2
-  },
-  {
-    name: "eticket-api",
-    description: CUSTOM_REPO_DESCRIPTIONS["eticket-api"],
-    html_url: "https://github.com/exelentshakil/eticket-api",
-    language: "PHP / Laravel",
-    stargazers_count: 22,
-    forks_count: 6
-  },
-  {
-    name: "barakah-school-suite",
-    description: CUSTOM_REPO_DESCRIPTIONS["barakah-school-suite"],
-    html_url: "https://github.com/exelentshakil/barakah-school-suite",
-    language: "PHP",
-    stargazers_count: 15,
-    forks_count: 3
-  },
-  {
-    name: "heartcore-guardian",
-    description: CUSTOM_REPO_DESCRIPTIONS["heartcore-guardian"],
-    html_url: "https://github.com/exelentshakil/heartcore-guardian",
-    language: "React",
-    stargazers_count: 19,
-    forks_count: 4
-  }
+const TRUST_BRANDS = [
+  { name: "Legiit.com", role: "Freelance Marketplace & AI SaaS" },
+  { name: "No Half Cakes", role: "Digital Growth Agency" },
+  { name: "Steve Weatherford", role: "Super Bowl Champion Platform" },
+  { name: "BarakahSoft", role: "Engineering Studio" },
 ];
 
-type GitHubRepo = {
-  name: string;
-  description: string;
-  html_url: string;
-  language: string | null;
-  stargazers_count: number;
-  forks_count: number;
-};
-
-interface TooltipProps {
-  active?: boolean;
-  payload?: Array<{ value: number; name?: string; dataKey?: string }>;
-  label?: string;
-}
-
-function CustomTelemetryTooltip({ active, payload, label }: TooltipProps) {
-  if (active && payload && payload.length) {
-    return (
-      <div className="bg-[#0D1738] text-white p-2.5 rounded-[4px] shadow-lg border border-slate-700 text-xs">
-        <p className="font-semibold text-slate-300 mb-1">{label}</p>
-        <p className="text-[#8D7BFF] font-mono">
-          Throughput: {payload[0]?.value} req/s
-        </p>
-        <p className="text-emerald-400 font-mono">
-          Latency: {payload[1]?.value} ms (85% reduction)
-        </p>
-      </div>
-    );
-  }
-  return null;
-}
-
-// --------------------------------------------------------------------------
-// 10 Common Scalable System Bottlenecks - Diagnosed & Resolved
-// --------------------------------------------------------------------------
-interface BottleneckStudy {
-  id: string;
-  num: string;
-  category: string;
-  title: string;
-  subtitle: string;
-  failureMode: {
-    title: string;
-    description: string;
-    impact: string;
-  };
-  tradeoffs: {
-    title: string;
-    options: string[];
-    decision: string;
-  };
-  solution: {
-    title: string;
-    description: string;
-    result: string;
-  };
-  code: {
-    filename: string;
-    vulnerable: string;
-    engineered: string;
-  };
-  metrics: {
-    latency: string;
-    throughput: string;
-    uptime: string;
-  };
-}
-
-const SYSTEM_BOTTLENECK_STUDIES: BottleneckStudy[] = [
+const CASE_STUDIES = [
   {
-    id: "nplusone",
-    num: "01",
-    category: "Database & ORM",
-    title: "Database N+1 Query Cascade & Pool Starvation",
-    subtitle: "Resolving 500+ independent SQL roundtrips per page load on high-volume marketplace dashboards.",
-    failureMode: {
-      title: "ORM Lazy-Loading in Loop",
-      description: "Fetching seller orders triggered N separate queries for items, buyers, and ledger details, consuming all available database connection pool slots during traffic surges.",
-      impact: "820ms Latency • Connection Pool Exhaustion • 95% CPU Spike"
-    },
-    tradeoffs: {
-      title: "Architectural Trade-offs Evaluated",
-      options: [
-        "In-Memory Node.js Joins: Created heavy RAM bloat and blocked event loop under 1,000 QPS.",
-        "Microservice Split: Added unacceptable network hop latency to checkout path.",
-        "Engineered Approach: Relational eager loading with column projections + composite B-Tree indexing + Redis tagged write-through cache."
-      ],
-      decision: "Selected Eager Relational Projection + Redis Tagged Cache"
-    },
-    solution: {
-      title: "Single-Pass Relational Execution",
-      description: "Collapsed 500 queries down to 2 optimized single-pass queries with composite index on (seller_id, status, created_at) and atomic cache invalidation.",
-      result: "820ms → 118ms Latency • 4,200 req/s Concurrency • Zero Deadlocks"
-    },
-    code: {
-      filename: "OrderQueryOptimization.php",
-      vulnerable: `// ❌ VULNERABLE: N+1 Cascade & Connection Pool Starvation
-public function getSellerOrders(Request $request) {
-    $orders = Order::where('seller_id', $request->user()->id)->where('status', 'PAID')->get();
-    $results = [];
-    foreach ($orders as $order) {
-        $items = $order->items;          // Query 1 + N
-        $buyer = $order->buyer;          // Query 1 + 2N
-        $escrow = $order->escrowDetails; // Query 1 + 3N
-        $results[] = ['id' => $order->id, 'buyer' => $buyer->name, 'escrow' => $escrow->status];
-    }
-    return response()->json($results); // 501 total SQL queries!
-}`,
-      engineered: `// ✅ MASTER FIX: Relational Eager Loading + Redis Tagged Cache
-public function getSellerOrders(Request $request) {
-    $sellerId = $request->user()->id;
-    $cacheKey = "seller:{$sellerId}:orders:page:" . $request->get('page', 1);
-
-    return Cache::tags(["seller_{$sellerId}_orders"])->remember($cacheKey, 120, function () use ($sellerId) {
-        return Order::query()
-            ->with(['items:id,order_id,title,price_cents', 'buyer:id,name,avatar_url', 'escrowDetails:id,order_id,status'])
-            ->where('seller_id', $sellerId)
-            ->where('status', OrderStatus::PAID)
-            ->orderBy('created_at', 'desc')
-            ->paginate(25); // Exactly 2 single-pass SQL statements
-    });
-}`
-    },
-    metrics: { latency: "820ms → 118ms", throughput: "4,200 req/s", uptime: "99.999%" }
-  },
-  {
-    id: "ai-mvp",
-    num: "02",
-    category: "AI Prototype Rescue",
-    title: "Hardening AI-Generated Prototypes for Scale",
-    subtitle: "Turning raw Lovable, Bolt, v0, and Supabase MVPs into resilient, secure, and production-tested systems.",
-    failureMode: {
-      title: "Untyped State & Missing Isolation",
-      description: "AI code generators write synchronous raw database queries directly inside components, missing transactions, rate limits, schema migrations, and role permissions.",
-      impact: "Silent Data Corruption • API Exploits • Out of Memory Crashes"
-    },
-    tradeoffs: {
-      title: "Engineering Strategy Evaluated",
-      options: [
-        "Complete Scrap & Rewrite: Loses 3 weeks of founder momentum and UI polish.",
-        "Patching in Place: Leaves hidden race conditions in business logic.",
-        "Engineered Approach: Isolate frontend UI, replace raw SQL with typed Prisma/Kysely schemas, inject rate-limited API handlers, and isolate background jobs in Redis queues."
-      ],
-      decision: "Hardened Service Architecture with Relational Integrity"
-    },
-    solution: {
-      title: "Hardened Service Architecture",
-      description: "Added PostgreSQL ACID transactions, JWT session rotation, Zod payload validation, and BullMQ background queues.",
-      result: "100% Type Safety • Sub-100ms API Execution • Zero Security Leaks"
-    },
-    code: {
-      filename: "HardenedApiEndpoint.ts",
-      vulnerable: `// ❌ VULNERABLE: Direct Client DB Call Without Rate Limit or Validation
-export async function POST(req: Request) {
-    const rawBody = await req.json(); // Untyped payload
-    const { data } = await supabase.from('orders').insert(rawBody); // SQL Injection & Unsafe
-    await sendTransactionalEmail(rawBody.email); // Synchronous blocking call
-    return Response.json(data);
-}`,
-      engineered: `// ✅ MASTER FIX: Validated Schema + Rate Limit + Async Queue
-export async function POST(req: Request) {
-    const session = await auth.verifySession(req);
-    if (!session) return unauthorizedResponse();
-
-    const rateLimit = await redis.limit(\`ip:\${req.ip}\`, { max: 60, window: 60 });
-    if (!rateLimit.ok) return rateLimitExceeded();
-
-    const payload = await OrderSchema.parseAsync(await req.json());
-    const order = await db.$transaction(async (tx) => {
-        return tx.order.create({ data: { ...payload, userId: session.userId } });
-    });
-
-    await queue.dispatch('send_order_email', { orderId: order.id });
-    return Response.json({ success: true, orderId: order.id });
-}`
-    },
-    metrics: { latency: "450ms → 85ms", throughput: "3,800 req/s", uptime: "99.999%" }
-  },
-  {
-    id: "escrow",
-    num: "03",
-    category: "Fintech & Payments",
-    title: "Stripe Connect Escrow & Webhook Concurrency",
-    subtitle: "Eliminating double-settlement bugs and webhook race conditions across $40M+ in marketplace transactions.",
-    failureMode: {
-      title: "Webhook Concurrency Race Conditions",
-      description: "Multiple webhook retries hitting the application concurrently triggered duplicate payout transfers and inconsistent ledger states during checkout spikes.",
-      impact: "Duplicate Payouts • Overdraft Risk • Accounting Discrepancies"
-    },
-    tradeoffs: {
-      title: "Concurrency Mechanisms Evaluated",
-      options: [
-        "Database Row Locking (SELECT FOR UPDATE): Caused frequent lock wait timeouts and deadlocks.",
-        "Client-Side Deduplication: Unreliable during network dropouts.",
-        "Engineered Approach: Distributed Redis Mutex Locks with 30s TTL + Idempotent Double-Entry Ledger."
-      ],
-      decision: "Distributed Mutex Lock + Idempotent Ledger Balancing"
-    },
-    solution: {
-      title: "Atomic Mutex Lock & Idempotent Ledger",
-      description: "Guaranteed atomic milestone release using distributed Redis locks combined with database transaction isolation.",
-      result: "Zero Payout Discrepancies across $40M+ Volume • 100% Idempotent"
-    },
-    code: {
-      filename: "StripeEscrowService.php",
-      vulnerable: `// ❌ VULNERABLE: Race Condition on Webhook Payout
-public function handleStripeWebhook(Request $request) {
-    $event = $request->get('event');
-    $order = Order::find($event['order_id']);
-    if ($order->status !== 'PAID') { // Race condition: 2 webhooks pass check simultaneously
-        Stripe\\Transfer::create(['amount' => $order->amount, 'destination' => $order->seller_account]);
-        $order->status = 'PAID';
-        $order->save();
-    }
-}`,
-      engineered: `// ✅ MASTER FIX: Distributed Redis Mutex Lock + Double-Entry Transaction
-public function handleStripeWebhook(Request $request) {
-    $orderId = $request->input('order_id');
-    $lockKey = "lock:escrow_release:{$orderId}";
-
-    return Redis::lock($lockKey, 30)->block(5, function () use ($orderId, $request) {
-        return DB::transaction(function () use ($orderId, $request) {
-            $order = Order::where('id', $orderId)->lockForUpdate()->firstOrFail();
-            if ($order->is_settled) return response()->json(['status' => 'already_settled']);
-
-            $transfer = Stripe\\Transfer::create([
-                'amount' => $order->net_seller_cents,
-                'currency' => 'usd',
-                'destination' => $order->seller->stripe_account_id,
-                'transfer_group' => $order->uuid
-            ]);
-
-            $order->update(['is_settled' => true, 'transfer_id' => $transfer->id]);
-            Ledger::recordSettlement($order, $transfer);
-        });
-    });
-}`
-    },
-    metrics: { latency: "95ms Execution", throughput: "100% Idempotent", uptime: "99.999%" }
-  },
-  {
-    id: "cache-stampede",
-    num: "04",
-    category: "Caching & Redis",
-    title: "Redis Cache Stampede & Thundering Herd Prevention",
-    subtitle: "Preventing database CPU lockup when hot cache keys expire under 10,000+ concurrent requests.",
-    failureMode: {
-      title: "Synchronous Cache Expiry Flood",
-      description: "When a popular marketplace catalog cache key expired, 15,000 concurrent requests bypassed cache simultaneously and overwhelmed the primary PostgreSQL instance.",
-      impact: "100% DB CPU • 504 Gateway Timeouts • Cascading Failure"
-    },
-    tradeoffs: {
-      title: "Cache Mitigation Strategies",
-      options: [
-        "Infinite TTL: Results in stale pricing and catalog data.",
-        "Simple Cache Lock: High latency for waiting requests.",
-        "Engineered Approach: Probabilistic Early Expiration (XFetch Algorithm) + Single-Flight Background Recomputation."
-      ],
-      decision: "XFetch Early Recomputation + Single-Flight Worker"
-    },
-    solution: {
-      title: "XFetch Probabilistic Re-Warm",
-      description: "Re-computes cache values in background before expiration using probabilistic delta math, keeping cache hits continuous.",
-      result: "99.6% Continuous Cache Hit Rate • DB CPU <18% under Peak Traffic"
-    },
-    code: {
-      filename: "XFetchCache.ts",
-      vulnerable: `// ❌ VULNERABLE: Cache Stampede / Thundering Herd
-async function getCatalog(tenantId: string) {
-    const cached = await redis.get(\`catalog:\${tenantId}\`);
-    if (!cached) {
-        // 10,000 requests hit database simultaneously when key expires!
-        const catalog = await db.catalog.findMany({ where: { tenantId } });
-        await redis.setex(\`catalog:\${tenantId}\`, 300, JSON.stringify(catalog));
-        return catalog;
-    }
-    return JSON.parse(cached);
-}`,
-      engineered: `// ✅ MASTER FIX: XFetch Probabilistic Early Recompute & Single-Flight
-async function getCatalogXFetch(tenantId: string, ttlSeconds = 300, beta = 1.0) {
-    const key = \`catalog:\${tenantId}\`;
-    const cached = await redis.get(key);
-
-    if (cached) {
-        const { value, delta, expiry } = JSON.parse(cached);
-        const shouldRecompute = Date.now() - delta * beta * Math.log(Math.random()) > expiry;
-        if (!shouldRecompute) return value; // Return instantly from hot cache
-    }
-
-    // Single-flight background refresh prevents DB storm
-    return singleFlight.do(key, async () => {
-        const start = Date.now();
-        const value = await db.catalog.findMany({ where: { tenantId }, take: 100 });
-        const delta = Date.now() - start;
-        await redis.setex(key, ttlSeconds, JSON.stringify({ value, delta, expiry: Date.now() + ttlSeconds * 1000 }));
-        return value;
-    });
-}`
-    },
-    metrics: { latency: "3.4s → 12ms", throughput: "12,000 req/s", uptime: "99.999%" }
-  },
-  {
-    id: "async-workers",
-    num: "05",
-    category: "Queues & Workers",
-    title: "Decoupling Heavy Synchronous Tasks with Async Queues",
-    subtitle: "Offloading PDF invoice generation, video encoding, and email digests to resilient background workers.",
-    failureMode: {
-      title: "Blocking Web Request Cycle",
-      description: "Executing PDF rendering and external API webhooks directly inside HTTP request handlers tied up web workers, crashing user response times.",
-      impact: "504 Gateway Timeouts • Web Server Starvation • Poor Core Web Vitals"
-    },
-    tradeoffs: {
-      title: "Worker Architectures Considered",
-      options: [
-        "Thread Spawning in Request: Causes server crashes when memory spikes.",
-        "Cron Polling: 60s delay is too slow for user feedback.",
-        "Engineered Approach: S3 Direct Presigned Uploads + Redis BullMQ/Celery Workers with Exponential Backoff Retries."
-      ],
-      decision: "Redis Worker Queues with Exponential Backoff"
-    },
-    solution: {
-      title: "Decoupled Worker Architecture",
-      description: "Converted heavy operations into background jobs with dead-letter queues and automated failure alerting.",
-      result: "92% Drop in HTTP Response Time • Zero Worker Timeouts"
-    },
-    code: {
-      filename: "PdfInvoiceJob.py",
-      vulnerable: `// ❌ VULNERABLE: Synchronous Blocking PDF Generation
-def generate_invoice_view(request, order_id):
-    order = Order.objects.get(id=order_id)
-    # Heavy 8-second Chromium headless PDF render inside request thread!
-    pdf_bytes = render_heavy_pdf_report(order)
-    upload_to_s3(pdf_bytes) # Blocks HTTP worker
-    send_email(order.user.email, pdf_bytes)
-    return JsonResponse({'status': 'done'})`,
-      engineered: `// ✅ MASTER FIX: Async Celery Job with Exponential Backoff Retry
-@shared_task(bind=True, max_retries=3, default_retry_delay=10)
-def generate_invoice_task(self, order_id):
-    try:
-        order = Order.objects.select_related('user', 'items').get(id=order_id)
-        pdf_bytes = render_heavy_pdf_report(order)
-        s3_url = storage.save_presigned(f"invoices/{order.uuid}.pdf", pdf_bytes)
-        send_email_async.delay(order.user.email, s3_url)
-        return {'status': 'success', 's3_url': s3_url}
-    except Exception as exc:
-        raise self.retry(exc=exc, countdown=2 ** self.request.retries)`
-    },
-    metrics: { latency: "8.2s → 65ms", throughput: "10,000 jobs/min", uptime: "99.999%" }
-  },
-  {
-    id: "websockets",
-    num: "06",
-    category: "Real-Time Systems",
-    title: "Scaling WebSockets to 2M+ Users Without Memory Leaks",
-    subtitle: "Replacing monolithic WebSocket servers with a horizontal Redis Pub/Sub clustered backplane.",
-    failureMode: {
-      title: "Socket Bloat & Process Crash",
-      description: "50,000 active chat and order notification WebSocket connections exhausted Node.js memory on a single instance, dropping user sessions.",
-      impact: "Dropped Messages • Socket Disconnections • High Server Memory"
-    },
-    tradeoffs: {
-      title: "Real-Time Topologies Evaluated",
-      options: [
-        "Third-Party Hosted Pusher: Costs soared past $4,000/mo at marketplace scale.",
-        "Long Polling: 100x higher network overhead.",
-        "Engineered Approach: Multi-node WebSocket cluster behind NGINX load balancer with Redis adapter pub/sub channel routing."
-      ],
-      decision: "Clustered WebSockets with Redis Adapter Backplane"
-    },
-    solution: {
-      title: "Horizontal WebSocket Cluster",
-      description: "Distributed message distribution across clustered workers using Redis pub/sub with binary message framing.",
-      result: "2,000,000+ Active User Sessions • Sub-40ms Live Delivery"
-    },
-    code: {
-      filename: "WebSocketCluster.ts",
-      vulnerable: `// ❌ VULNERABLE: Single Process In-Memory WebSocket State
-const wss = new WebSocketServer({ port: 8080 });
-const connections = new Map(); // Memory leak: sockets never garbage collected
-
-wss.on('connection', (ws, req) => {
-    connections.set(req.userId, ws); // Crashes when memory exceeds 1.4GB!
-});`,
-      engineered: `// ✅ MASTER FIX: Redis PubSub Clustered Channel Routing
-import { createAdapter } from '@socket.io/redis-adapter';
-import { pubClient, subClient } from './redis';
-
-const io = new Server(server, {
-    adapter: createAdapter(pubClient, subClient),
-    transports: ['websocket'],
-    pingTimeout: 20000,
-    pingInterval: 10000
-});
-
-io.of('/orders').on('connection', (socket) => {
-    socket.join(\`user:\${socket.data.userId}\`);
-});
-
-export const emitOrderUpdate = (userId: string, data: OrderEvent) => {
-    io.of('/orders').to(\`user:\${userId}\`).emit('ORDER_STATE', data);
-};`
-    },
-    metrics: { latency: "<40ms Message Delivery", throughput: "2M+ Users Scaled", uptime: "99.999%" }
-  },
-  {
-    id: "deadlocks",
-    num: "07",
-    category: "Concurrency & Locks",
-    title: "Eliminating Deadlocks in High-Concurrency Booking",
-    subtitle: "Replacing blocking row locks with Redis atomic counters and Optimistic Concurrency Control (OCC).",
-    failureMode: {
-      title: "Row Lock Deadlocks on Limited Slots",
-      description: "Hundreds of users reserving the same healthcare appointment or limited ticket slots simultaneously caused PostgreSQL transaction deadlocks and 500 errors.",
-      impact: "500 Internal Server Errors • Double Bookings • Lost Revenue"
-    },
-    tradeoffs: {
-      title: "Concurrency Control Strategies",
-      options: [
-        "Pessimistic SELECT FOR UPDATE: Severe lock contention, slow response.",
-        "No Locking: Resulted in catastrophic double-bookings.",
-        "Engineered Approach: Redis Atomic Decrement Reservation + Database Optimistic Concurrency Control with version key."
-      ],
-      decision: "Redis Atomic Token + Database Version Check (OCC)"
-    },
-    solution: {
-      title: "Atomic Redis Token + OCC Versioning",
-      description: "Allocated reservations instantly in memory via atomic DECR, followed by idempotent database commit with version key verification.",
-      result: "100% Oversell Prevention • 0 Deadlocks under 5,000 Concurrency"
-    },
-    code: {
-      filename: "AtomicBookingService.ts",
-      vulnerable: `// ❌ VULNERABLE: Pessimistic Row Lock Deadlock
-export async function bookSlot(slotId: string, userId: string) {
-    return db.$transaction(async (tx) => {
-        const slot = await tx.slot.findUnique({ where: { id: slotId } }); // SELECT FOR UPDATE
-        if (slot.availableCount > 0) { // Race condition: Deadlock under concurrency!
-            await tx.slot.update({ where: { id: slotId }, data: { availableCount: slot.availableCount - 1 } });
-            return tx.booking.create({ data: { slotId, userId } });
-        }
-    });
-}`,
-      engineered: `// ✅ MASTER FIX: Redis Atomic DECR + Optimistic Version Key
-export async function bookSlotAtomic(slotId: string, userId: string) {
-    const remaining = await redis.decr(\`slot:\${slotId}:count\`);
-    if (remaining < 0) {
-        await redis.incr(\`slot:\${slotId}:count\`); // Revert
-        throw new Error('SLOT_CAPACITY_EXCEEDED');
-    }
-
-    return db.$transaction(async (tx) => {
-        const updated = await tx.slot.updateMany({
-            where: { id: slotId, availableCount: { gt: 0 } },
-            data: { availableCount: { decrement: 1 }, version: { increment: 1 } }
-        });
-        if (updated.count === 0) throw new Error('OPTIMISTIC_LOCK_FAILED');
-        return tx.booking.create({ data: { slotId, userId } });
-    });
-}`
-    },
-    metrics: { latency: "14ms Allocation", throughput: "5,000 Bookings/s", uptime: "Zero Deadlocks" }
-  },
-  {
-    id: "search",
-    num: "08",
-    category: "Search & Indexing",
-    title: "Multi-Million Record Search from 4.2s to 22ms",
-    subtitle: "Replacing slow SQL wildcards with PostgreSQL GIN Trigram indexes and asynchronous Meilisearch sync.",
-    failureMode: {
-      title: "Unindexed Full Table Wildcard Scans",
-      description: "Executing SQL `LIKE '%query%'` across millions of product and medical records caused full table scans, locking DB CPUs for 4+ seconds per search.",
-      impact: "4,200ms Latency • High Bounce Rates • Server Strain"
-    },
-    tradeoffs: {
-      title: "Search Architectures Evaluated",
-      options: [
-        "Elasticsearch Cluster: Added $1,500/mo server costs and JVM memory overhead.",
-        "Standard B-Tree Index: Cannot optimize leading wildcard searches (`%term`).",
-        "Engineered Approach: PostgreSQL GIN Trigram extension + asynchronous Meilisearch edge synchronization."
-      ],
-      decision: "PostgreSQL GIN Trigrams + Meilisearch Index"
-    },
-    solution: {
-      title: "GIN Trigram & Meilisearch Pipeline",
-      description: "Implemented GIN trigram indexes for instantaneous typo-tolerant searches without external infrastructure overhead.",
-      result: "4,200ms → 22ms Search Latency • Typo Tolerant Search"
-    },
-    code: {
-      filename: "SearchIndexOptimization.sql",
-      vulnerable: `-- ❌ VULNERABLE: Full Table Scan on 2M+ Rows (Takes 4.2 seconds!)
-SELECT id, title, price_cents, category 
-FROM marketplace_listings 
-WHERE title ILIKE '%mechanic%' OR description ILIKE '%mechanic%'
-ORDER BY created_at DESC 
-LIMIT 50; -- Sequential scan across all 2,000,000+ records!`,
-      engineered: `-- ✅ MASTER FIX: PostgreSQL GIN Trigram Index (Executes in 22ms!)
-CREATE EXTENSION IF NOT EXISTS pg_trgm;
-
-CREATE INDEX idx_listings_trgm_search 
-ON marketplace_listings 
-USING GIN (title gin_trgm_ops, description gin_trgm_ops) 
-WHERE status = 'ACTIVE';
-
--- Optimized Query using Index Condition:
-SELECT id, title, price_cents, category 
-FROM marketplace_listings 
-WHERE title %> 'mechanic' AND status = 'ACTIVE' 
-ORDER BY similarity(title, 'mechanic') DESC 
-LIMIT 50;`
-    },
-    metrics: { latency: "4.2s → 22ms", throughput: "6,500 req/s", uptime: "99.999%" }
-  },
-  {
-    id: "auth-latency",
-    num: "09",
-    category: "Auth & Gateway",
-    title: "Eliminating 150ms Microservice Auth Latency",
-    subtitle: "Moving from stateful database lookups to stateless EdDSA public-key JWT verification with Redis revoke lists.",
-    failureMode: {
-      title: "Database Session Lookup per RPC Hop",
-      description: "Querying central session database on every microservice hop added 30ms-50ms per internal call, resulting in 150ms+ latency on composite pages.",
-      impact: "High Database Connection Load • High Latency on Internal APIs"
-    },
-    tradeoffs: {
-      title: "Authentication Paradigms Evaluated",
-      options: [
-        "Central Session DB: High query load, bottleneck for every service.",
-        "Symmetric HMAC JWTs: Insecure to distribute shared secrets to all services.",
-        "Engineered Approach: Asymmetric EdDSA Public-Key Verification at API Gateway with distributed Redis Revoke Bloom Filter."
-      ],
-      decision: "Asymmetric EdDSA JWTs + Redis Revoke Filter"
-    },
-    solution: {
-      title: "Stateless Gateway Auth Verification",
-      description: "Public key verification at edge gateway with sub-millisecond Redis revoke checks, completely removing database lookups.",
-      result: "150ms → <1.8ms Gateway Overhead • Zero Auth DB Load"
-    },
-    code: {
-      filename: "EdgeAuthVerifier.ts",
-      vulnerable: `// ❌ VULNERABLE: Database Session Query on Every Internal Service Call
-export async function authenticateInternalRequest(req: Request) {
-    const token = req.headers.get('Authorization');
-    // Hits central database on every microservice hop! (150ms overhead)
-    const session = await db.session.findUnique({ where: { token }, include: { user: true } });
-    if (!session || session.expiresAt < new Date()) throw new Error('UNAUTHORIZED');
-    return session.user;
-}`,
-      engineered: `// ✅ MASTER FIX: Stateless EdDSA Verification + Redis Revoke Check
-import { jwtVerify, importSPKI } from 'jose';
-
-const publicKey = await importSPKI(process.env.ED25519_PUBLIC_KEY!, 'EdDSA');
-
-export async function verifyGatewayAuth(token: string) {
-    const { payload } = await jwtVerify(token, publicKey, { algorithms: ['EdDSA'] });
-    const isRevoked = await redis.sismember('auth:revoked_tokens', payload.jti as string);
-    if (isRevoked) throw new Error('TOKEN_REVOKED');
-
-    return { userId: payload.sub, role: payload.role, tenantId: payload.tenantId };
-}`
-    },
-    metrics: { latency: "150ms → 1.8ms", throughput: "15,000 req/s", uptime: "99.999%" }
-  },
-  {
-    id: "circuit-breaker",
-    num: "10",
-    category: "Resilience & APIs",
-    title: "Preventing Cascading Outages with Circuit Breakers",
-    subtitle: "Isolating third-party payment, SMS, and carrier API failures to maintain 99.999% application availability.",
-    failureMode: {
-      title: "3rd-Party Outage Cascading to Web App",
-      description: "When an external shipping API hung for 30 seconds, all web worker threads got stuck waiting on the socket, taking down the entire customer portal.",
-      impact: "Complete Website Downtime • Blocked Checkout • Revenue Loss"
-    },
-    tradeoffs: {
-      title: "Resilience Patterns Considered",
-      options: [
-        "Short Socket Timeouts: Still backed up workers during high concurrency.",
-        "Manual Disabling: Required engineer on-call intervention.",
-        "Engineered Approach: Automated Circuit Breaker (Closed → Open → Half-Open states) with graceful fallback cache."
-      ],
-      decision: "Automated Circuit Breaker with Fallback Cache"
-    },
-    solution: {
-      title: "Automated Circuit Breaker Tripping",
-      description: "Automatically trips open when failure rate exceeds 20%, serving cached fallbacks instantly and self-healing when upstream recovers.",
-      result: "99.999% Core Platform Uptime • Zero Cascading Failures"
-    },
-    code: {
-      filename: "CircuitBreakerService.ts",
-      vulnerable: `// ❌ VULNERABLE: Direct 3rd-Party API Call Without Circuit Breaker
-export async function getShippingRate(address: Address) {
-    // If carrier API slows down to 30 seconds, all web workers hang and server crashes!
-    const response = await fetch('https://api.carrier.com/rates', { method: 'POST', body: JSON.stringify(address) });
-    return response.json();
-}`,
-      engineered: `// ✅ MASTER FIX: Circuit Breaker with Fallback Cache
-export class CircuitBreaker {
-    private state: 'CLOSED' | 'OPEN' | 'HALF_OPEN' = 'CLOSED';
-    private failureCount = 0;
-
-    async execute<T>(action: () => Promise<T>, fallback: () => Promise<T>): Promise<T> {
-        if (this.state === 'OPEN') return fallback(); // Serve fallback immediately without waiting!
-
-        try {
-            const result = await Promise.race([action(), timeoutPromise(3000)]);
-            this.state = 'CLOSED';
-            this.failureCount = 0;
-            return result as T;
-        } catch (err) {
-            this.failureCount++;
-            if (this.failureCount > 5) this.state = 'OPEN';
-            return fallback();
-        }
-    }
-}`
-    },
-    metrics: { latency: "<5ms Fallback", throughput: "Zero Cascading Crashes", uptime: "99.999%" }
-  }
-];
-
-// Repositories to exclude from portfolio showcase
-const EXCLUDED_REPOS = [
-  "shakil-portfolio",
-  "your-dining-club",
-  "dotfiles",
-  "exelentshakil",
-  "awesome-stock-resources",
-  "elementor",
-  "Switcheroo",
-  "reactjs.org",
-  "nuxt.js",
-  "socket.io",
-  "SumonMSelim",
-  "vue",
-  "cocoen",
-  "awesome-laravel",
-  "jwt-auth",
-  "woocommerce",
-  "the-php-practitioner",
-  "ES6-Learning",
-  "phpstorm-code-style",
-  "Scrollify",
-  "wedocs-plugin",
-  "responsive-html-email-template",
-  "airfare",
-  "noonsmart"
-];
-
-// --------------------------------------------------------------------------
-// Featured Hero Flagship Systems (Above-The-Fold Live Cockpit)
-// --------------------------------------------------------------------------
-interface HeroFlagshipDemo {
-  id: string;
-  name: string;
-  title: string;
-  tagline: string;
-  category: string;
-  image: string;
-  url: string;
-  anchor: string;
-  latency: string;
-  scale: string;
-  sla: string;
-  badge: string;
-  stack: string[];
-}
-
-// Featured Flying AI Project Blurbs for Hero Background
-interface HeroFloatingBlurb {
-  name: string;
-  desc: string;
-  metric: string;
-  latency: string;
-  color: string;
-}
-
-const HERO_FLOATING_BLURBS_TOP: HeroFloatingBlurb[] = [
-  { name: "LedgerFlow Core", desc: "Autonomous ACH Ledger", metric: "$40M+ Escrow", latency: "118ms", color: "text-emerald-700 bg-emerald-50 border-emerald-200" },
-  { name: "NightShift AI", desc: "Grounded Inbox Swarm", metric: "Zero Drift RAG", latency: "240ms", color: "text-violet-700 bg-violet-50 border-violet-200" },
-  { name: "Legiit Command Ctr", desc: "$1M ARR Marketplace", metric: "1M+ Orders", latency: "85ms", color: "text-indigo-700 bg-indigo-50 border-indigo-200" },
-  { name: "GearSignal AI", desc: "Automotive Telemetry", metric: "12K Sigs/sec", latency: "94ms", color: "text-cyan-700 bg-cyan-50 border-cyan-200" },
-  { name: "TheraScore AI", desc: "Clinical Intake Scoring", metric: "HIPAA Verified", latency: "140ms", color: "text-emerald-700 bg-emerald-50 border-emerald-200" },
-  { name: "CalRealty Ops", desc: "Multi-Agent Escrow", metric: "99.98% SLA", latency: "160ms", color: "text-blue-700 bg-blue-50 border-blue-200" },
-];
-
-const HERO_FLOATING_BLURBS_BOTTOM: HeroFloatingBlurb[] = [
-  { name: "NIST AI RMF", desc: "Enterprise LLM Firewall", metric: "TRiSM Validated", latency: "65ms", color: "text-violet-700 bg-violet-50 border-violet-200" },
-  { name: "Supabase Vector", desc: "pgvector HNSW Indexing", metric: "Sub-50ms Search", latency: "42ms", color: "text-emerald-700 bg-emerald-50 border-emerald-200" },
-  { name: "Inngest Durable", desc: "Fault-Tolerant Step Swarm", metric: "100% Guaranteed", latency: "110ms", color: "text-indigo-700 bg-indigo-50 border-indigo-200" },
-  { name: "Augusta Lights AI", desc: "Instant Quoting Engine", metric: "Sub-500ms Quoting", latency: "190ms", color: "text-amber-700 bg-amber-50 border-amber-200" },
-  { name: "Ontario Student Voice", desc: "Policy Intelligence", metric: "Multi-Model Fusion", latency: "180ms", color: "text-cyan-700 bg-cyan-50 border-cyan-200" },
-  { name: "FastAPI Engine", desc: "Async Python Services", metric: "Zero Cold-Start", latency: "38ms", color: "text-blue-700 bg-blue-50 border-blue-200" },
-];
-
-const HERO_FLAGSHIP_DEMOS: HeroFlagshipDemo[] = [
-  {
-    id: "ledgerflow",
-    name: "LedgerFlow",
-    title: "LedgerFlow Core - Autonomous ACH Ledger",
-    tagline: "High-Frequency Autonomous Financial Ledger & Instant ACH Reconciliation",
-    category: "Fintech & Autonomous Ledger",
-    image: "/screenshots/ai/ledgerflow-core.png",
-    url: "https://ledgerflow-core.vercel.app",
-    anchor: "#ai-systems",
-    latency: "118ms",
-    scale: "$40M+ Escrow",
-    sla: "99.98% Zero-Drift",
-    badge: "Fintech Engine",
-    stack: ["FastAPI", "Next.js 15", "Supabase", "Inngest"]
-  },
-  {
-    id: "nightshift",
-    name: "NightShift",
-    title: "NightShift - Autonomous Inbox AI Employee",
-    tagline: "Grounded Enterprise Inbox Swarm with Strict HITL Approval Gates",
-    category: "Autonomous Swarms",
-    image: "/screenshots/ai/nightshift-preview.png",
-    url: "https://ai-employee-demo-mu.vercel.app",
-    anchor: "#ai-systems",
-    latency: "240ms",
-    scale: "Zero Drift",
-    sla: "Grounded RAG",
-    badge: "Multi-Agent Swarm",
-    stack: ["Claude 3.5 Sonnet", "Inngest", "pgvector", "Gmail API"]
-  },
-  {
-    id: "legiit",
-    name: "Legiit",
-    title: "Legiit AI Command Center ($1M ARR)",
-    tagline: "Global Freelance Marketplace Scaled to $1M ARR Across 1,500+ Orgs",
-    category: "High-Scale Marketplace",
+    tag: "Laravel 10 · React · Stripe & Escrow · Redis Queues · MongoDB",
+    title: "Legiit.com: High-volume freelance services marketplace",
+    context:
+      "A live two-sided marketplace processing millions in GMV with complex financial logic, escrow, instant messaging, and seller payouts for 400,000+ registered users.",
     image: "/screenshots/Legiit.png",
-    url: "https://legiit.com",
-    anchor: "#experience",
-    latency: "85ms",
-    scale: "400K+ Users",
-    sla: "1M+ Orders",
-    badge: "$1M ARR Flagship",
-    stack: ["Node.js", "React Native", "Redis Cluster", "AWS RDS"]
+    built: [
+      "Engineered order checkout, multi-currency wallet balances, escrow releases, and automated seller payouts with strict idempotency.",
+      "Rebuilt background jobs on Redis queues and Supervisor workers so heavy transaction notifications, emails, and webhooks never block web requests.",
+      "Shipped hundreds of tickets through Jira, GitHub pull requests, strict peer reviews, and automated staging checks before touching production.",
+      "Optimized slow MongoDB queries and added Redis caching layers to keep catalog search fast during high-traffic promotions.",
+    ],
   },
   {
-    id: "gearsignal",
-    name: "GearSignal",
-    title: "GearSignal AI - Automotive Telemetry",
-    tagline: "Real-Time Vehicle Diagnostic Pipeline with Edge Inference",
-    category: "Real-time Telemetry",
-    image: "/screenshots/ai/gearsignal-ai.png",
-    url: "https://gearsignal-ai.vercel.app",
-    anchor: "#ai-systems",
-    latency: "94ms",
-    scale: "12,000 Sigs/sec",
-    sla: "Edge Inference",
-    badge: "Telemetry Engine",
-    stack: ["TypeScript", "Turborepo", "WebSockets", "TimescaleDB"]
-  }
+    tag: "Next.js 14 · Supabase · pgvector RAG · Multi-LLM Gateway · MCP",
+    title: "Command Center: AI-powered SaaS for business owners",
+    context:
+      "Legiit's flagship subscription SaaS, giving business owners automated audits, live rank tracking, and an AI advisory assistant grounded in domain data.",
+    built: [
+      "Built an advisor chat using RAG: knowledge base documents are chunked, embedded with OpenAI, and queried with pgvector using HNSW indexing for low-latency retrieval.",
+      "Engineered a multi-provider LLM gateway that balances calls across Claude, OpenAI, Gemini and Grok with automatic fallbacks when a provider hits downtime or rate limits.",
+      "Created a custom Model Context Protocol (MCP) server with OAuth so users can connect Claude directly to their workspace data.",
+      "Wrote 60+ Supabase edge functions protected by strict Row Level Security (RLS) policies to keep multi-tenant customer data completely isolated.",
+    ],
+  },
+  {
+    tag: "Python · FastAPI · Milvus · Kafka · LangChain · Docker",
+    title: "SEO intelligence and parallel crawl service",
+    context:
+      "A high-throughput backend service that crawls customer websites, extracts structured content, and runs autonomous AI audit workflows.",
+    built: [
+      "Built an asynchronous crawler pipeline with Kafka message consumers, allowing hundreds of sites to be processed concurrently without blocking the main web app.",
+      "Stored and queried semantic page embeddings using Milvus vector database running in isolated Docker containers.",
+      "Created LangChain agent workflows that evaluate crawled site structures and generate actionable audit reports using OpenAI and Gemini models.",
+    ],
+  },
 ];
 
-const ROTATING_DOMAINS = [
-  "Private Custom ML Containers.",
-  "4-Bit LoRA vLLM Infrastructure.",
-  "Enterprise LLM Firewalls.",
-  "Autonomous Agent Fleets.",
-  "Fault-Tolerant Cloud Backends.",
+const UPWORK_PROJECTS = [
+  {
+    title: "AI article and WordPress publishing automation",
+    detail:
+      "Built an automated workflow that generates research-backed articles with AI, formats structured HTML, and publishes them directly to WordPress via REST API with custom taxonomies.",
+    quote: "The final system works exactly as needed and has already started saving me significant time.",
+    stars: 5,
+  },
+  {
+    title: "AI-powered vehicle damage assessment web app",
+    detail:
+      "Developed a full-stack platform where users upload damaged vehicle photos to receive structured damage classifications, repair urgency scores, and preliminary repair cost estimates.",
+    quote: "Fast communication, exceptional technical depth, and delivered ahead of schedule.",
+    stars: 5,
+  },
+  {
+    title: "Multi-service API sync and webhook ingestion",
+    detail:
+      "Architected a bi-directional synchronization pipeline connecting CRM contacts, payment processor webhooks, and internal PostgreSQL records with dead-letter queue recovery.",
+    quote: "Shakil jumped into our messy codebase and stabilized the entire integration within days.",
+    stars: 5,
+  },
+  {
+    title: "Custom LLM prompt evaluation and guardrail engine",
+    detail:
+      "Created a validation layer that screens incoming prompt inputs, sanitizes output formats with strict JSON schemas, and logs token consumption across client accounts.",
+    quote: "Incredible attention to detail. Our AI outputs are finally predictable and reliable.",
+    stars: 5,
+  },
 ];
 
-export default function PortfolioPage() {
-  const pageRef = useRef<HTMLDivElement>(null);
-  const [repos, setRepos] = useState<GitHubRepo[]>(CACHED_GITHUB_REPOS);
-  const [activeBlueprintIndex, setActiveBlueprintIndex] = useState<number>(0);
-  const [codeComparisonTab, setCodeComparisonTab] = useState<"before" | "after">("after");
-  const [activeHeroDemo, setActiveHeroDemo] = useState<number>(0);
-  const [rotatingDomainIdx, setRotatingDomainIdx] = useState<number>(0);
+const TESTIMONIALS = [
+  {
+    name: "Chris M. Walker",
+    role: "CEO, Legiit.com",
+    photo: "/chris.jpeg",
+    quote:
+      "Most developers just write code; he thinks in systems. Legiit isn't a simple website; it's a complex marketplace with intricate financial logic. He engineered the architecture that allows us to scale safely. I don't need a freelancer; I need an engineering partner.",
+  },
+  {
+    name: "Jim Sabellico",
+    role: "Founder, No Half Cakes",
+    photo: "/jim.jpeg",
+    quote:
+      "When I land high-stakes clients like Steve Weatherford, I can't afford 'trial and error.' I bring him in because he brings an engineering discipline to agency chaos. He was the technical lead behind our biggest deployments because the code is clean, the database optimized, and the delivery flawless.",
+  },
+  {
+    name: "Steve Weatherford",
+    role: "Super Bowl Champion and Entrepreneur",
+    photo: "/steve.jpeg",
+    quote:
+      "I don't know the code, I just know that my platform needs to perform as hard as I do. The team delivered a digital HQ that handles my traffic, my content, and my sales without blinking. It feels solid, fast, and professional. That's the standard.",
+  },
+];
 
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setRotatingDomainIdx((prev) => (prev + 1) % ROTATING_DOMAINS.length);
-    }, 2800);
-    return () => clearInterval(timer);
-  }, []);
+const HOW_I_WORK = [
+  {
+    title: "US Eastern hours (9am to 5pm EST)",
+    desc: "I am online when your team is online. Quick morning check-ins and end-of-day recaps on Slack, so you never have to wonder what is happening.",
+  },
+  {
+    title: "Code review on every pull request",
+    desc: "Nothing merges directly into main or touches production unreviewed. Every change gets a ticket, a clean branch, tests, and a reviewed pull request.",
+  },
+  {
+    title: "Staging verification before live release",
+    desc: "I test every user flow on a staging environment before releasing to live customers. Every deploy has a clear rollback strategy and database backup.",
+  },
+  {
+    title: "Deterministic code handles money and rules",
+    desc: "Financial calculations, user permissions, and database constraints stay in strict, tested code. AI is used for language, search, and intelligent summarization.",
+  },
+  {
+    title: "Modern AI tooling without cutting corners",
+    desc: "I build with Claude Code and Cursor daily. That means high development velocity paired with strict unit tests, so speed never comes at the cost of code quality.",
+  },
+  {
+    title: "Direct, accountable communication",
+    desc: "When a requirement is ambiguous or an edge case pops up, I bring it up immediately with practical options. No hidden surprises or guessing games.",
+  },
+];
 
-  // GSAP Entrance Choreography - Safe fade in, never trapping elements at opacity 0
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      gsap.fromTo(
-        ".gsap-reveal",
-        { opacity: 0.8, y: 10 },
-        { opacity: 1, y: 0, duration: 0.4, stagger: 0.05, ease: "power2.out", clearProps: "all" }
-      );
-    }, pageRef);
+const STACK_GROUPS = [
+  {
+    icon: Code2,
+    group: "Frontend",
+    items: "TypeScript, React, Next.js, Vue, Tailwind CSS, HTML5, State Management",
+  },
+  {
+    icon: Server,
+    group: "Backend",
+    items: "PHP 8, Laravel 10, Python, FastAPI, Django, Node.js, Express, REST APIs",
+  },
+  {
+    icon: Database,
+    group: "Data & Caching",
+    items: "PostgreSQL, Supabase, MySQL, MongoDB, Redis, pgvector, Milvus",
+  },
+  {
+    icon: Cpu,
+    group: "AI & Vector Search",
+    items: "Claude API, OpenAI, Gemini, RAG Pipelines, LangChain, MCP Servers, Agent Workflows",
+  },
+  {
+    icon: Layers,
+    group: "Cloud & DevOps",
+    items: "Docker, AWS, Vercel, Supervisor Workers, Kafka, Inngest, Nginx, CI/CD",
+  },
+  {
+    icon: Terminal,
+    group: "Team Process",
+    items: "Git, GitHub, Bitbucket, Jira, Slack, Peer Code Review, Staging Environments",
+  },
+];
 
-    // Fetch GitHub Repositories with safe mapping and fallback
-    fetch("https://api.github.com/users/exelentshakil/repos?per_page=30&sort=updated")
-      .then((res) => res.json())
-      .then((data: GitHubRepo[]) => {
-        if (Array.isArray(data) && data.length > 0) {
-          const mappedRepos = data
-            .filter((r) => !EXCLUDED_REPOS.some((skip) => r.name.toLowerCase().includes(skip.toLowerCase())))
-            .map((r) => ({
-              ...r,
-              description: CUSTOM_REPO_DESCRIPTIONS[r.name] || r.description || "Open source production module and engineering utility."
-            }))
-            .slice(0, 6);
+const FAQS = [
+  {
+    q: "What time zone do you work in?",
+    a: "I work US Eastern hours, 9:00 AM to 5:00 PM EST. That means real-time collaboration with teams across New York, Toronto, Chicago, and San Francisco during standard business hours.",
+  },
+  {
+    q: "Can you jump directly into our existing codebase?",
+    a: "Yes. With 15+ years of software experience, I am comfortable stepping into established codebases in Next.js, Laravel, React, or Python. I read the domain logic, follow your established idioms, and start shipping clean pull requests quickly.",
+  },
+  {
+    q: "How do we hire you on Upwork?",
+    a: "You can click any of the Upwork buttons on this page to visit my profile. You can send me a direct message or invite me to your job. I review your requirements, confirm the scope and schedule, and we can start right away through Upwork hourly or milestone contracts.",
+  },
+  {
+    q: "Are you available for 30+ hours a week?",
+    a: "Yes. I specialize in long-term dedicated roles with product companies, taking on 30 to 40 hours per week as an integrated team member. I also take on focused, high-impact project sprints.",
+  },
+  {
+    q: "How do you handle testing and production deploys?",
+    a: "Every change goes through local testing and automated staging checks before touching production. For database migrations, I test up and down migrations on staging first. Releases are planned to ensure zero downtime.",
+  },
+];
 
-          if (mappedRepos.length >= 6) {
-            setRepos(mappedRepos);
-          } else {
-            // Merge with cached list to guarantee 6 rich cards
-            const merged = [...mappedRepos];
-            for (const cached of CACHED_GITHUB_REPOS) {
-              if (merged.length >= 6) break;
-              if (!merged.some((m) => m.name.toLowerCase() === cached.name.toLowerCase())) {
-                merged.push(cached);
-              }
-            }
-            setRepos(merged.slice(0, 6));
-          }
-        }
-      })
-      .catch(() => {
-        // Keeps the pre-cached fallback repositories
-      });
-
-    return () => ctx.revert();
-  }, []);
-
-
+function SectionHeading({ eyebrow, title, intro }: { eyebrow: string; title: string; intro?: string }) {
   return (
-    <div ref={pageRef} className="min-h-screen bg-white text-[#0D1738]">
-      
-      {/* -------------------------------------------------------------------- */}
-      {/* 1. STRIPE-STYLE NAVIGATION BAR */}
-      {/* -------------------------------------------------------------------- */}
-      <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-[#EAECF0] shadow-sm">
-        <div className="site-container h-16 flex items-center justify-between gap-4">
-          
-          {/* Brand */}
-          <a href="#top" className="flex items-center gap-2.5 group">
-            <div className="w-8 h-8 rounded-[6px] bg-[#0D1738] flex items-center justify-center p-1.5 border border-[#1D2939] shadow-sm group-hover:bg-[#533AFD] group-hover:border-[#533AFD] transition-all">
-              <Image src="/logo.png" alt="Shakil HQ" width={20} height={20} className="object-contain" priority />
-            </div>
-            <div>
-              <div className="flex items-center gap-1.5 font-bold text-sm text-[#0D1738] leading-none">
-                Shakil HQ
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                </span>
-              </div>
-              <div className="text-[11px] font-mono text-[#667085] leading-none mt-1 whitespace-nowrap">
-                Systems &amp; Integration
-              </div>
-            </div>
-          </a>
-
-          {/* Clean Desktop Nav Links */}
-          <nav className="hidden lg:flex items-center xl:gap-5 gap-3.5 text-xs font-semibold text-[#475467] whitespace-nowrap">
-            <a href="#ai-systems" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
-              <Sparkles className="w-3.5 h-3.5 text-[#533AFD]" />
-              <span>AI Systems</span>
-            </a>
-            <a href="#flagship" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
-              <Zap className="w-3.5 h-3.5 text-[#533AFD]" />
-              <span>Legiit &amp; AI</span>
-            </a>
-            <a href="#ai-rescue" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
-              <Wrench className="w-3.5 h-3.5 text-amber-500" />
-              <span>MVP Rescue</span>
-            </a>
-            <a href="#labs" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
-              <Grid className="w-3.5 h-3.5 text-[#667085]" />
-              <span>Labs</span>
-            </a>
-            <a href="#architecture" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
-              <Layers3 className="w-3.5 h-3.5 text-violet-500" />
-              <span>Strategy Lab</span>
-            </a>
-            <a href="#reviews" className="flex items-center gap-1.5 hover:text-[#533AFD] transition-colors">
-              <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
-              <span>Reviews</span>
-            </a>
-          </nav>
-
-          {/* Action CTAs - 100% Upwork Compliant */}
-          <div className="flex items-center gap-2.5">
-            <a
-              href="https://www.upwork.com/freelancers/shakilhq"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] bg-white hover:bg-[#F8F9FC] text-[#344054] hover:text-[#0D1738] text-xs font-semibold border border-[#D0D5DD] transition-all hidden sm:inline-flex shadow-sm"
-            >
-              <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />
-              Verified Partner
-            </a>
-            <a
-              href="https://www.upwork.com/freelancers/shakilhq"
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-xs font-semibold shadow-sm hover:shadow-md transition-all border border-transparent"
-            >
-              Hire on Upwork
-              <ArrowUpRight className="w-3.5 h-3.5" />
-            </a>
-          </div>
-        </div>
-      </header>
-
-      {/* -------------------------------------------------------------------- */}
-      {/* 2. HERO SECTION - STRIPE CLEAN WHITE WITH FLYING AI BLURBS */}
-      {/* -------------------------------------------------------------------- */}
-      <section id="top" className="relative pt-8 pb-12 lg:pt-10 lg:pb-14 border-b border-[#EAECF0] bg-white text-[#0D1738] overflow-hidden">
-        
-        {/* Subtle Stripe Dot Matrix Background */}
-        <div className="absolute inset-0 bg-[radial-gradient(#E2E8F0_1px,transparent_1px)] [background-size:24px_24px] opacity-70 pointer-events-none" />
-        
-        {/* Soft Ambient Radial Meshes (Stripe Signature Violet/Cyan Blobs) */}
-        <div className="absolute -top-32 left-1/4 w-[750px] h-[380px] bg-gradient-to-b from-[#533AFD]/07 via-[#06B6D4]/04 to-transparent blur-[120px] pointer-events-none" />
-        <div className="absolute top-1/3 -right-20 w-[550px] h-[350px] bg-[#533AFD]/05 blur-[100px] pointer-events-none" />
-
-        {/* Foreground Content */}
-        <div className="site-container relative z-10">
-          
-          {/* Single Consolidated Aerospace Flight Status Badge - Stripe White */}
-          <div className="mb-4 lg:mb-5">
-            <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-white border border-[#D9D6FE] shadow-sm text-[11px] text-[#475467] backdrop-blur-md max-w-full overflow-hidden whitespace-nowrap">
-              <div className="relative w-5 h-5 rounded-full overflow-hidden border border-[#D9D6FE] shrink-0 bg-slate-100">
-                <Image
-                  src="/shakil-headshot.jpeg"
-                  alt="Shakil Ahmed"
-                  fill
-                  sizes="20px"
-                  className="object-cover object-top"
-                  priority
-                />
-              </div>
-              <span className="font-bold text-[#0D1738] tracking-wide shrink-0">Shakil Ahmed</span>
-              <span className="text-slate-300 shrink-0">•</span>
-              <span className="font-semibold text-[#533AFD] shrink-0">Senior Systems &amp; Integration Engineer</span>
-              <span className="text-slate-300 hidden sm:inline shrink-0">•</span>
-              <span className="text-[#344054] font-medium hidden sm:inline-flex items-center gap-1 shrink-0">
-                <ShieldCheck className="w-3 h-3 text-[#533AFD]" />
-                Securiti Certified AI Architect
-              </span>
-              <span className="text-slate-300 hidden md:inline shrink-0">•</span>
-              <span className="text-[#027A48] font-semibold hidden md:inline-flex items-center gap-1.5 shrink-0">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block animate-pulse" />
-                Available for Contracts
-              </span>
-            </div>
-          </div>
-
-          <div className="grid lg:grid-cols-12 gap-8 lg:gap-8 items-center">
-            
-            {/* Left Column */}
-            <div className="lg:col-span-7 space-y-4">
-              
-              <h1 className="text-[1.75rem] sm:text-4xl lg:text-[2.65rem] xl:text-[3.05rem] font-black text-[#0D1738] tracking-tight leading-[1.2] sm:leading-[1.2] lg:leading-[1.18]">
-                Engineering Mission-Critical AI Systems &amp;{" "}
-                <span className="block sm:inline-block relative overflow-hidden min-h-[1.3em] align-bottom perspective-[1000px]">
-                  <span
-                    key={rotatingDomainIdx}
-                    className="inline-block animate-cylinder-roll bg-gradient-to-r from-[#533AFD] via-[#7F56D9] to-[#0BA5EC] bg-clip-text text-transparent pb-1"
-                  >
-                    {ROTATING_DOMAINS[rotatingDomainIdx]}
-                  </span>
-                </span>
-              </h1>
-
-              <p className="text-sm sm:text-base text-[#475467] font-normal leading-relaxed max-w-2xl">
-                15+ years commanding fault-tolerant enterprise systems and private machine learning architectures. Former Engineering Team Lead at <strong className="text-[#0D1738] font-semibold">Legiit</strong> (scaled core marketplace and AI Command Center to $1M ARR across 400K+ users). Specializing in 4-bit LoRA private cloud containers, sub-50ms execution, zero third-party data leaks, and Securiti certified AI governance.
-              </p>
-
-              {/* 3 Stripe HUD Telemetry Cards */}
-              <div className="grid grid-cols-3 gap-2.5 max-w-xl pt-0.5">
-                <div className="p-2.5 rounded-[6px] bg-white border border-[#EAECF0] hover:border-[#D9D6FE] shadow-sm hover:shadow-md transition-all group">
-                  <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-[#667085] flex items-center justify-between">
-                    <span>FLEET SCALE</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-500 opacity-80" />
-                  </div>
-                  <div className="text-base sm:text-lg font-black text-[#0D1738] mt-0.5 tracking-tight">400K+ Users</div>
-                  <div className="text-[10px] text-[#667085] font-mono truncate">1M+ Orders</div>
-                </div>
-
-                <div className="p-2.5 rounded-[6px] bg-white border border-[#EAECF0] hover:border-[#D9D6FE] shadow-sm hover:shadow-md transition-all group">
-                  <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-[#667085] flex items-center justify-between">
-                    <span>COMMAND CTR</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#533AFD] opacity-80" />
-                  </div>
-                  <div className="text-base sm:text-lg font-black text-[#533AFD] mt-0.5 tracking-tight">$1M ARR</div>
-                  <div className="text-[10px] text-[#667085] font-mono truncate">1,500+ Orgs</div>
-                </div>
-
-                <div className="p-2.5 rounded-[6px] bg-white border border-[#EAECF0] hover:border-[#D9D6FE] shadow-sm hover:shadow-md transition-all group">
-                  <div className="text-[10px] uppercase font-mono font-bold tracking-wider text-[#667085] flex items-center justify-between">
-                    <span>GOVERNANCE</span>
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 opacity-80" />
-                  </div>
-                  <div className="text-base sm:text-lg font-black text-[#027A48] mt-0.5 tracking-tight">NIST AI RMF</div>
-                  <div className="text-[10px] text-[#667085] font-mono truncate">AI TRiSM</div>
-                </div>
-              </div>
-
-              {/* Action Buttons: ZERO Awkward Whitespace - 100% Upwork Compliant */}
-              <div className="pt-2 flex flex-wrap items-center gap-2.5 sm:gap-3">
-                <a
-                  href="https://www.upwork.com/freelancers/shakilhq"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-primary gap-2 shadow-md shadow-[#533AFD]/20 hover:shadow-[#533AFD]/35 text-xs sm:text-sm font-semibold justify-center py-2.5 px-4 sm:px-5 whitespace-nowrap shrink-0"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0" />
-                  <span className="whitespace-nowrap">Hire on Upwork - Verified Partner Profile</span>
-                  <ArrowUpRight className="w-4 h-4 shrink-0" />
-                </a>
-
-                <a
-                  href="#ai-systems"
-                  className="inline-flex items-center justify-center gap-2 px-3.5 sm:px-4 py-2.5 rounded-[4px] bg-[#F4F3FF] hover:bg-[#EBE9FE] text-[#533AFD] hover:text-[#4327F5] border border-[#D9D6FE] hover:border-[#533AFD] transition-all text-xs sm:text-sm font-semibold shadow-sm whitespace-nowrap shrink-0"
-                >
-                  <Sparkles className="w-4 h-4 text-[#533AFD] shrink-0" />
-                  <span className="whitespace-nowrap">Explore 50+ Systems</span>
-                  <ArrowDown className="w-3.5 h-3.5 shrink-0" />
-                </a>
-              </div>
-
-              {/* Status Bar */}
-              <div className="pt-2.5 border-t border-[#EAECF0] flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-[#667085] font-mono">
-                <div className="flex items-center gap-1.5">
-                  <Check className="w-3.5 h-3.5 text-emerald-600" />
-                  <span className="font-semibold text-[#0D1738]">50+ Orbital AI Systems Active</span>
-                </div>
-                <span className="hidden sm:inline text-slate-300">•</span>
-                <div className="flex items-center gap-1.5">
-                  <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-500" />
-                  <span className="font-semibold text-[#0D1738]">4.9 ★ • 127+ Missions</span>
-                </div>
-                <span className="hidden sm:inline text-slate-300">•</span>
-                <div className="flex items-center gap-1.5">
-                  <Activity className="w-3.5 h-3.5 text-[#533AFD]" />
-                  <span className="text-[#344054]">&lt;120ms Latency SLA</span>
-                </div>
-              </div>
-
-            </div>
-
-            {/* Right Column: Tactical Viewport in Stripe Archetype */}
-            <div className="lg:col-span-5 space-y-3">
-              <div className="bg-white rounded-[8px] border border-[#D0D5DD] shadow-xl shadow-slate-200/50 overflow-hidden">
-                
-                {/* Viewport Window Header */}
-                <div className="bg-[#F8F9FC] px-3.5 py-2.5 border-b border-[#EAECF0] flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#FF5F56] inline-block shadow-sm" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E] inline-block shadow-sm" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-[#27C93F] inline-block shadow-sm" />
-                  </div>
-
-                  {/* Avionics Locator */}
-                  <div className="flex items-center gap-1.5 px-2.5 py-0.5 rounded bg-white border border-[#EAECF0] text-[10px] font-mono text-[#475467] max-w-[210px] truncate shadow-sm">
-                    <Lock className="w-2.5 h-2.5 text-[#533AFD] shrink-0" />
-                    <span className="text-slate-400">ORBITAL //</span>
-                    <span className="text-[#0D1738] font-semibold truncate">{HERO_FLAGSHIP_DEMOS[activeHeroDemo].id}</span>
-                  </div>
-
-                  {/* Live Beacon */}
-                  <div className="flex items-center gap-1.5 text-[10px] font-mono text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 shrink-0 font-medium">
-                    <span className="relative flex h-1.5 w-1.5">
-                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                      <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500" />
-                    </span>
-                    <span className="hidden sm:inline">FLIGHT ACTIVE</span>
-                  </div>
-                </div>
-
-                {/* Viewport Display (Real System Screenshots) */}
-                <div className="relative h-[230px] sm:h-[250px] w-full bg-slate-900 overflow-hidden group">
-                  <Image
-                    key={HERO_FLAGSHIP_DEMOS[activeHeroDemo].id}
-                    src={HERO_FLAGSHIP_DEMOS[activeHeroDemo].image}
-                    alt={HERO_FLAGSHIP_DEMOS[activeHeroDemo].title}
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 550px"
-                    className="object-cover object-top transition-all duration-300 group-hover:scale-[1.01]"
-                    priority
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-slate-950/20 pointer-events-none" />
-
-                  {/* Top Floating Telemetry Overlay */}
-                  <div className="absolute top-2.5 left-2.5 right-2.5 flex items-center justify-between gap-2 pointer-events-none">
-                    <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-white/95 backdrop-blur-md border border-[#EAECF0] text-[11px] text-[#0D1738] shadow-md pointer-events-auto">
-                      <span className="w-2 h-2 rounded-full bg-[#533AFD] animate-pulse" />
-                      <span className="font-bold text-[#0D1738] truncate">{HERO_FLAGSHIP_DEMOS[activeHeroDemo].name}</span>
-                      <span className="text-[#533AFD] font-mono text-[10px] font-semibold">• {HERO_FLAGSHIP_DEMOS[activeHeroDemo].latency}</span>
-                    </div>
-
-                    <a
-                      href={HERO_FLAGSHIP_DEMOS[activeHeroDemo].url || HERO_FLAGSHIP_DEMOS[activeHeroDemo].anchor}
-                      target={HERO_FLAGSHIP_DEMOS[activeHeroDemo].url ? "_blank" : undefined}
-                      rel="noreferrer"
-                      className="pointer-events-auto inline-flex items-center gap-1 px-2.5 py-1 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-[11px] font-bold shadow-md hover:shadow-[#533AFD]/30 transition-all border border-transparent"
-                    >
-                      <span>Engage Cockpit</span>
-                      <ArrowUpRight className="w-3 h-3" />
-                    </a>
-                  </div>
-
-                  {/* Bottom Floating Architecture & Scale Telemetry */}
-                  <div className="absolute bottom-2.5 left-2.5 right-2.5 flex items-center justify-between gap-2 text-[11px] pointer-events-none">
-                    <div className="flex flex-wrap items-center gap-1 pointer-events-auto">
-                      {HERO_FLAGSHIP_DEMOS[activeHeroDemo].stack.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-1.5 py-0.5 rounded-[3px] bg-white/95 backdrop-blur-sm border border-[#EAECF0] font-mono text-[9px] text-[#344054] font-medium shadow-sm"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    <span className="px-2 py-0.5 rounded-[3px] bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] font-mono text-[10px] font-bold shrink-0 pointer-events-auto shadow-sm">
-                      {HERO_FLAGSHIP_DEMOS[activeHeroDemo].scale}
-                    </span>
-                  </div>
-                </div>
-
-                {/* 4-System Avionics Console Buttons */}
-                <div className="p-2 bg-[#F8F9FC] border-t border-[#EAECF0] grid grid-cols-4 gap-1.5">
-                  {HERO_FLAGSHIP_DEMOS.map((demo, idx) => {
-                    const isActive = activeHeroDemo === idx;
-                    return (
-                      <button
-                        key={demo.id}
-                        type="button"
-                        onClick={() => setActiveHeroDemo(idx)}
-                        className={`flex flex-col text-left p-1.5 rounded-[4px] transition-all border ${
-                          isActive
-                            ? "bg-white border-[#533AFD] shadow-sm ring-1 ring-[#533AFD]"
-                            : "bg-white/60 border-[#EAECF0] hover:bg-white hover:border-[#D0D5DD]"
-                        }`}
-                      >
-                        <div className="flex items-center justify-between">
-                          <span className={`text-[9px] font-mono font-bold ${isActive ? "text-[#533AFD]" : "text-[#667085]"}`}>
-                            0{idx + 1}
-                          </span>
-                          {isActive && <span className="w-1.5 h-1.5 rounded-full bg-[#533AFD] shadow-sm shadow-[#533AFD]/80" />}
-                        </div>
-                        <span className={`text-[11px] font-bold truncate mt-0.5 ${isActive ? "text-[#0D1738]" : "text-[#475467]"}`}>
-                          {demo.name}
-                        </span>
-                        <span className={`text-[9px] font-mono truncate mt-0.5 ${isActive ? "text-[#533AFD] font-medium" : "text-[#667085]"}`}>
-                          {demo.sla}
-                        </span>
-                      </button>
-                    );
-                  })}
-                </div>
-
-              </div>
-
-              {/* Protocol Banner */}
-              <div className="px-3.5 py-2 rounded-[6px] bg-[#F8F9FC] border border-[#EAECF0] flex items-center justify-between text-xs text-[#475467]">
-                <div className="flex items-center gap-2">
-                  <ShieldCheck className="w-4 h-4 text-[#533AFD]" />
-                  <span className="font-semibold text-[#0D1738]">Gartner AI TRiSM &amp; NIST AI RMF Validated</span>
-                </div>
-                <span className="font-mono text-[10px] text-[#533AFD] bg-[#F4F3FF] px-2 py-0.5 rounded font-bold border border-[#D9D6FE]">
-                  50+ Orbital Cockpits
-                </span>
-              </div>
-            </div>
-
-          </div>
-
-          {/* =================================================================== */}
-          {/* KINETIC ROTATING ROPE TELEMETRY RIBBON (ZERO-CONFLICT DEDICATED RAIL) */}
-          {/* Undulating Wavy SVG Rope carrying continuous system telemetry */}
-          {/* =================================================================== */}
-          <div className="mt-8 pt-6 border-t border-[#EAECF0] relative">
-            
-            {/* Header & Verification Telemetry */}
-            <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5 text-xs font-mono">
-              <div className="flex items-center gap-2">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#533AFD] opacity-75" />
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-[#533AFD]" />
-                </span>
-                <span className="font-bold text-[#0D1738] uppercase tracking-wider text-[11px]">
-                  Continuous Telemetry Stream // 50+ Orbital AI Systems
-                </span>
-              </div>
-              <div className="text-[11px] text-[#667085] hidden sm:flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD]" />
-                <span>NIST AI RMF &amp; AI TRiSM</span>
-                <span>•</span>
-                <span className="text-[#533AFD] font-bold">99.98% Guaranteed SLA</span>
-              </div>
-            </div>
-
-            {/* Kinetic Undulating SVG Rope Marquee */}
-            <div className="relative w-full h-14 sm:h-16 overflow-hidden rounded-[6px] bg-[#F8F9FC] border border-[#EAECF0] shadow-inner flex items-center">
-              <svg
-                width="100%"
-                height="100%"
-                viewBox="0 0 1440 68"
-                preserveAspectRatio="none"
-                className="overflow-visible select-none pointer-events-none"
-              >
-                <defs>
-                  {/* Undulating sinusoidal rope path centered vertically with ample clearance */}
-                  <path
-                    id="telemetryRopePath"
-                    d="M -1440,43 Q -1080,25 -720,43 T 0,43 T 720,43 T 1440,43 T 2160,43 T 2880,43"
-                    fill="none"
-                  />
-                  {/* High-contrast brand gradient for flowing text */}
-                  <linearGradient id="ropeTextGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                    <stop offset="0%" stopColor="#4327F5" />
-                    <stop offset="30%" stopColor="#0086C9" />
-                    <stop offset="65%" stopColor="#6938EF" />
-                    <stop offset="100%" stopColor="#4327F5" />
-                  </linearGradient>
-                </defs>
-
-                {/* Braided Rope Guideline 1 (Solid accent strand) */}
-                <path
-                  d="M -1440,43 Q -1080,25 -720,43 T 0,43 T 720,43 T 1440,43 T 2160,43 T 2880,43"
-                  fill="none"
-                  stroke="#533AFD"
-                  strokeOpacity="0.28"
-                  strokeWidth="2.5"
-                />
-
-                {/* Braided Rope Guideline 2 (Dashed secondary strand) */}
-                <path
-                  d="M -1440,47 Q -1080,29 -720,47 T 0,47 T 720,47 T 1440,47 T 2160,47 T 2880,47"
-                  fill="none"
-                  stroke="#0BA5EC"
-                  strokeOpacity="0.35"
-                  strokeWidth="1.5"
-                  strokeDasharray="6 5"
-                />
-
-                {/* Animated Text flowing along the Rope Path */}
-                <text
-                  fill="url(#ropeTextGrad)"
-                  className="font-mono font-bold uppercase text-[12px] tracking-widest"
-                >
-                  <textPath href="#telemetryRopePath" startOffset="0%">
-                    ⚡ 50+ PRODUCTION AI SYSTEMS SHIPPED • LEDGERFLOW CORE ($40M+ ESCROW // 118ms) • NIGHTSHIFT AI (GROUNDED INBOX SWARM // 240ms) • LEGIIT COMMAND CTR ($1M ARR // 1M+ ORDERS) • NIST AI RMF SECURED (TRiSM VALIDATED) • GEARSIGNAL AI (12K SIGS/SEC) • THERACORE CLINICAL INTAKE (HIPAA) • CALREALTY OPS (99.98% SLA) • SUPABASE PGVECTOR (SUB-50ms) • INNGEST FAULT-TOLERANT STEP SWARMS • FASTAPI ASYNC ENGINE (38ms) •
-                    <animate
-                      attributeName="startOffset"
-                      from="0%"
-                      to="-50%"
-                      dur="32s"
-                      repeatCount="indefinite"
-                    />
-                  </textPath>
-                </text>
-              </svg>
-            </div>
-
-            {/* Interactive System Capsule Rail (Zero-Conflict Horizontal Stream) */}
-            <div className="mt-2.5 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)]">
-              <div className="animate-marquee-left flex items-center gap-2.5 hover:[animation-play-state:paused]">
-                {[...HERO_FLOATING_BLURBS_TOP, ...HERO_FLOATING_BLURBS_BOTTOM, ...HERO_FLOATING_BLURBS_TOP, ...HERO_FLOATING_BLURBS_BOTTOM].map((item, idx) => (
-                  <a
-                    key={`rope-chip-${idx}`}
-                    href="#ai-systems"
-                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white hover:bg-[#F4F3FF] border border-[#EAECF0] hover:border-[#D9D6FE] shadow-sm text-[11px] font-mono text-[#475467] shrink-0 transition-all cursor-pointer group"
-                  >
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#533AFD] group-hover:scale-125 transition-transform" />
-                    <span className="font-bold text-[#0D1738] group-hover:text-[#533AFD] transition-colors">{item.name}</span>
-                    <span className="text-slate-300">•</span>
-                    <span className="text-[#667085]">{item.desc}</span>
-                    <span className={`px-1.5 py-0.5 text-[9px] font-bold rounded border ${item.color}`}>
-                      {item.metric}
-                    </span>
-                    <span className="text-[10px] text-slate-400 font-semibold">{item.latency}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------------------- */}
-      {/* 3. EXECUTIVE PROOF BENTO CARDS */}
-      {/* -------------------------------------------------------------------- */}
-      <section id="proof" className="bg-[#F8FAFC]/60 border-b border-[#EAECF0] py-8 lg:py-10">
-        <div className="site-container">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            
-            <div className="stat-card">
-              <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 rounded-md bg-[#F4F3FF] border border-[#D9D6FE] flex items-center justify-center text-[#533AFD]">
-                  <Globe2 className="w-4 h-4" />
-                </div>
-                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-                  17 Countries
-                </span>
-              </div>
-              <div className="text-2xl sm:text-3xl font-bold text-[#0D1738] tracking-tight">400,000+</div>
-              <div className="text-xs font-semibold text-[#344054] mt-1">Shipped Platform Users</div>
-              <p className="text-[11px] text-[#667085] mt-1 leading-relaxed">
-                High-concurrency marketplace architecture powering Legiit with 1M+ orders.
-              </p>
-            </div>
-
-            <div className="stat-card">
-              <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 rounded-md bg-[#F4F3FF] border border-[#D9D6FE] flex items-center justify-center text-[#533AFD]">
-                  <Sparkles className="w-4 h-4" />
-                </div>
-                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-[#F4F3FF] text-[#533AFD] border border-[#D9D6FE]">
-                  1,500+ Orgs
-                </span>
-              </div>
-              <div className="text-2xl sm:text-3xl font-bold text-[#0D1738] tracking-tight">$1M ARR</div>
-              <div className="text-xs font-semibold text-[#344054] mt-1">AI Command Center Scaled</div>
-              <p className="text-[11px] text-[#667085] mt-1 leading-relaxed">
-                Intelligent business scoring & matching across 1,500+ locations in 40+ countries.
-              </p>
-            </div>
-
-            <div className="stat-card">
-              <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 rounded-md bg-[#F4F3FF] border border-[#D9D6FE] flex items-center justify-center text-[#533AFD]">
-                  <Cpu className="w-4 h-4" />
-                </div>
-                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-indigo-50 text-[#533AFD] border border-indigo-200">
-                  NIST AI RMF
-                </span>
-              </div>
-              <div className="text-2xl sm:text-3xl font-bold text-[#0D1738] tracking-tight">50+ Systems</div>
-              <div className="text-xs font-semibold text-[#344054] mt-1">Production AI Architectures</div>
-              <p className="text-[11px] text-[#667085] mt-1 leading-relaxed">
-                Autonomous swarms, governed RAG pipelines, multimodal vision & enterprise quoting.
-              </p>
-            </div>
-
-            <div className="stat-card">
-              <div className="flex items-center justify-between mb-3">
-                <div className="w-8 h-8 rounded-md bg-[#F4F3FF] border border-[#D9D6FE] flex items-center justify-center text-[#533AFD]">
-                  <Star className="w-4 h-4 text-amber-500 fill-amber-400" />
-                </div>
-                <span className="text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 border border-amber-200">
-                  4.9 ★ Rating
-                </span>
-              </div>
-              <div className="text-2xl sm:text-3xl font-bold text-[#0D1738] tracking-tight">125+ Reviews</div>
-              <div className="text-xs font-semibold text-[#344054] mt-1">Verified Five-Star Track Record</div>
-              <p className="text-[11px] text-[#667085] mt-1 leading-relaxed">
-                15+ years of enterprise systems engineering. Guaranteed milestone delivery.
-              </p>
-            </div>
-
-          </div>
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------------------- */}
-      {/* 3.5 DEDICATED AI APPLICATIONS & AUTONOMOUS AGENTS SHOWCASE */}
-      {/* -------------------------------------------------------------------- */}
-      <AiProjectsSection />
-
-      {/* -------------------------------------------------------------------- */}
-      {/* 4. FEATURED FLAGSHIP CASE STUDY: LEGIIT */}
-      {/* -------------------------------------------------------------------- */}
-      <section id="flagship" className="section-pad bg-[#F8FAFC]">
-        <div className="site-container">
-          
-          <div className="max-w-3xl mb-8">
-            <span className="badge-tag mb-2">Flagship Marketplace & AI Command Center</span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0D1738] tracking-tight">
-              Scaling Legiit to 400,000+ Users & $1M ARR AI Command Center
-            </h2>
-            <p className="text-xs sm:text-sm text-[#475467] mt-2 leading-relaxed">
-              For 4 years I was Engineering Team Lead at <strong>Legiit</strong>, a marketplace now processing 1M+ orders for 100K+ businesses through a vetted network of 25K+ freelancers. I engineered the core platform architecture, built the AI-powered Command Center from scratch, and developed the native mobile apps.
-            </p>
-          </div>
-
-          {/* Main Case Study Bento Card */}
-          <div className="bg-white rounded-[4px] border border-[#D0D5DD] p-6 lg:p-8 shadow-sm">
-            <div className="grid lg:grid-cols-12 gap-8 items-center">
-              
-              {/* Left Column: Details & Technical Wins */}
-              <div className="lg:col-span-6 space-y-4">
-                <div className="flex items-center gap-2">
-                  <span className="px-2.5 py-0.5 rounded-[2px] bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] text-[11px] font-bold uppercase">
-                    Freelance Marketplace
-                  </span>
-                  <span className="px-2.5 py-0.5 rounded-[2px] bg-[#ECFDF3] border border-[#A6F4C5] text-[#027A48] text-[11px] font-bold">
-                    400K+ Users • 17 Countries
-                  </span>
-                  <span className="px-2.5 py-0.5 rounded-[2px] bg-[#FEF3F2] border border-[#FECDCA] text-[#B42318] text-[11px] font-bold">
-                    $1M ARR AI Feature
-                  </span>
-                </div>
-
-                <h3 className="text-xl sm:text-2xl font-bold text-[#0D1738] tracking-tight">
-                  High-Concurrency Marketplace Core
-                </h3>
-
-                <p className="text-[#475467] text-xs sm:text-sm leading-relaxed">
-                  Architected the entire billing flow, wallet escrow holding, instant seller payouts, and WebSockets messaging. Scaled platform with zero service interruptions during major peak events.
-                </p>
-
-                {/* Technical Achievements 2x2 Bento Grid */}
-                <div className="grid sm:grid-cols-2 gap-2.5 pt-1">
-                  
-                  <div className="p-3 rounded-[6px] bg-[#F8FAFC] border border-[#EAECF0] hover:border-[#D9D6FE] transition-colors">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <div className="w-6 h-6 rounded bg-[#F4F3FF] text-[#533AFD] flex items-center justify-center shrink-0">
-                        <Sparkles className="w-3.5 h-3.5" />
-                      </div>
-                      <span className="text-xs font-bold text-[#0D1738]">AI Command Center</span>
-                      <span className="ml-auto text-[10px] font-mono font-bold text-[#533AFD] bg-[#F4F3FF] px-1.5 py-0.5 rounded border border-[#D9D6FE]">
-                        $1M ARR
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-[#475467] leading-snug">
-                      Scored 1,500+ businesses across 40+ countries via Google APIs & automated matching.
-                    </p>
-                  </div>
-
-                  <div className="p-3 rounded-[6px] bg-[#F8FAFC] border border-[#EAECF0] hover:border-[#D9D6FE] transition-colors">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <div className="w-6 h-6 rounded bg-[#ECFDF3] text-emerald-700 flex items-center justify-center shrink-0">
-                        <Smartphone className="w-3.5 h-3.5" />
-                      </div>
-                      <span className="text-xs font-bold text-[#0D1738]">Legiit Mobile</span>
-                      <span className="ml-auto text-[10px] font-mono font-bold text-emerald-700 bg-[#ECFDF3] px-1.5 py-0.5 rounded border border-[#A6F4C5]">
-                        10K+ DLs
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-[#475467] leading-snug">
-                      Built in React Native (iOS & Android) with real-time bidding, biometric auth & push.
-                    </p>
-                  </div>
-
-                  <div className="p-3 rounded-[6px] bg-[#F8FAFC] border border-[#EAECF0] hover:border-[#D9D6FE] transition-colors">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <div className="w-6 h-6 rounded bg-amber-50 text-amber-700 flex items-center justify-center shrink-0">
-                        <CreditCard className="w-3.5 h-3.5" />
-                      </div>
-                      <span className="text-xs font-bold text-[#0D1738]">Stripe & Escrow</span>
-                      <span className="ml-auto text-[10px] font-mono font-bold text-amber-700 bg-amber-50 px-1.5 py-0.5 rounded border border-amber-200">
-                        $40M+ Vol
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-[#475467] leading-snug">
-                      Automated escrow holds, milestone releases, affiliate splits & double-entry ledger.
-                    </p>
-                  </div>
-
-                  <div className="p-3 rounded-[6px] bg-[#F8FAFC] border border-[#EAECF0] hover:border-[#D9D6FE] transition-colors">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <div className="w-6 h-6 rounded bg-indigo-50 text-indigo-700 flex items-center justify-center shrink-0">
-                        <Database className="w-3.5 h-3.5" />
-                      </div>
-                      <span className="text-xs font-bold text-[#0D1738]">P99 DB Tuning</span>
-                      <span className="ml-auto text-[10px] font-mono font-bold text-indigo-700 bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-200">
-                        118ms P99
-                      </span>
-                    </div>
-                    <p className="text-[11px] text-[#475467] leading-snug">
-                      Reduced query latency from 800ms to 118ms; WebSockets live chat with preview.
-                    </p>
-                  </div>
-
-                </div>
-
-                {/* CEO Quote Pill */}
-                <div className="p-3.5 rounded-[6px] bg-[#F8F9FC] border-l-4 border-[#533AFD] border-y border-r border-[#EAECF0] text-xs text-[#344054]">
-                  <p className="italic leading-relaxed">
-                    &quot;He didn&apos;t just patch features together, he engineered the architecture that allows us to scale safely.&quot;
-                  </p>
-                  <span className="block not-italic font-bold text-[#0D1738] mt-1.5 text-[11px] tracking-tight">
-                    - Chris M. Walker, CEO of Legiit
-                  </span>
-                </div>
-
-                {/* Tech Pills */}
-                <div className="flex flex-wrap gap-1.5 pt-2">
-                  {["React", "Next.js", "React Native", "Node.js", "Laravel", "MySQL", "Redis", "Celery", "AWS", "Stripe API", "Google Search Console API"].map((tech) => (
-                    <span key={tech} className="px-2 py-0.5 rounded-[2px] bg-[#F2F4F7] text-[#344054] font-mono text-[11px] font-semibold">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-
-                {/* Direct Action Link */}
-                <div className="pt-2">
-                  <a
-                    href="https://legiit.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn-primary text-xs"
-                  >
-                    Visit Live Platform (Legiit.com)
-                    <ExternalLink className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-              </div>
-
-              {/* Right Column: Web + Mobile Screenshots */}
-              <div className="lg:col-span-6 space-y-3">
-                <div className="relative aspect-[16/10] rounded-[4px] overflow-hidden border border-[#D0D5DD] shadow-sm bg-slate-900">
-                  <Image
-                    src="/screenshots/Legiit.png"
-                    alt="Legiit Marketplace Web Platform"
-                    fill
-                    className="object-cover object-top"
-                    priority
-                  />
-                  <div className="absolute top-2 right-2 px-2 py-0.5 rounded-[2px] bg-[#0D1738]/90 text-white text-[10px] font-semibold">
-                    Web Platform
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="relative aspect-[16/9] rounded-[4px] overflow-hidden border border-[#D0D5DD] shadow-sm bg-slate-900">
-                    <Image
-                      src="/screenshots/Legiit - iOS.png"
-                      alt="Legiit iOS App"
-                      fill
-                      className="object-cover object-top"
-                    />
-                    <div className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded-[2px] bg-black/80 text-white text-[9px] font-semibold">
-                      iOS App (4.0 ★)
-                    </div>
-                  </div>
-
-                  <div className="relative aspect-[16/9] rounded-[4px] overflow-hidden border border-[#D0D5DD] shadow-sm bg-slate-900">
-                    <Image
-                      src="/screenshots/Legiit - Android.png"
-                      alt="Legiit Android App"
-                      fill
-                      className="object-cover object-top"
-                    />
-                    <div className="absolute top-1.5 left-1.5 px-1.5 py-0.5 rounded-[2px] bg-black/80 text-white text-[9px] font-semibold">
-                      Android (4.5 ★)
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------------------- */}
-      {/* 4.25 AI MVP RESCUE & PRODUCTIONIZATION SECTION */}
-      {/* -------------------------------------------------------------------- */}
-      <AiMvpRescueSection />
-
-      {/* -------------------------------------------------------------------- */}
-      {/* 4.5 10 CRITICAL BOTTLENECKS IN SCALABLE SYSTEMS - INTERACTIVE LAB */}
-      {/* -------------------------------------------------------------------- */}
-      <section className="section-pad bg-white border-b border-[#EAECF0]">
-        <div className="site-container">
-          
-          {/* Section Header with Slider Navigation Controls */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-6">
-            <div className="max-w-2xl">
-              <span className="badge-tag mb-2">Architectural Strategy Lab</span>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0D1738] tracking-tight">
-                10 Bottlenecks in Scalable Systems - Diagnosed & Resolved
-              </h2>
-              <p className="text-xs sm:text-sm text-[#475467] mt-1.5 leading-relaxed">
-                How I identify root causes, evaluate framework trade-offs, and engineer high-concurrency solutions that keep systems fast and reliable under heavy traffic.
-              </p>
-            </div>
-
-            {/* Slider Navigation Buttons */}
-            <div className="flex items-center gap-3">
-              <span className="text-xs font-mono font-bold text-[#533AFD] bg-[#F4F3FF] px-2.5 py-1 rounded-[4px] border border-[#D9D6FE]">
-                {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].num} / 10
-              </span>
-
-              <div className="flex items-center gap-1.5">
-                <button
-                  onClick={() => setActiveBlueprintIndex((prev) => (prev > 0 ? prev - 1 : SYSTEM_BOTTLENECK_STUDIES.length - 1))}
-                  aria-label="Previous system bottleneck"
-                  className="w-8 h-8 rounded-[4px] bg-white border border-[#D0D5DD] hover:border-[#533AFD] hover:text-[#533AFD] flex items-center justify-center text-[#344054] transition-colors"
-                >
-                  <ChevronLeft className="w-4 h-4" />
-                </button>
-
-                <button
-                  onClick={() => setActiveBlueprintIndex((prev) => (prev < SYSTEM_BOTTLENECK_STUDIES.length - 1 ? prev + 1 : 0))}
-                  aria-label="Next system bottleneck"
-                  className="w-8 h-8 rounded-[4px] bg-white border border-[#D0D5DD] hover:border-[#533AFD] hover:text-[#533AFD] flex items-center justify-center text-[#344054] transition-colors"
-                >
-                  <ChevronRight className="w-4 h-4" />
-                </button>
-              </div>
-            </div>
-          </div>
-
-          {/* Quick-Jump Problem Selector Track */}
-          <div className="overflow-x-auto pb-3 mb-6 no-scrollbar">
-            <div className="flex items-center gap-2 min-w-max">
-              {SYSTEM_BOTTLENECK_STUDIES.map((study, idx) => (
-                <button
-                  key={study.id}
-                  onClick={() => setActiveBlueprintIndex(idx)}
-                  className={`px-3 py-1.5 rounded-[4px] text-xs font-semibold flex items-center gap-1.5 transition-all ${
-                    activeBlueprintIndex === idx
-                      ? "bg-[#533AFD] text-white shadow-sm"
-                      : "bg-[#F8FAFC] text-[#344054] border border-[#EAECF0] hover:bg-[#F2F4F7]"
-                  }`}
-                >
-                  <span className="font-mono text-[11px] opacity-80">{study.num}</span>
-                  <span>{study.title.split("&")[0].split(" - ")[0].trim()}</span>
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Active Bottleneck Deep-Dive Card */}
-          <div className="bg-[#F8FAFC] rounded-[4px] border border-[#D0D5DD] p-6 lg:p-8 mb-6 shadow-sm">
-            
-            <div className="flex flex-wrap items-center justify-between gap-3 mb-4 pb-4 border-b border-[#EAECF0]">
-              <div>
-                <span className="px-2.5 py-0.5 rounded-[2px] bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] text-[11px] font-bold uppercase">
-                  {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].category}
-                </span>
-                <h3 className="text-xl sm:text-2xl font-bold text-[#0D1738] mt-1.5 tracking-tight">
-                  {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].title}
-                </h3>
-                <p className="text-xs text-[#475467] mt-0.5">
-                  {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].subtitle}
-                </p>
-              </div>
-
-              <div className="flex items-center gap-4 text-xs font-mono">
-                <span className="text-[#533AFD] font-bold">
-                  Latency: {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].metrics.latency}
-                </span>
-                <span className="text-emerald-700 font-bold">
-                  Throughput: {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].metrics.throughput}
-                </span>
-              </div>
-            </div>
-
-            {/* 3-Column Architecture Strategy Breakdown */}
-            <div className="grid md:grid-cols-3 gap-4 mb-6">
-              
-              {/* Stage 1: The Diagnosis */}
-              <div className="p-4 rounded-[4px] bg-[#FFF5F5] border border-[#FEDF89] flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-rose-800 uppercase tracking-wider mb-1.5">
-                    <AlertTriangle className="w-4 h-4 text-rose-600" />
-                    <span>1. The Failure Mode</span>
-                  </div>
-                  <h4 className="text-xs font-bold text-[#0D1738] mb-1">
-                    {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].failureMode.title}
-                  </h4>
-                  <p className="text-xs text-[#475467] leading-relaxed">
-                    {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].failureMode.description}
-                  </p>
-                </div>
-                <div className="mt-3 pt-2.5 border-t border-rose-200 text-[11px] font-mono text-rose-700 font-semibold">
-                  {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].failureMode.impact}
-                </div>
-              </div>
-
-              {/* Stage 2: Framework & Trade-off Evaluation */}
-              <div className="p-4 rounded-[4px] bg-white border border-[#D0D5DD] flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-[#533AFD] uppercase tracking-wider mb-1.5">
-                    <Cpu className="w-4 h-4 text-[#533AFD]" />
-                    <span>2. Trade-offs Evaluated</span>
-                  </div>
-                  <h4 className="text-xs font-bold text-[#0D1738] mb-1">
-                    {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].tradeoffs.title}
-                  </h4>
-                  <div className="space-y-1 text-xs text-[#475467]">
-                    {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].tradeoffs.options.map((opt, i) => (
-                      <p key={i}>• {opt}</p>
-                    ))}
-                  </div>
-                </div>
-                <div className="mt-3 pt-2.5 border-t border-[#EAECF0] text-[11px] font-mono text-[#533AFD] font-semibold">
-                  {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].tradeoffs.decision}
-                </div>
-              </div>
-
-              {/* Stage 3: The Production Outcome */}
-              <div className="p-4 rounded-[4px] bg-[#ECFDF3] border border-[#A6F4C5] flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-1.5 text-xs font-bold text-emerald-800 uppercase tracking-wider mb-1.5">
-                    <Check className="w-4 h-4 text-emerald-600" />
-                    <span>3. Engineered Solution</span>
-                  </div>
-                  <h4 className="text-xs font-bold text-[#0D1738] mb-1">
-                    {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].solution.title}
-                  </h4>
-                  <p className="text-xs text-[#475467] leading-relaxed">
-                    {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].solution.description}
-                  </p>
-                </div>
-                <div className="mt-3 pt-2.5 border-t border-emerald-200 text-[11px] font-mono text-emerald-800 font-semibold">
-                  {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].solution.result}
-                </div>
-              </div>
-
-            </div>
-
-            {/* Interactive Code Comparison Terminal */}
-            <div className="rounded-[4px] bg-[#0D1738] border border-slate-700 overflow-hidden shadow-md">
-              
-              {/* Header & Tabs */}
-              <div className="px-4 py-2.5 bg-[#09112B] border-b border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
-                <div className="flex items-center gap-3">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-full bg-rose-500/80 inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-amber-500/80 inline-block" />
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/80 inline-block" />
-                  </div>
-                  <span className="text-xs font-mono text-slate-300 font-semibold">
-                    {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].code.filename}
-                  </span>
-                </div>
-
-                {/* Code Toggle Tabs */}
-                <div className="flex items-center gap-2">
-                  <button
-                    onClick={() => setCodeComparisonTab("before")}
-                    className={`px-2.5 py-1 rounded-[2px] text-xs font-semibold font-mono transition-all ${
-                      codeComparisonTab === "before"
-                        ? "bg-rose-500/20 text-rose-300 border border-rose-500/40"
-                        : "text-slate-400 hover:text-slate-200"
-                    }`}
-                  >
-                    ❌ Vulnerable Bottleneck
-                  </button>
-
-                  <button
-                    onClick={() => setCodeComparisonTab("after")}
-                    className={`px-2.5 py-1 rounded-[2px] text-xs font-semibold font-mono transition-all ${
-                      codeComparisonTab === "after"
-                        ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40"
-                        : "text-slate-400 hover:text-slate-200"
-                    }`}
-                  >
-                    ✅ Engineered Solution
-                  </button>
-                </div>
-              </div>
-
-              {/* Code Content */}
-              <div className="p-4 text-xs font-mono overflow-x-auto leading-relaxed text-slate-200">
-                <pre className={codeComparisonTab === "before" ? "text-rose-200" : "text-emerald-200"}>
-                  <code>
-                    {codeComparisonTab === "before"
-                      ? SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].code.vulnerable
-                      : SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].code.engineered}
-                  </code>
-                </pre>
-              </div>
-
-              {/* Terminal Footer */}
-              <div className="px-4 py-2 bg-[#09112B] border-t border-slate-800 flex flex-wrap items-center justify-between text-[11px] font-mono text-slate-400">
-                <span className="flex items-center gap-1.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
-                  <span>Verified Production Architecture Benchmark</span>
-                </span>
-                <span className="text-[#8D7BFF]">
-                  {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].category} • {SYSTEM_BOTTLENECK_STUDIES[activeBlueprintIndex].metrics.uptime} Uptime
-                </span>
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-
-      {/* -------------------------------------------------------------------- */}
-      {/* 6. TECHNICAL ARCHITECTURE & BENCHMARKS (RECHARTS) */}
-      {/* -------------------------------------------------------------------- */}
-      <section id="architecture" className="section-pad bg-[#F8FAFC] border-b border-[#EAECF0]">
-        <div className="site-container">
-          
-          <div className="max-w-2xl mb-10">
-            <span className="badge-tag mb-2">Technical Foundations</span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0D1738] tracking-tight">
-              Systems Engineered For Longevity
-            </h2>
-            <p className="text-xs sm:text-sm text-[#475467] mt-1.5">
-              Architecture decisions focused on maintainability, query speed, transaction integrity, and minimal operational overhead.
-            </p>
-          </div>
-
-          {/* 4 Architectural Pillars */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-            
-            <div className="bg-white p-5 rounded-[4px] border border-[#D0D5DD]">
-              <div className="w-9 h-9 rounded-[4px] bg-[#F4F3FF] text-[#533AFD] flex items-center justify-center mb-3">
-                <Layers3 className="w-5 h-5" />
-              </div>
-              <h3 className="text-sm font-bold text-[#0D1738] mb-1">Full-Stack SaaS & Web</h3>
-              <p className="text-xs text-[#475467] leading-relaxed">
-                Next.js 15, React 19, TypeScript, Tailwind, Server Components, and responsive mobile architecture.
-              </p>
-            </div>
-
-            <div className="bg-white p-5 rounded-[4px] border border-[#D0D5DD]">
-              <div className="w-9 h-9 rounded-[4px] bg-emerald-50 text-emerald-700 flex items-center justify-center mb-3">
-                <Server className="w-5 h-5" />
-              </div>
-              <h3 className="text-sm font-bold text-[#0D1738] mb-1">High-Throughput APIs</h3>
-              <p className="text-xs text-[#475467] leading-relaxed">
-                Laravel, Node.js/NestJS, Python Django, Celery background queues, and WebSockets real-time sync.
-              </p>
-            </div>
-
-            <div className="bg-white p-5 rounded-[4px] border border-[#D0D5DD]">
-              <div className="w-9 h-9 rounded-[4px] bg-amber-50 text-amber-700 flex items-center justify-center mb-3">
-                <CreditCard className="w-5 h-5" />
-              </div>
-              <h3 className="text-sm font-bold text-[#0D1738] mb-1">Fintech & Billing Escrow</h3>
-              <p className="text-xs text-[#475467] leading-relaxed">
-                Stripe Connect, escrow holding, automated splits, webhook handlers, and multi-currency ledgers.
-              </p>
-            </div>
-
-            <div className="bg-white p-5 rounded-[4px] border border-[#D0D5DD]">
-              <div className="w-9 h-9 rounded-[4px] bg-indigo-50 text-[#533AFD] flex items-center justify-center mb-3">
-                <ShieldCheck className="w-5 h-5" />
-              </div>
-              <h3 className="text-sm font-bold text-[#0D1738] mb-1">Database & Infrastructure</h3>
-              <p className="text-xs text-[#475467] leading-relaxed">
-                PostgreSQL/MySQL index tuning, Redis caching, AWS EC2/S3 deployment, and HIPAA compliance.
-              </p>
-            </div>
-
-          </div>
-
-          {/* Benchmark Comparison Chart */}
-          <div className="bg-white rounded-[4px] border border-[#D0D5DD] p-6 lg:p-8">
-            <div className="grid lg:grid-cols-12 gap-6 items-center">
-              
-              <div className="lg:col-span-5 space-y-2.5">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#533AFD]">Quantitative Standards</span>
-                <h3 className="text-xl font-bold text-[#0D1738]">
-                  Architectural Rigor vs. Generic Freelance Builds
-                </h3>
-                <p className="text-xs sm:text-sm text-[#475467] leading-relaxed">
-                  Comparing critical execution standards across production deployments. Rigorous architecture directly reduces cloud bills and eliminates refactoring debt.
-                </p>
-                <div className="flex items-center gap-4 pt-1 text-xs font-semibold">
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-[2px] bg-[#533AFD]" />
-                    <span>My Standard</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <span className="w-2.5 h-2.5 rounded-[2px] bg-[#D0D5DD]" />
-                    <span>Typical Agency Build</span>
-                  </div>
-                </div>
-              </div>
-
-              <div className="lg:col-span-7 h-52 w-full">
-                <ResponsiveContainer width="100%" height="100%">
-                  <BarChart
-                    data={benchmarkComparisonData}
-                    layout="vertical"
-                    margin={{ top: 5, right: 15, left: 35, bottom: 5 }}
-                  >
-                    <CartesianGrid strokeDasharray="3 3" stroke="#F2F4F7" horizontal={false} />
-                    <XAxis type="number" domain={[0, 100]} hide />
-                    <YAxis dataKey="metric" type="category" tick={{ fontSize: 11, fill: "#344054", fontWeight: 600 }} axisLine={false} tickLine={false} />
-                    <Tooltip contentStyle={{ background: "#0D1738", border: "none", borderRadius: 4, color: "#fff", fontSize: 11 }} />
-                    <Bar dataKey="customEngineered" name="My Engineering Standard" fill="#533AFD" radius={[0, 2, 2, 0]} />
-                    <Bar dataKey="genericBuild" name="Generic Build" fill="#EAECF0" radius={[0, 2, 2, 0]} />
-                  </BarChart>
-                </ResponsiveContainer>
-              </div>
-
-            </div>
-          </div>
-
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------------------- */}
-      {/* 7. CEO VIDEO REVIEW & VERIFIED TESTIMONIALS */}
-      {/* -------------------------------------------------------------------- */}
-      <section id="reviews" className="section-pad bg-white border-b border-[#EAECF0]">
-        <div className="site-container">
-          
-          <div className="max-w-2xl mx-auto text-center mb-10">
-            <span className="badge-tag mb-2">CEO Endorsement</span>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-[#0D1738] tracking-tight">
-              &quot;Shaq actually <span className="text-[#533AFD]">works with us</span> on Legiit.&quot;
-            </h2>
-            <p className="text-xs sm:text-sm text-[#475467] mt-1.5">
-              Trusted by marketplace founders, agency CEOs, and high-profile entrepreneurs to engineer scalable digital systems.
-            </p>
-          </div>
-
-          {/* Verified Client Track Record & SLA Performance */}
-          <div className="bg-[#F8FAFC] rounded-[4px] border border-[#D0D5DD] p-5 mb-10 max-w-4xl mx-auto shadow-sm">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 divide-y md:divide-y-0 md:divide-x divide-[#EAECF0]">
-              <div className="pt-2 md:pt-0 md:px-4 text-center">
-                <div className="flex items-center justify-center gap-1 text-amber-500 font-bold text-lg">
-                  <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
-                  <span>4.9 / 5.0</span>
-                </div>
-                <div className="text-[11px] text-[#475467] font-medium mt-0.5">127+ Verified Reviews</div>
-              </div>
-
-              <div className="pt-2 md:pt-0 md:px-4 text-center">
-                <div className="text-emerald-700 font-bold text-lg">100%</div>
-                <div className="text-[11px] text-[#475467] font-medium mt-0.5">On-Time Delivery</div>
-              </div>
-
-              <div className="pt-2 md:pt-0 md:px-4 text-center">
-                <div className="text-[#533AFD] font-bold text-lg">94%</div>
-                <div className="text-[11px] text-[#475467] font-medium mt-0.5">Repeat Hire Rate</div>
-              </div>
-
-              <div className="pt-2 md:pt-0 md:px-4 text-center">
-                <div className="text-[#0D1738] font-bold text-lg">Top 1%</div>
-                <div className="text-[11px] text-[#475467] font-medium mt-0.5">Engineering Partner SLA</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Video Container */}
-          <div className="max-w-3xl mx-auto mb-12">
-            <div className="relative aspect-video rounded-[4px] overflow-hidden border border-[#D0D5DD] shadow-sm bg-slate-950">
-              <iframe
-                width="100%"
-                height="100%"
-                src="https://www.youtube.com/embed/VdPptVpxMPM?rel=0&modestbranding=1"
-                title="Legiit CEO Chris Walker Review"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                className="w-full h-full"
-              />
-            </div>
-          </div>
-
-          {/* Testimonial Cards */}
-          <div className="grid md:grid-cols-3 gap-5">
-            
-            {/* Chris M Walker */}
-            <div className="bg-[#F8FAFC] rounded-[4px] p-5 border border-[#D0D5DD] flex flex-col justify-between">
-              <div>
-                <div className="flex gap-1 text-amber-500 mb-3">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
-                </div>
-                <p className="text-[#344054] text-xs leading-relaxed mb-4">
-                  &quot;Most developers just write code; he thinks in systems. Legiit isn&apos;t a simple website; it&apos;s a complex marketplace with intricate financial logic. He engineered the architecture that allows us to scale safely. I don&apos;t need a freelancer; I need an engineering partner.&quot;
-                </p>
-              </div>
-              <div className="flex items-center gap-2.5 pt-3 border-t border-[#EAECF0]">
-                <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#D0D5DD]">
-                  <Image src="/chris.jpeg" alt="Chris M. Walker" fill className="object-cover" />
-                </div>
-                <div>
-                  <div className="font-bold text-[#0D1738] text-xs">Chris M. Walker</div>
-                  <div className="text-[11px] text-[#533AFD] font-medium">CEO, Legiit.com (2M+ Users)</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Jim Sabellico */}
-            <div className="bg-[#F8FAFC] rounded-[4px] p-5 border border-[#D0D5DD] flex flex-col justify-between">
-              <div>
-                <div className="flex gap-1 text-amber-500 mb-3">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
-                </div>
-                <p className="text-[#344054] text-xs leading-relaxed mb-4">
-                  &quot;When I land high-stakes clients like Steve Weatherford, I can&apos;t afford &apos;trial and error.&apos; I bring him in because he brings an engineering discipline to agency chaos. He was the technical lead behind our biggest deployments because the code is clean, the database optimized, and the delivery flawless.&quot;
-                </p>
-              </div>
-              <div className="flex items-center gap-2.5 pt-3 border-t border-[#EAECF0]">
-                <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#D0D5DD]">
-                  <Image src="/jim.jpeg" alt="Jim Sabellico" fill className="object-cover" />
-                </div>
-                <div>
-                  <div className="font-bold text-[#0D1738] text-xs">Jim Sabellico</div>
-                  <div className="text-[11px] text-[#533AFD] font-medium">Founder, No Half Cakes</div>
-                </div>
-              </div>
-            </div>
-
-            {/* Steve Weatherford */}
-            <div className="bg-[#F8FAFC] rounded-[4px] p-5 border border-[#D0D5DD] flex flex-col justify-between">
-              <div>
-                <div className="flex gap-1 text-amber-500 mb-3">
-                  {[...Array(5)].map((_, i) => <Star key={i} className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />)}
-                </div>
-                <p className="text-[#344054] text-xs leading-relaxed mb-4">
-                  &quot;I don&apos;t know the code, I just know that my platform needs to perform as hard as I do. The team delivered a digital HQ that handles my traffic, my content, and my sales without blinking. It feels solid, fast, and professional. That&apos;s the standard.&quot;
-                </p>
-              </div>
-              <div className="flex items-center gap-2.5 pt-3 border-t border-[#EAECF0]">
-                <div className="relative w-9 h-9 rounded-full overflow-hidden border border-[#D0D5DD]">
-                  <Image src="/steve.jpeg" alt="Steve Weatherford" fill className="object-cover" />
-                </div>
-                <div>
-                  <div className="font-bold text-[#0D1738] text-xs">Steve Weatherford</div>
-                  <div className="text-[11px] text-[#533AFD] font-medium">Super Bowl Champ & Entrepreneur</div>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------------------- */}
-      {/* 8. DIRECT ARCHITECT PARTNERSHIP & ATTRIBUTION */}
-      {/* -------------------------------------------------------------------- */}
-      <section className="section-pad bg-white border-b border-[#EAECF0]">
-        <div className="site-container">
-          <div className="bg-[#F8FAFC] rounded-[8px] border border-[#D0D5DD] p-6 lg:p-8 shadow-sm">
-            <div className="grid lg:grid-cols-12 gap-8 items-stretch">
-              
-              {/* Left Column: Executive Systems Engineer Dossier Card */}
-              <div className="lg:col-span-5 flex flex-col">
-                <div className="bg-white rounded-[6px] border border-[#D0D5DD] shadow-sm overflow-hidden flex flex-col justify-between h-full">
-                  
-                  {/* Portrait Headshot with Overlays */}
-                  <div className="relative h-[340px] sm:h-[380px] w-full bg-slate-900 overflow-hidden">
-                    <Image
-                      src="/shakil-headshot.jpeg"
-                      alt="Shakil Ahmed - Principal Systems Engineer"
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 450px"
-                      className="object-cover object-top"
-                      priority
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#0D1738]/90 via-[#0D1738]/20 to-transparent pointer-events-none" />
-
-                    {/* Top Status Pill */}
-                    <div className="absolute top-3 right-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-md border border-[#EAECF0] text-[11px] font-mono text-[#0D1738] shadow-sm flex items-center gap-1.5">
-                      <span className="relative flex h-2 w-2">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75" />
-                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500" />
-                      </span>
-                      <span className="font-bold text-emerald-700">AVAILABLE FOR CONTRACTS</span>
-                    </div>
-
-                    {/* Bottom Profile Identity Bar */}
-                    <div className="absolute bottom-3 left-3 right-3 p-3 rounded-[4px] bg-[#0D1738]/90 backdrop-blur-md border border-white/10 text-white">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="min-w-0">
-                          <div className="text-base font-bold text-white leading-tight">Shakil Ahmed</div>
-                          <div className="text-xs text-[#D9D6FE] font-medium mt-0.5 truncate">Senior Systems and Integration Engineer</div>
-                        </div>
-                        <span className="px-2 py-0.5 rounded bg-[#533AFD] text-white text-[10px] font-mono font-bold shrink-0 whitespace-nowrap">
-                          15+ Yrs Exp
-                        </span>
-                      </div>
-                      <div className="text-[11px] text-slate-300 mt-1.5 flex items-center justify-between gap-1.5">
-                        <div className="flex items-center gap-1.5 min-w-0">
-                          <Layers3 className="w-3 h-3 text-[#533AFD] shrink-0" />
-                          <span className="truncate">Founder, BarakahSoft LLC</span>
-                        </div>
-                        <span className="text-[10px] text-[#D9D6FE] font-mono shrink-0 whitespace-nowrap">Single-Member</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Verified Credentials Checklist & Contact Info */}
-                  <div className="p-4 bg-[#F8F9FC] border-t border-[#EAECF0] space-y-2.5 flex-1 flex flex-col justify-between">
-                    <div className="space-y-2 text-xs text-[#344054]">
-                      <div className="flex items-center gap-2">
-                        <ShieldCheck className="w-4 h-4 text-[#533AFD] shrink-0" />
-                        <span className="font-semibold text-[#0D1738]">Securiti Certified Systems & AI Architect</span>
-                        <span className="text-[10px] text-[#533AFD] font-mono font-semibold bg-[#F4F3FF] px-1.5 py-0.5 rounded border border-[#D9D6FE]">NIST AI RMF</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Zap className="w-4 h-4 text-[#533AFD] shrink-0" />
-                        <span className="font-semibold text-[#0D1738]">Former Team Lead at Legiit</span>
-                        <span className="text-[10px] text-[#667085] font-mono">$1M ARR Scale</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
-                        <span className="font-semibold text-[#0D1738]">50+ Production AI Systems Shipped</span>
-                        <span className="text-[10px] text-emerald-700 font-mono font-semibold">99.98% SLA</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Lock className="w-4 h-4 text-[#533AFD] shrink-0" />
-                        <span className="font-semibold text-[#0D1738]">Direct Hands-On Collaboration</span>
-                        <span className="text-[10px] text-[#533AFD] font-mono font-semibold bg-[#F4F3FF] px-1.5 py-0.5 rounded border border-[#D9D6FE]">Zero Subcontracting</span>
-                      </div>
-                    </div>
-
-                    <div className="pt-2.5 border-t border-[#EAECF0] flex flex-wrap items-center justify-between gap-2 text-xs font-mono">
-                      <a
-                        href="https://www.upwork.com/freelancers/shakilhq"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-[#533AFD] hover:text-[#4327F5] font-bold whitespace-nowrap"
-                      >
-                        <ShieldCheck className="w-3.5 h-3.5 text-[#533AFD] shrink-0" />
-                        <span>Upwork Direct Messaging</span>
-                      </a>
-                      <span className="text-[#667085] text-[11px] whitespace-nowrap">US MDT • Verified Identity</span>
-                    </div>
-                  </div>
-
-                </div>
-              </div>
-
-              {/* Right Column: Strategic Partnership Narrative & Telemetry */}
-              <div className="lg:col-span-7 flex flex-col justify-between space-y-4">
-                
-                <div className="space-y-3">
-                  {/* Unified Eyebrow Badges */}
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="badge-tag">Direct Engineering Partnership</span>
-                    <div className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-[4px] bg-[#F4F3FF] border border-[#D9D6FE] text-[#533AFD] text-[11px] font-bold uppercase tracking-wider">
-                      <ShieldCheck className="w-3.5 h-3.5" />
-                      100% Senior Engineer Delivery • Zero Junior Handoffs
-                    </div>
-                  </div>
-
-                  {/* Balanced Headline with No Awkward Orphans */}
-                  <h2 className="text-2xl sm:text-3xl lg:text-[2.2rem] font-black text-[#0D1738] tracking-tight leading-[1.22] [text-wrap:balance]">
-                    Direct Technical Leadership - {" "}
-                    <span className="bg-gradient-to-r from-[#533AFD] via-[#7F56D9] to-[#0BA5EC] bg-clip-text text-transparent">
-                      No Junior Handoffs, No Agency Bloat.
-                    </span>
-                  </h2>
-
-                  <p className="text-xs sm:text-sm text-[#475467] leading-relaxed">
-                    When you partner with me, you collaborate directly with a 15-year systems architect on every line of code, architecture decision, and deployment. No account managers, no junior developers learning on your project, and no agency overhead.
-                  </p>
-                </div>
-
-                {/* Two Specialized Capability Pillars */}
-                <div className="grid sm:grid-cols-2 gap-3">
-                  <div className="p-3 rounded-[6px] bg-white border border-[#EAECF0] hover:border-[#D9D6FE] shadow-sm transition-all">
-                    <div className="flex items-center gap-2 text-xs font-bold text-[#0D1738]">
-                      <Server className="w-4 h-4 text-[#533AFD]" />
-                      <span>Production SaaS &amp; Swarms</span>
-                    </div>
-                    <p className="text-xs text-[#667085] mt-1.5 leading-relaxed">
-                      High-throughput architectures in Next.js 15, FastAPI, Supabase, Inngest durable step-swarms, and NIST AI RMF governance boundaries.
-                    </p>
-                  </div>
-
-                  <div className="p-3 rounded-[6px] bg-white border border-[#EAECF0] hover:border-[#D9D6FE] shadow-sm transition-all">
-                    <div className="flex items-center gap-2 text-xs font-bold text-[#0D1738]">
-                      <Wrench className="w-4 h-4 text-amber-500" />
-                      <span>Stalled MVP Rescue</span>
-                    </div>
-                    <p className="text-xs text-[#667085] mt-1.5 leading-relaxed">
-                      Taking AI-generated codebases (Lovable, Bolt, v0, Replit, Base44) through schema refactoring, auth fixing, security hardening, and live production launch.
-                    </p>
-                  </div>
-                </div>
-
-                {/* Core Stack Pill Strip */}
-                <div className="p-2.5 rounded-[4px] bg-[#F8F9FC] border border-[#EAECF0] text-xs text-[#344054]">
-                  <strong className="text-[#0D1738] font-semibold">Core Stack:</strong> Next.js 15, Python (FastAPI), React Native, Node.js, TypeScript, PostgreSQL, Supabase, Redis, AWS, Inngest, Stripe, Gemini / OpenAI / Claude API integration.
-                </div>
-
-                {/* 3 Metric KPI Cards */}
-                <div className="grid grid-cols-3 gap-2.5">
-                  <div className="p-2.5 rounded-[4px] bg-white border border-[#EAECF0] shadow-sm">
-                    <div className="text-[10px] uppercase font-mono font-bold text-[#667085]">EXPERIENCE</div>
-                    <div className="text-base sm:text-lg font-black text-[#0D1738] mt-0.5">15+ Years</div>
-                    <div className="text-[10px] text-[#667085] font-mono">Systems Eng</div>
-                  </div>
-                  <div className="p-2.5 rounded-[4px] bg-white border border-[#EAECF0] shadow-sm">
-                    <div className="text-[10px] uppercase font-mono font-bold text-[#667085]">AI FLEET</div>
-                    <div className="text-base sm:text-lg font-black text-[#533AFD] mt-0.5">50+ Systems</div>
-                    <div className="text-[10px] text-[#667085] font-mono">Shipped &amp; Live</div>
-                  </div>
-                  <div className="p-2.5 rounded-[4px] bg-white border border-[#EAECF0] shadow-sm">
-                    <div className="text-[10px] uppercase font-mono font-bold text-[#667085]">TRACK RECORD</div>
-                    <div className="text-base sm:text-lg font-black text-[#027A48] mt-0.5">125+ Reviews</div>
-                    <div className="text-[10px] text-[#667085] font-mono">5.0 ★ Verified</div>
-                  </div>
-                </div>
-
-                {/* Action Buttons */}
-                <div className="pt-1 flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-                  <a
-                    href="https://www.upwork.com/freelancers/shakilhq"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="btn-primary gap-2 text-xs sm:text-sm font-semibold justify-center py-2.5 px-5 shadow-md shadow-[#533AFD]/20 whitespace-nowrap shrink-0"
-                  >
-                    <CheckCircle2 className="w-4 h-4 text-emerald-300 shrink-0" />
-                    <span className="whitespace-nowrap">Hire on Upwork</span>
-                    <ArrowUpRight className="w-4 h-4 shrink-0" />
-                  </a>
-                  <a
-                    href="#ai-systems"
-                    className="btn-secondary gap-2 text-xs sm:text-sm font-semibold justify-center py-2.5 px-4 shadow-sm"
-                  >
-                    <Sparkles className="w-4 h-4 text-[#533AFD]" />
-                    <span>Review 50+ Production Systems</span>
-                  </a>
-                </div>
-
-              </div>
-
-            </div>
-
-            {/* Attribution Notice */}
-            <div className="mt-5 p-3.5 rounded-[6px] bg-white border border-[#EAECF0] flex items-center gap-3 text-xs text-[#667085] shadow-sm">
-              <ShieldCheck className="w-4 h-4 text-[#533AFD] shrink-0" />
-              <span>
-                <strong className="text-[#0D1738]">Engineering Attribution:</strong> Many featured enterprise case studies (Legiit, Steve Weatherford, agency lead engines) were architected during my tenure as <em>Lead Technical Systems Engineer</em> at <strong>No Half Cakes</strong>. I deliver that same agency-grade discipline directly to your business.
-              </span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------------------- */}
-      {/* 9. OPEN SOURCE SIGNAL (GITHUB LIVE FEED) */}
-      {/* -------------------------------------------------------------------- */}
-      <section id="labs" className="section-pad bg-white border-b border-[#EAECF0]">
-        <div className="site-container">
-          
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
-            <div>
-              <span className="badge-tag mb-2">Public Engineering</span>
-              <h2 className="text-2xl sm:text-3xl font-bold text-[#0D1738] tracking-tight">
-                Open Source & Engineering Labs
-              </h2>
-              <p className="text-xs sm:text-sm text-[#475467] mt-1">
-                Developer tools, API utilities, and full-stack modules maintained in public.
-              </p>
-            </div>
-
-            <a
-              href="https://github.com/exelentshakil"
-              target="_blank"
-              rel="noreferrer"
-              className="btn-secondary text-xs"
-            >
-              <Github className="w-3.5 h-3.5" />
-              GitHub Profile
-            </a>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {repos.map((repo) => (
-              <a
-                key={repo.name}
-                href={repo.html_url}
-                target="_blank"
-                rel="noreferrer"
-                className="bg-[#F8FAFC] rounded-[4px] p-4 border border-[#D0D5DD] hover:border-[#533AFD] transition-colors flex flex-col justify-between group"
-              >
-                <div>
-                  <div className="flex items-center justify-between text-[#667085] mb-2">
-                    <Code2 className="w-4 h-4 text-[#0D1738]" />
-                    <ArrowUpRight className="w-3.5 h-3.5 text-[#667085] group-hover:text-[#533AFD] transition-colors" />
-                  </div>
-                  <h4 className="font-bold text-[#0D1738] text-sm mb-1 group-hover:text-[#533AFD] transition-colors truncate">
-                    {repo.name}
-                  </h4>
-                  <p className="text-xs text-[#475467] line-clamp-2 leading-relaxed">
-                    {repo.description || "Open source production module and engineering utility."}
-                  </p>
-                </div>
-
-                <div className="pt-3 border-t border-[#EAECF0] flex items-center justify-between mt-4 text-[11px] text-[#667085]">
-                  <span className="flex items-center gap-1 font-mono">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#533AFD]" />
-                    <span>{repo.language || "TypeScript"}</span>
-                  </span>
-                  {repo.stargazers_count > 0 && (
-                    <span className="flex items-center gap-1 font-semibold text-amber-600">
-                      <Star className="w-3 h-3 fill-amber-400" />
-                      <span>{repo.stargazers_count}</span>
-                    </span>
-                  )}
-                </div>
-              </a>
-            ))}
-          </div>
-
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------------------- */}
-      {/* 10. DIRECT CONTACT & OFFICIAL BUSINESS TERMINAL */}
-      {/* -------------------------------------------------------------------- */}
-      <section id="contact" className="section-pad bg-[#0D1738] text-white">
-        <div className="site-container">
-          
-          <div className="grid lg:grid-cols-12 gap-10 items-center">
-            
-            {/* Left: Call to Action */}
-            <div className="lg:col-span-6 space-y-4">
-              <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-[4px] bg-[#533AFD]/20 text-[#D9D6FE] border border-[#533AFD]/40 text-xs font-semibold">
-                Direct Engineering Access
-              </span>
-
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-[1.1]">
-                Ready to engineer your next platform?
-              </h2>
-
-              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed max-w-lg">
-                Available for enterprise AI application engineering, autonomous agent swarms, MVP rescues, and mission-critical SaaS architectures. Direct engagement with guaranteed milestones.
-              </p>
-
-              <div className="flex flex-wrap items-center gap-3 pt-2">
-                <a
-                  href="https://www.upwork.com/freelancers/shakilhq"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-primary text-xs py-2.5 px-4"
-                >
-                  <CheckCircle2 className="w-4 h-4 text-emerald-300" />
-                  Hire or Interview on Upwork
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-
-                <a
-                  href="https://www.upwork.com/freelancers/shakilhq"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="btn-secondary text-xs py-2.5 px-4 bg-white text-[#0D1738] hover:bg-slate-100"
-                >
-                  <ShieldCheck className="w-4 h-4 text-[#533AFD]" />
-                  Upwork Verified Partner (100% Compliant)
-                </a>
-              </div>
-            </div>
-
-            {/* Right: Verified Business Contact Card */}
-            <div className="lg:col-span-6">
-              <div className="bg-[#101B3D] border border-slate-700/80 rounded-[4px] p-6 space-y-4">
-                
-                <div className="flex items-center justify-between border-b border-slate-700/80 pb-3">
-                  <div className="flex items-center gap-2.5">
-                    <div className="relative w-8 h-8 rounded-[4px] overflow-hidden border border-slate-600 bg-slate-800 shrink-0">
-                      <Image
-                        src="/shakil-headshot.jpeg"
-                        alt="Shakil Ahmed"
-                        fill
-                        sizes="32px"
-                        className="object-cover object-top"
-                      />
-                    </div>
-                    <div>
-                      <h3 className="text-sm font-bold text-white leading-none">
-                        Shakil Ahmed
-                      </h3>
-                      <span className="text-[10px] text-[#8D7BFF] font-medium leading-none">
-                        BarakahSoft LLC
-                      </span>
-                    </div>
-                  </div>
-                  <span className="text-[10px] font-mono px-1.5 py-0.5 rounded-[2px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                    Direct Contact
-                  </span>
-                </div>
-
-                <div className="space-y-3 text-xs text-slate-300">
-                  <div className="flex items-start gap-3">
-                    <div className="w-7 h-7 rounded-[4px] bg-[#533AFD]/20 text-[#D9D6FE] flex items-center justify-center shrink-0 mt-0.5">
-                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                    </div>
-                    <div>
-                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Official Upwork Profile</div>
-                      <a href="https://www.upwork.com/freelancers/shakilhq" target="_blank" rel="noreferrer" className="text-white font-semibold hover:text-[#D9D6FE] transition-colors flex items-center gap-1">
-                        <span>upwork.com/freelancers/shakilhq</span>
-                        <ArrowUpRight className="w-3 h-3 text-emerald-400" />
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <div className="w-7 h-7 rounded-[4px] bg-[#533AFD]/20 text-[#D9D6FE] flex items-center justify-center shrink-0 mt-0.5">
-                      <Lock className="w-3.5 h-3.5 text-[#533AFD]" />
-                    </div>
-                    <div>
-                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Engagement & Compliance Policy</div>
-                      <div className="text-slate-200">
-                        100% Upwork Terms Compliant • All Contracts &amp; Messages On-Platform
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <div className="w-7 h-7 rounded-[4px] bg-[#533AFD]/20 text-[#D9D6FE] flex items-center justify-center shrink-0 mt-0.5">
-                      <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
-                    </div>
-                    <div>
-                      <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Escrow Payment Protection</div>
-                      <div className="text-slate-200">
-                        Escrow-Funded Milestones &amp; Verified Upwork Hourly Billing
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Upwork Direct CTA Strip */}
-                <div className="pt-4 border-t border-slate-700/80 flex items-center justify-between gap-3">
-                  <span className="text-[11px] text-slate-400 font-mono">Available for Upwork Contracts</span>
-                  <a
-                    href="https://www.upwork.com/freelancers/shakilhq"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-[4px] bg-[#533AFD] hover:bg-[#4327F5] text-white text-xs font-semibold shadow-sm transition-all whitespace-nowrap"
-                  >
-                    <span>Hire on Upwork</span>
-                    <ArrowUpRight className="w-3.5 h-3.5" />
-                  </a>
-                </div>
-
-              </div>
-            </div>
-
-          </div>
-
-        </div>
-      </section>
-
-      {/* -------------------------------------------------------------------- */}
-      {/* 11. FOOTER */}
-      {/* -------------------------------------------------------------------- */}
-      <footer className="bg-[#080E24] border-t border-slate-800 text-slate-400 py-8">
-        <div className="site-container flex flex-col md:flex-row items-center justify-between gap-4 text-xs">
-          <div className="flex items-center gap-2 text-slate-300">
-            <span className="font-semibold">© 2026 Shakil Ahmed (BarakahSoft LLC).</span>
-            <span>All rights reserved.</span>
-          </div>
-
-          <div className="text-slate-400">
-            All client engagements contracted strictly on-platform via Upwork
-          </div>
-        </div>
-      </footer>
-
+    <div className="mb-10 max-w-2xl">
+      <div className="inline-flex items-center gap-2 rounded-full bg-[#F4F3FF] px-3 py-1 text-xs font-semibold text-[#533AFD] border border-[#D9D6FE]">
+        <Sparkles className="h-3 w-3" />
+        <span>{eyebrow}</span>
+      </div>
+      <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#0D1738] sm:text-3xl lg:text-4xl">{title}</h2>
+      {intro && <p className="mt-3 text-[15px] leading-relaxed text-[#475467]">{intro}</p>}
     </div>
   );
 }
 
+function UpworkButton({ dark = false, size = "md" }: { dark?: boolean; size?: "sm" | "md" | "lg" }) {
+  const sizeClasses = {
+    sm: "px-3.5 py-2 text-xs",
+    md: "px-4 py-2.5 text-sm",
+    lg: "px-6 py-3.5 text-base font-semibold",
+  }[size];
+
+  return (
+    <a
+      href={UPWORK_URL}
+      target="_blank"
+      rel="noreferrer"
+      className={`group inline-flex items-center gap-2 whitespace-nowrap rounded-md font-semibold transition-all shadow-sm ${sizeClasses} ${
+        dark
+          ? "bg-white text-[#0D1738] hover:bg-[#F2F4F7] hover:shadow"
+          : "bg-[#0D1738] text-white hover:bg-[#1D2939] hover:shadow"
+      }`}
+    >
+      <span>Hire me on Upwork</span>
+      <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+    </a>
+  );
+}
+
+export default function Home() {
+  return (
+    <div className="min-h-screen bg-white text-[#0D1738]">
+      {/* ================================================================== */}
+      {/* Header & Sticky Navigation */}
+      {/* ================================================================== */}
+      <header className="sticky top-0 z-50 border-b border-[#EAECF0] bg-white/95 backdrop-blur-md">
+        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
+          {/* Brand Logo & Title */}
+          <a href="#top" className="group flex items-center gap-2.5">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0D1738] p-1.5 border border-[#1D2939] shadow-sm transition-all group-hover:bg-[#533AFD] group-hover:border-[#533AFD]">
+              <Image src="/logo.png" alt="Shakil Ahmed logo" width={22} height={22} className="object-contain" priority />
+            </div>
+            <div className="flex flex-col">
+              <div className="flex items-center gap-1.5 text-sm font-bold leading-none text-[#0D1738]">
+                <span>Shakil Ahmed</span>
+                <span className="relative flex h-2 w-2" title="Available now (US Eastern hours)">
+                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+                </span>
+              </div>
+              <span className="mt-1 text-[11px] font-medium text-[#667085] leading-none">
+                Senior Full-Stack &amp; AI Engineer
+              </span>
+            </div>
+          </a>
+
+          {/* Desktop Navigation Links */}
+          <nav className="hidden items-center gap-6 md:flex">
+            {NAV.map((n) => (
+              <a
+                key={n.href}
+                href={n.href}
+                className="text-xs font-semibold text-[#475467] transition hover:text-[#533AFD]"
+              >
+                {n.label}
+              </a>
+            ))}
+          </nav>
+
+          {/* Header Action Button */}
+          <div className="flex items-center gap-3">
+            <div className="hidden lg:flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700 border border-emerald-200">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+              <span>Available 30+ hrs/wk</span>
+            </div>
+            <UpworkButton size="sm" />
+          </div>
+        </div>
+      </header>
+
+      <main id="top">
+        {/* ================================================================== */}
+        {/* Hero Section */}
+        {/* ================================================================== */}
+        <section className="relative border-b border-[#EAECF0] bg-gradient-to-b from-white via-[#FAFBFD] to-white">
+          <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20 lg:py-24">
+            {/* Live Availability & Credentials Pill */}
+            <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-[#D9D6FE] bg-white px-3.5 py-1.5 text-xs text-[#344054] shadow-sm">
+              <span className="relative flex h-2 w-2">
+                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              </span>
+              <span className="font-semibold text-emerald-700">Available for hire</span>
+              <span className="text-slate-300">·</span>
+              <span className="font-medium">US Eastern (9am to 5pm EST)</span>
+              <span className="text-slate-300 hidden sm:inline">·</span>
+              <span className="hidden sm:inline font-semibold text-[#533AFD]">100% Upwork Job Success</span>
+            </div>
+
+            {/* Profile Intro Row */}
+            <div className="mt-8 flex items-center gap-4">
+              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white shadow-md ring-2 ring-[#EAECF0]">
+                <Image
+                  src="/shakil-headshot.jpeg"
+                  alt="Shakil Ahmed headshot"
+                  fill
+                  sizes="64px"
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <div>
+                <div className="flex items-center gap-2">
+                  <h2 className="text-lg font-bold text-[#0D1738]">Shakil Ahmed</h2>
+                  <span className="rounded bg-[#F4F3FF] px-2 py-0.5 text-[11px] font-semibold text-[#533AFD] border border-[#D9D6FE]">
+                    15+ Years Exp
+                  </span>
+                </div>
+                <p className="text-sm font-medium text-[#475467]">
+                  Senior Full-Stack &amp; AI Systems Engineer, Ex-Lead Engineer @ Legiit
+                </p>
+              </div>
+            </div>
+
+            {/* Main Headline */}
+            <h1 className="mt-6 max-w-3xl text-3xl font-bold leading-[1.12] tracking-tight text-[#0D1738] sm:text-5xl lg:text-5xl">
+              I build and run production web apps, and add AI to them that actually works.
+            </h1>
+
+            {/* Subhead Body */}
+            <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#475467] sm:text-lg">
+              15+ years engineering software. Former engineering team lead at Legiit, where I helped scale the
+              marketplace and AI Command Center to $1M ARR across 400,000+ users. I work across Next.js, Laravel,
+              Python, and build production AI features: RAG, agents, and multi-model LLM integrations that stay fast
+              and reliable.
+            </p>
+
+            {/* Action Buttons */}
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <UpworkButton size="lg" />
+              <a
+                href="#work"
+                className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-md border border-[#D0D5DD] bg-white px-5 py-3.5 text-base font-semibold text-[#0D1738] transition hover:bg-[#F8F9FC] shadow-sm"
+              >
+                <span>See my work</span>
+                <ChevronRight className="h-4 w-4 text-[#667085]" />
+              </a>
+              <a
+                href="#endorsements"
+                className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-4 py-3.5 text-sm font-semibold text-[#533AFD] hover:bg-[#F4F3FF] transition"
+              >
+                <Play className="h-3.5 w-3.5 fill-current" />
+                <span>Watch CEO testimonial</span>
+              </a>
+            </div>
+
+            {/* Metrics Trust Strip */}
+            <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+              {METRICS.map((m) => (
+                <div
+                  key={m.label}
+                  className="rounded-xl border border-[#EAECF0] bg-white p-4 shadow-sm transition hover:border-[#D9D6FE]"
+                >
+                  <p className="text-2xl font-bold tracking-tight text-[#0D1738]">{m.value}</p>
+                  <p className="mt-1 text-xs font-semibold text-[#533AFD]">{m.label}</p>
+                  <p className="mt-1 text-xs text-[#667085] leading-snug">{m.sub}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Client Social Proof Banner */}
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-[#EAECF0] pt-6 text-xs text-[#667085]">
+              <span className="font-semibold text-[#344054]">Trusted by founders and leaders at:</span>
+              {TRUST_BRANDS.map((b) => (
+                <span key={b.name} className="flex items-center gap-1.5 font-medium text-[#475467]">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
+                  {b.name}
+                </span>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================== */}
+        {/* CEO Video Endorsement & Client Reviews */}
+        {/* ================================================================== */}
+        <section id="endorsements" className="scroll-mt-16 border-b border-[#EAECF0] bg-[#FAFBFD]">
+          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+            <SectionHeading
+              eyebrow="Verified Endorsements"
+              title="What founders and CEOs say about working with me"
+              intro="Real testimonials from leaders of platforms where downtime costs real money and delivery is everything."
+            />
+
+            {/* Featured Video Block */}
+            <div className="mb-10 overflow-hidden rounded-2xl border border-[#EAECF0] bg-[#0D1738] shadow-lg">
+              <div className="grid lg:grid-cols-[1.1fr_1fr]">
+                <div className="relative aspect-video lg:aspect-auto">
+                  <iframe
+                    className="absolute inset-0 h-full w-full"
+                    src="https://www.youtube.com/embed/VdPptVpxMPM?rel=0&modestbranding=1"
+                    title="Chris M. Walker, CEO of Legiit, endorsing Shakil Ahmed"
+                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                    loading="lazy"
+                  />
+                </div>
+                <div className="flex flex-col justify-between p-6 sm:p-8 text-white">
+                  <div>
+                    <div className="flex items-center gap-1 text-amber-400">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-4 w-4 fill-current" />
+                      ))}
+                    </div>
+                    <blockquote className="mt-4 text-[15px] sm:text-base leading-relaxed text-[#F2F4F7]">
+                      &ldquo;Most developers just write code; he thinks in systems. Legiit isn&apos;t a simple website;
+                      it&apos;s a complex marketplace with intricate financial logic. He engineered the architecture
+                      that allows us to scale safely. I don&apos;t need a freelancer; I need an engineering
+                      partner.&rdquo;
+                    </blockquote>
+                  </div>
+                  <div className="mt-6 flex items-center gap-3 border-t border-white/10 pt-4">
+                    <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-white/20">
+                      <Image src="/chris.jpeg" alt="Chris M. Walker" fill sizes="44px" className="object-cover" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white">Chris M. Walker</p>
+                      <p className="text-xs text-[#98A2B3]">CEO, Legiit.com</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Client Endorsement Cards */}
+            <div className="grid gap-4 md:grid-cols-2">
+              {TESTIMONIALS.slice(1).map((t) => (
+                <figure
+                  key={t.name}
+                  className="flex flex-col justify-between rounded-xl border border-[#EAECF0] bg-white p-6 shadow-sm"
+                >
+                  <div>
+                    <div className="flex items-center gap-1 text-amber-500">
+                      {[...Array(5)].map((_, i) => (
+                        <Star key={i} className="h-3.5 w-3.5 fill-current" />
+                      ))}
+                    </div>
+                    <blockquote className="mt-3 text-[15px] leading-relaxed text-[#344054]">
+                      &ldquo;{t.quote}&rdquo;
+                    </blockquote>
+                  </div>
+                  <figcaption className="mt-5 flex items-center gap-3 border-t border-[#EAECF0] pt-4">
+                    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-[#EAECF0]">
+                      <Image src={t.photo} alt={t.name} fill sizes="40px" className="object-cover" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-[#0D1738]">{t.name}</p>
+                      <p className="text-xs text-[#667085]">{t.role}</p>
+                    </div>
+                  </figcaption>
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================== */}
+        {/* Selected Production Case Studies */}
+        {/* ================================================================== */}
+        <section id="work" className="scroll-mt-16 border-b border-[#EAECF0] bg-white">
+          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+            <SectionHeading
+              eyebrow="Selected Work"
+              title="Production systems I've built and run"
+              intro="Real web applications and backend systems with paying users. No throwaway mockups, no artificial metrics."
+            />
+
+            <div className="space-y-8">
+              {CASE_STUDIES.map((c) => (
+                <article
+                  key={c.title}
+                  className="overflow-hidden rounded-2xl border border-[#EAECF0] bg-white shadow-sm transition hover:shadow-md"
+                >
+                  <div className={`grid gap-0 ${c.image ? "lg:grid-cols-[1.1fr_1fr]" : ""}`}>
+                    <div className="p-6 sm:p-8">
+                      <p className="text-xs font-semibold text-[#533AFD]">{c.tag}</p>
+                      <h3 className="mt-2 text-xl font-bold tracking-tight text-[#0D1738] sm:text-2xl">{c.title}</h3>
+                      <p className="mt-2 text-[15px] leading-relaxed text-[#475467]">{c.context}</p>
+
+                      <div className="mt-5 border-t border-[#EAECF0] pt-4">
+                        <p className="text-xs font-bold uppercase tracking-wider text-[#667085]">What I built and shipped</p>
+                        <ul className="mt-3 space-y-2.5">
+                          {c.built.map((b) => (
+                            <li key={b} className="flex gap-2.5 text-[14px] leading-relaxed text-[#344054]">
+                              <Check className="mt-1 h-4 w-4 shrink-0 text-[#027A48]" />
+                              <span>{b}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+
+                    {c.image && (
+                      <div className="relative min-h-[260px] border-t border-[#EAECF0] bg-[#F2F4F7] lg:border-l lg:border-t-0">
+                        <Image
+                          src={c.image}
+                          alt={c.title}
+                          fill
+                          sizes="(min-width: 1024px) 500px, 100vw"
+                          className="object-cover object-top"
+                        />
+                      </div>
+                    )}
+                  </div>
+                </article>
+              ))}
+            </div>
+
+            {/* Upwork Client Projects Grid */}
+            <div className="mt-14 border-t border-[#EAECF0] pt-12">
+              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                <div>
+                  <h3 className="text-lg font-bold text-[#0D1738]">Verified Upwork Project Deliveries</h3>
+                  <p className="text-sm text-[#667085]">Recent client contracts delivered with 5-star reviews.</p>
+                </div>
+                <a
+                  href={UPWORK_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#533AFD] hover:underline"
+                >
+                  <span>View all Upwork feedback</span>
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </a>
+              </div>
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {UPWORK_PROJECTS.map((p) => (
+                  <div
+                    key={p.title}
+                    className="flex flex-col justify-between rounded-xl border border-[#EAECF0] bg-[#FAFBFD] p-5 shadow-sm transition hover:border-[#D9D6FE] hover:bg-white"
+                  >
+                    <div>
+                      <div className="flex items-center gap-1 text-amber-500">
+                        {[...Array(p.stars)].map((_, i) => (
+                          <Star key={i} className="h-3 w-3 fill-current" />
+                        ))}
+                      </div>
+                      <h4 className="mt-2 text-sm font-bold text-[#0D1738]">{p.title}</h4>
+                      <p className="mt-1.5 text-xs leading-relaxed text-[#475467]">{p.detail}</p>
+                    </div>
+                    {p.quote && (
+                      <p className="mt-3 border-t border-[#EAECF0] pt-2.5 text-xs italic text-[#344054]">
+                        &ldquo;{p.quote}&rdquo;
+                      </p>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================== */}
+        {/* How I Work */}
+        {/* ================================================================== */}
+        <section id="how" className="scroll-mt-16 border-b border-[#EAECF0] bg-[#FAFBFD]">
+          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+            <SectionHeading
+              eyebrow="Engineering Process"
+              title="How I work: steady, predictable delivery"
+              intro="The habits of shipping every day on live products where mistakes cost real money and user trust."
+            />
+
+            <div className="grid gap-4 md:grid-cols-2">
+              {HOW_I_WORK.map((h) => (
+                <div
+                  key={h.title}
+                  className="flex gap-3.5 rounded-xl border border-[#EAECF0] bg-white p-5 shadow-sm transition hover:border-[#D9D6FE]"
+                >
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#F4F3FF] text-[#533AFD]">
+                    <Check className="h-4 w-4" />
+                  </div>
+                  <div>
+                    <h3 className="text-sm font-bold text-[#0D1738]">{h.title}</h3>
+                    <p className="mt-1 text-xs leading-relaxed text-[#475467]">{h.desc}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================== */}
+        {/* Tech Stack */}
+        {/* ================================================================== */}
+        <section id="stack" className="scroll-mt-16 border-b border-[#EAECF0] bg-white">
+          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+            <SectionHeading
+              eyebrow="Core Competencies"
+              title="Technologies and tools I use every day"
+              intro="I specialize in full-stack web platforms and practical AI architectures that run reliably in production."
+            />
+
+            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {STACK_GROUPS.map((s) => {
+                const Icon = s.icon;
+                return (
+                  <div
+                    key={s.group}
+                    className="flex flex-col rounded-xl border border-[#EAECF0] bg-[#FAFBFD] p-5 shadow-sm transition hover:border-[#D9D6FE] hover:bg-white"
+                  >
+                    <div className="flex items-center gap-2.5">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white border border-[#EAECF0] text-[#533AFD] shadow-xs">
+                        <Icon className="h-4 w-4" />
+                      </div>
+                      <h3 className="text-sm font-bold text-[#0D1738]">{s.group}</h3>
+                    </div>
+                    <p className="mt-3 text-xs leading-relaxed text-[#475467]">{s.items}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================== */}
+        {/* Buyer FAQ */}
+        {/* ================================================================== */}
+        <section id="faq" className="scroll-mt-16 border-b border-[#EAECF0] bg-[#FAFBFD]">
+          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+            <SectionHeading
+              eyebrow="Client FAQ"
+              title="Frequently asked questions from hiring managers"
+              intro="Everything you need to know before bringing me onto your engineering team or project."
+            />
+
+            <div className="space-y-4">
+              {FAQS.map((f) => (
+                <div key={f.q} className="rounded-xl border border-[#EAECF0] bg-white p-5 shadow-sm">
+                  <h3 className="text-sm font-bold text-[#0D1738]">{f.q}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-[#475467] sm:text-sm">{f.a}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================== */}
+        {/* Contact & Hire CTA Section */}
+        {/* ================================================================== */}
+        <section id="contact" className="bg-[#0D1738] text-white">
+          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+            <div className="max-w-3xl">
+              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-emerald-400 border border-white/10">
+                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+                <span>Available now for new projects</span>
+              </div>
+
+              <h2 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+                Looking for a senior engineer who shows up every day and ships?
+              </h2>
+
+              <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#D0D5DD]">
+                I am available for long-term roles on a product team, 30+ hours a week on US Eastern hours, and open to
+                contract-to-hire. I also take on focused development sprints. Send me a message on Upwork and tell me
+                about your codebase or roadmap.
+              </p>
+
+              <div className="mt-8 flex flex-wrap items-center gap-3">
+                <UpworkButton dark size="lg" />
+                <a
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-md border border-white/20 bg-white/5 px-5 py-3.5 text-base font-semibold text-white transition hover:bg-white/10 shadow-sm"
+                >
+                  <Github className="h-4 w-4" />
+                  <span>GitHub Profile</span>
+                </a>
+              </div>
+
+              <p className="mt-5 text-xs text-[#98A2B3]">
+                Contracts and payments are handled securely through Upwork escrow with zero billing surprises.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* ================================================================== */}
+      {/* Footer */}
+      {/* ================================================================== */}
+      <footer className="border-t border-[#EAECF0] bg-white">
+        <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-8 text-xs text-[#667085] sm:flex-row sm:items-center sm:justify-between sm:px-6">
+          <div className="flex items-center gap-2.5">
+            <div className="flex h-6 w-6 items-center justify-center rounded bg-[#0D1738] p-1">
+              <Image src="/logo.png" alt="Shakil logo" width={14} height={14} className="object-contain" />
+            </div>
+            <span>© 2026 Shakil Ahmed. Rajshahi, Bangladesh. Working US Eastern hours.</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <a href={UPWORK_URL} target="_blank" rel="noreferrer" className="hover:text-[#0D1738] transition">
+              Upwork Profile
+            </a>
+            <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="hover:text-[#0D1738] transition">
+              GitHub
+            </a>
+            <a href="#top" className="hover:text-[#0D1738] transition">
+              Back to top ↑
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
