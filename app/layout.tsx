@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import Script from "next/script";
 import "./globals.css";
+import { AVAILABILITY } from "./lib/profile";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -23,8 +24,7 @@ export const viewport: Viewport = {
 };
 
 const TITLE = "Shakil Ahmed | Senior Full-Stack & AI Engineer | Next.js, Laravel, Python, RAG";
-const DESCRIPTION =
-  "Senior full-stack engineer with 15+ years of experience. I build and run production web apps on Next.js, Laravel and Python, and add AI features that work: RAG, agents and LLM integrations. US Eastern hours.";
+const DESCRIPTION = `Senior full-stack engineer with 15+ years of experience and Lead Engineer at Legiit (400,000+ users, $1M ARR). I build and run production web apps on Next.js, Laravel and Python, and add AI features that work: RAG, agents and LLM integrations. ${AVAILABILITY}`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -96,6 +96,7 @@ export default function RootLayout({
     image: `${BASE_URL}/shakil-headshot.jpeg`,
     sameAs: ["https://www.upwork.com/freelancers/shakilhq", "https://github.com/exelentshakil"],
     description: DESCRIPTION,
+    worksFor: { "@type": "Organization", name: "Legiit", url: "https://legiit.com" },
     address: { "@type": "PostalAddress", addressLocality: "Rajshahi", addressCountry: "Bangladesh" },
     knowsAbout: ["Next.js", "TypeScript", "Laravel", "PHP", "Python", "FastAPI", "PostgreSQL", "Supabase", "RAG", "LLM Integration", "AI Agents", "Docker", "AWS"],
     alumniOf: { "@type": "CollegeOrUniversity", name: "Bangladesh University" },

@@ -10,6 +10,7 @@ import {
   ExternalLink,
   Github,
   Layers,
+  MessageCircle,
   Play,
   Server,
   ShieldCheck,
@@ -18,6 +19,7 @@ import {
   Terminal,
   Zap,
 } from "lucide-react";
+import { AVAILABILITY, CALL_WINDOW, ENGAGEMENT, HOURS_PER_WEEK, WHATSAPP_URL } from "./lib/profile";
 
 const UPWORK_URL = "https://www.upwork.com/freelancers/shakilhq";
 const GITHUB_URL = "https://github.com/exelentshakil";
@@ -38,19 +40,19 @@ const METRICS = [
     sub: "Production web apps, APIs and distributed systems",
   },
   {
-    value: "$1M+ ARR",
+    value: "$1M ARR",
     label: "Marketplace Scaled",
-    sub: "Lead engineer at Legiit across 400k+ users",
+    sub: "Lead Engineer at Legiit, 400,000+ users",
   },
   {
     value: "100% JSS",
     label: "Upwork Job Success",
-    sub: "Top Rated track record with 5.0 client feedback",
+    sub: "5-star client feedback on Upwork",
   },
   {
-    value: "US Eastern",
-    label: "9am to 5pm EST",
-    sub: "Full daily overlap on Slack with US teams",
+    value: `${HOURS_PER_WEEK} hrs/week`,
+    label: "Available for new projects",
+    sub: `US Eastern overlap for calls on ${CALL_WINDOW}`,
   },
 ];
 
@@ -66,7 +68,7 @@ const CASE_STUDIES = [
     tag: "Laravel 10 · React · Stripe & Escrow · Redis Queues · MongoDB",
     title: "Legiit.com: High-volume freelance services marketplace",
     context:
-      "A live two-sided marketplace processing millions in GMV with complex financial logic, escrow, instant messaging, and seller payouts for 400,000+ registered users.",
+      "A live two-sided marketplace at $1M ARR with complex financial logic, escrow, instant messaging, and seller payouts for 400,000+ registered users.",
     image: "/screenshots/Legiit.png",
     built: [
       "Engineered order checkout, multi-currency wallet balances, escrow releases, and automated seller payouts with strict idempotency.",
@@ -100,34 +102,37 @@ const CASE_STUDIES = [
   },
 ];
 
-const UPWORK_PROJECTS = [
+const UPWORK_REVIEWS = [
   {
     title: "AI article and WordPress publishing automation",
     detail:
       "Built an automated workflow that generates research-backed articles with AI, formats structured HTML, and publishes them directly to WordPress via REST API with custom taxonomies.",
     quote: "The final system works exactly as needed and has already started saving me significant time.",
-    stars: 5,
   },
   {
     title: "AI-powered vehicle damage assessment web app",
     detail:
       "Developed a full-stack platform where users upload damaged vehicle photos to receive structured damage classifications, repair urgency scores, and preliminary repair cost estimates.",
-    quote: "Fast communication, exceptional technical depth, and delivered ahead of schedule.",
-    stars: 5,
+    quote: "Good job. Thanks",
   },
+  {
+    title: "Ticket system and ongoing work",
+    detail: "Ongoing development on a ticket system and related client work across multiple frameworks.",
+    quote:
+      "Excellent Freelancer, extremely skilled on multiple frameworks, and his reverse engineering is superb. I definitely recommend him.",
+  },
+];
+
+const OTHER_PROJECTS = [
   {
     title: "Multi-service API sync and webhook ingestion",
     detail:
       "Architected a bi-directional synchronization pipeline connecting CRM contacts, payment processor webhooks, and internal PostgreSQL records with dead-letter queue recovery.",
-    quote: "Shakil jumped into our messy codebase and stabilized the entire integration within days.",
-    stars: 5,
   },
   {
     title: "Custom LLM prompt evaluation and guardrail engine",
     detail:
       "Created a validation layer that screens incoming prompt inputs, sanitizes output formats with strict JSON schemas, and logs token consumption across client accounts.",
-    quote: "Incredible attention to detail. Our AI outputs are finally predictable and reliable.",
-    stars: 5,
   },
 ];
 
@@ -157,8 +162,8 @@ const TESTIMONIALS = [
 
 const HOW_I_WORK = [
   {
-    title: "US Eastern hours (9am to 5pm EST)",
-    desc: "I am online when your team is online. Quick morning check-ins and end-of-day recaps on Slack, so you never have to wonder what is happening.",
+    title: "US Eastern overlap for calls",
+    desc: `${AVAILABILITY} Written updates on Slack in between, so you never have to wonder what is happening.`,
   },
   {
     title: "Code review on every pull request",
@@ -218,7 +223,7 @@ const STACK_GROUPS = [
 const FAQS = [
   {
     q: "What time zone do you work in?",
-    a: "I work US Eastern hours, 9:00 AM to 5:00 PM EST. That means real-time collaboration with teams across New York, Toronto, Chicago, and San Francisco during standard business hours.",
+    a: `I am based in Rajshahi, Bangladesh. ${AVAILABILITY} Outside call times I keep the team updated in writing on Slack or Upwork.`,
   },
   {
     q: "Can you jump directly into our existing codebase?",
@@ -229,8 +234,8 @@ const FAQS = [
     a: "You can click any of the Upwork buttons on this page to visit my profile. You can send me a direct message or invite me to your job. I review your requirements, confirm the scope and schedule, and we can start right away through Upwork hourly or milestone contracts.",
   },
   {
-    q: "Are you available for 30+ hours a week?",
-    a: "Yes. I specialize in long-term dedicated roles with product companies, taking on 30 to 40 hours per week as an integrated team member. I also take on focused, high-impact project sprints.",
+    q: "How many hours a week are you available?",
+    a: `${AVAILABILITY} ${ENGAGEMENT}`,
   },
   {
     q: "How do you handle testing and production deploys?",
@@ -275,6 +280,20 @@ function UpworkButton({ dark = false, size = "md" }: { dark?: boolean; size?: "s
   );
 }
 
+function WhatsAppButton() {
+  return (
+    <a
+      href={WHATSAPP_URL}
+      target="_blank"
+      rel="noreferrer"
+      className="inline-flex items-center gap-2 whitespace-nowrap rounded-md bg-[#047857] px-6 py-3.5 text-base font-semibold text-white shadow-sm transition-all hover:bg-[#065F46] hover:shadow"
+    >
+      <MessageCircle className="h-4 w-4" />
+      <span>Message me on WhatsApp</span>
+    </a>
+  );
+}
+
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-[#0D1738]">
@@ -291,7 +310,7 @@ export default function Home() {
             <div className="flex flex-col">
               <div className="flex items-center gap-1.5 text-sm font-bold leading-none text-[#0D1738]">
                 <span>Shakil Ahmed</span>
-                <span className="relative flex h-2 w-2" title="Available now (US Eastern hours)">
+                <span className="relative flex h-2 w-2" title="Available for new projects">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                 </span>
@@ -319,7 +338,7 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <div className="hidden lg:flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700 border border-emerald-200">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              <span>Available 30+ hrs/wk</span>
+              <span>Available for new projects</span>
             </div>
             <UpworkButton size="sm" />
           </div>
@@ -338,9 +357,9 @@ export default function Home() {
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
               </span>
-              <span className="font-semibold text-emerald-700">Available for hire</span>
+              <span className="font-semibold text-emerald-700">Available for new projects</span>
               <span className="text-slate-300">·</span>
-              <span className="font-medium">US Eastern (9am to 5pm EST)</span>
+              <span className="font-medium">{HOURS_PER_WEEK} hrs/week, US Eastern call overlap</span>
               <span className="text-slate-300 hidden sm:inline">·</span>
               <span className="hidden sm:inline font-semibold text-[#533AFD]">100% Upwork Job Success</span>
             </div>
@@ -365,7 +384,7 @@ export default function Home() {
                   </span>
                 </div>
                 <p className="text-sm font-medium text-[#475467]">
-                  Senior Full-Stack &amp; AI Systems Engineer, Ex-Lead Engineer @ Legiit
+                  Senior Full-Stack &amp; AI Systems Engineer, Lead Engineer at Legiit
                 </p>
               </div>
             </div>
@@ -377,14 +396,15 @@ export default function Home() {
 
             {/* Subhead Body */}
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#475467] sm:text-lg">
-              15+ years engineering software. Former engineering team lead at Legiit, where I helped scale the
-              marketplace and AI Command Center to $1M ARR across 400,000+ users. I work across Next.js, Laravel,
+              15+ years engineering software. I am Lead Engineer at Legiit, where I help scale the marketplace and
+              AI Command Center, now at $1M ARR across 400,000+ users. I work across Next.js, Laravel,
               Python, and build production AI features: RAG, agents, and multi-model LLM integrations that stay fast
               and reliable.
             </p>
 
             {/* Action Buttons */}
             <div className="mt-8 flex flex-wrap items-center gap-3">
+              <WhatsAppButton />
               <UpworkButton size="lg" />
               <a
                 href="#work"
@@ -590,8 +610,8 @@ export default function Home() {
             <div className="mt-14 border-t border-[#EAECF0] pt-12">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
                 <div>
-                  <h3 className="text-lg font-bold text-[#0D1738]">Verified Upwork Project Deliveries</h3>
-                  <p className="text-sm text-[#667085]">Recent client contracts delivered with 5-star reviews.</p>
+                  <h3 className="text-lg font-bold text-[#0D1738]">Upwork Project Deliveries</h3>
+                  <p className="text-sm text-[#667085]">Real client reviews from my Upwork profile.</p>
                 </div>
                 <a
                   href={UPWORK_URL}
@@ -604,29 +624,42 @@ export default function Home() {
                 </a>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
-                {UPWORK_PROJECTS.map((p) => (
-                  <div
+              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                {UPWORK_REVIEWS.map((p) => (
+                  <a
                     key={p.title}
+                    href={UPWORK_URL}
+                    target="_blank"
+                    rel="noreferrer"
                     className="flex flex-col justify-between rounded-xl border border-[#EAECF0] bg-[#FAFBFD] p-5 shadow-sm transition hover:border-[#D9D6FE] hover:bg-white"
                   >
                     <div>
                       <div className="flex items-center gap-1 text-amber-500">
-                        {[...Array(p.stars)].map((_, i) => (
+                        {[...Array(5)].map((_, i) => (
                           <Star key={i} className="h-3 w-3 fill-current" />
                         ))}
                       </div>
                       <h4 className="mt-2 text-sm font-bold text-[#0D1738]">{p.title}</h4>
                       <p className="mt-1.5 text-xs leading-relaxed text-[#475467]">{p.detail}</p>
                     </div>
-                    {p.quote && (
-                      <p className="mt-3 border-t border-[#EAECF0] pt-2.5 text-xs italic text-[#344054]">
-                        &ldquo;{p.quote}&rdquo;
-                      </p>
-                    )}
-                  </div>
+                    <p className="mt-3 border-t border-[#EAECF0] pt-2.5 text-xs italic text-[#344054]">
+                      &ldquo;{p.quote}&rdquo;
+                    </p>
+                  </a>
                 ))}
               </div>
+
+              <h3 className="mt-10 text-sm font-bold text-[#0D1738]">Other projects</h3>
+              <ul className="mt-3 space-y-3">
+                {OTHER_PROJECTS.map((p) => (
+                  <li key={p.title} className="flex gap-2.5 text-xs leading-relaxed text-[#475467]">
+                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#027A48]" />
+                    <span>
+                      <span className="font-semibold text-[#0D1738]">{p.title}.</span> {p.detail}
+                    </span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </section>
@@ -724,7 +757,7 @@ export default function Home() {
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-emerald-400 border border-white/10">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                <span>Available now for new projects</span>
+                <span>Available for new projects</span>
               </div>
 
               <h2 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
@@ -732,12 +765,12 @@ export default function Home() {
               </h2>
 
               <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#D0D5DD]">
-                I am available for long-term roles on a product team, 30+ hours a week on US Eastern hours, and open to
-                contract-to-hire. I also take on focused development sprints. Send me a message on Upwork and tell me
-                about your codebase or roadmap.
+                {AVAILABILITY} {ENGAGEMENT} Message me on WhatsApp or Upwork and tell me about your codebase or
+                roadmap.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
+                <WhatsAppButton />
                 <UpworkButton dark size="lg" />
                 <a
                   href={GITHUB_URL}
@@ -767,7 +800,7 @@ export default function Home() {
             <div className="flex h-6 w-6 items-center justify-center rounded bg-[#0D1738] p-1">
               <Image src="/logo.png" alt="Shakil logo" width={14} height={14} className="object-contain" />
             </div>
-            <span>© 2026 Shakil Ahmed. Rajshahi, Bangladesh. Working US Eastern hours.</span>
+            <span>© 2026 Shakil Ahmed. Rajshahi, Bangladesh. US Eastern overlap for calls.</span>
           </div>
           <div className="flex items-center gap-4">
             <a href={UPWORK_URL} target="_blank" rel="noreferrer" className="hover:text-[#0D1738] transition">
