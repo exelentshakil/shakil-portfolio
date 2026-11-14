@@ -349,7 +349,7 @@ export default function Home() {
         <section className="relative overflow-hidden bg-white">
           {/* Soft gradient backdrop */}
           <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-x-[-10%] top-0 h-[560px] origin-top-left -skew-y-6 bg-gradient-to-r from-[#EEF2FF] via-[#F5F3FF] to-[#FFF1F2]" />
+            <div className="absolute inset-x-0 top-0 h-[640px] bg-gradient-to-r from-[#EEF2FF] via-[#F5F3FF] to-[#FFF1F2] [mask-image:linear-gradient(to_bottom,#000_30%,transparent)]" />
             <div className="absolute -right-24 -top-32 h-[520px] w-[520px] rounded-full bg-gradient-to-br from-[#A5B4FC] via-[#C4B5FD] to-[#FBCFE8] opacity-50 blur-3xl" />
             <div className="absolute -left-32 top-64 h-[360px] w-[360px] rounded-full bg-gradient-to-br from-[#BAE6FD] to-[#DDD6FE] opacity-40 blur-3xl" />
           </div>
