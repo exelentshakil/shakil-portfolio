@@ -19,7 +19,8 @@ import {
   Terminal,
   Zap,
 } from "lucide-react";
-import { AVAILABILITY, CALL_WINDOW, ENGAGEMENT, HOURS_PER_WEEK, WHATSAPP_URL } from "./lib/profile";
+import HeroShowcase from "./HeroShowcase";
+import { AVAILABILITY, ENGAGEMENT, WHATSAPP_URL } from "./lib/profile";
 
 const UPWORK_URL = "https://www.upwork.com/freelancers/shakilhq";
 const GITHUB_URL = "https://github.com/exelentshakil";
@@ -50,9 +51,9 @@ const METRICS = [
     sub: "5-star client feedback on Upwork",
   },
   {
-    value: `${HOURS_PER_WEEK} hrs/week`,
-    label: "Available for new projects",
-    sub: `US Eastern overlap for calls on ${CALL_WINDOW}`,
+    value: "9am ET",
+    label: "Call overlap with the US",
+    sub: "My day starts at 9am US Eastern, weekdays",
   },
 ];
 
@@ -234,7 +235,7 @@ const FAQS = [
     a: "You can click any of the Upwork buttons on this page to visit my profile. You can send me a direct message or invite me to your job. I review your requirements, confirm the scope and schedule, and we can start right away through Upwork hourly or milestone contracts.",
   },
   {
-    q: "How many hours a week are you available?",
+    q: "What does your availability look like?",
     a: `${AVAILABILITY} ${ENGAGEMENT}`,
   },
   {
@@ -256,7 +257,15 @@ function SectionHeading({ eyebrow, title, intro }: { eyebrow: string; title: str
   );
 }
 
-function UpworkButton({ dark = false, size = "md" }: { dark?: boolean; size?: "sm" | "md" | "lg" }) {
+function UpworkButton({
+  dark = false,
+  size = "md",
+  label = "Hire me on Upwork",
+}: {
+  dark?: boolean;
+  size?: "sm" | "md" | "lg";
+  label?: string;
+}) {
   const sizeClasses = {
     sm: "px-3.5 py-2 text-xs",
     md: "px-4 py-2.5 text-sm",
@@ -274,7 +283,7 @@ function UpworkButton({ dark = false, size = "md" }: { dark?: boolean; size?: "s
           : "bg-[#0D1738] text-white hover:bg-[#1D2939] hover:shadow"
       }`}
     >
-      <span>Hire me on Upwork</span>
+      <span>{label}</span>
       <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
     </a>
   );
@@ -301,9 +310,9 @@ export default function Home() {
       {/* Header & Sticky Navigation */}
       {/* ================================================================== */}
       <header className="sticky top-0 z-50 border-b border-[#EAECF0] bg-white/95 backdrop-blur-md">
-        <div className="mx-auto flex h-16 max-w-5xl items-center justify-between gap-4 px-4 sm:px-6">
+        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
           {/* Brand Logo & Title */}
-          <a href="#top" className="group flex items-center gap-2.5">
+          <a href="#top" className="group flex shrink-0 items-center gap-2.5">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0D1738] p-1.5 border border-[#1D2939] shadow-sm transition-all group-hover:bg-[#533AFD] group-hover:border-[#533AFD]">
               <Image src="/logo.png" alt="Shakil Ahmed logo" width={22} height={22} className="object-contain" priority />
             </div>
@@ -322,12 +331,12 @@ export default function Home() {
           </a>
 
           {/* Desktop Navigation Links */}
-          <nav className="hidden items-center gap-6 md:flex">
+          <nav className="hidden items-center gap-4 md:flex lg:gap-5">
             {NAV.map((n) => (
               <a
                 key={n.href}
                 href={n.href}
-                className="text-xs font-semibold text-[#475467] transition hover:text-[#533AFD]"
+                className="whitespace-nowrap text-[12px] font-semibold text-[#475467] transition hover:text-[#533AFD]"
               >
                 {n.label}
               </a>
@@ -335,12 +344,12 @@ export default function Home() {
           </nav>
 
           {/* Header Action Button */}
-          <div className="flex items-center gap-3">
-            <div className="hidden lg:flex items-center gap-1.5 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-medium text-emerald-700 border border-emerald-200">
+          <div className="flex shrink-0 items-center gap-3">
+            <div className="hidden xl:flex items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-700 border border-emerald-200">
               <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
               <span>Available for new projects</span>
             </div>
-            <UpworkButton size="sm" />
+            <UpworkButton size="sm" label="Hire on Upwork" />
           </div>
         </div>
       </header>
@@ -350,7 +359,9 @@ export default function Home() {
         {/* Hero Section */}
         {/* ================================================================== */}
         <section className="relative border-b border-[#EAECF0] bg-gradient-to-b from-white via-[#FAFBFD] to-white">
-          <div className="mx-auto max-w-5xl px-4 py-14 sm:px-6 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-14">
+            <div className="grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12">
+            <div>
             {/* Live Availability & Credentials Pill */}
             <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-[#D9D6FE] bg-white px-3.5 py-1.5 text-xs text-[#344054] shadow-sm">
               <span className="relative flex h-2 w-2">
@@ -359,13 +370,13 @@ export default function Home() {
               </span>
               <span className="font-semibold text-emerald-700">Available for new projects</span>
               <span className="text-slate-300">·</span>
-              <span className="font-medium">{HOURS_PER_WEEK} hrs/week, US Eastern call overlap</span>
+              <span className="font-medium">Calls from 9am US Eastern</span>
               <span className="text-slate-300 hidden sm:inline">·</span>
               <span className="hidden sm:inline font-semibold text-[#533AFD]">100% Upwork Job Success</span>
             </div>
 
             {/* Profile Intro Row */}
-            <div className="mt-8 flex items-center gap-4">
+            <div className="mt-8 flex items-center gap-4 lg:hidden">
               <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white shadow-md ring-2 ring-[#EAECF0]">
                 <Image
                   src="/shakil-headshot.jpeg"
@@ -390,7 +401,7 @@ export default function Home() {
             </div>
 
             {/* Main Headline */}
-            <h1 className="mt-6 max-w-3xl text-3xl font-bold leading-[1.12] tracking-tight text-[#0D1738] sm:text-5xl lg:text-5xl">
+            <h1 className="mt-6 max-w-3xl text-3xl font-bold leading-[1.12] tracking-tight text-[#0D1738] sm:text-5xl lg:mt-7 lg:text-[44px]">
               I build and run production web apps, and add AI to them that actually works.
             </h1>
 
@@ -420,6 +431,11 @@ export default function Home() {
                 <Play className="h-3.5 w-3.5 fill-current" />
                 <span>Watch CEO testimonial</span>
               </a>
+            </div>
+            </div>
+
+            {/* Animated profile card */}
+            <HeroShowcase />
             </div>
 
             {/* Metrics Trust Strip */}
@@ -453,7 +469,7 @@ export default function Home() {
         {/* CEO Video Endorsement & Client Reviews */}
         {/* ================================================================== */}
         <section id="endorsements" className="scroll-mt-16 border-b border-[#EAECF0] bg-[#FAFBFD]">
-          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
             <SectionHeading
               eyebrow="Verified Endorsements"
               title="What founders and CEOs say about working with me"
@@ -536,7 +552,7 @@ export default function Home() {
         {/* Selected Production Case Studies */}
         {/* ================================================================== */}
         <section id="work" className="scroll-mt-16 border-b border-[#EAECF0] bg-white">
-          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
             <SectionHeading
               eyebrow="Selected Work"
               title="Production systems I've built and run"
@@ -668,7 +684,7 @@ export default function Home() {
         {/* How I Work */}
         {/* ================================================================== */}
         <section id="how" className="scroll-mt-16 border-b border-[#EAECF0] bg-[#FAFBFD]">
-          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
             <SectionHeading
               eyebrow="Engineering Process"
               title="How I work: steady, predictable delivery"
@@ -698,7 +714,7 @@ export default function Home() {
         {/* Tech Stack */}
         {/* ================================================================== */}
         <section id="stack" className="scroll-mt-16 border-b border-[#EAECF0] bg-white">
-          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
             <SectionHeading
               eyebrow="Core Competencies"
               title="Technologies and tools I use every day"
@@ -731,7 +747,7 @@ export default function Home() {
         {/* Buyer FAQ */}
         {/* ================================================================== */}
         <section id="faq" className="scroll-mt-16 border-b border-[#EAECF0] bg-[#FAFBFD]">
-          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20">
+          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
             <SectionHeading
               eyebrow="Client FAQ"
               title="Frequently asked questions from hiring managers"
@@ -753,7 +769,7 @@ export default function Home() {
         {/* Contact & Hire CTA Section */}
         {/* ================================================================== */}
         <section id="contact" className="bg-[#0D1738] text-white">
-          <div className="mx-auto max-w-5xl px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-emerald-400 border border-white/10">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
@@ -795,7 +811,7 @@ export default function Home() {
       {/* Footer */}
       {/* ================================================================== */}
       <footer className="border-t border-[#EAECF0] bg-white">
-        <div className="mx-auto flex max-w-5xl flex-col gap-3 px-4 py-8 text-xs text-[#667085] sm:flex-row sm:items-center sm:justify-between sm:px-6">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-xs text-[#667085] sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div className="flex items-center gap-2.5">
             <div className="flex h-6 w-6 items-center justify-center rounded bg-[#0D1738] p-1">
               <Image src="/logo.png" alt="Shakil logo" width={14} height={14} className="object-contain" />
