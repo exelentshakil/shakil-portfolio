@@ -541,11 +541,15 @@ export default function Home() {
               intro="Real web applications and backend systems with paying users. No throwaway mockups, no artificial metrics."
             />
 
-            <div className="space-y-8">
-              {CASE_STUDIES.map((c) => (
-                <article
+            <div className="space-y-6 lg:space-y-[18vh]">
+              {CASE_STUDIES.map((c, i) => (
+                <div
                   key={c.title}
-                  className="card-soft overflow-hidden rounded-3xl border border-[#E3E8EE] bg-white"
+                  className="lg:sticky"
+                  style={{ top: `calc(5.5rem + ${i * 1.25}rem)` }}
+                >
+                <article
+                  className="card-float overflow-hidden rounded-3xl border border-[#E3E8EE] bg-white"
                 >
                   <div className={`grid gap-0 ${c.image ? "lg:grid-cols-[1.1fr_1fr]" : ""}`}>
                     <div className="p-6 sm:p-8">
@@ -601,6 +605,7 @@ export default function Home() {
                     )}
                   </div>
                 </article>
+                </div>
               ))}
             </div>
 
