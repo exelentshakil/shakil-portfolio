@@ -11,7 +11,6 @@ import {
   Layers,
   Server,
   ShieldCheck,
-  Sparkles,
   Star,
   Terminal,
   Zap,
@@ -251,13 +250,12 @@ const FAQS = [
 
 function SectionHeading({ eyebrow, title, intro }: { eyebrow: string; title: string; intro?: string }) {
   return (
-    <div className="mb-10 max-w-2xl">
-      <div className="inline-flex items-center gap-2 rounded-full bg-[#F4F3FF] px-3 py-1 text-xs font-semibold text-[#533AFD] border border-[#D9D6FE]">
-        <Sparkles className="h-3 w-3" />
-        <span>{eyebrow}</span>
-      </div>
-      <h2 className="mt-3 text-2xl font-bold tracking-tight text-[#0D1738] sm:text-3xl lg:text-4xl">{title}</h2>
-      {intro && <p className="mt-3 text-[15px] leading-relaxed text-[#475467]">{intro}</p>}
+    <div className="mb-12 max-w-2xl">
+      <p className="text-[13px] font-semibold uppercase tracking-[0.12em] text-[#635BFF]">{eyebrow}</p>
+      <h2 className="mt-3 text-[28px] font-semibold leading-[1.1] tracking-[-0.03em] text-[#0A2540] sm:text-4xl lg:text-[42px]">
+        {title}
+      </h2>
+      {intro && <p className="mt-4 text-base leading-relaxed text-[#425466] sm:text-lg">{intro}</p>}
     </div>
   );
 }
@@ -272,9 +270,9 @@ function UpworkButton({
   label?: string;
 }) {
   const sizeClasses = {
-    sm: "px-3.5 py-2 text-xs",
-    md: "px-4 py-2.5 text-sm",
-    lg: "px-6 py-3.5 text-base font-semibold",
+    sm: "px-4 py-2 text-[13px]",
+    md: "px-5 py-2.5 text-sm",
+    lg: "px-7 py-3.5 text-[15px]",
   }[size];
 
   return (
@@ -282,10 +280,10 @@ function UpworkButton({
       href={UPWORK_URL}
       target="_blank"
       rel="noreferrer"
-      className={`group inline-flex items-center gap-2 whitespace-nowrap rounded-md font-semibold transition-all shadow-sm ${sizeClasses} ${
+      className={`group inline-flex items-center gap-2 whitespace-nowrap rounded-full font-semibold transition-all ${sizeClasses} ${
         dark
-          ? "bg-white text-[#0D1738] hover:bg-[#F2F4F7] hover:shadow"
-          : "bg-[#0D1738] text-white hover:bg-[#1D2939] hover:shadow"
+          ? "bg-white text-[#0A2540] shadow-[0_12px_28px_-10px_rgba(0,0,0,0.5)] hover:bg-[#F6F9FC]"
+          : "bg-[#635BFF] text-white shadow-[0_12px_28px_-8px_rgba(99,91,255,0.65)] hover:bg-[#5851EA]"
       }`}
     >
       <span>{label}</span>
@@ -296,7 +294,7 @@ function UpworkButton({
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-[#0D1738]">
+    <div className="min-h-screen bg-white text-[#0A2540]">
       {/* ================================================================== */}
       {/* Header & Sticky Navigation */}
       {/* ================================================================== */}
@@ -452,8 +450,8 @@ export default function Home() {
         {/* ================================================================== */}
         {/* CEO Video Endorsement & Client Reviews */}
         {/* ================================================================== */}
-        <section id="endorsements" className="scroll-mt-16 border-b border-[#EAECF0] bg-[#FAFBFD]">
-          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+        <section id="endorsements" className="scroll-mt-16 border-b border-[#E3E8EE] bg-[#F6F9FC]">
+          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
             <SectionHeading
               eyebrow="Verified Endorsements"
               title="What founders and CEOs say about working with me"
@@ -461,7 +459,7 @@ export default function Home() {
             />
 
             {/* Featured Video Block */}
-            <div className="mb-10 overflow-hidden rounded-2xl border border-[#EAECF0] bg-[#0D1738] shadow-lg">
+            <div className="mb-10 overflow-hidden rounded-3xl border border-[#1D2939] bg-[#0A2540] shadow-[0_40px_90px_-30px_rgba(50,50,93,0.55)]">
               <div className="grid lg:grid-cols-[1.1fr_1fr]">
                 <div className="relative aspect-video lg:aspect-auto">
                   <iframe
@@ -480,7 +478,7 @@ export default function Home() {
                         <Star key={i} className="h-4 w-4 fill-current" />
                       ))}
                     </div>
-                    <blockquote className="mt-4 text-[15px] sm:text-base leading-relaxed text-[#F2F4F7]">
+                    <blockquote className="mt-4 text-[15px] sm:text-base leading-relaxed text-[#EDF1F6]">
                       &ldquo;Most developers just write code; he thinks in systems. Legiit isn&apos;t a simple website;
                       it&apos;s a complex marketplace with intricate financial logic. He engineered the architecture
                       that allows us to scale safely. I don&apos;t need a freelancer; I need an engineering
@@ -493,7 +491,7 @@ export default function Home() {
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-white">Chris M. Walker</p>
-                      <p className="text-xs text-[#98A2B3]">CEO, Legiit.com</p>
+                      <p className="text-xs text-[#8792A2]">CEO, Legiit.com</p>
                     </div>
                   </div>
                 </div>
@@ -505,7 +503,7 @@ export default function Home() {
               {TESTIMONIALS.slice(1).map((t) => (
                 <figure
                   key={t.name}
-                  className="flex flex-col justify-between rounded-xl border border-[#EAECF0] bg-white p-6 shadow-sm"
+                  className="card-soft flex flex-col justify-between rounded-2xl border border-[#E3E8EE] bg-white p-7"
                 >
                   <div>
                     <div className="flex items-center gap-1 text-amber-500">
@@ -513,17 +511,17 @@ export default function Home() {
                         <Star key={i} className="h-3.5 w-3.5 fill-current" />
                       ))}
                     </div>
-                    <blockquote className="mt-3 text-[15px] leading-relaxed text-[#344054]">
+                    <blockquote className="mt-3 text-[15px] leading-relaxed text-[#3C4257]">
                       &ldquo;{t.quote}&rdquo;
                     </blockquote>
                   </div>
-                  <figcaption className="mt-5 flex items-center gap-3 border-t border-[#EAECF0] pt-4">
-                    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-[#EAECF0]">
+                  <figcaption className="mt-5 flex items-center gap-3 border-t border-[#E3E8EE] pt-4">
+                    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-[#E3E8EE]">
                       <Image src={t.photo} alt={t.name} fill sizes="40px" className="object-cover" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-[#0D1738]">{t.name}</p>
-                      <p className="text-xs text-[#667085]">{t.role}</p>
+                      <p className="text-sm font-semibold text-[#0A2540]">{t.name}</p>
+                      <p className="text-xs text-[#697386]">{t.role}</p>
                     </div>
                   </figcaption>
                 </figure>
@@ -535,8 +533,8 @@ export default function Home() {
         {/* ================================================================== */}
         {/* Selected Production Case Studies */}
         {/* ================================================================== */}
-        <section id="work" className="scroll-mt-16 border-b border-[#EAECF0] bg-white">
-          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+        <section id="work" className="scroll-mt-16 border-b border-[#E3E8EE] bg-white">
+          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
             <SectionHeading
               eyebrow="Selected Work"
               title="Production systems I've built and run"
@@ -547,19 +545,19 @@ export default function Home() {
               {CASE_STUDIES.map((c) => (
                 <article
                   key={c.title}
-                  className="overflow-hidden rounded-2xl border border-[#EAECF0] bg-white shadow-sm transition hover:shadow-md"
+                  className="card-soft overflow-hidden rounded-3xl border border-[#E3E8EE] bg-white"
                 >
                   <div className={`grid gap-0 ${c.image ? "lg:grid-cols-[1.1fr_1fr]" : ""}`}>
                     <div className="p-6 sm:p-8">
-                      <p className="text-xs font-semibold text-[#533AFD]">{c.tag}</p>
-                      <h3 className="mt-2 text-xl font-bold tracking-tight text-[#0D1738] sm:text-2xl">{c.title}</h3>
-                      <p className="mt-2 text-[15px] leading-relaxed text-[#475467]">{c.context}</p>
+                      <p className="text-xs font-semibold text-[#635BFF]">{c.tag}</p>
+                      <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-[#0A2540] sm:text-2xl">{c.title}</h3>
+                      <p className="mt-2 text-[15px] leading-relaxed text-[#425466]">{c.context}</p>
 
-                      <div className="mt-5 border-t border-[#EAECF0] pt-4">
-                        <p className="text-xs font-bold uppercase tracking-wider text-[#667085]">What I built and shipped</p>
+                      <div className="mt-5 border-t border-[#E3E8EE] pt-4">
+                        <p className="text-xs font-semibold uppercase tracking-wider text-[#697386]">What I built and shipped</p>
                         <ul className="mt-3 space-y-2.5">
                           {c.built.map((b) => (
-                            <li key={b} className="flex gap-2.5 text-[14px] leading-relaxed text-[#344054]">
+                            <li key={b} className="flex gap-2.5 text-[14px] leading-relaxed text-[#3C4257]">
                               <Check className="mt-1 h-4 w-4 shrink-0 text-[#027A48]" />
                               <span>{b}</span>
                             </li>
@@ -569,22 +567,22 @@ export default function Home() {
                     </div>
 
                     {c.image && (
-                      <div className="flex flex-col justify-center border-t border-[#EAECF0] bg-[#F8F9FC] p-4 sm:p-6 lg:border-l lg:border-t-0">
+                      <div className="flex flex-col justify-center border-t border-[#E3E8EE] bg-[#F6F9FC] p-4 sm:p-6 lg:border-l lg:border-t-0">
                         <a
                           href={c.image}
                           target="_blank"
                           rel="noreferrer"
-                          className="group/img block overflow-hidden rounded-xl border border-[#EAECF0] bg-white shadow-sm transition hover:border-[#D9D6FE] hover:shadow-md"
+                          className="group/img block overflow-hidden rounded-xl border border-[#E3E8EE] bg-white shadow-sm transition hover:border-[#DAD7FF] hover:shadow-md"
                           title="Click to view full screenshot"
                         >
-                          <div className="flex items-center justify-between border-b border-[#EAECF0] bg-[#F2F4F7] px-3.5 py-2">
+                          <div className="flex items-center justify-between border-b border-[#E3E8EE] bg-[#EDF1F6] px-3.5 py-2">
                             <div className="flex items-center gap-1.5">
                               <span className="h-2 w-2 rounded-full bg-slate-300" />
                               <span className="h-2 w-2 rounded-full bg-slate-300" />
                               <span className="h-2 w-2 rounded-full bg-slate-300" />
                               <span className="ml-2 font-mono text-[11px] text-slate-500">legiit.com</span>
                             </div>
-                            <span className="flex items-center gap-1 text-[11px] font-medium text-[#533AFD] opacity-0 transition group-hover/img:opacity-100">
+                            <span className="flex items-center gap-1 text-[11px] font-medium text-[#635BFF] opacity-0 transition group-hover/img:opacity-100">
                               <span>Full size</span>
                               <ExternalLink className="h-3 w-3" />
                             </span>
@@ -607,17 +605,17 @@ export default function Home() {
             </div>
 
             {/* Upwork Client Projects Grid */}
-            <div className="mt-14 border-t border-[#EAECF0] pt-12">
+            <div className="mt-14 border-t border-[#E3E8EE] pt-12">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
                 <div>
-                  <h3 className="text-lg font-bold text-[#0D1738]">Upwork Project Deliveries</h3>
-                  <p className="text-sm text-[#667085]">Real client reviews from my Upwork profile.</p>
+                  <h3 className="text-lg font-semibold text-[#0A2540]">Upwork Project Deliveries</h3>
+                  <p className="text-sm text-[#697386]">Real client reviews from my Upwork profile.</p>
                 </div>
                 <a
                   href={UPWORK_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#533AFD] hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#635BFF] hover:underline"
                 >
                   <span>View all Upwork feedback</span>
                   <ExternalLink className="h-3.5 w-3.5" />
@@ -631,7 +629,7 @@ export default function Home() {
                     href={UPWORK_URL}
                     target="_blank"
                     rel="noreferrer"
-                    className="flex flex-col justify-between rounded-xl border border-[#EAECF0] bg-[#FAFBFD] p-5 shadow-sm transition hover:border-[#D9D6FE] hover:bg-white"
+                    className="card-soft flex flex-col justify-between rounded-2xl border border-[#E3E8EE] bg-white p-6"
                   >
                     <div>
                       <div className="flex items-center gap-1 text-amber-500">
@@ -639,23 +637,23 @@ export default function Home() {
                           <Star key={i} className="h-3 w-3 fill-current" />
                         ))}
                       </div>
-                      <h4 className="mt-2 text-sm font-bold text-[#0D1738]">{p.title}</h4>
-                      <p className="mt-1.5 text-xs leading-relaxed text-[#475467]">{p.detail}</p>
+                      <h4 className="mt-2 text-sm font-semibold text-[#0A2540]">{p.title}</h4>
+                      <p className="mt-1.5 text-xs leading-relaxed text-[#425466]">{p.detail}</p>
                     </div>
-                    <p className="mt-3 border-t border-[#EAECF0] pt-2.5 text-xs italic text-[#344054]">
+                    <p className="mt-3 border-t border-[#E3E8EE] pt-2.5 text-xs italic text-[#3C4257]">
                       &ldquo;{p.quote}&rdquo;
                     </p>
                   </a>
                 ))}
               </div>
 
-              <h3 className="mt-10 text-sm font-bold text-[#0D1738]">Other projects</h3>
+              <h3 className="mt-10 text-sm font-semibold text-[#0A2540]">Other projects</h3>
               <ul className="mt-3 space-y-3">
                 {OTHER_PROJECTS.map((p) => (
-                  <li key={p.title} className="flex gap-2.5 text-xs leading-relaxed text-[#475467]">
+                  <li key={p.title} className="flex gap-2.5 text-xs leading-relaxed text-[#425466]">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#027A48]" />
                     <span>
-                      <span className="font-semibold text-[#0D1738]">{p.title}.</span> {p.detail}
+                      <span className="font-semibold text-[#0A2540]">{p.title}.</span> {p.detail}
                     </span>
                   </li>
                 ))}
@@ -667,8 +665,8 @@ export default function Home() {
         {/* ================================================================== */}
         {/* How I Work */}
         {/* ================================================================== */}
-        <section id="how" className="scroll-mt-16 border-b border-[#EAECF0] bg-[#FAFBFD]">
-          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+        <section id="how" className="scroll-mt-16 border-b border-[#E3E8EE] bg-[#F6F9FC]">
+          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
             <SectionHeading
               eyebrow="Engineering Process"
               title="How I work: steady, predictable delivery"
@@ -679,14 +677,14 @@ export default function Home() {
               {HOW_I_WORK.map((h) => (
                 <div
                   key={h.title}
-                  className="flex gap-3.5 rounded-xl border border-[#EAECF0] bg-white p-5 shadow-sm transition hover:border-[#D9D6FE]"
+                  className="card-soft flex gap-4 rounded-2xl border border-[#E3E8EE] bg-white p-6"
                 >
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-md bg-[#F4F3FF] text-[#533AFD]">
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#F1EFFF] text-[#635BFF]">
                     <Check className="h-4 w-4" />
                   </div>
                   <div>
-                    <h3 className="text-sm font-bold text-[#0D1738]">{h.title}</h3>
-                    <p className="mt-1 text-xs leading-relaxed text-[#475467]">{h.desc}</p>
+                    <h3 className="text-[15px] font-semibold text-[#0A2540]">{h.title}</h3>
+                    <p className="mt-1.5 text-[13.5px] leading-relaxed text-[#425466]">{h.desc}</p>
                   </div>
                 </div>
               ))}
@@ -697,8 +695,8 @@ export default function Home() {
         {/* ================================================================== */}
         {/* Tech Stack */}
         {/* ================================================================== */}
-        <section id="stack" className="scroll-mt-16 border-b border-[#EAECF0] bg-white">
-          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+        <section id="stack" className="scroll-mt-16 border-b border-[#E3E8EE] bg-white">
+          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
             <SectionHeading
               eyebrow="Core Competencies"
               title="Technologies and tools I use every day"
@@ -711,15 +709,15 @@ export default function Home() {
                 return (
                   <div
                     key={s.group}
-                    className="flex flex-col rounded-xl border border-[#EAECF0] bg-[#FAFBFD] p-5 shadow-sm transition hover:border-[#D9D6FE] hover:bg-white"
+                    className="card-soft flex flex-col rounded-2xl border border-[#E3E8EE] bg-white p-6"
                   >
                     <div className="flex items-center gap-2.5">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white border border-[#EAECF0] text-[#533AFD] shadow-xs">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white border border-[#E3E8EE] text-[#635BFF] ">
                         <Icon className="h-4 w-4" />
                       </div>
-                      <h3 className="text-sm font-bold text-[#0D1738]">{s.group}</h3>
+                      <h3 className="text-[15px] font-semibold text-[#0A2540]">{s.group}</h3>
                     </div>
-                    <p className="mt-3 text-xs leading-relaxed text-[#475467]">{s.items}</p>
+                    <p className="mt-3 text-[13.5px] leading-relaxed text-[#425466]">{s.items}</p>
                   </div>
                 );
               })}
@@ -730,8 +728,8 @@ export default function Home() {
         {/* ================================================================== */}
         {/* Buyer FAQ */}
         {/* ================================================================== */}
-        <section id="faq" className="scroll-mt-16 border-b border-[#EAECF0] bg-[#FAFBFD]">
-          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20">
+        <section id="faq" className="scroll-mt-16 border-b border-[#E3E8EE] bg-[#F6F9FC]">
+          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
             <SectionHeading
               eyebrow="Client FAQ"
               title="Frequently asked questions from hiring managers"
@@ -740,9 +738,9 @@ export default function Home() {
 
             <div className="space-y-4">
               {FAQS.map((f) => (
-                <div key={f.q} className="rounded-xl border border-[#EAECF0] bg-white p-5 shadow-sm">
-                  <h3 className="text-sm font-bold text-[#0D1738]">{f.q}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-[#475467] sm:text-sm">{f.a}</p>
+                <div key={f.q} className="card-soft rounded-2xl border border-[#E3E8EE] bg-white p-6">
+                  <h3 className="text-base font-semibold text-[#0A2540]">{f.q}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#425466]">{f.a}</p>
                 </div>
               ))}
             </div>
@@ -752,36 +750,40 @@ export default function Home() {
         {/* ================================================================== */}
         {/* Contact & Hire CTA Section */}
         {/* ================================================================== */}
-        <section id="contact" className="bg-[#0D1738] text-white">
-          <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-20 lg:py-24">
+        <section id="contact" className="relative overflow-hidden bg-[#0A2540] text-white">
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <div className="absolute -right-24 -top-32 h-[460px] w-[460px] rounded-full bg-gradient-to-br from-[#635BFF] via-[#8B5CF6] to-[#EC4899] opacity-40 blur-3xl" />
+            <div className="absolute -bottom-40 -left-24 h-[380px] w-[380px] rounded-full bg-gradient-to-tr from-[#38BDF8] to-[#635BFF] opacity-25 blur-3xl" />
+          </div>
+          <div className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
             <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-xs font-semibold text-emerald-400 border border-white/10">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold text-emerald-300 backdrop-blur">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
                 <span>Available for new projects</span>
               </div>
 
-              <h2 className="mt-4 text-2xl font-bold tracking-tight text-white sm:text-4xl lg:text-5xl">
+              <h2 className="mt-6 text-[32px] font-semibold leading-[1.08] tracking-[-0.03em] text-white sm:text-5xl lg:text-[56px]">
                 Looking for a senior engineer who shows up every day and ships?
               </h2>
 
-              <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#D0D5DD]">
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#C1C9D2] sm:text-lg">
                 {AVAILABILITY} {ENGAGEMENT} Send me an invite on Upwork and tell me about your codebase or roadmap.
               </p>
 
-              <div className="mt-8 flex flex-wrap items-center gap-3">
+              <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <UpworkButton dark size="lg" label="Invite me on Upwork" />
                 <a
                   href={GITHUB_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 whitespace-nowrap rounded-md border border-white/20 bg-white/5 px-5 py-3.5 text-base font-semibold text-white transition hover:bg-white/10 shadow-sm"
+                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-[15px] font-semibold text-white backdrop-blur transition hover:bg-white/10"
                 >
                   <Github className="h-4 w-4" />
                   <span>GitHub Profile</span>
                 </a>
               </div>
 
-              <p className="mt-5 text-xs text-[#98A2B3]">
+              <p className="mt-6 text-xs text-[#8792A2]">
                 Contracts and payments are handled securely through Upwork escrow with zero billing surprises.
               </p>
             </div>
@@ -792,22 +794,22 @@ export default function Home() {
       {/* ================================================================== */}
       {/* Footer */}
       {/* ================================================================== */}
-      <footer className="border-t border-[#EAECF0] bg-white">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-xs text-[#667085] sm:flex-row sm:items-center sm:justify-between sm:px-6">
+      <footer className="border-t border-[#E3E8EE] bg-white">
+        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-xs text-[#697386] sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-6 w-6 items-center justify-center rounded bg-[#0D1738] p-1">
+            <div className="flex h-6 w-6 items-center justify-center rounded bg-[#0A2540] p-1">
               <Image src="/logo.png" alt="Shakil logo" width={14} height={14} className="object-contain" />
             </div>
             <span>© 2026 Shakil Ahmed. Rajshahi, Bangladesh. US Eastern overlap for calls.</span>
           </div>
           <div className="flex items-center gap-4">
-            <a href={UPWORK_URL} target="_blank" rel="noreferrer" className="hover:text-[#0D1738] transition">
+            <a href={UPWORK_URL} target="_blank" rel="noreferrer" className="hover:text-[#0A2540] transition">
               Upwork Profile
             </a>
-            <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="hover:text-[#0D1738] transition">
+            <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="hover:text-[#0A2540] transition">
               GitHub
             </a>
-            <a href="#top" className="hover:text-[#0D1738] transition">
+            <a href="#top" className="hover:text-[#0A2540] transition">
               Back to top ↑
             </a>
           </div>
