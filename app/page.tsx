@@ -541,7 +541,7 @@ export default function Home() {
               intro="Real web applications and backend systems with paying users. No throwaway mockups, no artificial metrics."
             />
 
-            <div className="space-y-6 lg:space-y-[18vh]">
+            <div className="space-y-6 lg:space-y-8">
               {CASE_STUDIES.map((c, i) => (
                 <div
                   key={c.title}
