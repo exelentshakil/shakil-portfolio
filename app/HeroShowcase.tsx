@@ -135,8 +135,24 @@ export default function HeroShowcase() {
 
   return (
     <div className="relative">
+      <motion.div
+        animate={reduce ? undefined : { y: [0, -6, 0] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -right-3 -top-4 hidden rounded-xl border border-[#E3E8EE] bg-white px-3 py-2 shadow-lg sm:block"
+      >
+        <p className="text-[11px] font-semibold text-[#0A2540]">100% Job Success</p>
+        <p className="text-[10px] text-[#697386]">Upwork</p>
+      </motion.div>
+      <motion.div
+        animate={reduce ? undefined : { y: [0, 6, 0] }}
+        transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute -bottom-12 left-6 hidden rounded-xl border border-[#E3E8EE] bg-white px-3 py-2 shadow-lg sm:block"
+      >
+        <p className="text-[11px] font-semibold text-[#0A2540]">$1M ARR marketplace</p>
+        <p className="text-[10px] text-[#697386]">Lead Engineer, Legiit</p>
+      </motion.div>
       <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-[#533AFD]/15 via-transparent to-emerald-400/10 blur-2xl" />
-      <div className="overflow-hidden rounded-2xl border border-[#1D2939] bg-[#0D1738] shadow-2xl">
+      <div className="overflow-hidden rounded-2xl border border-[#1D2939] bg-[#0A2540] shadow-[0_40px_90px_-24px_rgba(50,50,93,0.55)]">
         {/* Window bar */}
         <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
           <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
@@ -180,7 +196,7 @@ export default function HeroShowcase() {
         </div>
 
         {/* Scene */}
-        <div className="relative h-[210px] px-5 pb-2 pt-4">
+        <div className="relative min-h-[210px] px-5 pb-4 pt-4">
           <AnimatePresence mode="wait">
             <motion.div
               key={scene}

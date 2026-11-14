@@ -2,7 +2,6 @@ import Image from "next/image";
 import {
   ArrowUpRight,
   Check,
-  CheckCircle2,
   ChevronRight,
   Code2,
   Cpu,
@@ -10,8 +9,6 @@ import {
   ExternalLink,
   Github,
   Layers,
-  MessageCircle,
-  Play,
   Server,
   ShieldCheck,
   Sparkles,
@@ -20,7 +17,7 @@ import {
   Zap,
 } from "lucide-react";
 import HeroShowcase from "./HeroShowcase";
-import { AVAILABILITY, ENGAGEMENT, WHATSAPP_URL } from "./lib/profile";
+import { AVAILABILITY, ENGAGEMENT } from "./lib/profile";
 
 const UPWORK_URL = "https://www.upwork.com/freelancers/shakilhq";
 const GITHUB_URL = "https://github.com/exelentshakil";
@@ -57,11 +54,19 @@ const METRICS = [
   },
 ];
 
-const TRUST_BRANDS = [
-  { name: "Legiit.com", role: "Freelance Marketplace & AI SaaS" },
-  { name: "No Half Cakes", role: "Digital Growth Agency" },
-  { name: "Steve Weatherford", role: "Super Bowl Champion Platform" },
-  { name: "BarakahSoft", role: "Engineering Studio" },
+const CLIENT_LOGOS = [
+  { name: "Legiit", src: "/logos/legiit.png", h: 28 },
+  { name: "Heartcore Growth", src: "/logos/heartcore-growth.png", h: 26 },
+  { name: "No Half Cakes", src: "/logos/no-half-cakes.png", h: 30 },
+  { name: "Superstar SEO", src: "/logos/superstar-seo.png", h: 22 },
+  { name: "Audiit", src: "/logos/audiit.svg", h: 22 },
+  { name: "Snapt", src: "/logos/snapt.png", h: 20 },
+  { name: "Hubert Vester Auto Group", src: "/logos/hubert-vester.png", h: 24 },
+  { name: "Lotus", src: "/logos/lotus.png", h: 32 },
+  { name: "Express Diagnostics", src: "/logos/express-diagnostics.png", h: 30 },
+  { name: "Suited", src: "/logos/looksuited.png", h: 22 },
+  { name: "Riverode Sales", src: "/logos/riverode.png", h: 34 },
+  { name: "BarakahSoft", src: "/logos/barakahsoft.png", h: 22 },
 ];
 
 const CASE_STUDIES = [
@@ -289,68 +294,53 @@ function UpworkButton({
   );
 }
 
-function WhatsAppButton() {
-  return (
-    <a
-      href={WHATSAPP_URL}
-      target="_blank"
-      rel="noreferrer"
-      className="inline-flex items-center gap-2 whitespace-nowrap rounded-md bg-[#047857] px-6 py-3.5 text-base font-semibold text-white shadow-sm transition-all hover:bg-[#065F46] hover:shadow"
-    >
-      <MessageCircle className="h-4 w-4" />
-      <span>Message me on WhatsApp</span>
-    </a>
-  );
-}
-
 export default function Home() {
   return (
     <div className="min-h-screen bg-white text-[#0D1738]">
       {/* ================================================================== */}
       {/* Header & Sticky Navigation */}
       {/* ================================================================== */}
-      <header className="sticky top-0 z-50 border-b border-[#EAECF0] bg-white/95 backdrop-blur-md">
+      <header className="sticky top-0 z-50 border-b border-[#E3E8EE]/70 bg-white/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-          {/* Brand Logo & Title */}
           <a href="#top" className="group flex shrink-0 items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0D1738] p-1.5 border border-[#1D2939] shadow-sm transition-all group-hover:bg-[#533AFD] group-hover:border-[#533AFD]">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#1D2939] bg-[#0A2540] p-1.5 shadow-sm transition-all group-hover:border-[#635BFF] group-hover:bg-[#635BFF]">
               <Image src="/logo.png" alt="Shakil Ahmed logo" width={22} height={22} className="object-contain" priority />
             </div>
             <div className="flex flex-col">
-              <div className="flex items-center gap-1.5 text-sm font-bold leading-none text-[#0D1738]">
+              <div className="flex items-center gap-1.5 text-sm font-semibold leading-none text-[#0A2540]">
                 <span>Shakil Ahmed</span>
                 <span className="relative flex h-2 w-2" title="Available for new projects">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                 </span>
               </div>
-              <span className="mt-1 text-[11px] font-medium text-[#667085] leading-none">
+              <span className="mt-1 text-[11px] font-medium leading-none text-[#697386]">
                 Senior Full-Stack &amp; AI Engineer
               </span>
             </div>
           </a>
 
-          {/* Desktop Navigation Links */}
-          <nav className="hidden items-center gap-4 md:flex lg:gap-5">
+          <nav className="hidden items-center gap-1 md:flex">
             {NAV.map((n) => (
               <a
                 key={n.href}
                 href={n.href}
-                className="whitespace-nowrap text-[12px] font-semibold text-[#475467] transition hover:text-[#533AFD]"
+                className="whitespace-nowrap rounded-full px-3 py-1.5 text-[13px] font-medium text-[#425466] transition hover:bg-[#F6F9FC] hover:text-[#0A2540]"
               >
                 {n.label}
               </a>
             ))}
           </nav>
 
-          {/* Header Action Button */}
-          <div className="flex shrink-0 items-center gap-3">
-            <div className="hidden xl:flex items-center gap-1.5 whitespace-nowrap rounded-full bg-emerald-50 px-2.5 py-1 text-[11px] font-medium text-emerald-700 border border-emerald-200">
-              <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
-              <span>Available for new projects</span>
-            </div>
-            <UpworkButton size="sm" label="Hire on Upwork" />
-          </div>
+          <a
+            href={UPWORK_URL}
+            target="_blank"
+            rel="noreferrer"
+            className="group inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#635BFF] px-4 py-2 text-[13px] font-semibold text-white shadow-[0_6px_16px_-6px_rgba(99,91,255,0.6)] transition hover:bg-[#5851EA]"
+          >
+            <span>Hire on Upwork</span>
+            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          </a>
         </div>
       </header>
 
@@ -358,109 +348,103 @@ export default function Home() {
         {/* ================================================================== */}
         {/* Hero Section */}
         {/* ================================================================== */}
-        <section className="relative border-b border-[#EAECF0] bg-gradient-to-b from-white via-[#FAFBFD] to-white">
-          <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6 sm:py-16 lg:py-14">
-            <div className="grid items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-12">
-            <div>
-            {/* Live Availability & Credentials Pill */}
-            <div className="inline-flex flex-wrap items-center gap-2 rounded-full border border-[#D9D6FE] bg-white px-3.5 py-1.5 text-xs text-[#344054] shadow-sm">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-              </span>
-              <span className="font-semibold text-emerald-700">Available for new projects</span>
-              <span className="text-slate-300">·</span>
-              <span className="font-medium">Calls from 9am US Eastern</span>
-              <span className="text-slate-300 hidden sm:inline">·</span>
-              <span className="hidden sm:inline font-semibold text-[#533AFD]">100% Upwork Job Success</span>
-            </div>
+        <section className="relative overflow-hidden bg-white">
+          {/* Soft gradient backdrop */}
+          <div aria-hidden className="pointer-events-none absolute inset-0">
+            <div className="absolute inset-x-[-10%] top-0 h-[560px] origin-top-left -skew-y-6 bg-gradient-to-r from-[#EEF2FF] via-[#F5F3FF] to-[#FFF1F2]" />
+            <div className="absolute -right-24 -top-32 h-[520px] w-[520px] rounded-full bg-gradient-to-br from-[#A5B4FC] via-[#C4B5FD] to-[#FBCFE8] opacity-50 blur-3xl" />
+            <div className="absolute -left-32 top-64 h-[360px] w-[360px] rounded-full bg-gradient-to-br from-[#BAE6FD] to-[#DDD6FE] opacity-40 blur-3xl" />
+          </div>
 
-            {/* Profile Intro Row */}
-            <div className="mt-8 flex items-center gap-4 lg:hidden">
-              <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full border-2 border-white shadow-md ring-2 ring-[#EAECF0]">
-                <Image
-                  src="/shakil-headshot.jpeg"
-                  alt="Shakil Ahmed headshot"
-                  fill
-                  sizes="64px"
-                  className="object-cover"
-                  priority
-                />
-              </div>
+          <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-14 sm:px-6 sm:pt-20 lg:pb-14 lg:pt-20">
+            <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
               <div>
-                <div className="flex items-center gap-2">
-                  <h2 className="text-lg font-bold text-[#0D1738]">Shakil Ahmed</h2>
-                  <span className="rounded bg-[#F4F3FF] px-2 py-0.5 text-[11px] font-semibold text-[#533AFD] border border-[#D9D6FE]">
-                    15+ Years Exp
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#E3E8EE] bg-white/80 px-3 py-1.5 text-xs font-medium text-[#425466] shadow-sm backdrop-blur">
+                  <span className="relative flex h-2 w-2">
+                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                   </span>
+                  <span className="font-semibold text-[#0A2540]">Available for new projects</span>
+                  <span className="text-[#C1C9D2]">·</span>
+                  <span>Calls from 9am US Eastern</span>
                 </div>
-                <p className="text-sm font-medium text-[#475467]">
-                  Senior Full-Stack &amp; AI Systems Engineer, Lead Engineer at Legiit
+
+                <h1 className="mt-6 text-[34px] font-semibold leading-[1.07] tracking-[-0.035em] text-[#0A2540] sm:text-5xl lg:text-[56px]">
+                  I build and run production web apps, and add AI to them{" "}
+                  <span className="bg-gradient-to-r from-[#635BFF] via-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent">
+                    that actually works.
+                  </span>
+                </h1>
+
+                <p className="mt-6 max-w-xl text-base leading-relaxed text-[#425466] sm:text-lg">
+                  15+ years engineering software. I am Lead Engineer at Legiit, where I help scale the marketplace and
+                  AI Command Center, now at $1M ARR across 400,000+ users. I work across Next.js, Laravel, Python, and
+                  build production AI features: RAG, agents, and multi-model LLM integrations that stay fast and
+                  reliable.
                 </p>
+
+                <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center">
+                  <a
+                    href={UPWORK_URL}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#635BFF] px-7 py-3.5 sm:w-auto text-[15px] font-semibold text-white shadow-[0_12px_28px_-8px_rgba(99,91,255,0.65)] transition hover:bg-[#5851EA]"
+                  >
+                    <span>Hire me on Upwork</span>
+                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </a>
+                  <a
+                    href="#work"
+                    className="group inline-flex w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-[#D5DBE1] sm:w-auto bg-white/80 px-6 py-3.5 text-[15px] font-semibold text-[#0A2540] shadow-sm backdrop-blur transition hover:border-[#B6BFCA] hover:bg-white"
+                  >
+                    <span>See my work</span>
+                    <ChevronRight className="h-4 w-4 text-[#697386] transition-transform group-hover:translate-x-0.5" />
+                  </a>
+                </div>
               </div>
+
+              <HeroShowcase />
             </div>
 
-            {/* Main Headline */}
-            <h1 className="mt-6 max-w-3xl text-3xl font-bold leading-[1.12] tracking-tight text-[#0D1738] sm:text-5xl lg:mt-7 lg:text-[44px]">
-              I build and run production web apps, and add AI to them that actually works.
-            </h1>
-
-            {/* Subhead Body */}
-            <p className="mt-5 max-w-2xl text-base leading-relaxed text-[#475467] sm:text-lg">
-              15+ years engineering software. I am Lead Engineer at Legiit, where I help scale the marketplace and
-              AI Command Center, now at $1M ARR across 400,000+ users. I work across Next.js, Laravel,
-              Python, and build production AI features: RAG, agents, and multi-model LLM integrations that stay fast
-              and reliable.
-            </p>
-
-            {/* Action Buttons */}
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <WhatsAppButton />
-              <UpworkButton size="lg" />
-              <a
-                href="#work"
-                className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-md border border-[#D0D5DD] bg-white px-5 py-3.5 text-base font-semibold text-[#0D1738] transition hover:bg-[#F8F9FC] shadow-sm"
-              >
-                <span>See my work</span>
-                <ChevronRight className="h-4 w-4 text-[#667085]" />
-              </a>
-              <a
-                href="#endorsements"
-                className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-md px-4 py-3.5 text-sm font-semibold text-[#533AFD] hover:bg-[#F4F3FF] transition"
-              >
-                <Play className="h-3.5 w-3.5 fill-current" />
-                <span>Watch CEO testimonial</span>
-              </a>
-            </div>
-            </div>
-
-            {/* Animated profile card */}
-            <HeroShowcase />
-            </div>
-
-            {/* Metrics Trust Strip */}
-            <div className="mt-12 grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-              {METRICS.map((m) => (
+            {/* Metrics strip */}
+            <div className="mt-12 grid grid-cols-2 overflow-hidden rounded-2xl border border-[#E3E8EE] bg-white/80 shadow-sm backdrop-blur lg:grid-cols-4">
+              {METRICS.map((m, i) => (
                 <div
                   key={m.label}
-                  className="rounded-xl border border-[#EAECF0] bg-white p-4 shadow-sm transition hover:border-[#D9D6FE]"
+                  className={`p-5 sm:p-6 ${i % 2 === 1 ? "border-l border-[#E3E8EE]" : ""} ${
+                    i > 1 ? "border-t border-[#E3E8EE] lg:border-t-0" : ""
+                  } ${i > 0 ? "lg:border-l" : ""}`}
                 >
-                  <p className="text-2xl font-bold tracking-tight text-[#0D1738]">{m.value}</p>
-                  <p className="mt-1 text-xs font-semibold text-[#533AFD]">{m.label}</p>
-                  <p className="mt-1 text-xs text-[#667085] leading-snug">{m.sub}</p>
+                  <p className="text-2xl font-semibold tracking-tight text-[#0A2540] sm:text-3xl">{m.value}</p>
+                  <p className="mt-1 text-xs font-semibold text-[#635BFF]">{m.label}</p>
+                  <p className="mt-1 text-xs leading-snug text-[#697386]">{m.sub}</p>
                 </div>
               ))}
             </div>
 
-            {/* Client Social Proof Banner */}
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-[#EAECF0] pt-6 text-xs text-[#667085]">
-              <span className="font-semibold text-[#344054]">Trusted by founders and leaders at:</span>
-              {TRUST_BRANDS.map((b) => (
-                <span key={b.name} className="flex items-center gap-1.5 font-medium text-[#475467]">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-600" />
-                  {b.name}
-                </span>
-              ))}
+          </div>
+          {/* Client logo marquee, full width */}
+          <div className="relative mt-2 border-t border-[#E3E8EE] bg-white/70 py-7 backdrop-blur">
+            <p className="text-center text-xs font-medium uppercase tracking-[0.14em] text-[#8792A2]">
+              Teams I have worked with
+            </p>
+            <div className="logo-marquee mt-5 overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)]">
+              <ul className="marquee-track flex w-max items-center gap-14 pr-14">
+                {[0, 1].map((copy) =>
+                  CLIENT_LOGOS.map((l) => (
+                    <li key={`${copy}-${l.name}`} aria-hidden={copy === 1} className="flex h-10 shrink-0 items-center">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={l.src}
+                        alt={copy === 0 ? l.name : ""}
+                        loading="lazy"
+                        style={{ height: l.h, width: "auto", maxWidth: 140 }}
+                        className="object-contain opacity-40 brightness-0 transition duration-300 hover:opacity-70"
+                      />
+                    </li>
+                  ))
+                )}
+              </ul>
             </div>
           </div>
         </section>
@@ -781,13 +765,11 @@ export default function Home() {
               </h2>
 
               <p className="mt-4 text-sm sm:text-base leading-relaxed text-[#D0D5DD]">
-                {AVAILABILITY} {ENGAGEMENT} Message me on WhatsApp or Upwork and tell me about your codebase or
-                roadmap.
+                {AVAILABILITY} {ENGAGEMENT} Send me an invite on Upwork and tell me about your codebase or roadmap.
               </p>
 
               <div className="mt-8 flex flex-wrap items-center gap-3">
-                <WhatsAppButton />
-                <UpworkButton dark size="lg" />
+                <UpworkButton dark size="lg" label="Invite me on Upwork" />
                 <a
                   href={GITHUB_URL}
                   target="_blank"
