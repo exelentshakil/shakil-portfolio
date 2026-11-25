@@ -1,6 +1,5 @@
 import Image from "next/image";
 import { Check, ExternalLink, Star } from "lucide-react";
-import Announcement from "./components/Announcement";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import HomeScripts from "./components/HomeScripts";
@@ -96,7 +95,6 @@ function SectionHeading({ eyebrow, title, intro }: { eyebrow: string; title: str
 export default function Home() {
   return (
     <div className="min-h-screen overflow-x-clip bg-[#F9F6F3] text-[#1A182B]">
-      <Announcement />
       <Header />
       <main>
         <div id="vz" dangerouslySetInnerHTML={{ __html: PART1 }} />
