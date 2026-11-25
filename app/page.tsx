@@ -1,96 +1,12 @@
 import Image from "next/image";
-import {
-  ArrowUpRight,
-  Check,
-  ChevronRight,
-  Code2,
-  Cpu,
-  Database,
-  ExternalLink,
-  Github,
-  Layers,
-  Server,
-  ShieldCheck,
-  Star,
-  Terminal,
-  Zap,
-} from "lucide-react";
-import ChatWindow from "./components/ChatWindow";
-import { AVAILABILITY, ENGAGEMENT } from "./lib/profile";
+import { Check, ExternalLink, Star } from "lucide-react";
+import Announcement from "./components/Announcement";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import HomeScripts from "./components/HomeScripts";
+import { PART1, PART2 } from "./components/home-data";
 
 const UPWORK_URL = "https://www.upwork.com/freelancers/shakilhq";
-const GITHUB_URL = "https://github.com/exelentshakil";
-
-const NAV = [
-  { href: "#offer", label: "The offer" },
-  { href: "#work", label: "Work" },
-  { href: "#endorsements", label: "Endorsements" },
-  { href: "#how", label: "How I work" },
-  { href: "#stack", label: "Stack" },
-  { href: "#faq", label: "FAQ" },
-];
-
-const OFFER_STEPS = [
-  {
-    title: "Week 1: I get in and fix",
-    desc: "I join your Slack or Teams, get named access under NDA, read the code and take the first tickets off your backlog.",
-  },
-  {
-    title: "Week 2: I close 3 real tickets",
-    desc: "Real bugs, real features, on your live product. Each one ships with a staging link, a rollback plan and a 30 minute watch after release.",
-  },
-  {
-    title: "Then you decide",
-    desc: "If I don't close 3 real tickets, you don't pay. If it works, we move to a monthly plan where I own your production and its tickets.",
-  },
-];
-
-const RELEASE_ROUTINE = [
-  "A staging link you can click before anything goes live",
-  "A backup and a rollback plan on every release",
-  "Me watching production for 30 minutes after it ships",
-  "A short changelog every day and a summary every Friday",
-  "Replies within the hour, 9 to 5 US Eastern",
-  "NDA and named access, removed the day we finish",
-];
-
-const METRICS = [
-  {
-    value: "15+ Years",
-    label: "Software Engineering",
-    sub: "Production web apps, APIs and distributed systems",
-  },
-  {
-    value: "400,000+",
-    label: "Users on the live product",
-    sub: "Lead Engineer at Legiit, a marketplace with real payments",
-  },
-  {
-    value: "100% JSS",
-    label: "Upwork Job Success",
-    sub: "5-star client feedback on Upwork",
-  },
-  {
-    value: "1 hour",
-    label: "Reply time",
-    sub: "In your Slack, Teams or inbox, 9 to 5 US Eastern",
-  },
-];
-
-const CLIENT_LOGOS = [
-  { name: "Legiit", src: "/logos/legiit.png", h: 28 },
-  { name: "Heartcore Growth", src: "/logos/heartcore-growth.png", h: 26 },
-  { name: "No Half Cakes", src: "/logos/no-half-cakes.png", h: 30 },
-  { name: "Superstar SEO", src: "/logos/superstar-seo.png", h: 22 },
-  { name: "Audiit", src: "/logos/audiit.svg", h: 22 },
-  { name: "Snapt", src: "/logos/snapt.png", h: 20 },
-  { name: "Hubert Vester Auto Group", src: "/logos/hubert-vester.png", h: 24 },
-  { name: "Lotus", src: "/logos/lotus.png", h: 32 },
-  { name: "Express Diagnostics", src: "/logos/express-diagnostics.png", h: 30 },
-  { name: "Suited", src: "/logos/looksuited.png", h: 22 },
-  { name: "Riverode Sales", src: "/logos/riverode.png", h: 34 },
-  { name: "BarakahSoft", src: "/logos/barakahsoft.png", h: 22 },
-];
 
 const CASE_STUDIES = [
   {
@@ -165,113 +81,6 @@ const OTHER_PROJECTS = [
   },
 ];
 
-const TESTIMONIALS = [
-  {
-    name: "Chris M. Walker",
-    role: "CEO, Legiit.com",
-    photo: "/chris.jpeg",
-    quote:
-      "Most developers just write code; he thinks in systems. Legiit isn't a simple website; it's a complex marketplace with intricate financial logic. He engineered the architecture that allows us to scale safely. I don't need a freelancer; I need an engineering partner.",
-  },
-  {
-    name: "Jim Sabellico",
-    role: "Founder, No Half Cakes",
-    photo: "/jim.jpeg",
-    quote:
-      "When I land high-stakes clients like Steve Weatherford, I can't afford 'trial and error.' I bring him in because he brings an engineering discipline to agency chaos. He was the technical lead behind our biggest deployments because the code is clean, the database optimized, and the delivery flawless.",
-  },
-  {
-    name: "Steve Weatherford",
-    role: "Super Bowl Champion and Entrepreneur",
-    photo: "/steve.jpeg",
-    quote:
-      "I don't know the code, I just know that my platform needs to perform as hard as I do. The team delivered a digital HQ that handles my traffic, my content, and my sales without blinking. It feels solid, fast, and professional. That's the standard.",
-  },
-];
-
-const HOW_I_WORK = [
-  {
-    title: "Reply within the hour",
-    desc: `${AVAILABILITY} Written updates on Slack in between, so you never have to wonder what is happening.`,
-  },
-  {
-    title: "Code review on every pull request",
-    desc: "Nothing merges directly into main or touches production unreviewed. Every change gets a ticket, a clean branch, tests, and a reviewed pull request.",
-  },
-  {
-    title: "Staging verification before live release",
-    desc: "I test every user flow on a staging environment before releasing to live customers. Every deploy has a clear rollback strategy and database backup.",
-  },
-  {
-    title: "Deterministic code handles money and rules",
-    desc: "Financial calculations, user permissions, and database constraints stay in strict, tested code. AI is used for language, search, and intelligent summarization.",
-  },
-  {
-    title: "Modern AI tooling without cutting corners",
-    desc: "I build with Claude Code and Cursor daily. That means high development velocity paired with strict unit tests, so speed never comes at the cost of code quality.",
-  },
-  {
-    title: "Daily changelog, Friday summary",
-    desc: "You see what shipped every day and what is next every Friday. When something is unclear or breaks, I tell you right away with options. No surprises.",
-  },
-];
-
-const STACK_GROUPS = [
-  {
-    icon: Code2,
-    group: "Frontend",
-    items: "TypeScript, React, Next.js, Vue, Tailwind CSS, HTML5, State Management",
-  },
-  {
-    icon: Server,
-    group: "Backend",
-    items: "PHP 8, Laravel 10, Python, FastAPI, Node.js, Express, REST APIs",
-  },
-  {
-    icon: Database,
-    group: "Data & Caching",
-    items: "PostgreSQL, Supabase, MySQL, MongoDB, Redis, pgvector, Milvus",
-  },
-  {
-    icon: Cpu,
-    group: "AI & Vector Search",
-    items: "Claude API, OpenAI, Gemini, RAG Pipelines, LangChain, MCP Servers, Agent Workflows",
-  },
-  {
-    icon: Layers,
-    group: "Cloud & DevOps",
-    items: "Docker, AWS, Vercel, Supervisor Workers, Kafka, Inngest, Nginx, CI/CD",
-  },
-  {
-    icon: Terminal,
-    group: "Team Process",
-    items: "Git, GitHub, Bitbucket, Jira, Slack, Peer Code Review, Staging Environments",
-  },
-];
-
-const FAQS = [
-  {
-    q: "What time zone do you work in?",
-    a: `I am based in Rajshahi, Bangladesh. ${AVAILABILITY} Outside call times I keep the team updated in writing on Slack or Upwork.`,
-  },
-  {
-    q: "Can you jump directly into our existing codebase?",
-    a: "Yes. With 15+ years of software experience, I am comfortable stepping into established codebases in Next.js, Laravel, React, or Python. I read the domain logic, follow your established idioms, and start shipping clean pull requests quickly.",
-  },
-  {
-    q: "How does the 2 week trial work?",
-    a: `${ENGAGEMENT}`,
-  },
-  {
-    q: "How do we start?",
-    a: "Click any Upwork button on this page, send me a message or invite me to your job. Tell me what is running and what is breaking. I confirm the scope and we start through an Upwork contract, with payments handled by Upwork.",
-  },
-  {
-    q: "How do you handle testing and production deploys?",
-    a: "Every change goes through local testing and automated staging checks before touching production. For database migrations, I test up and down migrations on staging first. Releases are planned to ensure zero downtime.",
-  },
-];
-
 function SectionHeading({ eyebrow, title, intro }: { eyebrow: string; title: string; intro?: string }) {
   return (
     <div className="mb-12 max-w-2xl">
@@ -284,605 +93,150 @@ function SectionHeading({ eyebrow, title, intro }: { eyebrow: string; title: str
   );
 }
 
-function UpworkButton({
-  dark = false,
-  size = "md",
-  label = "Start the 2 week trial on Upwork",
-}: {
-  dark?: boolean;
-  size?: "sm" | "md" | "lg";
-  label?: string;
-}) {
-  const sizeClasses = {
-    sm: "px-4 py-2 text-[13px]",
-    md: "px-5 py-2.5 text-sm",
-    lg: "px-7 py-3.5 text-[15px]",
-  }[size];
-
-  return (
-    <a
-      href={UPWORK_URL}
-      target="_blank"
-      rel="noreferrer"
-      className={`group inline-flex items-center gap-2 whitespace-nowrap rounded-full font-semibold transition-all ${sizeClasses} ${
-        dark
-          ? "bg-white text-[#1A182B] shadow-[0_12px_28px_-10px_rgba(0,0,0,0.5)] hover:bg-[#F9F6F3]"
-          : "bg-[#533AFD] text-white shadow-[0_12px_28px_-8px_rgba(99,91,255,0.65)] hover:bg-[#4327F5]"
-      }`}
-    >
-      <span>{label}</span>
-      <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-    </a>
-  );
-}
-
 export default function Home() {
   return (
-    <div className="min-h-screen overflow-x-clip bg-white text-[#1A182B]">
-      {/* ================================================================== */}
-      {/* Header & Sticky Navigation */}
-      {/* ================================================================== */}
-      <header className="sticky top-0 z-50 border-b border-[#E4DFDD]/70 bg-white/80 backdrop-blur-xl">
-        <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-          <a href="#top" className="group flex shrink-0 items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#1D2939] bg-[#1A182B] p-1.5 shadow-sm transition-all group-hover:border-[#533AFD] group-hover:bg-[#533AFD]">
-              <Image src="/logo.png" alt="Shakil Ahmed logo" width={22} height={22} className="object-contain" priority />
-            </div>
-            <div className="flex flex-col">
-              <div className="flex items-center gap-1.5 text-sm font-semibold leading-none text-[#1A182B]">
-                <span>Shakil Ahmed</span>
-                <span className="relative flex h-2 w-2" title="Taking new on-call clients">
-                  <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                  <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                </span>
-              </div>
-              <span className="mt-1 text-[11px] font-medium leading-none text-[#697386]">
-                On-Call Engineer for Live Products
-              </span>
-            </div>
-          </a>
-
-          <nav className="hidden items-center gap-1 md:flex">
-            {NAV.map((n) => (
-              <a
-                key={n.href}
-                href={n.href}
-                className="whitespace-nowrap rounded-full px-3 py-1.5 text-[13px] font-medium text-[#425466] transition hover:bg-[#F9F6F3] hover:text-[#1A182B]"
-              >
-                {n.label}
-              </a>
-            ))}
-          </nav>
-
-          <a
-            href={UPWORK_URL}
-            target="_blank"
-            rel="noreferrer"
-            className="group inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#533AFD] px-4 py-2 text-[13px] font-semibold text-white shadow-[0_6px_16px_-6px_rgba(99,91,255,0.6)] transition hover:bg-[#4327F5]"
-          >
-            <span className="sm:hidden">Start trial</span>
-            <span className="hidden sm:inline">Start trial on Upwork</span>
-            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-          </a>
-        </div>
-      </header>
-
-      <main id="top">
-        {/* ================================================================== */}
-        {/* Hero Section */}
-        {/* ================================================================== */}
-        <section className="relative overflow-hidden bg-white">
-          {/* Soft gradient backdrop */}
-          <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute inset-x-0 top-0 h-[640px] bg-gradient-to-r from-[#EEF2FF] via-[#F5F3FF] to-[#FFF1F2] [mask-image:linear-gradient(to_bottom,#000_30%,transparent)]" />
-            <div className="absolute -right-24 -top-32 h-[520px] w-[520px] rounded-full bg-gradient-to-br from-[#A5B4FC] via-[#C4B5FD] to-[#FBCFE8] opacity-50 blur-3xl" />
-            <div className="absolute -left-32 top-64 h-[360px] w-[360px] rounded-full bg-gradient-to-br from-[#BAE6FD] to-[#DDD6FE] opacity-40 blur-3xl" />
-          </div>
-
-          <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-14 sm:px-6 sm:pt-20 lg:pb-14 lg:pt-20">
-            <div>
-              <div className="max-w-3xl">
-                <div className="inline-flex items-center gap-2 rounded-full border border-[#E4DFDD] bg-white/80 px-3 py-1.5 text-xs font-medium text-[#425466] shadow-sm backdrop-blur">
-                  <span className="relative flex h-2 w-2">
-                    <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                    <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
-                  </span>
-                  <span className="font-semibold text-[#1A182B]">Taking new on-call clients</span>
-                  <span className="text-[#C1C9D2]">·</span>
-                  <span>9 to 5 US Eastern</span>
-                </div>
-
-                <h1 className="mt-6 text-[34px] font-semibold leading-[1.07] tracking-[-0.035em] text-[#1A182B] sm:text-5xl lg:text-[56px]">
-                  Your live product has bugs and requests piling up.{" "}
-                  <span className="bg-gradient-to-r from-[#533AFD] via-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent">
-                    I'm the named engineer who owns them.
-                  </span>
-                </h1>
-
-                <p className="mt-6 max-w-xl text-base leading-relaxed text-[#425466] sm:text-lg">
-                  One named lead engineer in your Slack, Teams or inbox, 9 to 5 US Eastern, on Laravel, Next.js,
-                  Python and AWS. 15+ years of software and Lead Engineer at Legiit. Start with a 2 week trial on your
-                  real backlog: I close 3 real tickets or you pay nothing.
-                </p>
-
-                <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center">
-                  <a
-                    href={UPWORK_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#533AFD] px-7 py-3.5 sm:w-auto text-[15px] font-semibold text-white shadow-[0_12px_28px_-8px_rgba(99,91,255,0.65)] transition hover:bg-[#4327F5]"
-                  >
-                    <span>Start the 2 week trial on Upwork</span>
-                    <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-                  </a>
-                  <a
-                    href="#offer"
-                    className="group inline-flex w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-[#D5DBE1] sm:w-auto bg-white/80 px-6 py-3.5 text-[15px] font-semibold text-[#1A182B] shadow-sm backdrop-blur transition hover:border-[#B6BFCA] hover:bg-white"
-                  >
-                    <span>See how it works</span>
-                    <ChevronRight className="h-4 w-4 text-[#697386] transition-transform group-hover:translate-x-0.5" />
-                  </a>
-                </div>
-              </div>
-
-              
-            </div>
-
-            <div className="mt-12"><ChatWindow /></div>
-
-            {/* Metrics strip */}
-            <div className="mt-12 grid grid-cols-2 overflow-hidden rounded-2xl border border-[#E4DFDD] bg-white/80 shadow-sm backdrop-blur lg:grid-cols-4">
-              {METRICS.map((m, i) => (
-                <div
-                  key={m.label}
-                  className={`p-5 sm:p-6 ${i % 2 === 1 ? "border-l border-[#E4DFDD]" : ""} ${
-                    i > 1 ? "border-t border-[#E4DFDD] lg:border-t-0" : ""
-                  } ${i > 0 ? "lg:border-l" : ""}`}
-                >
-                  <p className="text-2xl font-semibold tracking-tight text-[#1A182B] sm:text-3xl">{m.value}</p>
-                  <p className="mt-1 text-xs font-semibold text-[#533AFD]">{m.label}</p>
-                  <p className="mt-1 text-xs leading-snug text-[#697386]">{m.sub}</p>
-                </div>
-              ))}
-            </div>
-
-          </div>
-          {/* Client logo marquee, full width */}
-          <div className="relative mt-2 border-t border-[#E4DFDD] bg-white/70 py-7 backdrop-blur">
-            <p className="text-center text-xs font-medium uppercase tracking-[0.14em] text-[#8792A2]">
-              Teams I have worked with
-            </p>
-            <div className="logo-marquee mt-5 overflow-hidden [mask-image:linear-gradient(to_right,transparent,#000_8%,#000_92%,transparent)]">
-              <ul className="marquee-track flex w-max items-center gap-14 pr-14">
-                {[0, 1].map((copy) =>
-                  CLIENT_LOGOS.map((l) => (
-                    <li key={`${copy}-${l.name}`} aria-hidden={copy === 1} className="flex h-10 shrink-0 items-center">
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={l.src}
-                        alt={copy === 0 ? l.name : ""}
-                        loading="lazy"
-                        style={{ height: l.h, width: "auto", maxWidth: 140 }}
-                        className="object-contain opacity-40 brightness-0 transition duration-300 hover:opacity-70"
-                      />
-                    </li>
-                  ))
-                )}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* ================================================================== */}
-        {/* The Offer */}
-        {/* ================================================================== */}
-        <section id="offer" className="scroll-mt-16 border-b border-[#E4DFDD] bg-white">
-          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-            <SectionHeading
-              eyebrow="The offer"
-              title="On-call engineer for your live product"
-              intro="You don't need more hours of a developer. You need one named person who owns production and closes the tickets."
-            />
-
-            <div className="grid gap-4 md:grid-cols-3">
-              {OFFER_STEPS.map((o) => (
-                <div key={o.title} className="card-soft rounded-2xl border border-[#E4DFDD] bg-white p-6">
-                  <h3 className="text-[15px] font-semibold text-[#1A182B]">{o.title}</h3>
-                  <p className="mt-2 text-[13.5px] leading-relaxed text-[#425466]">{o.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-6 rounded-2xl border border-[#E4DFDD] bg-[#F9F6F3] p-6 sm:p-8">
-              <p className="text-xs font-semibold uppercase tracking-wider text-[#697386]">Every release, every time</p>
-              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                {RELEASE_ROUTINE.map((r) => (
-                  <li key={r} className="flex gap-2.5 text-[14px] leading-relaxed text-[#3C4257]">
-                    <Check className="mt-1 h-4 w-4 shrink-0 text-[#027A48]" />
-                    <span>{r}</span>
-                  </li>
-                ))}
-              </ul>
-              <div className="mt-6">
-                <UpworkButton />
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ================================================================== */}
-        {/* CEO Video Endorsement & Client Reviews */}
-        {/* ================================================================== */}
-        <section id="endorsements" className="scroll-mt-16 border-b border-[#E4DFDD] bg-[#F9F6F3]">
-          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-            <SectionHeading
-              eyebrow="Verified Endorsements"
-              title="What founders and CEOs say about working with me"
-              intro="Real testimonials from leaders of platforms where downtime costs real money and delivery is everything."
-            />
-
-            {/* Featured Video Block */}
-            <div className="mb-10 overflow-hidden rounded-3xl border border-[#1D2939] bg-[#1A182B] shadow-[0_40px_90px_-30px_rgba(50,50,93,0.55)]">
-              <div className="grid lg:grid-cols-[1.1fr_1fr]">
-                <div className="relative aspect-video lg:aspect-auto">
-                  <iframe
-                    className="absolute inset-0 h-full w-full"
-                    src="https://www.youtube.com/embed/VdPptVpxMPM?rel=0&modestbranding=1"
-                    title="Chris M. Walker, CEO of Legiit, endorsing Shakil Ahmed"
-                    allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                    loading="lazy"
-                  />
-                </div>
-                <div className="flex flex-col justify-between p-6 sm:p-8 text-white">
-                  <div>
-                    <div className="flex items-center gap-1 text-amber-400">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-4 w-4 fill-current" />
+    <div className="min-h-screen overflow-x-clip bg-[#F9F6F3] text-[#1A182B]">
+      <Announcement />
+      <Header />
+      <main>
+        <div id="vz" dangerouslySetInnerHTML={{ __html: PART1 }} />
+        <section id="work" className="scroll-mt-24 border-b border-[#E4DFDD] bg-[#F9F6F3]">
+                  <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+                    <SectionHeading
+                      eyebrow="Selected Work"
+                      title="Production systems I've built and run"
+                      intro="Real web applications and backend systems with paying users. No throwaway mockups, no artificial metrics."
+                    />
+        
+                    <div className="space-y-6 lg:space-y-8">
+                      {CASE_STUDIES.map((c, i) => (
+                        <div
+                          key={c.title}
+                          className="lg:sticky"
+                          style={{ top: `calc(5.5rem + ${i * 1.25}rem)` }}
+                        >
+                        <article
+                          className="card-float overflow-hidden rounded-3xl border border-[#E4DFDD] bg-white"
+                        >
+                          <div className={`grid gap-0 ${c.image ? "lg:grid-cols-[1.1fr_1fr]" : ""}`}>
+                            <div className="p-6 sm:p-8">
+                              <p className="text-xs font-semibold text-[#533AFD]">{c.tag}</p>
+                              <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-[#1A182B] sm:text-2xl">{c.title}</h3>
+                              <p className="mt-2 text-[15px] leading-relaxed text-[#425466]">{c.context}</p>
+        
+                              <div className="mt-5 border-t border-[#E4DFDD] pt-4">
+                                <p className="text-xs font-semibold uppercase tracking-wider text-[#697386]">What I built and shipped</p>
+                                <ul className="mt-3 space-y-2.5">
+                                  {c.built.map((b) => (
+                                    <li key={b} className="flex gap-2.5 text-[14px] leading-relaxed text-[#3C4257]">
+                                      <Check className="mt-1 h-4 w-4 shrink-0 text-[#027A48]" />
+                                      <span>{b}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            </div>
+        
+                            {c.image && (
+                              <div className="flex flex-col justify-center border-t border-[#E4DFDD] bg-[#F9F6F3] p-4 sm:p-6 lg:border-l lg:border-t-0">
+                                <a
+                                  href={c.image}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="group/img block overflow-hidden rounded-xl border border-[#E4DFDD] bg-white shadow-sm transition hover:border-[#DAD7FF] hover:shadow-md"
+                                  title="Click to view full screenshot"
+                                >
+                                  <div className="flex items-center justify-between border-b border-[#E4DFDD] bg-[#EDF1F6] px-3.5 py-2">
+                                    <div className="flex items-center gap-1.5">
+                                      <span className="h-2 w-2 rounded-full bg-slate-300" />
+                                      <span className="h-2 w-2 rounded-full bg-slate-300" />
+                                      <span className="h-2 w-2 rounded-full bg-slate-300" />
+                                      <span className="ml-2 font-mono text-[11px] text-slate-500">legiit.com</span>
+                                    </div>
+                                    <span className="flex items-center gap-1 text-[11px] font-medium text-[#533AFD] opacity-0 transition group-hover/img:opacity-100">
+                                      <span>Full size</span>
+                                      <ExternalLink className="h-3 w-3" />
+                                    </span>
+                                  </div>
+                                  <div className="relative aspect-[1555/1176] w-full bg-white">
+                                    <Image
+                                      src={c.image}
+                                      alt={c.title}
+                                      fill
+                                      sizes="(min-width: 1024px) 480px, 100vw"
+                                      className="object-contain"
+                                    />
+                                  </div>
+                                </a>
+                              </div>
+                            )}
+                          </div>
+                        </article>
+                        </div>
                       ))}
                     </div>
-                    <blockquote className="mt-4 text-[15px] sm:text-base leading-relaxed text-[#EDF1F6]">
-                      &ldquo;Most developers just write code; he thinks in systems. Legiit isn&apos;t a simple website;
-                      it&apos;s a complex marketplace with intricate financial logic. He engineered the architecture
-                      that allows us to scale safely. I don&apos;t need a freelancer; I need an engineering
-                      partner.&rdquo;
-                    </blockquote>
-                  </div>
-                  <div className="mt-6 flex items-center gap-3 border-t border-white/10 pt-4">
-                    <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-full border border-white/20">
-                      <Image src="/chris.jpeg" alt="Chris M. Walker" fill sizes="44px" className="object-cover" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white">Chris M. Walker</p>
-                      <p className="text-xs text-[#8792A2]">CEO, Legiit.com</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* Client Endorsement Cards */}
-            <div className="grid gap-4 md:grid-cols-2">
-              {TESTIMONIALS.slice(1).map((t) => (
-                <figure
-                  key={t.name}
-                  className="card-soft flex flex-col justify-between rounded-2xl border border-[#E4DFDD] bg-white p-7"
-                >
-                  <div>
-                    <div className="flex items-center gap-1 text-amber-500">
-                      {[...Array(5)].map((_, i) => (
-                        <Star key={i} className="h-3.5 w-3.5 fill-current" />
-                      ))}
-                    </div>
-                    <blockquote className="mt-3 text-[15px] leading-relaxed text-[#3C4257]">
-                      &ldquo;{t.quote}&rdquo;
-                    </blockquote>
-                  </div>
-                  <figcaption className="mt-5 flex items-center gap-3 border-t border-[#E4DFDD] pt-4">
-                    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-[#E4DFDD]">
-                      <Image src={t.photo} alt={t.name} fill sizes="40px" className="object-cover" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-[#1A182B]">{t.name}</p>
-                      <p className="text-xs text-[#697386]">{t.role}</p>
-                    </div>
-                  </figcaption>
-                </figure>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ================================================================== */}
-        {/* Selected Production Case Studies */}
-        {/* ================================================================== */}
-        <section id="work" className="scroll-mt-16 border-b border-[#E4DFDD] bg-white">
-          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-            <SectionHeading
-              eyebrow="Selected Work"
-              title="Production systems I've built and run"
-              intro="Real web applications and backend systems with paying users. No throwaway mockups, no artificial metrics."
-            />
-
-            <div className="space-y-6 lg:space-y-8">
-              {CASE_STUDIES.map((c, i) => (
-                <div
-                  key={c.title}
-                  className="lg:sticky"
-                  style={{ top: `calc(5.5rem + ${i * 1.25}rem)` }}
-                >
-                <article
-                  className="card-float overflow-hidden rounded-3xl border border-[#E4DFDD] bg-white"
-                >
-                  <div className={`grid gap-0 ${c.image ? "lg:grid-cols-[1.1fr_1fr]" : ""}`}>
-                    <div className="p-6 sm:p-8">
-                      <p className="text-xs font-semibold text-[#533AFD]">{c.tag}</p>
-                      <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-[#1A182B] sm:text-2xl">{c.title}</h3>
-                      <p className="mt-2 text-[15px] leading-relaxed text-[#425466]">{c.context}</p>
-
-                      <div className="mt-5 border-t border-[#E4DFDD] pt-4">
-                        <p className="text-xs font-semibold uppercase tracking-wider text-[#697386]">What I built and shipped</p>
-                        <ul className="mt-3 space-y-2.5">
-                          {c.built.map((b) => (
-                            <li key={b} className="flex gap-2.5 text-[14px] leading-relaxed text-[#3C4257]">
-                              <Check className="mt-1 h-4 w-4 shrink-0 text-[#027A48]" />
-                              <span>{b}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                    </div>
-
-                    {c.image && (
-                      <div className="flex flex-col justify-center border-t border-[#E4DFDD] bg-[#F9F6F3] p-4 sm:p-6 lg:border-l lg:border-t-0">
+        
+                    {/* Upwork Client Projects Grid */}
+                    <div className="mt-14 border-t border-[#E4DFDD] pt-12">
+                      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+                        <div>
+                          <h3 className="text-lg font-semibold text-[#1A182B]">Upwork Project Deliveries</h3>
+                          <p className="text-sm text-[#697386]">Real client reviews from my Upwork profile.</p>
+                        </div>
                         <a
-                          href={c.image}
+                          href={UPWORK_URL}
                           target="_blank"
                           rel="noreferrer"
-                          className="group/img block overflow-hidden rounded-xl border border-[#E4DFDD] bg-white shadow-sm transition hover:border-[#DAD7FF] hover:shadow-md"
-                          title="Click to view full screenshot"
+                          className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#533AFD] hover:underline"
                         >
-                          <div className="flex items-center justify-between border-b border-[#E4DFDD] bg-[#EDF1F6] px-3.5 py-2">
-                            <div className="flex items-center gap-1.5">
-                              <span className="h-2 w-2 rounded-full bg-slate-300" />
-                              <span className="h-2 w-2 rounded-full bg-slate-300" />
-                              <span className="h-2 w-2 rounded-full bg-slate-300" />
-                              <span className="ml-2 font-mono text-[11px] text-slate-500">legiit.com</span>
-                            </div>
-                            <span className="flex items-center gap-1 text-[11px] font-medium text-[#533AFD] opacity-0 transition group-hover/img:opacity-100">
-                              <span>Full size</span>
-                              <ExternalLink className="h-3 w-3" />
-                            </span>
-                          </div>
-                          <div className="relative aspect-[1555/1176] w-full bg-white">
-                            <Image
-                              src={c.image}
-                              alt={c.title}
-                              fill
-                              sizes="(min-width: 1024px) 480px, 100vw"
-                              className="object-contain"
-                            />
-                          </div>
+                          <span>View all Upwork feedback</span>
+                          <ExternalLink className="h-3.5 w-3.5" />
                         </a>
                       </div>
-                    )}
-                  </div>
-                </article>
-                </div>
-              ))}
-            </div>
-
-            {/* Upwork Client Projects Grid */}
-            <div className="mt-14 border-t border-[#E4DFDD] pt-12">
-              <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
-                <div>
-                  <h3 className="text-lg font-semibold text-[#1A182B]">Upwork Project Deliveries</h3>
-                  <p className="text-sm text-[#697386]">Real client reviews from my Upwork profile.</p>
-                </div>
-                <a
-                  href={UPWORK_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#533AFD] hover:underline"
-                >
-                  <span>View all Upwork feedback</span>
-                  <ExternalLink className="h-3.5 w-3.5" />
-                </a>
-              </div>
-
-              <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                {UPWORK_REVIEWS.map((p) => (
-                  <a
-                    key={p.title}
-                    href={UPWORK_URL}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="card-soft flex flex-col justify-between rounded-2xl border border-[#E4DFDD] bg-white p-6"
-                  >
-                    <div>
-                      <div className="flex items-center gap-1 text-amber-500">
-                        {[...Array(5)].map((_, i) => (
-                          <Star key={i} className="h-3 w-3 fill-current" />
+        
+                      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                        {UPWORK_REVIEWS.map((p) => (
+                          <a
+                            key={p.title}
+                            href={UPWORK_URL}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="card-soft flex flex-col justify-between rounded-2xl border border-[#E4DFDD] bg-white p-6"
+                          >
+                            <div>
+                              <div className="flex items-center gap-1 text-amber-500">
+                                {[...Array(5)].map((_, i) => (
+                                  <Star key={i} className="h-3 w-3 fill-current" />
+                                ))}
+                              </div>
+                              <h4 className="mt-2 text-sm font-semibold text-[#1A182B]">{p.title}</h4>
+                              <p className="mt-1.5 text-xs leading-relaxed text-[#425466]">{p.detail}</p>
+                            </div>
+                            <p className="mt-3 border-t border-[#E4DFDD] pt-2.5 text-xs italic text-[#3C4257]">
+                              &ldquo;{p.quote}&rdquo;
+                            </p>
+                          </a>
                         ))}
                       </div>
-                      <h4 className="mt-2 text-sm font-semibold text-[#1A182B]">{p.title}</h4>
-                      <p className="mt-1.5 text-xs leading-relaxed text-[#425466]">{p.detail}</p>
+        
+                      <h3 className="mt-10 text-sm font-semibold text-[#1A182B]">Other projects</h3>
+                      <ul className="mt-3 space-y-3">
+                        {OTHER_PROJECTS.map((p) => (
+                          <li key={p.title} className="flex gap-2.5 text-xs leading-relaxed text-[#425466]">
+                            <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#027A48]" />
+                            <span>
+                              <span className="font-semibold text-[#1A182B]">{p.title}.</span> {p.detail}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
                     </div>
-                    <p className="mt-3 border-t border-[#E4DFDD] pt-2.5 text-xs italic text-[#3C4257]">
-                      &ldquo;{p.quote}&rdquo;
-                    </p>
-                  </a>
-                ))}
-              </div>
-
-              <h3 className="mt-10 text-sm font-semibold text-[#1A182B]">Other projects</h3>
-              <ul className="mt-3 space-y-3">
-                {OTHER_PROJECTS.map((p) => (
-                  <li key={p.title} className="flex gap-2.5 text-xs leading-relaxed text-[#425466]">
-                    <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#027A48]" />
-                    <span>
-                      <span className="font-semibold text-[#1A182B]">{p.title}.</span> {p.detail}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-        </section>
-
-        {/* ================================================================== */}
-        {/* How I Work */}
-        {/* ================================================================== */}
-        <section id="how" className="scroll-mt-16 border-b border-[#E4DFDD] bg-[#F9F6F3]">
-          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-            <SectionHeading
-              eyebrow="Engineering Process"
-              title="How I run your production"
-              intro="The habits of shipping every day on live products where mistakes cost real money and user trust."
-            />
-
-            <div className="grid gap-4 md:grid-cols-2">
-              {HOW_I_WORK.map((h) => (
-                <div
-                  key={h.title}
-                  className="card-soft flex gap-4 rounded-2xl border border-[#E4DFDD] bg-white p-6"
-                >
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#F4F3FF] text-[#533AFD]">
-                    <Check className="h-4 w-4" />
                   </div>
-                  <div>
-                    <h3 className="text-[15px] font-semibold text-[#1A182B]">{h.title}</h3>
-                    <p className="mt-1.5 text-[13.5px] leading-relaxed text-[#425466]">{h.desc}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ================================================================== */}
-        {/* Tech Stack */}
-        {/* ================================================================== */}
-        <section id="stack" className="scroll-mt-16 border-b border-[#E4DFDD] bg-white">
-          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-            <SectionHeading
-              eyebrow="Core Competencies"
-              title="Technologies and tools I use every day"
-              intro="I specialize in full-stack web platforms and practical AI architectures that run reliably in production."
-            />
-
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {STACK_GROUPS.map((s) => {
-                const Icon = s.icon;
-                return (
-                  <div
-                    key={s.group}
-                    className="card-soft flex flex-col rounded-2xl border border-[#E4DFDD] bg-white p-6"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white border border-[#E4DFDD] text-[#533AFD] ">
-                        <Icon className="h-4 w-4" />
-                      </div>
-                      <h3 className="text-[15px] font-semibold text-[#1A182B]">{s.group}</h3>
-                    </div>
-                    <p className="mt-3 text-[13.5px] leading-relaxed text-[#425466]">{s.items}</p>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-        </section>
-
-        {/* ================================================================== */}
-        {/* Buyer FAQ */}
-        {/* ================================================================== */}
-        <section id="faq" className="scroll-mt-16 border-b border-[#E4DFDD] bg-[#F9F6F3]">
-          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
-            <SectionHeading
-              eyebrow="Client FAQ"
-              title="Questions before you start"
-              intro="What most teams ask before handing over a live product."
-            />
-
-            <div className="space-y-4">
-              {FAQS.map((f) => (
-                <div key={f.q} className="card-soft rounded-2xl border border-[#E4DFDD] bg-white p-6">
-                  <h3 className="text-base font-semibold text-[#1A182B]">{f.q}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#425466]">{f.a}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* ================================================================== */}
-        {/* Contact & Hire CTA Section */}
-        {/* ================================================================== */}
-        <section id="contact" className="relative overflow-hidden bg-[#1A182B] text-white">
-          <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute -right-24 -top-32 h-[460px] w-[460px] rounded-full bg-gradient-to-br from-[#533AFD] via-[#8B5CF6] to-[#EC4899] opacity-40 blur-3xl" />
-            <div className="absolute -bottom-40 -left-24 h-[380px] w-[380px] rounded-full bg-gradient-to-tr from-[#38BDF8] to-[#533AFD] opacity-25 blur-3xl" />
-          </div>
-          <div className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
-            <div className="max-w-3xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold text-emerald-300 backdrop-blur">
-                <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                <span>Taking new on-call clients</span>
-              </div>
-
-              <h2 className="mt-6 text-[32px] font-semibold leading-[1.08] tracking-[-0.03em] text-white sm:text-5xl lg:text-[56px]">
-                Want one named engineer to own your production?
-              </h2>
-
-              <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#C1C9D2] sm:text-lg">
-                {AVAILABILITY} {ENGAGEMENT}
-              </p>
-
-              <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                <UpworkButton dark size="lg" label="Start the 2 week trial on Upwork" />
-                <a
-                  href={GITHUB_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-[15px] font-semibold text-white backdrop-blur transition hover:bg-white/10"
-                >
-                  <Github className="h-4 w-4" />
-                  <span>GitHub Profile</span>
-                </a>
-              </div>
-
-              <p className="mt-6 text-xs text-[#8792A2]">
-                Contracts and payments are handled securely through Upwork escrow with zero billing surprises.
-              </p>
-            </div>
-          </div>
-        </section>
+                </section>
+        <div id="vz" dangerouslySetInnerHTML={{ __html: PART2 }} />
       </main>
-
-      {/* ================================================================== */}
-      {/* Footer */}
-      {/* ================================================================== */}
-      <footer className="border-t border-[#E4DFDD] bg-white">
-        <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-xs text-[#697386] sm:flex-row sm:items-center sm:justify-between sm:px-6">
-          <div className="flex items-center gap-2.5">
-            <div className="flex h-6 w-6 items-center justify-center rounded bg-[#1A182B] p-1">
-              <Image src="/logo.png" alt="Shakil logo" width={14} height={14} className="object-contain" />
-            </div>
-            <span>© 2026 Shakil Ahmed. Rajshahi, Bangladesh. 9 to 5 US Eastern.</span>
-          </div>
-          <div className="flex items-center gap-4">
-            <a href={UPWORK_URL} target="_blank" rel="noreferrer" className="hover:text-[#1A182B] transition">
-              Upwork Profile
-            </a>
-            <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="hover:text-[#1A182B] transition">
-              GitHub
-            </a>
-            <a href="#top" className="hover:text-[#1A182B] transition">
-              Back to top ↑
-            </a>
-          </div>
-        </div>
-      </footer>
+      <Footer />
+      <HomeScripts />
     </div>
   );
 }
