@@ -15,7 +15,7 @@ import {
   Terminal,
   Zap,
 } from "lucide-react";
-import HeroShowcase from "./HeroShowcase";
+import ChatWindow from "./components/ChatWindow";
 import { AVAILABILITY, ENGAGEMENT } from "./lib/profile";
 
 const UPWORK_URL = "https://www.upwork.com/freelancers/shakilhq";
@@ -318,7 +318,7 @@ function UpworkButton({
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-[#1A182B]">
+    <div className="min-h-screen overflow-x-clip bg-white text-[#1A182B]">
       {/* ================================================================== */}
       {/* Header & Sticky Navigation */}
       {/* ================================================================== */}
@@ -360,7 +360,8 @@ export default function Home() {
             rel="noreferrer"
             className="group inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#533AFD] px-4 py-2 text-[13px] font-semibold text-white shadow-[0_6px_16px_-6px_rgba(99,91,255,0.6)] transition hover:bg-[#4327F5]"
           >
-            <span>Start trial on Upwork</span>
+            <span className="sm:hidden">Start trial</span>
+            <span className="hidden sm:inline">Start trial on Upwork</span>
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </div>
@@ -379,8 +380,8 @@ export default function Home() {
           </div>
 
           <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-14 sm:px-6 sm:pt-20 lg:pb-14 lg:pt-20">
-            <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
-              <div>
+            <div>
+              <div className="max-w-3xl">
                 <div className="inline-flex items-center gap-2 rounded-full border border-[#E4DFDD] bg-white/80 px-3 py-1.5 text-xs font-medium text-[#425466] shadow-sm backdrop-blur">
                   <span className="relative flex h-2 w-2">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
@@ -424,8 +425,10 @@ export default function Home() {
                 </div>
               </div>
 
-              <HeroShowcase />
+              
             </div>
+
+            <div className="mt-12"><ChatWindow /></div>
 
             {/* Metrics strip */}
             <div className="mt-12 grid grid-cols-2 overflow-hidden rounded-2xl border border-[#E4DFDD] bg-white/80 shadow-sm backdrop-blur lg:grid-cols-4">
