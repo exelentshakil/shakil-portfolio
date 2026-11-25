@@ -38,3 +38,9 @@ html body{background:#F9F6F3;font-family:Manrope,Inter,system-ui,sans-serif}
 .sc-foot .pf-b{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(255,255,255,.2);margin-top:44px;padding:22px 0;color:#cfc8f5;font-size:14px;position:relative;z-index:1}
 .sc-foot .pf-wm{font-weight:800;font-size:clamp(40px,9.4vw,170px);line-height:.78;letter-spacing:-.04em;color:rgba(255,255,255,.07);white-space:nowrap;text-align:center;margin:8px -20px -.1em;user-select:none;pointer-events:none;font-family:Manrope,Inter,sans-serif}
 @media(max-width:1000px){.sc-foot .pf-g{grid-template-columns:1fr 1fr}.sc-foot .pf-brand{grid-column:1/-1}.sc-foot .pf{padding:40px 24px 0;border-radius:28px}}
+/* keep CTA labels on one line, stack the two buttons on phones */
+#vz a.vz-btn,#vz a.vz-btn2{white-space:nowrap!important}
+@media(max-width:600px){
+#vz .vz-cta{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:10px!important}
+#vz a.vz-btn,#vz a.vz-btn2{width:100%!important;padding:15px 16px!important;font-size:15px!important;text-align:center}
+}
