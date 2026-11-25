@@ -23,8 +23,8 @@ export const viewport: Viewport = {
   maximumScale: 1,
 };
 
-const TITLE = "Shakil Ahmed | Senior Full-Stack & AI Engineer | Next.js, Laravel, Python, RAG";
-const DESCRIPTION = `Senior full-stack engineer with 15+ years of experience and Lead Engineer at Legiit (400,000+ users, $1M ARR). I build and run production web apps on Next.js, Laravel and Python, and add AI features that work: RAG, agents and LLM integrations. ${AVAILABILITY}`;
+const TITLE = "Shakil Ahmed | On-Call Engineer for Live Products | Laravel, Next.js, Python, AWS";
+const DESCRIPTION = `On-call engineer for live products. One named lead engineer in your Slack, 9 to 5 US Eastern, on Laravel, Next.js, Python and AWS. 15+ years of software, Lead Engineer at Legiit (400,000+ users). Start with a 2 week trial: close 3 real tickets or you pay nothing.`;
 
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
@@ -37,6 +37,7 @@ export const metadata: Metadata = {
   },
   description: DESCRIPTION,
   keywords: [
+    "On-Call Engineer",
     "Senior Full-Stack Engineer",
     "AI Engineer",
     "Next.js Developer",
@@ -66,14 +67,14 @@ export const metadata: Metadata = {
     lastName: "Ahmed",
     locale: "en_US",
     url: BASE_URL,
-    title: "Shakil Ahmed | Senior Full-Stack & AI Engineer",
+    title: "Shakil Ahmed | On-Call Engineer for Live Products",
     description: DESCRIPTION,
     siteName: "Shakil Ahmed",
-    images: [{ url: "/og-image.jpg", width: 320, height: 320, alt: "Shakil Ahmed, Senior Full-Stack & AI Engineer" }],
+    images: [{ url: "/og-image.jpg", width: 320, height: 320, alt: "Shakil Ahmed, On-Call Engineer for Live Products" }],
   },
   twitter: {
     card: "summary",
-    title: "Shakil Ahmed | Senior Full-Stack & AI Engineer",
+    title: "Shakil Ahmed | On-Call Engineer for Live Products",
     description: DESCRIPTION,
     images: ["/og-image.jpg"],
   },
@@ -91,7 +92,7 @@ export default function RootLayout({
     "@context": "https://schema.org",
     "@type": "Person",
     name: "Shakil Ahmed",
-    jobTitle: "Senior Full-Stack & AI Engineer",
+    jobTitle: "On-Call Engineer",
     url: BASE_URL,
     image: `${BASE_URL}/shakil-headshot.jpeg`,
     sameAs: ["https://www.upwork.com/freelancers/shakilhq", "https://github.com/exelentshakil"],

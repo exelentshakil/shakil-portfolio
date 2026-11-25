@@ -33,7 +33,7 @@ function CountUp({ to, prefix = "", suffix = "" }: { to: number; prefix?: string
 
 const STATS = [
   { to: 15, suffix: "+", label: "Years engineering" },
-  { to: 1, prefix: "$", suffix: "M", label: "ARR marketplace scaled" },
+  { to: 115, suffix: "+", label: "Builds shipped" },
   { to: 400000, suffix: "+", label: "Users on the platform" },
   { to: 100, suffix: "%", label: "Upwork Job Success" },
 ];
@@ -75,7 +75,7 @@ function Impact() {
           className="rounded-xl border border-white/10 bg-white/[0.04] p-4"
         >
           <p className="text-2xl font-bold tracking-tight text-white">
-            <CountUp to={s.to} prefix={s.prefix} suffix={s.suffix} />
+            <CountUp to={s.to} suffix={s.suffix} />
           </p>
           <p className="mt-1 text-xs text-[#98A2B3]">{s.label}</p>
         </motion.div>
@@ -138,21 +138,21 @@ export default function HeroShowcase() {
       <motion.div
         animate={reduce ? undefined : { y: [0, -6, 0] }}
         transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -right-3 -top-4 hidden rounded-xl border border-[#E3E8EE] bg-white px-3 py-2 shadow-lg sm:block"
+        className="absolute -right-3 -top-4 hidden rounded-xl border border-[#E4DFDD] bg-white px-3 py-2 shadow-lg sm:block"
       >
-        <p className="text-[11px] font-semibold text-[#0A2540]">100% Job Success</p>
+        <p className="text-[11px] font-semibold text-[#1A182B]">100% Job Success</p>
         <p className="text-[10px] text-[#697386]">Upwork</p>
       </motion.div>
       <motion.div
         animate={reduce ? undefined : { y: [0, 6, 0] }}
         transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -bottom-12 left-6 hidden rounded-xl border border-[#E3E8EE] bg-white px-3 py-2 shadow-lg sm:block"
+        className="absolute -bottom-12 left-6 hidden rounded-xl border border-[#E4DFDD] bg-white px-3 py-2 shadow-lg sm:block"
       >
-        <p className="text-[11px] font-semibold text-[#0A2540]">$1M ARR marketplace</p>
+        <p className="text-[11px] font-semibold text-[#1A182B]">400,000+ user marketplace</p>
         <p className="text-[10px] text-[#697386]">Lead Engineer, Legiit</p>
       </motion.div>
       <div className="pointer-events-none absolute -inset-6 -z-10 rounded-[2rem] bg-gradient-to-br from-[#533AFD]/15 via-transparent to-emerald-400/10 blur-2xl" />
-      <div className="overflow-hidden rounded-2xl border border-[#1D2939] bg-[#0A2540] shadow-[0_40px_90px_-24px_rgba(50,50,93,0.55)]">
+      <div className="overflow-hidden rounded-2xl border border-[#1D2939] bg-[#1A182B] shadow-[0_40px_90px_-24px_rgba(50,50,93,0.55)]">
         {/* Window bar */}
         <div className="flex items-center gap-1.5 border-b border-white/10 px-4 py-3">
           <span className="h-2.5 w-2.5 rounded-full bg-white/20" />
@@ -168,13 +168,13 @@ export default function HeroShowcase() {
           </div>
           <div className="min-w-0">
             <p className="text-base font-bold text-white">Shakil Ahmed</p>
-            <p className="truncate text-xs text-[#98A2B3]">Senior Full-Stack &amp; AI Systems Engineer</p>
+            <p className="truncate text-xs text-[#98A2B3]">On-Call Engineer for Live Products</p>
             <p className="mt-1 flex items-center gap-1.5 text-[11px] font-semibold text-emerald-400">
               <span className="relative flex h-1.5 w-1.5">
                 <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                 <span className="relative inline-flex h-1.5 w-1.5 rounded-full bg-emerald-400" />
               </span>
-              Available for new projects
+              Taking new on-call clients
             </p>
           </div>
         </div>

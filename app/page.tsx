@@ -22,12 +22,36 @@ const UPWORK_URL = "https://www.upwork.com/freelancers/shakilhq";
 const GITHUB_URL = "https://github.com/exelentshakil";
 
 const NAV = [
+  { href: "#offer", label: "The offer" },
   { href: "#work", label: "Work" },
   { href: "#endorsements", label: "Endorsements" },
   { href: "#how", label: "How I work" },
   { href: "#stack", label: "Stack" },
   { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
+];
+
+const OFFER_STEPS = [
+  {
+    title: "Week 1: I get in and fix",
+    desc: "I join your Slack or Teams, get named access under NDA, read the code and take the first tickets off your backlog.",
+  },
+  {
+    title: "Week 2: I close 3 real tickets",
+    desc: "Real bugs, real features, on your live product. Each one ships with a staging link, a rollback plan and a 30 minute watch after release.",
+  },
+  {
+    title: "Then you decide",
+    desc: "If I don't close 3 real tickets, you don't pay. If it works, we move to a monthly plan where I own your production and its tickets.",
+  },
+];
+
+const RELEASE_ROUTINE = [
+  "A staging link you can click before anything goes live",
+  "A backup and a rollback plan on every release",
+  "Me watching production for 30 minutes after it ships",
+  "A short changelog every day and a summary every Friday",
+  "Replies within the hour, 9 to 5 US Eastern",
+  "NDA and named access, removed the day we finish",
 ];
 
 const METRICS = [
@@ -37,9 +61,9 @@ const METRICS = [
     sub: "Production web apps, APIs and distributed systems",
   },
   {
-    value: "$1M ARR",
-    label: "Marketplace Scaled",
-    sub: "Lead Engineer at Legiit, 400,000+ users",
+    value: "400,000+",
+    label: "Users on the live product",
+    sub: "Lead Engineer at Legiit, a marketplace with real payments",
   },
   {
     value: "100% JSS",
@@ -47,9 +71,9 @@ const METRICS = [
     sub: "5-star client feedback on Upwork",
   },
   {
-    value: "9am ET",
-    label: "Call overlap with the US",
-    sub: "My day starts at 9am US Eastern, weekdays",
+    value: "1 hour",
+    label: "Reply time",
+    sub: "In your Slack, Teams or inbox, 9 to 5 US Eastern",
   },
 ];
 
@@ -73,7 +97,7 @@ const CASE_STUDIES = [
     tag: "Laravel 10 · React · Stripe & Escrow · Redis Queues · MongoDB",
     title: "Legiit.com: High-volume freelance services marketplace",
     context:
-      "A live two-sided marketplace at $1M ARR with complex financial logic, escrow, instant messaging, and seller payouts for 400,000+ registered users.",
+      "A live two-sided marketplace at 400,000+ users with complex financial logic, escrow, instant messaging, and seller payouts for 400,000+ registered users.",
     image: "/screenshots/Legiit.png",
     built: [
       "Engineered order checkout, multi-currency wallet balances, escrow releases, and automated seller payouts with strict idempotency.",
@@ -167,7 +191,7 @@ const TESTIMONIALS = [
 
 const HOW_I_WORK = [
   {
-    title: "US Eastern overlap for calls",
+    title: "Reply within the hour",
     desc: `${AVAILABILITY} Written updates on Slack in between, so you never have to wonder what is happening.`,
   },
   {
@@ -187,8 +211,8 @@ const HOW_I_WORK = [
     desc: "I build with Claude Code and Cursor daily. That means high development velocity paired with strict unit tests, so speed never comes at the cost of code quality.",
   },
   {
-    title: "Direct, accountable communication",
-    desc: "When a requirement is ambiguous or an edge case pops up, I bring it up immediately with practical options. No hidden surprises or guessing games.",
+    title: "Daily changelog, Friday summary",
+    desc: "You see what shipped every day and what is next every Friday. When something is unclear or breaks, I tell you right away with options. No surprises.",
   },
 ];
 
@@ -201,7 +225,7 @@ const STACK_GROUPS = [
   {
     icon: Server,
     group: "Backend",
-    items: "PHP 8, Laravel 10, Python, FastAPI, Django, Node.js, Express, REST APIs",
+    items: "PHP 8, Laravel 10, Python, FastAPI, Node.js, Express, REST APIs",
   },
   {
     icon: Database,
@@ -235,12 +259,12 @@ const FAQS = [
     a: "Yes. With 15+ years of software experience, I am comfortable stepping into established codebases in Next.js, Laravel, React, or Python. I read the domain logic, follow your established idioms, and start shipping clean pull requests quickly.",
   },
   {
-    q: "How do we hire you on Upwork?",
-    a: "You can click any of the Upwork buttons on this page to visit my profile. You can send me a direct message or invite me to your job. I review your requirements, confirm the scope and schedule, and we can start right away through Upwork hourly or milestone contracts.",
+    q: "How does the 2 week trial work?",
+    a: `${ENGAGEMENT}`,
   },
   {
-    q: "What does your availability look like?",
-    a: `${AVAILABILITY} ${ENGAGEMENT}`,
+    q: "How do we start?",
+    a: "Click any Upwork button on this page, send me a message or invite me to your job. Tell me what is running and what is breaking. I confirm the scope and we start through an Upwork contract, with payments handled by Upwork.",
   },
   {
     q: "How do you handle testing and production deploys?",
@@ -251,8 +275,8 @@ const FAQS = [
 function SectionHeading({ eyebrow, title, intro }: { eyebrow: string; title: string; intro?: string }) {
   return (
     <div className="mb-12 max-w-2xl">
-      <p className="text-[13px] font-semibold uppercase tracking-[0.12em] text-[#635BFF]">{eyebrow}</p>
-      <h2 className="mt-3 text-[28px] font-semibold leading-[1.1] tracking-[-0.03em] text-[#0A2540] sm:text-4xl lg:text-[42px]">
+      <p className="text-[13px] font-semibold uppercase tracking-[0.12em] text-[#533AFD]">{eyebrow}</p>
+      <h2 className="mt-3 text-[28px] font-semibold leading-[1.1] tracking-[-0.03em] text-[#1A182B] sm:text-4xl lg:text-[42px]">
         {title}
       </h2>
       {intro && <p className="mt-4 text-base leading-relaxed text-[#425466] sm:text-lg">{intro}</p>}
@@ -263,7 +287,7 @@ function SectionHeading({ eyebrow, title, intro }: { eyebrow: string; title: str
 function UpworkButton({
   dark = false,
   size = "md",
-  label = "Hire me on Upwork",
+  label = "Start the 2 week trial on Upwork",
 }: {
   dark?: boolean;
   size?: "sm" | "md" | "lg";
@@ -282,8 +306,8 @@ function UpworkButton({
       rel="noreferrer"
       className={`group inline-flex items-center gap-2 whitespace-nowrap rounded-full font-semibold transition-all ${sizeClasses} ${
         dark
-          ? "bg-white text-[#0A2540] shadow-[0_12px_28px_-10px_rgba(0,0,0,0.5)] hover:bg-[#F6F9FC]"
-          : "bg-[#635BFF] text-white shadow-[0_12px_28px_-8px_rgba(99,91,255,0.65)] hover:bg-[#5851EA]"
+          ? "bg-white text-[#1A182B] shadow-[0_12px_28px_-10px_rgba(0,0,0,0.5)] hover:bg-[#F9F6F3]"
+          : "bg-[#533AFD] text-white shadow-[0_12px_28px_-8px_rgba(99,91,255,0.65)] hover:bg-[#4327F5]"
       }`}
     >
       <span>{label}</span>
@@ -294,26 +318,26 @@ function UpworkButton({
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-[#0A2540]">
+    <div className="min-h-screen bg-white text-[#1A182B]">
       {/* ================================================================== */}
       {/* Header & Sticky Navigation */}
       {/* ================================================================== */}
-      <header className="sticky top-0 z-50 border-b border-[#E3E8EE]/70 bg-white/80 backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-[#E4DFDD]/70 bg-white/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
           <a href="#top" className="group flex shrink-0 items-center gap-2.5">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#1D2939] bg-[#0A2540] p-1.5 shadow-sm transition-all group-hover:border-[#635BFF] group-hover:bg-[#635BFF]">
+            <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#1D2939] bg-[#1A182B] p-1.5 shadow-sm transition-all group-hover:border-[#533AFD] group-hover:bg-[#533AFD]">
               <Image src="/logo.png" alt="Shakil Ahmed logo" width={22} height={22} className="object-contain" priority />
             </div>
             <div className="flex flex-col">
-              <div className="flex items-center gap-1.5 text-sm font-semibold leading-none text-[#0A2540]">
+              <div className="flex items-center gap-1.5 text-sm font-semibold leading-none text-[#1A182B]">
                 <span>Shakil Ahmed</span>
-                <span className="relative flex h-2 w-2" title="Available for new projects">
+                <span className="relative flex h-2 w-2" title="Taking new on-call clients">
                   <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                   <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                 </span>
               </div>
               <span className="mt-1 text-[11px] font-medium leading-none text-[#697386]">
-                Senior Full-Stack &amp; AI Engineer
+                On-Call Engineer for Live Products
               </span>
             </div>
           </a>
@@ -323,7 +347,7 @@ export default function Home() {
               <a
                 key={n.href}
                 href={n.href}
-                className="whitespace-nowrap rounded-full px-3 py-1.5 text-[13px] font-medium text-[#425466] transition hover:bg-[#F6F9FC] hover:text-[#0A2540]"
+                className="whitespace-nowrap rounded-full px-3 py-1.5 text-[13px] font-medium text-[#425466] transition hover:bg-[#F9F6F3] hover:text-[#1A182B]"
               >
                 {n.label}
               </a>
@@ -334,9 +358,9 @@ export default function Home() {
             href={UPWORK_URL}
             target="_blank"
             rel="noreferrer"
-            className="group inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#635BFF] px-4 py-2 text-[13px] font-semibold text-white shadow-[0_6px_16px_-6px_rgba(99,91,255,0.6)] transition hover:bg-[#5851EA]"
+            className="group inline-flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-[#533AFD] px-4 py-2 text-[13px] font-semibold text-white shadow-[0_6px_16px_-6px_rgba(99,91,255,0.6)] transition hover:bg-[#4327F5]"
           >
-            <span>Hire on Upwork</span>
+            <span>Start trial on Upwork</span>
             <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
           </a>
         </div>
@@ -357,28 +381,27 @@ export default function Home() {
           <div className="relative mx-auto max-w-6xl px-4 pb-10 pt-14 sm:px-6 sm:pt-20 lg:pb-14 lg:pt-20">
             <div className="grid items-center gap-10 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14">
               <div>
-                <div className="inline-flex items-center gap-2 rounded-full border border-[#E3E8EE] bg-white/80 px-3 py-1.5 text-xs font-medium text-[#425466] shadow-sm backdrop-blur">
+                <div className="inline-flex items-center gap-2 rounded-full border border-[#E4DFDD] bg-white/80 px-3 py-1.5 text-xs font-medium text-[#425466] shadow-sm backdrop-blur">
                   <span className="relative flex h-2 w-2">
                     <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
                     <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
                   </span>
-                  <span className="font-semibold text-[#0A2540]">Available for new projects</span>
+                  <span className="font-semibold text-[#1A182B]">Taking new on-call clients</span>
                   <span className="text-[#C1C9D2]">·</span>
-                  <span>Calls from 9am US Eastern</span>
+                  <span>9 to 5 US Eastern</span>
                 </div>
 
-                <h1 className="mt-6 text-[34px] font-semibold leading-[1.07] tracking-[-0.035em] text-[#0A2540] sm:text-5xl lg:text-[56px]">
-                  I build and run production web apps, and add AI to them{" "}
-                  <span className="bg-gradient-to-r from-[#635BFF] via-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent">
-                    that actually works.
+                <h1 className="mt-6 text-[34px] font-semibold leading-[1.07] tracking-[-0.035em] text-[#1A182B] sm:text-5xl lg:text-[56px]">
+                  Your live product has bugs and requests piling up.{" "}
+                  <span className="bg-gradient-to-r from-[#533AFD] via-[#8B5CF6] to-[#EC4899] bg-clip-text text-transparent">
+                    I'm the named engineer who owns them.
                   </span>
                 </h1>
 
                 <p className="mt-6 max-w-xl text-base leading-relaxed text-[#425466] sm:text-lg">
-                  15+ years engineering software. I am Lead Engineer at Legiit, where I help scale the marketplace and
-                  AI Command Center, now at $1M ARR across 400,000+ users. I work across Next.js, Laravel, Python, and
-                  build production AI features: RAG, agents, and multi-model LLM integrations that stay fast and
-                  reliable.
+                  One named lead engineer in your Slack, Teams or inbox, 9 to 5 US Eastern, on Laravel, Next.js,
+                  Python and AWS. 15+ years of software and Lead Engineer at Legiit. Start with a 2 week trial on your
+                  real backlog: I close 3 real tickets or you pay nothing.
                 </p>
 
                 <div className="mt-8 flex flex-col gap-3 sm:mt-9 sm:flex-row sm:flex-wrap sm:items-center">
@@ -386,16 +409,16 @@ export default function Home() {
                     href={UPWORK_URL}
                     target="_blank"
                     rel="noreferrer"
-                    className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#635BFF] px-7 py-3.5 sm:w-auto text-[15px] font-semibold text-white shadow-[0_12px_28px_-8px_rgba(99,91,255,0.65)] transition hover:bg-[#5851EA]"
+                    className="group inline-flex w-full items-center justify-center gap-2 whitespace-nowrap rounded-full bg-[#533AFD] px-7 py-3.5 sm:w-auto text-[15px] font-semibold text-white shadow-[0_12px_28px_-8px_rgba(99,91,255,0.65)] transition hover:bg-[#4327F5]"
                   >
-                    <span>Hire me on Upwork</span>
+                    <span>Start the 2 week trial on Upwork</span>
                     <ArrowUpRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </a>
                   <a
-                    href="#work"
-                    className="group inline-flex w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-[#D5DBE1] sm:w-auto bg-white/80 px-6 py-3.5 text-[15px] font-semibold text-[#0A2540] shadow-sm backdrop-blur transition hover:border-[#B6BFCA] hover:bg-white"
+                    href="#offer"
+                    className="group inline-flex w-full items-center justify-center gap-1.5 whitespace-nowrap rounded-full border border-[#D5DBE1] sm:w-auto bg-white/80 px-6 py-3.5 text-[15px] font-semibold text-[#1A182B] shadow-sm backdrop-blur transition hover:border-[#B6BFCA] hover:bg-white"
                   >
-                    <span>See my work</span>
+                    <span>See how it works</span>
                     <ChevronRight className="h-4 w-4 text-[#697386] transition-transform group-hover:translate-x-0.5" />
                   </a>
                 </div>
@@ -405,16 +428,16 @@ export default function Home() {
             </div>
 
             {/* Metrics strip */}
-            <div className="mt-12 grid grid-cols-2 overflow-hidden rounded-2xl border border-[#E3E8EE] bg-white/80 shadow-sm backdrop-blur lg:grid-cols-4">
+            <div className="mt-12 grid grid-cols-2 overflow-hidden rounded-2xl border border-[#E4DFDD] bg-white/80 shadow-sm backdrop-blur lg:grid-cols-4">
               {METRICS.map((m, i) => (
                 <div
                   key={m.label}
-                  className={`p-5 sm:p-6 ${i % 2 === 1 ? "border-l border-[#E3E8EE]" : ""} ${
-                    i > 1 ? "border-t border-[#E3E8EE] lg:border-t-0" : ""
+                  className={`p-5 sm:p-6 ${i % 2 === 1 ? "border-l border-[#E4DFDD]" : ""} ${
+                    i > 1 ? "border-t border-[#E4DFDD] lg:border-t-0" : ""
                   } ${i > 0 ? "lg:border-l" : ""}`}
                 >
-                  <p className="text-2xl font-semibold tracking-tight text-[#0A2540] sm:text-3xl">{m.value}</p>
-                  <p className="mt-1 text-xs font-semibold text-[#635BFF]">{m.label}</p>
+                  <p className="text-2xl font-semibold tracking-tight text-[#1A182B] sm:text-3xl">{m.value}</p>
+                  <p className="mt-1 text-xs font-semibold text-[#533AFD]">{m.label}</p>
                   <p className="mt-1 text-xs leading-snug text-[#697386]">{m.sub}</p>
                 </div>
               ))}
@@ -422,7 +445,7 @@ export default function Home() {
 
           </div>
           {/* Client logo marquee, full width */}
-          <div className="relative mt-2 border-t border-[#E3E8EE] bg-white/70 py-7 backdrop-blur">
+          <div className="relative mt-2 border-t border-[#E4DFDD] bg-white/70 py-7 backdrop-blur">
             <p className="text-center text-xs font-medium uppercase tracking-[0.14em] text-[#8792A2]">
               Teams I have worked with
             </p>
@@ -448,9 +471,46 @@ export default function Home() {
         </section>
 
         {/* ================================================================== */}
+        {/* The Offer */}
+        {/* ================================================================== */}
+        <section id="offer" className="scroll-mt-16 border-b border-[#E4DFDD] bg-white">
+          <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
+            <SectionHeading
+              eyebrow="The offer"
+              title="On-call engineer for your live product"
+              intro="You don't need more hours of a developer. You need one named person who owns production and closes the tickets."
+            />
+
+            <div className="grid gap-4 md:grid-cols-3">
+              {OFFER_STEPS.map((o) => (
+                <div key={o.title} className="card-soft rounded-2xl border border-[#E4DFDD] bg-white p-6">
+                  <h3 className="text-[15px] font-semibold text-[#1A182B]">{o.title}</h3>
+                  <p className="mt-2 text-[13.5px] leading-relaxed text-[#425466]">{o.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-6 rounded-2xl border border-[#E4DFDD] bg-[#F9F6F3] p-6 sm:p-8">
+              <p className="text-xs font-semibold uppercase tracking-wider text-[#697386]">Every release, every time</p>
+              <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+                {RELEASE_ROUTINE.map((r) => (
+                  <li key={r} className="flex gap-2.5 text-[14px] leading-relaxed text-[#3C4257]">
+                    <Check className="mt-1 h-4 w-4 shrink-0 text-[#027A48]" />
+                    <span>{r}</span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-6">
+                <UpworkButton />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ================================================================== */}
         {/* CEO Video Endorsement & Client Reviews */}
         {/* ================================================================== */}
-        <section id="endorsements" className="scroll-mt-16 border-b border-[#E3E8EE] bg-[#F6F9FC]">
+        <section id="endorsements" className="scroll-mt-16 border-b border-[#E4DFDD] bg-[#F9F6F3]">
           <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
             <SectionHeading
               eyebrow="Verified Endorsements"
@@ -459,7 +519,7 @@ export default function Home() {
             />
 
             {/* Featured Video Block */}
-            <div className="mb-10 overflow-hidden rounded-3xl border border-[#1D2939] bg-[#0A2540] shadow-[0_40px_90px_-30px_rgba(50,50,93,0.55)]">
+            <div className="mb-10 overflow-hidden rounded-3xl border border-[#1D2939] bg-[#1A182B] shadow-[0_40px_90px_-30px_rgba(50,50,93,0.55)]">
               <div className="grid lg:grid-cols-[1.1fr_1fr]">
                 <div className="relative aspect-video lg:aspect-auto">
                   <iframe
@@ -503,7 +563,7 @@ export default function Home() {
               {TESTIMONIALS.slice(1).map((t) => (
                 <figure
                   key={t.name}
-                  className="card-soft flex flex-col justify-between rounded-2xl border border-[#E3E8EE] bg-white p-7"
+                  className="card-soft flex flex-col justify-between rounded-2xl border border-[#E4DFDD] bg-white p-7"
                 >
                   <div>
                     <div className="flex items-center gap-1 text-amber-500">
@@ -515,12 +575,12 @@ export default function Home() {
                       &ldquo;{t.quote}&rdquo;
                     </blockquote>
                   </div>
-                  <figcaption className="mt-5 flex items-center gap-3 border-t border-[#E3E8EE] pt-4">
-                    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-[#E3E8EE]">
+                  <figcaption className="mt-5 flex items-center gap-3 border-t border-[#E4DFDD] pt-4">
+                    <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-full border border-[#E4DFDD]">
                       <Image src={t.photo} alt={t.name} fill sizes="40px" className="object-cover" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-[#0A2540]">{t.name}</p>
+                      <p className="text-sm font-semibold text-[#1A182B]">{t.name}</p>
                       <p className="text-xs text-[#697386]">{t.role}</p>
                     </div>
                   </figcaption>
@@ -533,7 +593,7 @@ export default function Home() {
         {/* ================================================================== */}
         {/* Selected Production Case Studies */}
         {/* ================================================================== */}
-        <section id="work" className="scroll-mt-16 border-b border-[#E3E8EE] bg-white">
+        <section id="work" className="scroll-mt-16 border-b border-[#E4DFDD] bg-white">
           <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
             <SectionHeading
               eyebrow="Selected Work"
@@ -549,15 +609,15 @@ export default function Home() {
                   style={{ top: `calc(5.5rem + ${i * 1.25}rem)` }}
                 >
                 <article
-                  className="card-float overflow-hidden rounded-3xl border border-[#E3E8EE] bg-white"
+                  className="card-float overflow-hidden rounded-3xl border border-[#E4DFDD] bg-white"
                 >
                   <div className={`grid gap-0 ${c.image ? "lg:grid-cols-[1.1fr_1fr]" : ""}`}>
                     <div className="p-6 sm:p-8">
-                      <p className="text-xs font-semibold text-[#635BFF]">{c.tag}</p>
-                      <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-[#0A2540] sm:text-2xl">{c.title}</h3>
+                      <p className="text-xs font-semibold text-[#533AFD]">{c.tag}</p>
+                      <h3 className="mt-2 text-xl font-semibold tracking-[-0.02em] text-[#1A182B] sm:text-2xl">{c.title}</h3>
                       <p className="mt-2 text-[15px] leading-relaxed text-[#425466]">{c.context}</p>
 
-                      <div className="mt-5 border-t border-[#E3E8EE] pt-4">
+                      <div className="mt-5 border-t border-[#E4DFDD] pt-4">
                         <p className="text-xs font-semibold uppercase tracking-wider text-[#697386]">What I built and shipped</p>
                         <ul className="mt-3 space-y-2.5">
                           {c.built.map((b) => (
@@ -571,22 +631,22 @@ export default function Home() {
                     </div>
 
                     {c.image && (
-                      <div className="flex flex-col justify-center border-t border-[#E3E8EE] bg-[#F6F9FC] p-4 sm:p-6 lg:border-l lg:border-t-0">
+                      <div className="flex flex-col justify-center border-t border-[#E4DFDD] bg-[#F9F6F3] p-4 sm:p-6 lg:border-l lg:border-t-0">
                         <a
                           href={c.image}
                           target="_blank"
                           rel="noreferrer"
-                          className="group/img block overflow-hidden rounded-xl border border-[#E3E8EE] bg-white shadow-sm transition hover:border-[#DAD7FF] hover:shadow-md"
+                          className="group/img block overflow-hidden rounded-xl border border-[#E4DFDD] bg-white shadow-sm transition hover:border-[#DAD7FF] hover:shadow-md"
                           title="Click to view full screenshot"
                         >
-                          <div className="flex items-center justify-between border-b border-[#E3E8EE] bg-[#EDF1F6] px-3.5 py-2">
+                          <div className="flex items-center justify-between border-b border-[#E4DFDD] bg-[#EDF1F6] px-3.5 py-2">
                             <div className="flex items-center gap-1.5">
                               <span className="h-2 w-2 rounded-full bg-slate-300" />
                               <span className="h-2 w-2 rounded-full bg-slate-300" />
                               <span className="h-2 w-2 rounded-full bg-slate-300" />
                               <span className="ml-2 font-mono text-[11px] text-slate-500">legiit.com</span>
                             </div>
-                            <span className="flex items-center gap-1 text-[11px] font-medium text-[#635BFF] opacity-0 transition group-hover/img:opacity-100">
+                            <span className="flex items-center gap-1 text-[11px] font-medium text-[#533AFD] opacity-0 transition group-hover/img:opacity-100">
                               <span>Full size</span>
                               <ExternalLink className="h-3 w-3" />
                             </span>
@@ -610,17 +670,17 @@ export default function Home() {
             </div>
 
             {/* Upwork Client Projects Grid */}
-            <div className="mt-14 border-t border-[#E3E8EE] pt-12">
+            <div className="mt-14 border-t border-[#E4DFDD] pt-12">
               <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
                 <div>
-                  <h3 className="text-lg font-semibold text-[#0A2540]">Upwork Project Deliveries</h3>
+                  <h3 className="text-lg font-semibold text-[#1A182B]">Upwork Project Deliveries</h3>
                   <p className="text-sm text-[#697386]">Real client reviews from my Upwork profile.</p>
                 </div>
                 <a
                   href={UPWORK_URL}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#635BFF] hover:underline"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#533AFD] hover:underline"
                 >
                   <span>View all Upwork feedback</span>
                   <ExternalLink className="h-3.5 w-3.5" />
@@ -634,7 +694,7 @@ export default function Home() {
                     href={UPWORK_URL}
                     target="_blank"
                     rel="noreferrer"
-                    className="card-soft flex flex-col justify-between rounded-2xl border border-[#E3E8EE] bg-white p-6"
+                    className="card-soft flex flex-col justify-between rounded-2xl border border-[#E4DFDD] bg-white p-6"
                   >
                     <div>
                       <div className="flex items-center gap-1 text-amber-500">
@@ -642,23 +702,23 @@ export default function Home() {
                           <Star key={i} className="h-3 w-3 fill-current" />
                         ))}
                       </div>
-                      <h4 className="mt-2 text-sm font-semibold text-[#0A2540]">{p.title}</h4>
+                      <h4 className="mt-2 text-sm font-semibold text-[#1A182B]">{p.title}</h4>
                       <p className="mt-1.5 text-xs leading-relaxed text-[#425466]">{p.detail}</p>
                     </div>
-                    <p className="mt-3 border-t border-[#E3E8EE] pt-2.5 text-xs italic text-[#3C4257]">
+                    <p className="mt-3 border-t border-[#E4DFDD] pt-2.5 text-xs italic text-[#3C4257]">
                       &ldquo;{p.quote}&rdquo;
                     </p>
                   </a>
                 ))}
               </div>
 
-              <h3 className="mt-10 text-sm font-semibold text-[#0A2540]">Other projects</h3>
+              <h3 className="mt-10 text-sm font-semibold text-[#1A182B]">Other projects</h3>
               <ul className="mt-3 space-y-3">
                 {OTHER_PROJECTS.map((p) => (
                   <li key={p.title} className="flex gap-2.5 text-xs leading-relaxed text-[#425466]">
                     <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#027A48]" />
                     <span>
-                      <span className="font-semibold text-[#0A2540]">{p.title}.</span> {p.detail}
+                      <span className="font-semibold text-[#1A182B]">{p.title}.</span> {p.detail}
                     </span>
                   </li>
                 ))}
@@ -670,11 +730,11 @@ export default function Home() {
         {/* ================================================================== */}
         {/* How I Work */}
         {/* ================================================================== */}
-        <section id="how" className="scroll-mt-16 border-b border-[#E3E8EE] bg-[#F6F9FC]">
+        <section id="how" className="scroll-mt-16 border-b border-[#E4DFDD] bg-[#F9F6F3]">
           <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
             <SectionHeading
               eyebrow="Engineering Process"
-              title="How I work: steady, predictable delivery"
+              title="How I run your production"
               intro="The habits of shipping every day on live products where mistakes cost real money and user trust."
             />
 
@@ -682,13 +742,13 @@ export default function Home() {
               {HOW_I_WORK.map((h) => (
                 <div
                   key={h.title}
-                  className="card-soft flex gap-4 rounded-2xl border border-[#E3E8EE] bg-white p-6"
+                  className="card-soft flex gap-4 rounded-2xl border border-[#E4DFDD] bg-white p-6"
                 >
-                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#F1EFFF] text-[#635BFF]">
+                  <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#F4F3FF] text-[#533AFD]">
                     <Check className="h-4 w-4" />
                   </div>
                   <div>
-                    <h3 className="text-[15px] font-semibold text-[#0A2540]">{h.title}</h3>
+                    <h3 className="text-[15px] font-semibold text-[#1A182B]">{h.title}</h3>
                     <p className="mt-1.5 text-[13.5px] leading-relaxed text-[#425466]">{h.desc}</p>
                   </div>
                 </div>
@@ -700,7 +760,7 @@ export default function Home() {
         {/* ================================================================== */}
         {/* Tech Stack */}
         {/* ================================================================== */}
-        <section id="stack" className="scroll-mt-16 border-b border-[#E3E8EE] bg-white">
+        <section id="stack" className="scroll-mt-16 border-b border-[#E4DFDD] bg-white">
           <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
             <SectionHeading
               eyebrow="Core Competencies"
@@ -714,13 +774,13 @@ export default function Home() {
                 return (
                   <div
                     key={s.group}
-                    className="card-soft flex flex-col rounded-2xl border border-[#E3E8EE] bg-white p-6"
+                    className="card-soft flex flex-col rounded-2xl border border-[#E4DFDD] bg-white p-6"
                   >
                     <div className="flex items-center gap-2.5">
-                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white border border-[#E3E8EE] text-[#635BFF] ">
+                      <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-white border border-[#E4DFDD] text-[#533AFD] ">
                         <Icon className="h-4 w-4" />
                       </div>
-                      <h3 className="text-[15px] font-semibold text-[#0A2540]">{s.group}</h3>
+                      <h3 className="text-[15px] font-semibold text-[#1A182B]">{s.group}</h3>
                     </div>
                     <p className="mt-3 text-[13.5px] leading-relaxed text-[#425466]">{s.items}</p>
                   </div>
@@ -733,18 +793,18 @@ export default function Home() {
         {/* ================================================================== */}
         {/* Buyer FAQ */}
         {/* ================================================================== */}
-        <section id="faq" className="scroll-mt-16 border-b border-[#E3E8EE] bg-[#F6F9FC]">
+        <section id="faq" className="scroll-mt-16 border-b border-[#E4DFDD] bg-[#F9F6F3]">
           <div className="mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28">
             <SectionHeading
               eyebrow="Client FAQ"
-              title="Frequently asked questions from hiring managers"
-              intro="Everything you need to know before bringing me onto your engineering team or project."
+              title="Questions before you start"
+              intro="What most teams ask before handing over a live product."
             />
 
             <div className="space-y-4">
               {FAQS.map((f) => (
-                <div key={f.q} className="card-soft rounded-2xl border border-[#E3E8EE] bg-white p-6">
-                  <h3 className="text-base font-semibold text-[#0A2540]">{f.q}</h3>
+                <div key={f.q} className="card-soft rounded-2xl border border-[#E4DFDD] bg-white p-6">
+                  <h3 className="text-base font-semibold text-[#1A182B]">{f.q}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-[#425466]">{f.a}</p>
                 </div>
               ))}
@@ -755,28 +815,28 @@ export default function Home() {
         {/* ================================================================== */}
         {/* Contact & Hire CTA Section */}
         {/* ================================================================== */}
-        <section id="contact" className="relative overflow-hidden bg-[#0A2540] text-white">
+        <section id="contact" className="relative overflow-hidden bg-[#1A182B] text-white">
           <div aria-hidden className="pointer-events-none absolute inset-0">
-            <div className="absolute -right-24 -top-32 h-[460px] w-[460px] rounded-full bg-gradient-to-br from-[#635BFF] via-[#8B5CF6] to-[#EC4899] opacity-40 blur-3xl" />
-            <div className="absolute -bottom-40 -left-24 h-[380px] w-[380px] rounded-full bg-gradient-to-tr from-[#38BDF8] to-[#635BFF] opacity-25 blur-3xl" />
+            <div className="absolute -right-24 -top-32 h-[460px] w-[460px] rounded-full bg-gradient-to-br from-[#533AFD] via-[#8B5CF6] to-[#EC4899] opacity-40 blur-3xl" />
+            <div className="absolute -bottom-40 -left-24 h-[380px] w-[380px] rounded-full bg-gradient-to-tr from-[#38BDF8] to-[#533AFD] opacity-25 blur-3xl" />
           </div>
           <div className="relative mx-auto max-w-6xl px-4 py-24 sm:px-6 sm:py-32">
             <div className="max-w-3xl">
               <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 text-xs font-semibold text-emerald-300 backdrop-blur">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
-                <span>Available for new projects</span>
+                <span>Taking new on-call clients</span>
               </div>
 
               <h2 className="mt-6 text-[32px] font-semibold leading-[1.08] tracking-[-0.03em] text-white sm:text-5xl lg:text-[56px]">
-                Looking for a senior engineer who shows up every day and ships?
+                Want one named engineer to own your production?
               </h2>
 
               <p className="mt-6 max-w-2xl text-base leading-relaxed text-[#C1C9D2] sm:text-lg">
-                {AVAILABILITY} {ENGAGEMENT} Send me an invite on Upwork and tell me about your codebase or roadmap.
+                {AVAILABILITY} {ENGAGEMENT}
               </p>
 
               <div className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                <UpworkButton dark size="lg" label="Invite me on Upwork" />
+                <UpworkButton dark size="lg" label="Start the 2 week trial on Upwork" />
                 <a
                   href={GITHUB_URL}
                   target="_blank"
@@ -799,22 +859,22 @@ export default function Home() {
       {/* ================================================================== */}
       {/* Footer */}
       {/* ================================================================== */}
-      <footer className="border-t border-[#E3E8EE] bg-white">
+      <footer className="border-t border-[#E4DFDD] bg-white">
         <div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-xs text-[#697386] sm:flex-row sm:items-center sm:justify-between sm:px-6">
           <div className="flex items-center gap-2.5">
-            <div className="flex h-6 w-6 items-center justify-center rounded bg-[#0A2540] p-1">
+            <div className="flex h-6 w-6 items-center justify-center rounded bg-[#1A182B] p-1">
               <Image src="/logo.png" alt="Shakil logo" width={14} height={14} className="object-contain" />
             </div>
-            <span>© 2026 Shakil Ahmed. Rajshahi, Bangladesh. US Eastern overlap for calls.</span>
+            <span>© 2026 Shakil Ahmed. Rajshahi, Bangladesh. 9 to 5 US Eastern.</span>
           </div>
           <div className="flex items-center gap-4">
-            <a href={UPWORK_URL} target="_blank" rel="noreferrer" className="hover:text-[#0A2540] transition">
+            <a href={UPWORK_URL} target="_blank" rel="noreferrer" className="hover:text-[#1A182B] transition">
               Upwork Profile
             </a>
-            <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="hover:text-[#0A2540] transition">
+            <a href={GITHUB_URL} target="_blank" rel="noreferrer" className="hover:text-[#1A182B] transition">
               GitHub
             </a>
-            <a href="#top" className="hover:text-[#0A2540] transition">
+            <a href="#top" className="hover:text-[#1A182B] transition">
               Back to top ↑
             </a>
           </div>
